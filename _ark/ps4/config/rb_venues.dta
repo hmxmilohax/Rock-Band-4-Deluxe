@@ -1,0 +1,28 @@
+(venues 
+   (big_club_toys ui/shared/fake_bg.scene kLargeClub kRBEntitlementInvalid) 
+   (big_club_standard ui/shared/fake_bg.scene kLargeClub kRBEntitlementInvalid) 
+   (big_club_industrial ui/shared/fake_bg.scene kLargeClub kRBEntitlementInvalid) 
+#ifndef HUE_DEMO
+ 
+   (big_club_gym ui/shared/fake_bg.scene kLargeClub kRBEntitlementExpansionPack2016) 
+   (big_club_arcade ui/shared/fake_bg.scene kLargeClub kRBEntitlementExpansionPack2016) 
+   (big_club_arcade_terry ui/shared/fake_bg.scene kLargeClub kRBEntitlementExpansionPack2016) 
+   (big_club_boat ui/shared/fake_bg.scene kLargeClub kRBEntitlementExpansionPack2016) 
+   (big_club_desert ui/shared/fake_bg.scene kLargeClub kRBEntitlementExpansionPack2016) 
+   (small_club_vwhall ui/shared/fake_bg.scene kSmallClub kRBEntitlementExpansionPack2016) 
+   (small_club_basement ui/shared/fake_bg.scene kSmallClub kRBEntitlementExpansionPack2016) 
+#endif 
+ 
+   (small_club_industrial ui/shared/fake_bg.scene kSmallClub kRBEntitlementInvalid) 
+   (small_club_roadhouse ui/shared/fake_bg.scene kSmallClub kRBEntitlementInvalid) 
+   (small_club_trashed ui/shared/fake_bg.scene kSmallClub kRBEntitlementInvalid) 
+   (arena ui/shared/fake_bg.scene kArena kRBEntitlementInvalid))
+(locked_venues 
+#ifndef HUE_DEMO
+ big_club_gym big_club_arcade big_club_arcade_terry big_club_boat big_club_desert small_club_vwhall small_club_basement 
+#endif 
+)
+(default_venue big_club_standard)
+(practice_venue_scene ui/shared/fake_bg.scene)
+(instrument_options "This is a Test")
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
