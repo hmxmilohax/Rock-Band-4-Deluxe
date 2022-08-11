@@ -1,7 +1,8 @@
 (kState_RB4DXMain
    (view list_medium) 
    (enter 
-      {$this setup_confirm_actions a (venfps tspd sngspd vensel colsel scrsvr lostmenu) }) 
+      {$this setup_confirm_actions a (venfps tspd sngspd vensel colsel scrsvr lostmenu) }
+      ) 
    (SELECT_MSG 
       {local $list_data 
          {

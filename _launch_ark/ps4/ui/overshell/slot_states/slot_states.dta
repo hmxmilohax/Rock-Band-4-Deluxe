@@ -1142,4 +1142,4 @@
    (retracted_position TRUE) 
    (allows_input_to_shell TRUE) 
    (idle_flow TRUE))
-#include ../../../config/include/track_graphics.dta
+#merge ../../../config/include/track_graphics.dta
