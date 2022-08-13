@@ -1,0 +1,23 @@
+
+#include version.dta
+
+(system 
+   (language 
+      (default eng) 
+      (supported 
+         (eng ita fre deu esl mex)) 
+      (cheat_supported 
+         (eng ita fre deu esl mex)) 
+   ) 
+   (ps4_map_file "rockband_ps4_%s.map") 
+   (connect_fmod 0))
+(locale
+   ../../ui/locale/eng/locale_keep.dta
+   ../../ui/locale/eng/locale_updates_keep.dta)
+(ui 
+   (verbose_locale_notifies TRUE))
+(crucible 
+   (project "rockband"))
+
+#include spew.dta
+
