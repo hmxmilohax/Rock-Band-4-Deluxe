@@ -1,1 +1,0 @@
-FOR /F "tokens=*" %%G IN ('dir /b *.png') DO forgetool\forgetool png2tex "%%G" "%%~nG.png_ps4"
