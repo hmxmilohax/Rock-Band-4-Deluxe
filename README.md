@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This Repo contains almost everything you need to build an ark for Rock Band 4 Deluxe for PS4.
+This Repo contains almost everything you need to build an ark and pkg for Rock Band 4 Deluxe for PS4.
 
 This mod is very early along, so there is a lot that either doesn't work or isn't complete.
 
