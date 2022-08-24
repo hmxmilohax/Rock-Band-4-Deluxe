@@ -1,0 +1,166 @@
+(kState_RB4DXScreensaver
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXSongSpeed
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXColorSelector
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXLostMenus
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXVenueFPS
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(show_phoneme_tubes TRUE)
+(allow_tube_glow TRUE)
+(lyric_overlap_ms 100)
+(static_vocal_parameters 
+   (static_deploy_x_size 2.0) 
+   (static_phrase_margin_x 0.03) 
+   (static_deploy_buffer_x 0.5) 
+   (lyric_shift_ms 100 20) 
+   (lyric_shift_anticipation_ms 500) 
+   (min_lyric_highlight_ms 120) 
+   (phrase_highlight_ms 500))
+(pulse_offset 0.1)
+(ghost_arrow_duration 1000.0)
+(key_glow_threshold_ticks 2880)
+(key_intro_offset_ms 25)
+(key_intro_delay_ms 1000)
+(popup_help_intro_duration_ms 5000)
+(rg_run_space_ticks 720)
+(view_times 
+   (drum 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)) 
+   (bass 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)) 
+   (guitar 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)) 
+   (real_guitar 
+      (easy 2.4) 
+      (medium 2.2) 
+      (hard 1.8) 
+      (expert 1.2)) 
+   (real_bass 
+      (easy 2.4) 
+      (medium 2.2) 
+      (hard 1.8) 
+      (expert 1.2)) 
+   (real_keys 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)) 
+   (keys 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)) 
+   (pending 
+      (easy 2.4) 
+      (medium 2.0) 
+      (hard 1.6) 
+      (expert 1.2)))
+(breakneck_multipliers 
+   (1.0 1.25 1.5 1.75 2.0 2.25 2.5))
