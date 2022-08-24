@@ -1,108 +1,32 @@
-(kState_RB4DXScreensaver
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {switch $list_data 
-         (overshell_continue 
-            {$this show_state kState_RB4DXMain })
-         (overshell_restart 
-            {$this confirm_toggle_cymbal } 
-            {$this restart_song })
-         (overshell_cancel 
-            {$this cancel_toggle_cymbal } 
-            {$this show_state kState_OptionsDrum })} 
-      {$this trigger_select_effects }) 
-   (on_cancel 
-      {$this show_state kState_RB4DXMain } 
-      {$this trigger_cancel_effects }))
-(kState_RB4DXSongSpeed
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {switch $list_data 
-         (overshell_continue 
-            {$this show_state kState_RB4DXMain })
-         (overshell_restart 
-            {$this confirm_toggle_cymbal } 
-            {$this restart_song })
-         (overshell_cancel 
-            {$this cancel_toggle_cymbal } 
-            {$this show_state kState_OptionsDrum })} 
-      {$this trigger_select_effects }) 
-   (on_cancel 
-      {$this show_state kState_RB4DXMain } 
-      {$this trigger_cancel_effects }))
-(kState_RB4DXColorSelector
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {switch $list_data 
-         (overshell_continue 
-            {$this show_state kState_RB4DXMain })
-         (overshell_restart 
-            {$this confirm_toggle_cymbal } 
-            {$this restart_song })
-         (overshell_cancel 
-            {$this cancel_toggle_cymbal } 
-            {$this show_state kState_OptionsDrum })} 
-      {$this trigger_select_effects }) 
-   (on_cancel 
-      {$this show_state kState_RB4DXMain } 
-      {$this trigger_cancel_effects }))
-(kState_RB4DXLostMenus
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {switch $list_data 
-         (overshell_continue 
-            {$this show_state kState_RB4DXMain })
-         (overshell_restart 
-            {$this confirm_toggle_cymbal } 
-            {$this restart_song })
-         (overshell_cancel 
-            {$this cancel_toggle_cymbal } 
-            {$this show_state kState_OptionsDrum })} 
-      {$this trigger_select_effects }) 
-   (on_cancel 
-      {$this show_state kState_RB4DXMain } 
-      {$this trigger_cancel_effects }))
-(kState_RB4DXVenueFPS
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions menu_unimplimented (overshell_continue) }) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {switch $list_data 
-         (overshell_continue 
-            {$this show_state kState_RB4DXMain })
-         (overshell_restart 
-            {$this confirm_toggle_cymbal } 
-            {$this restart_song })
-         (overshell_cancel 
-            {$this cancel_toggle_cymbal } 
-            {$this show_state kState_OptionsDrum })} 
-      {$this trigger_select_effects }) 
-   (on_cancel 
-      {$this show_state kState_RB4DXMain } 
-      {$this trigger_cancel_effects }))
+(callbacks
+   (sixteenth_note
+      {if_else
+         $stagekit
+         {stagekit_left_right kStageSweepLeft_fast kStageSweepRight_fast}
+         {handle
+            (game quarterbeat)}})
+   (eighth_note
+      {if
+         $stagekit
+         {stagekit_left_right kStageSweepLeft_medium kStageSweepRight_medium}})
+   (beat
+   {if $spd 
+      {beatmatch set_speed $speedmod}}
+      {if_else
+         $stagekit
+         {stagekit_left_right kStageSweepLeft_slow kStageSweepRight_slow}
+         {handle
+            (game beat)}})
+   (downbeat
+   {if $spd 
+      {beatmatch set_speed $speedmod}}
+   {if $autoplay
+      {beatmatch foreach_active_player $player {unless {mod $measure 4} {$player deploy_if_possible}}}}
+     {unless
+         $stagekit
+         {handle
+            (game downbeat)}})
+   (reset))
 (show_phoneme_tubes TRUE)
 (allow_tube_glow TRUE)
 (lyric_overlap_ms 100)

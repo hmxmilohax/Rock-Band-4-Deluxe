@@ -1831,8 +1831,7 @@
 (kState_RB4DXMain
    (view list_medium) 
    (enter 
-      {$this setup_confirm_actions a ("venue fps" "song speed" screensaver "lost menus") }
-      ) 
+      {$this setup_confirm_actions a ("venue fps" "song speed" screensaver "lost menus")}) 
    (SELECT_MSG 
       {local $list_data 
          {
@@ -1856,4 +1855,4 @@
    (on_cancel 
       {$this show_state kState_Options }
       {$this trigger_cancel_effects }))
-#merge ../../../config/include/track_graphics.dta
+#merge ../../../config/include/arkorder.dta

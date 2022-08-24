@@ -1,0 +1,268 @@
+(kState_RB4DXScreensaver
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions "This menu has not been implemented yet. Please check back later." (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXSongSpeed
+   (view list_long) 
+   (enter 
+      {$this setup_confirm_actions a (".5" ".6" ".7" ".75" ".8" ".9" "1" "1.1" "1.2" "1.25" "1.3" "1.4" "1.5" "1.6" "1.7" "1.75" "1.8" "1.9" "2" "2.1" "2.2" "2.25" "2.3" "2.4" "2.5" "2.6" "2.7" "2.75" "2.8" "2.9" "3" "3.1" "3.2" "3.25" "3.3" "3.4" "3.5" "3.6" "3.7" "3.75" "3.8" "3.9" "4")}) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+		("1" 
+			{set $spd FALSE}
+			{$this show_state kState_RB4DXMain })
+		(".5"
+			{set $spd TRUE}
+			{set $speedmod 0.5}
+			{$this show_state kState_RB4DXMain})
+		(".6"
+			{set $spd TRUE}
+			{set $speedmod 0.6}
+			{$this show_state kState_RB4DXMain})
+		(".7"
+			{set $spd TRUE}
+			{set $speedmod 0.7}
+			{$this show_state kState_RB4DXMain})
+		(".75"
+			{set $spd TRUE}
+			{set $speedmod 0.75}
+			{$this show_state kState_RB4DXMain})
+		(".8"
+			{set $spd TRUE}
+			{set $speedmod 0.8}
+			{$this show_state kState_RB4DXMain})
+		(".9"
+			{set $spd TRUE}
+			{set $speedmod 0.9}
+			{$this show_state kState_RB4DXMain})
+		("1.1"
+			{set $spd TRUE}
+			{set $speedmod 1.1}
+			{$this show_state kState_RB4DXMain})
+		("1.2"
+			{set $spd TRUE}
+			{set $speedmod 1.2}
+			{$this show_state kState_RB4DXMain})
+		("1.25"
+			{set $spd TRUE}
+			{set $speedmod 1.25}
+			{$this show_state kState_RB4DXMain})
+		("1.3"
+			{set $spd TRUE}
+			{set $speedmod 1.3}
+			{$this show_state kState_RB4DXMain})
+		("1.4"
+			{set $spd TRUE}
+			{set $speedmod 1.4}
+			{$this show_state kState_RB4DXMain})
+		("1.5"
+			{set $spd TRUE}
+			{set $speedmod 1.5}
+			{$this show_state kState_RB4DXMain})
+		("1.6"
+			{set $spd TRUE}
+			{set $speedmod 1.6}
+			{$this show_state kState_RB4DXMain})
+		("1.7"
+			{set $spd TRUE}
+			{set $speedmod 1.7}
+			{$this show_state kState_RB4DXMain})
+		("1.75"
+			{set $spd TRUE}
+			{set $speedmod 1.75}
+			{$this show_state kState_RB4DXMain})
+		("1.8"
+			{set $spd TRUE}
+			{set $speedmod 1.8}
+			{$this show_state kState_RB4DXMain})
+		("1.9"
+			{set $spd TRUE}
+			{set $speedmod 1.9}
+			{$this show_state kState_RB4DXMain})
+		("2"
+			{set $spd TRUE}
+			{set $speedmod 2}
+			{$this show_state kState_RB4DXMain})
+		("2.1"
+			{set $spd TRUE}
+			{set $speedmod 2.1}
+			{$this show_state kState_RB4DXMain})
+		("2.2"
+			{set $spd TRUE}
+			{set $speedmod 2.2}
+			{$this show_state kState_RB4DXMain})
+		("2.25"
+			{set $spd TRUE}
+			{set $speedmod 2.25}
+			{$this show_state kState_RB4DXMain})
+		("2.3"
+			{set $spd TRUE}
+			{set $speedmod 2.3}
+			{$this show_state kState_RB4DXMain})
+		("2.4"
+			{set $spd TRUE}
+			{set $speedmod 2.4}
+			{$this show_state kState_RB4DXMain})
+		("2.5"
+			{set $spd TRUE}
+			{set $speedmod 2.5}
+			{$this show_state kState_RB4DXMain})
+		("2.6"
+			{set $spd TRUE}
+			{set $speedmod 2.6}
+			{$this show_state kState_RB4DXMain})
+		("2.7"
+			{set $spd TRUE}
+			{set $speedmod 2.7}
+			{$this show_state kState_RB4DXMain})
+		("2.75"
+			{set $spd TRUE}
+			{set $speedmod 2.75}
+			{$this show_state kState_RB4DXMain})
+		("2.8"
+			{set $spd TRUE}
+			{set $speedmod 2.8}
+			{$this show_state kState_RB4DXMain})
+		("2.9"
+			{set $spd TRUE}
+			{set $speedmod 2.9}
+			{$this show_state kState_RB4DXMain})
+		("3"
+			{set $spd TRUE}
+			{set $speedmod 3}
+			{$this show_state kState_RB4DXMain})
+		("3.1"
+			{set $spd TRUE}
+			{set $speedmod 3.1}
+			{$this show_state kState_RB4DXMain})
+		("3.2"
+			{set $spd TRUE}
+			{set $speedmod 3.2}
+			{$this show_state kState_RB4DXMain})
+		("3.25"
+			{set $spd TRUE}
+			{set $speedmod 3.25}
+			{$this show_state kState_RB4DXMain})
+		("3.3"
+			{set $spd TRUE}
+			{set $speedmod 3.3}
+			{$this show_state kState_RB4DXMain})
+		("3.4"
+			{set $spd TRUE}
+			{set $speedmod 3.4}
+			{$this show_state kState_RB4DXMain})
+		("3.5"
+			{set $spd TRUE}
+			{set $speedmod 3.5}
+			{$this show_state kState_RB4DXMain})
+		("3.6"
+			{set $spd TRUE}
+			{set $speedmod 3.6}
+			{$this show_state kState_RB4DXMain})
+		("3.7"
+			{set $spd TRUE}
+			{set $speedmod 3.7}
+			{$this show_state kState_RB4DXMain})
+		("3.75"
+			{set $spd TRUE}
+			{set $speedmod 3.75}
+			{$this show_state kState_RB4DXMain})
+		("3.8"
+			{set $spd TRUE}
+			{set $speedmod 3.8}
+			{$this show_state kState_RB4DXMain})
+		("3.9"
+			{set $spd TRUE}
+			{set $speedmod 3.9}
+			{$this show_state kState_RB4DXMain})
+		("4"
+			{set $spd TRUE}
+			{set $speedmod 4}
+			{$this show_state kState_RB4DXMain})} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXColorSelector
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions "This menu has not been implemented yet. Please check back later." (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXLostMenus
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions "This menu has not been implemented yet. Please check back later." (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
+(kState_RB4DXVenueFPS
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions "This menu has not been implemented yet. Please check back later." (overshell_continue) }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_RB4DXMain })
+         (overshell_restart 
+            {$this confirm_toggle_cymbal } 
+            {$this restart_song })
+         (overshell_cancel 
+            {$this cancel_toggle_cymbal } 
+            {$this show_state kState_OptionsDrum })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain } 
+      {$this trigger_cancel_effects }))
