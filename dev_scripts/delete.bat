@@ -1,0 +1,1 @@
+for /R %%f in (*) do (if not "%%~xf"==".dta" del "%%~f")
