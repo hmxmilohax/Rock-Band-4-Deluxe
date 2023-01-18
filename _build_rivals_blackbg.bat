@@ -64,7 +64,6 @@ move "%~dp0_build\rivals\main_ps4_53.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 move "%~dp0_build\rivals\main_ps4_54.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 move "%~dp0_build\rivals\main_ps4_55.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 move "%~dp0_build\rivals\main_ps4_56.ark" "%~dp0_build\rivals\CUSA02084-patch\"
-move "%~dp0_build\rivals\patch_main_ps4_1.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 move "%~dp0_build\rivals\patch_main_ps4_3.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 move "%~dp0_build\rivals\patch_main_ps4_4.ark" "%~dp0_build\rivals\CUSA02084-patch\"
 pause
