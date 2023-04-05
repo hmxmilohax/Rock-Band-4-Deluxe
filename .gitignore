@@ -1,6 +1,11 @@
-
-*.ark
-*.hdr
+_build/1.08/*/*.ark
+_build/1.08/*/*.hdr
+_build/1.08/*.ark
+_build/1.08/*.hdr
+_build/rivals/*/*.ark
+_build/rivals/*/*.hdr
+_build/rivals/*.ark
+_build/rivals/*.hdr
 *.gp4
 *.dta_dta_ps4
 *.dta_dta_pc

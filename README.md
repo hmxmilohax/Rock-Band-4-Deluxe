@@ -17,7 +17,7 @@ You will need
 
 Currently the versions of Rock Band 4 set up for easy building is 1.08 (shows up as 1.3.0 inside the game), and 2.21/latest/Rivals (shows up as 2.3.7 inside the game).
 
-## Install
+## Building
 
 NOTE: You WILL need a modded/hacked console to play this mod on console. I hope this is clear
 
@@ -30,17 +30,42 @@ The exe is a dependency, [Git for Windows](https://gitforwindows.org/).
 Git is required for you to take advantage of auto updating via github pulls.
 You can setup git with all default options.
 
-Once the dependency is installed, run "_init_repo.bat" in an **empty folder**. git will pull the repo and make sure you are completely up to date.
+Once the dependency is installed, run `_init_repo.bat` in an **empty folder**. git will pull the repo and make sure you are completely up to date.
 
-After Running "_init_repo.bat", extract your Rock Band 4 .ark and .hdr files to the correct build folder (1.0/Launch in _build/launch, 1.08 in _build/1.08, 2.21/latest/Rivals in _build/rivals)
+After Running `_init_repo.bat`, extract your Rock Band 4 .ark and .hdr files to the correct build folder (1.0/Launch in `_build/launch`, 1.08 in `_build/1.08`, 2.21/latest/Rivals in `_build/rivals`)
 
-From then on simply run "_build_launch.bat", "_build_1.08.bat", or "_build_rivals.bat" depending on the version you are building for. This script will pull the repo again for updates, build the ARK for you, and spit it out in _build/launch, _build/1.08, or _build/rivals
+From then on simply run `_build_launch.bat`, `_build_1.08.bat`, or `_build_rivals.bat` depending on the version you are building for. This script will pull the repo again for updates, build the ARK for you, and spit it out in `_build/launch`, `_build/1.08`, or `_build/rivals`
+
+Run the build script again to pull any new updates committed to the repo and rebuild a new ark.
+
+## AFR-Installing
+
+***AFR IS CURRENTLY RIVALS ONLY***
+
+***AFR IS ONLY AVAILABLE FOR GOLDHEN 2.3 OR NEWER***
+
+After the build bat is complete, download the latest release of the [GoldHEN plugins repository.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository/releases/latest) install that to your PS4 following the instructions found [here.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository#getting-started)
+
+Once that is complete, copy the `plugins.ini` file in `_build/afr_files` to `/data/GoldHEN/plugins.ini` on your PS4 or edit your current `plugins.ini` file to add these lines
+
+```ini
+; Rock Band 4 Deluxe Plugins
+[CUSA02084]
+/data/GoldHEN/plugins/afr.prx
+/data/GoldHEN/plugins/no_share_watermark.prx
+```
+
+after that, install the `rb4dx_rivals_afr_blank.pkg` file found in `_build/afr_file` to your PS4. Once that is complete, copy all of the files found in `_build/rivals/patched_arks` to `data/GoldHEN/AFR/CUSA02084` on your PS4. If the folder does not exist, create it.
+
+## PKG-Installing
+
+***RIVALS ONLY***
+
+Before going through the next steps, copy the files in `_build/rivals/patched_arks` to `_build/rivals/CUSA02084-patch`
 
 After the build bat is done open gengp4.exe in dependencies/ps4-pkg-tools (-app for launch/1.08, -patch for 2.21/latest/Rivals), select CUSAXXXXX folder in the correct build folder, and generate a gp4 file.
 
 After the gp4 is generated, open orbis-pub-gen.exe in dependencies/ps4-pkg-tools, open the gp4 and click build, select an output folder and build with the default settings. If you want a slight speedup, build with skip digest calculation checked.
-
-Run the build script again to pull any new updates committed to the repo and rebuild a new ark.
 
 ## Included Dependencies
 
