@@ -2,7 +2,8 @@ git pull https://github.com/LlysiX/rock-band-4-deluxe main
 @echo OFF
 del "%~dp0_build\rivals\CUSA03284-app\main_ps4_0.ark"
 del "%~dp0_build\rivals\CUSA03284-app\main_ps4_19.ark"
-del "%~dp0_build\rivals\CUSA03284-app\patch_main_ps4_0.ark"
+del "%~dp0_build\rivals\CUSA03284-app\patch_main_ps4_1.ark"
+del "%~dp0_build\rivals\CUSA03284-app\patch_main_ps4_2.ark"
 "%~dp0dependencies\hdiffpatch\hpatchz" "%~dp0_build\rivals\main_ps4_0.ark" "%~dp0dependencies\rivalsark0.patch" "%~dp0_build\rivals\patched_arks\main_ps4_0.ark"
 "%~dp0dependencies\hdiffpatch\hpatchz" "%~dp0_build\rivals\main_ps4_19.ark" "%~dp0dependencies\rivalsark19.patch" "%~dp0_build\rivals\patched_arks\main_ps4_19.ark"
 "%~dp0dependencies\hdiffpatch\hpatchz" "%~dp0_build\rivals\patch_main_ps4_1.ark" "%~dp0dependencies\rivalspark1.patch" "%~dp0_build\rivals\patched_arks\patch_main_ps4_1.ark"
