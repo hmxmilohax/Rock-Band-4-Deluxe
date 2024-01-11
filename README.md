@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This Repo contains almost everything you need to build an ark and pkg for Rock Band 4 Deluxe for PS4.
+This Repo contains almost everything you need to build files for Rock Band 4 Deluxe for PS4.
 
 This mod is very early along, so there is a lot that either doesn't work or isn't complete.
 
@@ -12,10 +12,8 @@ This mod is very early along, so there is a lot that either doesn't work or isn'
 
 You will need
 
-- a Hackable PS4 (sytem software 9.00 or lower)
-- a copy of Rock Band 4 (1.00/Launch, 1.08, or 2.21/latest/Rivals) that you can extract onto your PC.
-
-Currently the versions of Rock Band 4 set up for easy building is 1.08 (shows up as 1.3.0 inside the game), and 2.21/latest/Rivals (shows up as 2.3.7 inside the game).
+- a Hackable PS4 with GoldHEN 2.3.0+ (sytem software 9.00 or lower)
+- a copy of Rock Band 4 version 2.21 (shows up as 2.3.7 in game) installed on your PS4.
 
 ## Building
 
@@ -32,40 +30,31 @@ You can setup git with all default options.
 
 Once the dependency is installed, run `_init_repo.bat` in an **empty folder**. git will pull the repo and make sure you are completely up to date.
 
-After Running `_init_repo.bat`, extract your Rock Band 4 .ark and .hdr files to the correct build folder (1.0/Launch in `_build/launch`, 1.08 in `_build/1.08`, 2.21/latest/Rivals in `_build/rivals`)
-
-From then on simply run `_build_launch.bat`, `_build_1.08.bat`, or `_build_rivals.bat` depending on the version you are building for. This script will pull the repo again for updates, build the ARK for you, and spit it out in `_build/launch`, `_build/1.08`, or `_build/rivals`
+From then on simply run `_build.bat`. This script will pull the repo again for updates, build the ARK for you, and spit it out in `_build`,
 
 Run the build script again to pull any new updates committed to the repo and rebuild a new ark.
 
-## AFR-Installing
-
-***AFR IS CURRENTLY RIVALS ONLY***
-
-***AFR IS ONLY AVAILABLE FOR GOLDHEN 2.3 OR NEWER***
+## Installing
 
 After the build bat is complete, download the latest release of the [GoldHEN plugins repository.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository/releases/latest) install that to your PS4 following the instructions found [here.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository#getting-started)
 
-Once that is complete, copy the `plugins.ini` file in `_build/afr_files` to `/data/GoldHEN/plugins.ini` on your PS4 or edit your current `plugins.ini` file to add these lines
+Once that is complete, copy the `plugins` folder and `plugins.ini` file in `_build/GoldHEN` to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
 
 ```ini
 ; Rock Band 4 Deluxe Plugins
+;US
 [CUSA02084]
 /data/GoldHEN/plugins/afr.prx
+/data/GoldHEN/plugins/RB4DX-Plugin.prx
+/data/GoldHEN/plugins/no_share_watermark.prx
+;EU
+[CUSA02901]
+/data/GoldHEN/plugins/afr.prx
+/data/GoldHEN/plugins/RB4DX-Plugin.prx
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-after that, install the `rb4dx_rivals_afr_blank.pkg` file found in `_build/afr_file` to your PS4. Once that is complete, copy all of the files found in `_build/rivals/patched_arks` to `data/GoldHEN/AFR/CUSA02084` on your PS4. If the folder does not exist, create it.
-
-## PKG-Installing
-
-***RIVALS ONLY***
-
-Before going through the next steps, copy the files in `_build/rivals/patched_arks` to `_build/rivals/CUSA02084-patch`
-
-After the build bat is done open gengp4.exe in dependencies/ps4-pkg-tools (-app for launch/1.08, -patch for 2.21/latest/Rivals), select CUSAXXXXX folder in the correct build folder, and generate a gp4 file.
-
-After the gp4 is generated, open orbis-pub-gen.exe in dependencies/ps4-pkg-tools, open the gp4 and click build, select an output folder and build with the default settings. If you want a slight speedup, build with skip digest calculation checked.
+after that, copy the `ps4` folder found in `_build/` to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02084/` for a EU copy. If the folder does not exist, create it.
 
 ## Included Dependencies
 
@@ -73,8 +62,6 @@ After the gp4 is generated, open orbis-pub-gen.exe in dependencies/ps4-pkg-tools
 
 [LibForge](https://github.com/mtolly/LibForge) - ForgeTool for modifying Rock Band 4 Textures
 
-[HDiffPatch](https://github.com/sisong/HDiffPatch) - To patch existing Rock Band 4 Arks with the Deluxe updates
-
 [DtxCS](https://github.com/InvoxiPlayGames/DtxCS) - For serializing Rock Band dtb files
 
-[PS4 Fake PKG Tools 3.87](https://github.com/CyB1K/PS4-Fake-PKG-Tools-3.87) - for creating a Rock Band 4 PKG for PS4
+[RB4DX-Plugin](https://github.com/LlysiX/RB4DX-Plugin) - GoldHEN Plugin used for loading RB4DX flies
