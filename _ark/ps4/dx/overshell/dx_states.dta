@@ -1,0 +1,27 @@
+(kState_RB4DXMain
+   (view list_medium) 
+   (enter 
+      {$this setup_confirm_actions a ("Instrument Options")}) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         ("Instrument Options"
+            {$this show_instrument_options}
+            {$this trigger_select_effects })
+         ("song speed"
+            {$this show_state kState_RB4DXSongSpeed}
+            {$this trigger_select_effects })
+         (colsel
+            {$this show_state kState_RB4DXColorSelector}
+            {$this trigger_select_effects })
+         (screensaver
+            {$this show_state kState_RB4DXScreensaver}
+            {$this trigger_select_effects })
+         ("lost menus"
+            {$this show_state kState_RB4DXLostMenus}
+            {$this trigger_select_effects })}) 
+   (on_cancel 
+      {$this show_state kState_Options }
+      {$this trigger_cancel_effects }))
