@@ -1,6 +1,7 @@
 (kState_RB4DXMain
    (view list_medium) 
-   (enter 
+   (enter
+      #include ../ui/dx_init.dta
       {$this setup_confirm_actions a ("Instrument Options" "song speed")}) 
    (SELECT_MSG 
       {local $list_data 
@@ -37,7 +38,6 @@
 (kState_RB4DXSongSpeed
    (view confirm_action) 
    (enter 
-      {unless $speedhack {set $speedhack TRUE} {set $speedmod 100}}
       {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
    )
    (SELECT_MSG 

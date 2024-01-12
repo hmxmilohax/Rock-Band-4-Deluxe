@@ -1,0 +1,4 @@
+{unless $dx_initialized
+	{set $speedmod 100}
+	{set $dx_initialized TRUE}
+}

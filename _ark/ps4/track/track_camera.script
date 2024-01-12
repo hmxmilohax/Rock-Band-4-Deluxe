@@ -20,6 +20,6 @@
       [
          (
             [$this track_com ] RBTrack)now_offset ]}
-         {if $speedhack
+         {if {&& {! {$gamemode in_mode practice}} {> $speedmod 100}}
             {$timemgr set_speed {/ $speedmod 100}}
          })
