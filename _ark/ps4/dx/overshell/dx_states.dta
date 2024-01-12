@@ -1,7 +1,7 @@
 (kState_RB4DXMain
    (view list_medium) 
    (enter 
-      {$this setup_confirm_actions a ("Instrument Options")}) 
+      {$this setup_confirm_actions a ("Instrument Options" "song speed")}) 
    (SELECT_MSG 
       {local $list_data 
          {
@@ -10,6 +10,11 @@
          ("Instrument Options"
             {$this show_instrument_options}
             {$this trigger_select_effects })
+         ("writefile"
+            {set $dx_write_test {array ()}}
+            {push_back $dx_write_test {sprint $this}}
+            {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
+            )
          ("song speed"
             {$this show_state kState_RB4DXSongSpeed}
             {$this trigger_select_effects })
@@ -27,4 +32,36 @@
          {$this in_song }
          {$this show_in_song_menu }
          {$this show_state kState_Options }}
-      {$this trigger_cancel_effects }))
+      {$this trigger_cancel_effects })
+)
+(kState_RB4DXSongSpeed
+   (view confirm_action) 
+   (enter 
+      {unless $speedhack {set $speedhack TRUE} {set $speedmod 1.0}}
+      {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         ("+"
+            {set $speedmod {+ $speedmod 0.05}}
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+         )
+         ("0"
+            {set $speedmod 1.0}
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+         )
+         ("-"
+            {unless {< {- $speedmod 0.05} 1.0}
+               {set $speedmod {- $speedmod 0.05}}
+            }
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+         )
+
+         })
+   (on_cancel 
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects })
+)
