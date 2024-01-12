@@ -30,7 +30,7 @@ You can setup git with all default options.
 
 Once the dependency is installed, run `_init_repo.bat` in an **empty folder**. git will pull the repo and make sure you are completely up to date.
 
-From then on simply run `_build.bat`. This script will pull the repo again for updates, build the ARK for you, and spit it out in `_build`,
+From then on simply run `_build.bat`. This script will pull the repo again for updates, build the files for you, and spit them out in `_build`,
 
 Run the build script again to pull any new updates committed to the repo and rebuild a new ark.
 
