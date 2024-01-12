@@ -37,8 +37,8 @@
 (kState_RB4DXSongSpeed
    (view confirm_action) 
    (enter 
-      {unless $speedhack {set $speedhack TRUE} {set $speedmod 1.0}}
-      {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+      {unless $speedhack {set $speedhack TRUE} {set $speedmod 100}}
+      {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
    )
    (SELECT_MSG 
       {local $list_data 
@@ -46,18 +46,18 @@
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
          ("+"
-            {set $speedmod {+ $speedmod 0.05}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+            {set $speedmod {+ $speedmod 5}}
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
          )
          ("0"
-            {set $speedmod 1.0}
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+            {set $speedmod 100}
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
          )
          ("-"
-            {unless {< {- $speedmod 0.05} 1.0}
-               {set $speedmod {- $speedmod 0.05}}
+            {unless {< {- $speedmod 5} 100}
+               {set $speedmod {- $speedmod 5}}
             }
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" $speedmod} ("+" "0" "-")}
+            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
          )
 
          })

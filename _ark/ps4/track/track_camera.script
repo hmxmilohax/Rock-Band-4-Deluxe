@@ -21,4 +21,5 @@
          (
             [$this track_com ] RBTrack)now_offset ]}
          {if $speedhack
-         {$timemgr set_speed $speedmod}})
+            {$timemgr set_speed {/ $speedmod 100}}
+         })
