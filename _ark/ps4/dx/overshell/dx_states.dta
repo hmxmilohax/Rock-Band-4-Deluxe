@@ -23,5 +23,8 @@
             {$this show_state kState_RB4DXLostMenus}
             {$this trigger_select_effects })}) 
    (on_cancel 
-      {$this show_state kState_Options }
+      {if_else 
+         {$this in_song }
+         {$this show_in_song_menu }
+         {$this show_state kState_Options }}
       {$this trigger_cancel_effects }))
