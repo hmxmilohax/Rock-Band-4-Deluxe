@@ -1,3 +1,4 @@
 _build/ps4/*
 *.dta_dta_ps4
 !_ark/ps4/ui/overshell/slot_states/slot_states.dta_dta_ps4
+_ark/ps4/ui/game

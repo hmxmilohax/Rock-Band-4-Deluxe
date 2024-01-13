@@ -54,7 +54,7 @@ Once that is complete, copy the `plugins` folder and `plugins.ini` file in `_bui
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-after that, copy the `ps4` folder found in `_build/` to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02084/` for a EU copy. If the folder does not exist, create it.
+after that, copy the `ps4` folder found in `_build/` to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02084/` for a EU copy. If the AFR/CUSA##### folder does not exist on your ps4, create it. If the ps4 folder already exists on your ps4, delete it.
 
 ## Included Dependencies
 
