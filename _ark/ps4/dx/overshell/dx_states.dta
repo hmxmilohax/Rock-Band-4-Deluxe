@@ -2,7 +2,7 @@
    (view list_medium) 
    (enter
       #include ../ui/dx_init.dta
-      {$this setup_confirm_actions a ("Instrument Options" "song speed")}) 
+      {$this setup_confirm_actions a ("Instrument Options" {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"} "song speed")}) 
    (SELECT_MSG 
       {local $list_data 
          {
@@ -15,6 +15,17 @@
             {set $dx_write_test {array ()}}
             {push_back $dx_write_test {sprint $this}}
             {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
+            )
+         (("Black Venue: ON" "Black Venue: OFF")
+            {set $blackbg {! $blackbg}}
+            {if_else $blackbg
+               {do
+                  {set $dx_write_blackbg {array ()}}
+                  {write_file "data:/GoldHEN/blackbg.dta" $dx_write_blackbg}
+               }
+               {file_delete "data:/GoldHEN/blackbg.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
             )
          ("song speed"
             {$this show_state kState_RB4DXSongSpeed}
@@ -34,6 +45,20 @@
          {$this show_in_song_menu }
          {$this show_state kState_Options }}
       {$this trigger_cancel_effects })
+)
+(kState_RB4DXDelayedEffectWarn
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "This option will take effect the next time you restart the game." ("Ok")}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects }
+   )
 )
 (kState_RB4DXSongSpeed
    (view confirm_action) 

@@ -1,4 +1,5 @@
 {unless $dx_initialized
 	{set $speedmod 100}
 	{set $dx_initialized TRUE}
+	{set $blackbg {file_exists "data:/GoldHEN/blackbg.dta"}}
 }
