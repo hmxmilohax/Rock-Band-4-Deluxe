@@ -1,44 +1,49 @@
-# Rock-Band-4-Deluxe
+<div align="center">
 
 ![Header Image](dependencies/header.png)
 
-## Introduction
+## *Rock Band 4 Deluxe* is a Quality-of-Life Improvement Mod for PlayStation 4.
 
-This Repo contains almost everything you need to build files for Rock Band 4 Deluxe for PS4.
+### 📥 [Download Now!](#%EF%B8%8F-what-youll-need)
 
-This mod is very early along, so there is a lot that either doesn't work or isn't complete.
+</div>
 
-## Prerequisites
+# ✍️ What You'll Need
 
-You will need
+### Playing *Rock Band 4 Deluxe* requires these things:
 
-- a Hackable PS4 with GoldHEN 2.3.0+ (sytem software 9.00 or lower)
+- a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 9.00 or lower)
 - a copy of Rock Band 4 version 2.21 (shows up as 2.3.7 in game) installed on your PS4.
 
-## Building
+<br/>
 
-NOTE: You WILL need a modded/hacked console to play this mod on console. I hope this is clear
+# 📥 Downloads
 
-Setting up the Rock Band 4 Deluxe repo for the first time is meant to be as easy as possible.
-As well, it is designed to allow you to automatically receive updates as the repo is updated.
+*Rock Band 4 Deluxe recieves infrequent updates. You can click the `Watch` button (All Activity) to be notified about any updates that occur.*
 
-Simply go to the Releases of this repo and grab both files. (one .exe, one .bat)
+![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe?label=last%20updated%3A)
 
-The exe is a dependency, [Git for Windows](https://gitforwindows.org/).
-Git is required for you to take advantage of auto updating via github pulls.
-You can setup git with all default options.
+### 📥 [Playstation 4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
 
-Once the dependency is installed, run `_init_repo.bat` in an **empty folder**. git will pull the repo and make sure you are completely up to date.
+> The standard install, typical for most users.
 
-From then on simply run `_build.bat`. This script will pull the repo again for updates, build the files for you, and spit them out in `_build`,
+### 📥 [Playstation 4 (Song Title Always On)](https://nightly.link/hmxmilohax/Rock-Band-4-Deluxe/workflows/build/main/RB4DX-PS4-song-title-always-on.zip)
 
-Run the build script again to pull any new updates committed to the repo and rebuild a new ark.
+> Always shows the song title in-game.
 
-## Installing
+<br/>
 
-After the build bat is complete, download the latest release of the [GoldHEN plugins repository.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository/releases/latest) install that to your PS4 following the instructions found [here.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository#getting-started)
+> Continue to: 
+    - [Installing](#-installing)
+    
+## 📩 Installing
+**NOTE: You WILL need a JAILBROKEN (GoldHen 2.3.0+) PS4 in order to play this mod on console. We hope this is clear.**
 
-Once that is complete, copy the `plugins` folder and `plugins.ini` file in `_build/GoldHEN` to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
+download the latest release of the [GoldHEN plugins repository.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository/releases/latest) install that to your PS4 following the instructions found [here.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository#quick-start)
+
+Download [**Rock Band 4 Deluxe**](#-downloads), Extract the zip somewhere on your PC.
+
+Once that is complete, copy the `plugins` folder and `plugins.ini` file in the GoldHEN folder to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
 
 ```ini
 ; Rock Band 4 Deluxe Plugins
@@ -54,11 +59,42 @@ Once that is complete, copy the `plugins` folder and `plugins.ini` file in `_bui
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-after that, copy the `ps4` folder found in `_build/` to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02901/` for a EU copy. If the AFR/CUSA##### folder does not exist on your ps4, create it. If the ps4 folder already exists on your ps4, delete it.
+after that, copy the `ps4` folder to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02901/` for a EU copy.
 
-## Included Dependencies
+If the AFR/CUSA##### folder does not exist on your ps4, create it. If the ps4 folder already exists on your ps4, delete it before copying.
 
-[Git for Windows](https://gitforwindows.org/) - CLI application to allow auto updating rb4dx repo files
+# 🔨 Building (Advanced)
+
+### Installing Python (Required)
+
+* Head to the [**Python downloads**](https://www.python.org/downloads/), download and install Python (version 3.9 or later).
+  * ***Select "Add python.exe to PATH"*** on the installer.
+
+![Python PATH](dependencies/images/pythonpath.png)
+
+### Initializing the Repo
+
+* Go to the **[Releases](https://github.com/hmxmilohax/rock-band-4-deluxe/releases)** of this repo and **download `_init_repo.py`**.
+  * Make a new **empty** folder, **put `_init_repo.py` in the folder, and run it**. This will pull the repo down for you and make sure you're completely up to date. **This will take some time.**
+
+### ***The folder should look like this once it's done:***
+
+![Repo Folder](dependencies/images/repofolder.png)
+
+### ✅ ***The Rock Band 4 Deluxe repo is now set up!***
+
+From here, you can make any personal modifications to the game or build it yourself.
+
+  * Run the `build.bat` script to build *Rock Band 4 Deluxe*.
+  * Built contents will be in the `_build` folder on the root of the repo.
+
+You can now return to [**Installing**](#-installing)
+
+# 🖥️ Dependencies
+
+[Git for Windows](https://gitforwindows.org/) - CLI application to allow auto updating Deluxe repo files
+
+[Python](https://www.python.org/downloads/) - For user script functionality (NOTE: 3.9 or newer is highly recommended!)
 
 [LibForge](https://github.com/mtolly/LibForge) - ForgeTool for modifying Rock Band 4 Textures
 
