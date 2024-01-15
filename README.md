@@ -49,19 +49,17 @@ Once that is complete, copy the `plugins` folder and `plugins.ini` file in the G
 ; Rock Band 4 Deluxe Plugins
 ;US
 [CUSA02084]
-/data/GoldHEN/plugins/afr.prx
 /data/GoldHEN/plugins/RB4DX-Plugin.prx
 /data/GoldHEN/plugins/no_share_watermark.prx
 ;EU
 [CUSA02901]
-/data/GoldHEN/plugins/afr.prx
 /data/GoldHEN/plugins/RB4DX-Plugin.prx
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-after that, copy the `ps4` folder to your ps4 in the folder `/data/GoldHEN/AFR/CUSA02084/` for a US copy or `/data/GoldHEN/AFR/CUSA02901/` for a EU copy.
+after that, copy the `ps4` folder to your ps4 in the folder `/data/GoldHEN/RB4DX/`.
 
-If the AFR/CUSA##### folder does not exist on your ps4, create it. If the ps4 folder already exists on your ps4, delete it before copying.
+If the `RB4DX` folder does not exist on your ps4, create it. If the `ps4` folder already exists on your ps4, delete it before copying.
 
 # 🔨 Building (Advanced)
 
