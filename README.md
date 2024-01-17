@@ -25,12 +25,6 @@
 
 ### 📥 [Playstation 4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
 
-> The standard install, typical for most users.
-
-### 📥 [Playstation 4 (Song Title Always On)](https://nightly.link/hmxmilohax/Rock-Band-4-Deluxe/workflows/build/main/RB4DX-PS4-song-title-always-on.zip)
-
-> Always shows the song title in-game.
-
 <br/>
 
 > Continue to: 
@@ -60,6 +54,14 @@ Once that is complete, copy the `plugins` folder and `plugins.ini` file in the G
 after that, copy the `ps4` folder to your ps4 in the folder `/data/GoldHEN/RB4DX/`.
 
 If the `RB4DX` folder does not exist on your ps4, create it. If the `ps4` folder already exists on your ps4, delete it before copying.
+
+### Optional Additions
+
+*Rock Band 4 Deluxe* Comes with many goodies to change/improve the game
+
+All of them can be found in the dx_optional_additions folder in the download for RB4DX.
+
+To install these, copy the `ps4` folder inside each optional addition to your ps4 in the folder `/data/GoldHEN/RB4DX/` **AFTER** copying the main rb4dx ps4 folder.
 
 # 🔨 Building (Advanced)
 
