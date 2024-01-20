@@ -3,18 +3,20 @@
    {$this setup_confirm_actions a 
       (
          "Instrument Options"
+         "song speed"
          {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
          {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-         "song speed"
+         {if_else $noui "No HUD: ON" "No HUD: OFF"}
+         "optional additions"
       )
    }
 )
 (kState_RB4DXMain
-   (view list_medium) 
+   (view list_long) 
    (enter
       #include ../ui/dx_init.dta
       RB4DXMAIN_DATA
-      ) 
+   ) 
    (SELECT_MSG 
       {local $list_data 
          {
@@ -23,11 +25,9 @@
          ("Instrument Options"
             {$this show_instrument_options}
             {$this trigger_select_effects })
-         ("writefile"
-            {set $dx_write_test {array ()}}
-            {push_back $dx_write_test {sprint $this}}
-            {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
-         )
+         ("song speed"
+            {$this show_state kState_RB4DXSongSpeed}
+            {$this trigger_select_effects })
          (("Black Venue: ON" "Black Venue: OFF")
             {set $blackbg {! $blackbg}}
             {if_else $blackbg
@@ -59,9 +59,32 @@
             }
             {$this trigger_select_effects }
          )
-         ("song speed"
-            {$this show_state kState_RB4DXSongSpeed}
-            {$this trigger_select_effects })
+         (("No HUD: ON" "No HUD: OFF")
+            {set $noui {! $noui}}
+            {if_else $noui
+               {do
+                  {set $dx_write_blackbg {array ()}}
+                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_blackbg}
+               }
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXMAIN_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         ("optional additions"
+            {$this show_state kState_RB4DXOptionalAdditions}
+            {$this trigger_select_effects}
+         )
+         ("writefile"
+            {set $dx_write_test {array ()}}
+            {push_back $dx_write_test {sprint $this}}
+            {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
+         )
          (colsel
             {$this show_state kState_RB4DXColorSelector}
             {$this trigger_select_effects })
@@ -70,18 +93,21 @@
             {$this trigger_select_effects })
          ("lost menus"
             {$this show_state kState_RB4DXLostMenus}
-            {$this trigger_select_effects })}) 
+            {$this trigger_select_effects })
+      }
+   ) 
    (on_cancel 
       {if_else 
          {$this in_song }
          {$this show_in_song_menu }
          {$this show_state kState_Options }}
-      {$this trigger_cancel_effects })
+      {$this trigger_cancel_effects }
+   )
 )
 (kState_RB4DXDelayedEffectWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect the next time you restart the game." ("Ok")}
+      {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state kState_RB4DXMain}
@@ -95,7 +121,7 @@
 (kState_RB4DXInGameWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect when you go back to music library." ("Ok")}
+      {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state kState_RB4DXMain}
@@ -135,4 +161,107 @@
    (on_cancel 
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects })
+)
+(kState_RB4DXOptionalAdditions
+   (view list_short) 
+   (enter
+      OPTIONAL_ADDITIONS_CHECK
+      {$this setup_confirm_actions a 
+         (
+            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
+            {if_else $noshine "No Shine: ON" "No Shine: OFF"}
+         )
+      }
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         (("Performance Mode: ON" "Performance Mode: OFF")
+            {if_else $nohud
+               {do
+                  {set $optionaladd nohud}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
+         (("Song Title Always: ON" "Song Title Always: OFF")
+            {if_else $songtitle
+               {do
+                  {set $optionaladd songtitle}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
+         (("No Shine: ON" "No Shine: OFF")
+            {if_else $noshine
+               {do
+                  {set $optionaladd noshine}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
+      }
+   ) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
+   )
+)
+(kState_RB4DXOptionalAddWarn
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "You will need to re-add the optional addition from your RB4DX build zip/folder. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+   )
+   (SELECT_MSG
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         (overshell_confirm_yes
+            {switch $optionaladd
+               (nohud
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
+               )
+               (songtitle
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
+               )
+               (noshine
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+               )
+            }
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+         (overshell_confirm_no
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXOptionalAdditions}
+      {$this trigger_cancel_effects }
+   )
+)
+(kState_RB4DXOptionalAddHowTo
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "This option cannot be changed in-game. go to the \qdx_optional_additions\q folder in your RB4DX build zip/folder, and copy the ps4 folder of the addition to \q/data/GoldHEN/RB4DX/\q." (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXOptionalAdditions}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXOptionalAdditions}
+      {$this trigger_cancel_effects }
+   )
 )
