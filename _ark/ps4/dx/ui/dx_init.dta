@@ -1,7 +1,8 @@
 {unless $dx_initialized
 	{set $speedmod 100}
 	{set $dx_initialized TRUE}
-	{set $blackbg {file_exists "data:/GoldHEN/RB4DX/blackbg.dta"}}
+	{set $blackbg {file_exists "blackbg.dta"}}
+	{set $nomiss {file_exists "nomiss.dta"}}
 	{set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
 	{set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
 }

@@ -5,7 +5,8 @@
          "Instrument Options"
          "song speed"
          {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
-         {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+         {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
+         {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
          {if_else $noui "No HUD: ON" "No HUD: OFF"}
          "optional additions"
       )
@@ -32,21 +33,33 @@
             {set $blackbg {! $blackbg}}
             {if_else $blackbg
                {do
-                  {set $dx_write_blackbg {array ()}}
-                  {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_blackbg}
+                  {set $dx_write_nul {array ()}}
+                  {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_nul}
                }
                {file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
          )
-         (("Crowd Meter: OFF" "Crowd Meter: ON")
+         (("No Miss Sounds: ON" "No Miss Sounds: OFF")
+            {set $nomiss {! $nomiss}}
+            {if_else $nomiss
+               {do
+                  {set $dx_write_nul {array ()}}
+                  {write_file "data:/GoldHEN/RB4DX/nomiss.dta" $dx_write_nul}
+               }
+               {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("No Crowd Meter: ON" "No Crowd Meter: OFF")
             {set $crowdmeter {! $crowdmeter}}
             {if_else $crowdmeter
                {do
-                  {set $dx_write_blackbg {array ()}}
-                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4" $dx_write_blackbg}
-                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/join_band.entity_ps4" $dx_write_blackbg}
+                  {set $dx_write_nul {array ()}}
+                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4" $dx_write_nul}
+                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/join_band.entity_ps4" $dx_write_nul}
                }
                {do
                   {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}
@@ -63,8 +76,8 @@
             {set $noui {! $noui}}
             {if_else $noui
                {do
-                  {set $dx_write_blackbg {array ()}}
-                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_blackbg}
+                  {set $dx_write_nul {array ()}}
+                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_nul}
                }
                {do
                   {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
