@@ -176,7 +176,7 @@
       {$this trigger_cancel_effects })
 )
 (kState_RB4DXOptionalAdditions
-   (view list_short) 
+   (view list_medium) 
    (enter
       OPTIONAL_ADDITIONS_CHECK
       {$this setup_confirm_actions a 
@@ -184,6 +184,7 @@
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
             {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
             {if_else $noshine "No Shine: ON" "No Shine: OFF"}
+            {if_else $noflames "No Flames: ON" "No Flames: OFF"}
          )
       }
    ) 
@@ -222,6 +223,16 @@
             }
             {$this trigger_select_effects}
          )
+         (("No Flames: ON" "No Flames: OFF")
+            {if_else $noflames
+               {do
+                  {set $optionaladd noflames}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
       }
    ) 
    (on_cancel 
@@ -249,6 +260,9 @@
                )
                (noshine
                   {file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+               )
+               (noflames
+                  DELETE_NOFLAMES_FILES
                )
             }
             {$this show_state kState_RB4DXOptionalAdditions}
