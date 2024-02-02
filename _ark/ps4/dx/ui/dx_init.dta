@@ -25,7 +25,7 @@
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp"}
+	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
