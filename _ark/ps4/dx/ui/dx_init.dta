@@ -12,6 +12,7 @@
 	{set $songtitle {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}}
 	{set $noshine {file_exists "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
 	{set $noflames {file_exists "data:/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
+	{set $calibrationmode {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}}
 )
 #define DELETE_NOFLAMES_FILES
 (

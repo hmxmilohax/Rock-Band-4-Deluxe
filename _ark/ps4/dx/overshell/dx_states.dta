@@ -123,11 +123,19 @@
       {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
    )
    (SELECT_MSG
-      {$this show_state kState_RB4DXMain}
+      {if_else {== $optionaladd calibrationmode}
+         {$this show_state kState_RB4DXOptionalAdditions}
+         {$this show_state kState_RB4DXMain}
+      }
+      {set $optionaladd FALSE}
       {$this trigger_select_effects }
    )
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {if_else {== $optionaladd calibrationmode}
+         {$this show_state kState_RB4DXOptionalAdditions}
+         {$this show_state kState_RB4DXMain}
+      }
+      {set $optionaladd FALSE}
       {$this trigger_cancel_effects }
    )
 )
@@ -185,6 +193,7 @@
             {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
             {if_else $noshine "No Shine: ON" "No Shine: OFF"}
             {if_else $noflames "No Flames: ON" "No Flames: OFF"}
+            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
          )
       }
    ) 
@@ -233,6 +242,16 @@
             }
             {$this trigger_select_effects}
          )
+         (("Calibration Mode: ON" "Calibration Mode: OFF")
+            {if_else $calibrationmode
+               {do
+                  {set $optionaladd calibrationmode}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
       }
    ) 
    (on_cancel 
@@ -264,16 +283,24 @@
                (noflames
                   DELETE_NOFLAMES_FILES
                )
+               (calibrationmode
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+               )
             }
-            {$this show_state kState_RB4DXOptionalAdditions}
+            {if_else {== $optionaladd calibrationmode}
+               {$this show_state kState_RB4DXDelayedEffectWarn}
+               {$this show_state kState_RB4DXOptionalAdditions}
+            }
          )
          (overshell_confirm_no
+            {set $optionaladd FALSE}
             {$this show_state kState_RB4DXOptionalAdditions}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
+      {set $optionaladd FALSE}
       {$this show_state kState_RB4DXOptionalAdditions}
       {$this trigger_cancel_effects }
    )
