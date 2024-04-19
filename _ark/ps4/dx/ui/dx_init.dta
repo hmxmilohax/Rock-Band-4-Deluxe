@@ -1,10 +1,50 @@
 {unless $dx_initialized
+	{set $dx_write_nul {array ()}}
 	{set $speedmod 100}
 	{set $dx_initialized TRUE}
 	{set $blackbg {file_exists "blackbg.dta"}}
 	{set $nomiss {file_exists "nomiss.dta"}}
 	{set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
 	{set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
+	{set $voxslt
+		{cond
+			({file_exists "voxgtr.dta"}
+				gtr
+			)
+			({file_exists "voxdrum.dta"}
+				drum
+			)
+			({&& {! {file_exists "voxdrum.dta"}} {! {file_exists "voxgtr.dta"}}}
+				vox
+			)
+		}
+	}
+	{set $gtrslt
+		{cond
+			({file_exists "gtrvox.dta"}
+				vox
+			)
+			({file_exists "gtrdrum.dta"}
+				drum
+			)
+			({&& {! {file_exists "gtrdrum.dta"}} {! {file_exists "gtrvox.dta"}}}
+				gtr
+			)
+		}
+	}
+	{set $drmslt
+		{cond
+			({file_exists "drumgtr.dta"}
+				gtr
+			)
+			({file_exists "drumvox.dta"}
+				vox
+			)
+			({&& {! {file_exists "drumvox.dta"}} {! {file_exists "drumgtr.dta"}}}
+				drum
+			)
+		}
+	}
 }
 #define OPTIONAL_ADDITIONS_CHECK
 (

@@ -13,5 +13,5 @@ xcopy /q /e /y _tmpbuild _build\ps4\
 for /R "%~dp0_tmpbuild" %%f in (*) do del "%%f"
 rmdir /s /q "%~dp0_tmpbuild"
 echo:Created Rock Band 4 Deluxe files.
-echo:Complete! Copy the ps4 folder in _build into /data/GoldHEN/AFR/CUSA02084 (US) or /data/GoldHEN/AFR/CUSA02901 (EU) on your PS4.
+echo:Complete! Copy the ps4 folder in _build into /data/GoldHEN/RB4DX/ on your PS4.
 pause
