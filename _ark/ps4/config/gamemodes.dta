@@ -11,7 +11,7 @@
          {$gamemode get_int max_players }1 }) 
    (use_quickplay_leaderboards TRUE) 
    (use_brutal_leaderboards FALSE) 
-   (allow_overdrive_phrases TRUE) 
+   (allow_overdrive_phrases {! {file_exists "nood.dta"}}) 
    (allow_drum_fills TRUE) 
    (can_lose TRUE) 
    (num_strikes 0) 
@@ -97,7 +97,7 @@
    (game_screen frame_rate_game_screen) 
    (allow_input_performance_mode FALSE))
 (practice 
-   (allow_overdrive_phrases TRUE) 
+   (allow_overdrive_phrases {file_exists "practiceod.dta"}) 
    (can_lose FALSE) 
    (quarantine FALSE) 
    (enable_overdrive TRUE) 

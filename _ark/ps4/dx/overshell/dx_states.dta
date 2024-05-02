@@ -101,6 +101,8 @@
          {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
          {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
          {if_else $noui "No HUD: ON" "No HUD: OFF"}
+         {if_else $nood "No OD: ON" "No OD: OFF"}
+         {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
       )
    }
 )
@@ -132,6 +134,28 @@
                   {write_file "data:/GoldHEN/RB4DX/nomiss.dta" $dx_write_nul}
                }
                {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("No OD: ON" "No OD: OFF")
+            {set $nood {! $nood}}
+            {if_else $nood
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/nood.dta" $dx_write_nul}
+               }
+               {file_delete "data:/GoldHEN/RB4DX/nood.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("OD in Practice: ON" "OD in Practice: OFF")
+            {set $practiceod {! $practiceod}}
+            {if_else $practiceod
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/practiceod.dta" $dx_write_nul}
+               }
+               {file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
