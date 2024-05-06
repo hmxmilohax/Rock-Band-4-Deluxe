@@ -4,6 +4,8 @@
 
 ## *Rock Band 4 Deluxe* is a Quality-of-Life Improvement Mod for PlayStation 4.
 
+### 👉 See [Full Feature List](https://github.com/hmxmilohax/rock-band-4-deluxe/blob/main/dependencies/features.md#features)
+
 ### 📥 [Download Now!](#%EF%B8%8F-what-youll-need)
 
 </div>
