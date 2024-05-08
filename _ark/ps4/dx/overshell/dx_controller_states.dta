@@ -204,7 +204,7 @@
    ) 
    (on_cancel 
       {set $slot_changed FALSE}
-      {set $slot_to}
+      {set $slot_to FALSE}
       {$this show_state kState_RB4DXSlotOverride}
       {$this trigger_cancel_effects }
    )
