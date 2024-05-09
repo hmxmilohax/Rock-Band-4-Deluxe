@@ -11,7 +11,7 @@
    }
 )
 (kState_RB4DXMain
-   (view list_long) 
+   (view {$this get_auto_list_view }) 
    (enter
       #include ../ui/dx_init.dta
       RB4DXMAIN_DATA
@@ -107,7 +107,7 @@
    }
 )
 (kState_RB4DXGPSettings
-   (view list_medium) 
+   (view {$this get_auto_list_view }) 
    (enter
       RB4DXGP_DATA
    ) 
@@ -202,7 +202,7 @@
    )
 )
 (kState_RB4DXOptionalAdditions
-   (view list_medium) 
+   (view {$this get_auto_list_view }) 
    (enter
       OPTIONAL_ADDITIONS_CHECK
       {$this setup_confirm_actions a 

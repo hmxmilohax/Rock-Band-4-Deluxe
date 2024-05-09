@@ -1,5 +1,5 @@
 (kState_RB4DXControllerSettings
-   (view list_short) 
+   (view {$this get_auto_list_view }) 
    (enter
       {$this setup_confirm_actions a 
       (
