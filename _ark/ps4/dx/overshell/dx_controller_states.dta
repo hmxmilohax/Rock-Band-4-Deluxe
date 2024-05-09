@@ -3,7 +3,7 @@
    (enter
       {$this setup_confirm_actions a 
       (
-         "Slot Override"
+         "Change instrument type"
       )
    }
    ) 
@@ -12,7 +12,7 @@
          {
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
-         ("Slot Override"
+         ("Change instrument type"
             {$this show_state kState_RB4DXSlotOverride}
          )
       }
@@ -96,115 +96,25 @@
       {switch $list_data 
          ("guitar"
             {set $slot_to gtr}
-            {$this show_state kState_RB4DXSlotWarn}
-            {$this trigger_select_effects }
          )
          ("drums"
             {set $slot_to drum}
-            {$this show_state kState_RB4DXSlotWarn}
-            {$this trigger_select_effects }
          )
          ("vocals"
             {set $slot_to vox}
-            {$this show_state kState_RB4DXSlotWarn}
-            {$this trigger_select_effects }
          )
       }
-   ) 
-   (on_cancel 
-      {set $slot_changed FALSE}
-      {$this show_state kState_RB4DXSlotOverride}
-      {$this trigger_cancel_effects }
-   )
-)
-
-(kState_RB4DXSlotWarn
-   (view confirm_action) 
-   (enter
-      {$this setup_confirm_actions "You will have to disconnect and reconnect any controllers of this type. Do you want to continue?"
-      (
-         overshell_confirm_yes
-         overshell_confirm_no
-      )
-   }
-   ) 
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
-      {switch $list_data 
-         (overshell_confirm_yes
-            {write_file {sprint "data:/GoldHEN/RB4DX/" $slot_changed $slot_to ".dta"} $dx_write_nul}
-            {switch $slot_changed
-               (gtr
-                  {switch $slot_to
-                     (gtr
-                        {set $gtrslt gtr}
-                        {file_delete "data:/GoldHEN/RB4DX/gtrgtr.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
-                     )
-                     (drum
-                        {set $gtrslt drum}
-                        {file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
-                     )
-                     (vox
-                        {set $gtrslt vox}
-                        {file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
-                     )
-                  }
-               )
-               (drum
-                  {switch $slot_to
-                     (gtr
-                        {set $drmslt gtr}
-                        {file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
-                     )
-                     (drum
-                        {set $drmslt drum}
-                        {file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/drumdrum.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
-                     )
-                     (vox
-                        {set $drmslt vox}
-                        {file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
-                     )
-                  }
-               )
-               (vox
-                  {switch $slot_to
-                     (gtr
-                        {set $voxslt gtr}
-                        {file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
-                     )
-                     (drum
-                        {set $voxslt drum}
-                        {file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
-                     )
-                     (vox
-                        {set $voxslt vox}
-                        {file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
-                        {file_delete "data:/GoldHEN/RB4DX/voxvox.dta"}
-                     )
-                  }
-               )
-            }
-            {$this show_state kState_RB4DXSlotOverride}
-            {$this trigger_select_effects}
-         )
-         (overshell_confirm_no
-            {set $slot_changed FALSE}
-            {set $slot_to FALSE}
-            {$this show_state kState_RB4DXSlotOverride}
-            {$this trigger_select_effects}
-         )
-      }
-   ) 
-   (on_cancel 
-      {set $slot_changed FALSE}
+      CLEAR_SLOT_DTAS
+      WRITE_SLOT_DTA
+      SET_SLOT_VAR
+      CLEAR_INVALID_SLOT_DTAS
+      {$overshell update_all}
+      {$this trigger_select_effects }
       {set $slot_to FALSE}
+      {set $slot_changed FALSE}
+   ) 
+   (on_cancel 
+      {set $slot_changed FALSE}
       {$this show_state kState_RB4DXSlotOverride}
       {$this trigger_cancel_effects }
    )

@@ -76,3 +76,48 @@
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
 )
+
+#define WRITE_SLOT_DTA
+(
+	{write_file {sprint "data:/GoldHEN/RB4DX/" $slot_changed $slot_to ".dta"} $dx_write_nul}
+)
+
+#define SET_SLOT_VAR
+(
+	{switch $slot_changed
+        (gtr
+	        {set $gtrslt $slot_to}
+        )
+        (drum
+            {set $drmslt $slot_to}
+        )
+        (vox
+	        {set $voxslt $slot_to}
+        )
+    }
+)
+
+#define CLEAR_SLOT_DTAS
+(
+	{switch $slot_changed
+        (gtr
+	        {file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
+	        {file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
+        )
+        (drum
+            {file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
+            {file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
+        )
+        (vox
+	        {file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
+	        {file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
+        )
+    }
+)
+
+#define CLEAR_INVALID_SLOT_DTAS
+(
+	{file_delete "data:/GoldHEN/RB4DX/voxvox.dta"}
+	{file_delete "data:/GoldHEN/RB4DX/drumdrum.dta"}
+	{file_delete "data:/GoldHEN/RB4DX/gtrgtr.dta"}
+)
