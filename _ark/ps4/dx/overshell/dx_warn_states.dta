@@ -6,7 +6,7 @@
    (SELECT_MSG
       {if_else {== $optionaladd calibrationmode}
          {$this show_state kState_RB4DXOptionalAdditions}
-         {$this show_state kState_RB4DXMain}
+         {$this show_state kState_RB4DXGPSettings}
       }
       {set $optionaladd FALSE}
       {$this trigger_select_effects }
@@ -14,7 +14,7 @@
    (on_cancel 
       {if_else {== $optionaladd calibrationmode}
          {$this show_state kState_RB4DXOptionalAdditions}
-         {$this show_state kState_RB4DXMain}
+         {$this show_state kState_RB4DXGPSettings}
       }
       {set $optionaladd FALSE}
       {$this trigger_cancel_effects }
@@ -26,11 +26,11 @@
       {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
    )
    (SELECT_MSG
-      {$this show_state kState_RB4DXMain}
+      {$this show_state kState_RB4DXGPSettings}
       {$this trigger_select_effects }
    )
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {$this show_state kState_RB4DXGPSettings}
       {$this trigger_cancel_effects }
    )
 )
