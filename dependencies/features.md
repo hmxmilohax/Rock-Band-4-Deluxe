@@ -8,7 +8,7 @@
 * Modifier to enable Overdrive gain in practice mode
 * New menu, `Deluxe Settings`, in game for additional modifications
 * Selectable song speed by 5% increments
-* 60 FPS Venues modifier to make the backrounds smoother and light you PS4 on fire
+* 60 FPS Venues modifier to make the backrounds smoother and light your PS4 on fire
 * Black Venue modifier with decreased load times and system load
 * Song title always visible optional patch
 * optional position adjustment for the song title to move it out of the way of gameplay
