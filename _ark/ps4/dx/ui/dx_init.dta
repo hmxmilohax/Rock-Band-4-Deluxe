@@ -5,6 +5,7 @@
 	{set $nood {file_exists "nood.dta"}}
 	{set $practiceod {file_exists "practiceod.dta"}}
 	{set $blackbg {file_exists "blackbg.dta"}}
+	{set $60fpsbg {file_exists "60fpsbg.dta"}}
 	{set $nomiss {file_exists "nomiss.dta"}}
 	{set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
 	{set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}

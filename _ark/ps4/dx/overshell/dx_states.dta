@@ -98,6 +98,7 @@
    {$this setup_confirm_actions a 
       (
          {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
+         {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
          {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
          {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
          {if_else $noui "No HUD: ON" "No HUD: OFF"}
@@ -123,6 +124,17 @@
                   {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_nul}
                }
                {file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("60 FPS Venues: ON" "60 FPS Venues: OFF")
+            {set $60fpsbg {! $60fpsbg}}
+            {if_else $60fpsbg
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/60fpsbg.dta" $dx_write_nul}
+               }
+               {file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
