@@ -13,7 +13,6 @@
 (kState_RB4DXMain
    (view {$this get_auto_list_view }) 
    (enter
-      #include ../ui/dx_init.dta
       RB4DXMAIN_DATA
    ) 
    (SELECT_MSG 
