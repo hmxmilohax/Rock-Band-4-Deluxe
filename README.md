@@ -14,7 +14,7 @@
 
 ### Playing *Rock Band 4 Deluxe* requires these things:
 
-- a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 9.00 or lower)
+- a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 11.00 or lower)
 - a copy of Rock Band 4 version 2.21 (shows up as 2.3.7 in game) installed on your PS4.
 
 <br/>
