@@ -4,17 +4,31 @@
       {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
    )
    (SELECT_MSG
-      {if_else {== $optionaladd calibrationmode}
-         {$this show_state kState_RB4DXOptionalAdditions}
-         {$this show_state kState_RB4DXGPSettings}
+      {switch $dx_cur_state
+         (optionaladd
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+         (gp
+            {$this show_state kState_RB4DXGPSettings}
+         )
+         (vis
+            {$this show_state kState_RB4DXVisSettings}
+         )
       }
       {set $optionaladd FALSE}
       {$this trigger_select_effects }
    )
    (on_cancel 
-      {if_else {== $optionaladd calibrationmode}
-         {$this show_state kState_RB4DXOptionalAdditions}
-         {$this show_state kState_RB4DXGPSettings}
+      {switch $dx_cur_state
+         (optionaladd
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+         (gp
+            {$this show_state kState_RB4DXGPSettings}
+         )
+         (vis
+            {$this show_state kState_RB4DXVisSettings}
+         )
       }
       {set $optionaladd FALSE}
       {$this trigger_cancel_effects }
@@ -26,11 +40,31 @@
       {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
    )
    (SELECT_MSG
-      {$this show_state kState_RB4DXGPSettings}
+      {switch $dx_cur_state
+         (optionaladd
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+         (gp
+            {$this show_state kState_RB4DXGPSettings}
+         )
+         (vis
+            {$this show_state kState_RB4DXVisSettings}
+         )
+      }
       {$this trigger_select_effects }
    )
    (on_cancel 
-      {$this show_state kState_RB4DXGPSettings}
+      {switch $dx_cur_state
+         (optionaladd
+            {$this show_state kState_RB4DXOptionalAdditions}
+         )
+         (gp
+            {$this show_state kState_RB4DXGPSettings}
+         )
+         (vis
+            {$this show_state kState_RB4DXVisSettings}
+         )
+      }
       {$this trigger_cancel_effects }
    )
 )
@@ -64,7 +98,10 @@
             }
             {if_else {== $optionaladd calibrationmode}
                {$this show_state kState_RB4DXDelayedEffectWarn}
-               {$this show_state kState_RB4DXOptionalAdditions}
+               {if_else {$this in_song}
+                  {$this show_state kState_RB4DXInGameWarn}
+                  {$this show_state kState_RB4DXOptionalAdditions}
+               }
             }
          )
          (overshell_confirm_no

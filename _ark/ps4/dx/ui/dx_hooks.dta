@@ -1,0 +1,7 @@
+{if $nood
+   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
+}
+{set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
+{if $practiceod
+   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
+}

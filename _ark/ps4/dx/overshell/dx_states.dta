@@ -5,6 +5,7 @@
          "Instrument Options"
          "Song Speed"
          "Gameplay Settings"
+         "Visual Settings"
          "Controller Settings"
          "Optional Additions"
       )
@@ -28,6 +29,10 @@
             {$this trigger_select_effects })
          ("Gameplay Settings"
             {$this show_state kState_RB4DXGPSettings}
+            {$this trigger_select_effects}
+         )
+         ("Visual Settings"
+            {$this show_state kState_RB4DXVisSettings}
             {$this trigger_select_effects}
          )
          ("Controller Settings"
@@ -96,11 +101,7 @@
 (
    {$this setup_confirm_actions a 
       (
-         {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
-         {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
          {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
-         {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
-         {if_else $noui "No HUD: ON" "No HUD: OFF"}
          {if_else $nood "No OD: ON" "No OD: OFF"}
          {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
       )
@@ -109,6 +110,7 @@
 (kState_RB4DXGPSettings
    (view {$this get_auto_list_view }) 
    (enter
+      {set $dx_cur_state gp}
       RB4DXGP_DATA
    ) 
    (SELECT_MSG 
@@ -116,28 +118,6 @@
          {
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
-         (("Black Venue: ON" "Black Venue: OFF")
-            {set $blackbg {! $blackbg}}
-            {if_else $blackbg
-               {do
-                  {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_nul}
-               }
-               {file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
-            }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
-            {$this trigger_select_effects }
-         )
-         (("60 FPS Venues: ON" "60 FPS Venues: OFF")
-            {set $60fpsbg {! $60fpsbg}}
-            {if_else $60fpsbg
-               {do
-                  {write_file "data:/GoldHEN/RB4DX/60fpsbg.dta" $dx_write_nul}
-               }
-               {file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
-            }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
-            {$this trigger_select_effects }
-         )
          (("No Miss Sounds: ON" "No Miss Sounds: OFF")
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
@@ -154,10 +134,17 @@
             {if_else $nood
                {do
                   {write_file "data:/GoldHEN/RB4DX/nood.dta" $dx_write_nul}
+                  {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
                }
-               {file_delete "data:/GoldHEN/RB4DX/nood.dta"}
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/nood.dta"}
+                  {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 TRUE}
+               }
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
             {$this trigger_select_effects }
          )
          (("OD in Practice: ON" "OD in Practice: OFF")
@@ -165,8 +152,63 @@
             {if_else $practiceod
                {do
                   {write_file "data:/GoldHEN/RB4DX/practiceod.dta" $dx_write_nul}
+                  {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
                }
-               {file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
+                  {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 FALSE}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
+      }
+   ) 
+   (on_cancel 
+      {set $dx_cur_state FALSE}
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects }
+   )
+)
+#define RB4DXVIS_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
+         {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+         {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
+         {if_else $noui "No HUD: ON" "No HUD: OFF"}
+      )
+   }
+)
+(kState_RB4DXVisSettings
+   (view {$this get_auto_list_view }) 
+   (enter
+      {set $dx_cur_state vis}
+      RB4DXVIS_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         (("Black Venue: ON" "Black Venue: OFF")
+            {set $blackbg {! $blackbg}}
+            {if_else $blackbg
+               {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("60 FPS Venues: ON" "60 FPS Venues: OFF")
+            {set $60fpsbg {! $60fpsbg}}
+            {if_else $60fpsbg
+               {write_file "data:/GoldHEN/RB4DX/60fpsbg.dta" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
@@ -185,29 +227,26 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXGP_DATA
+               RB4DXVIS_DATA
             }
             {$this trigger_select_effects }
          )
          (("No HUD: ON" "No HUD: OFF")
             {set $noui {! $noui}}
             {if_else $noui
-               {do
-                  {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_nul}
-               }
-               {do
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
-               }
+               {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXGP_DATA
+               RB4DXVIS_DATA
             }
             {$this trigger_select_effects }
          )
       }
    ) 
    (on_cancel 
+      {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects }
    )
@@ -215,6 +254,7 @@
 (kState_RB4DXOptionalAdditions
    (view {$this get_auto_list_view }) 
    (enter
+      {set $dx_cur_state optionaladd}
       OPTIONAL_ADDITIONS_CHECK
       {$this setup_confirm_actions a 
          (
@@ -284,6 +324,7 @@
       }
    ) 
    (on_cancel 
+      {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects}
    )
