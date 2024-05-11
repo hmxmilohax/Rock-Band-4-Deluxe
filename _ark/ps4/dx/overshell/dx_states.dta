@@ -110,6 +110,7 @@
             (off "Track Muting: Off")
             (on "Track Muting: On")
          }
+         {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
       )
    }
 )
@@ -220,6 +221,18 @@
             }
             {$this trigger_select_effects }
          )
+         (("Calibration Mode: ON" "Calibration Mode: OFF")
+            {set $calibrationmode {! $calibrationmode}}
+            {if_else $calibrationmode
+               {set_elem {find $syscfg beatmatcher watcher slop} 1 15}
+               {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
       }
    ) 
    (on_cancel 
@@ -317,7 +330,6 @@
             {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
             {if_else $noshine "No Shine: ON" "No Shine: OFF"}
             {if_else $noflames "No Flames: ON" "No Flames: OFF"}
-            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
          )
       }
    ) 
@@ -360,16 +372,6 @@
             {if_else $noflames
                {do
                   {set $optionaladd noflames}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("Calibration Mode: ON" "Calibration Mode: OFF")
-            {if_else $calibrationmode
-               {do
-                  {set $optionaladd calibrationmode}
                   {$this show_state kState_RB4DXOptionalAddWarn}
                }
                {$this show_state kState_RB4DXOptionalAddHowTo}

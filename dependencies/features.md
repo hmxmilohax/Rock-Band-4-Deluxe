@@ -23,7 +23,7 @@
 * No whammy effect modifier
 * No track muting modifier
 * No miss sfx modifier
-* Calibration Mode patch that shrinks the hit window to help perfect your calibration numbers
+* Calibration Mode modifier that shrinks the hit window to help perfect your calibration numbers
 
 
 # 👉 [Download Here!](https://github.com/hmxmilohax/rock-band-4-deluxe#%EF%B8%8F-what-youll-need)
