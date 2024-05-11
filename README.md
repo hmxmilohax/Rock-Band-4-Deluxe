@@ -65,7 +65,7 @@ All of them can be found in the dx_optional_additions folder in the download for
 
 To install these, copy the `ps4` folder inside each optional addition to your ps4 in the folder `/data/GoldHEN/RB4DX/` **AFTER** copying the main rb4dx ps4 folder.
 
-# 🔨 Building (Advanced)
+# 🔨 Building (NOT standard download and install)
 
 ### Installing Python (Required)
 
