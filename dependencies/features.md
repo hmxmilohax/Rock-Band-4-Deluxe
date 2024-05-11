@@ -20,6 +20,8 @@
 * `Controller settings` menu to override controller slots (i.e. changing pad to guitar)
 * No shine patch that flattens out the highway, possibly helping with visibility
 * No flames optional patch
+* No whammy effect modifier
+* No track muting modifier
 * No miss sfx modifier
 * Calibration Mode patch that shrinks the hit window to help perfect your calibration numbers
 

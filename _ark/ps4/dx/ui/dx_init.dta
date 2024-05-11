@@ -6,8 +6,22 @@
 {set $blackbg {file_exists "blackbg.dta"}}
 {set $60fpsbg {file_exists "60fpsbg.dta"}}
 {set $nomiss {file_exists "nomiss.dta"}}
+{set $nowhammyfx {file_exists "nowhammyfx.dta"}}
 {set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
 {set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
+{set $trackmuting
+	{cond
+		({file_exists "trackmutingoff.dta"}
+			off
+		)
+		({file_exists "trackmutingon.dta"}
+			on
+		)
+		({&& {! {file_exists "trackmutingoff.dta"}} {! {file_exists "trackmutingon.dta"}}}
+			vanilla
+		)
+	}
+}
 {set $voxslt
 	{cond
 		({file_exists "voxgtr.dta"}

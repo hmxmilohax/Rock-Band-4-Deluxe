@@ -5,3 +5,17 @@
 {if $practiceod
    {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
 }
+{switch $trackmuting
+   (vanilla 
+      {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
+   )
+   (off 
+      {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
+   )
+   (on 
+      {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
+   )
+}
+{if $nowhammyfx
+   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
+}

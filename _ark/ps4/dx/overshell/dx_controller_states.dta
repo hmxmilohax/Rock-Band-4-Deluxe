@@ -110,9 +110,11 @@
       CLEAR_INVALID_SLOT_DTAS
       {$overshell update_all}
       {$this trigger_select_effects }
-      {set $slot_to FALSE}
+   )
+   (exit
       {set $slot_changed FALSE}
-   ) 
+      {set $slot_to FALSE}
+   )
    (on_cancel 
       {set $slot_changed FALSE}
       {$this show_state kState_RB4DXSlotOverride}

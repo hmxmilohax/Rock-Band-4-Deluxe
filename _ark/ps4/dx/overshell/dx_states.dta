@@ -104,6 +104,12 @@
          {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
          {if_else $nood "No OD: ON" "No OD: OFF"}
          {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
+         {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
+         {switch $trackmuting
+            (vanilla "Track Muting: Partial")
+            (off "Track Muting: Off")
+            (on "Track Muting: On")
+         }
       )
    }
 )
@@ -118,6 +124,37 @@
          {
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
+         (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
+            {set $trackmuting
+               {switch $trackmuting
+                  (vanilla on)
+                  (on off)
+                  (off vanilla)
+               }
+            }
+            {switch $trackmuting
+               (vanilla 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+               )
+               (off 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
+                  {write_file "data:/GoldHEN/RB4DX/trackmutingoff.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+               )
+               (on 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
+                  {write_file "data:/GoldHEN/RB4DX/trackmutingon.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+               )
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
          (("No Miss Sounds: ON" "No Miss Sounds: OFF")
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
@@ -127,6 +164,24 @@
                {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("Whammy FX: OFF" "Whammy FX: ON")
+            {set $nowhammyfx {! $nowhammyfx}}
+            {if_else $nowhammyfx
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/nowhammyfx.dta" $dx_write_nul}
+                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
+               }
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
+                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
             {$this trigger_select_effects }
          )
          (("No OD: ON" "No OD: OFF")
