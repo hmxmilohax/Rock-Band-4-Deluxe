@@ -138,8 +138,7 @@
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {set $optionaladd FALSE}
-      {$this show_state kState_RB4DXOptionalAdditions}
+      {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects }
    )
 )
