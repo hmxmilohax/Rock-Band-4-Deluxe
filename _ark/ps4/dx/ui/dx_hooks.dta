@@ -1,10 +1,15 @@
+;apply no overdrive hooks
 {if $nood
    {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
 }
+
+;apply practice overdrive hooks
 {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
 {if $practiceod
    {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
 }
+
+;apply track muting hook
 {switch $trackmuting
    (vanilla 
       {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
@@ -16,6 +21,8 @@
       {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
    )
 }
+
+;apply no whammy fx hook
 {if $nowhammyfx
    {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
 }

@@ -1,5 +1,4 @@
-;#include ../dx/macros/dx_macros.dta
-;#include ../dx/funcs/dx_funcs.dta
+#include ../dx/macros/dx_macros.dta
 (init
    #include ../dx/ui/dx_init.dta
 )
