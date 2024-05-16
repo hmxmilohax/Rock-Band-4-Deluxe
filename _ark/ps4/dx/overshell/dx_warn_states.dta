@@ -117,6 +117,32 @@
       {$this trigger_cancel_effects }
    )
 )
+(kState_RB4DXScreensaverWarn
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+   )
+   (SELECT_MSG
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         (overshell_confirm_yes
+            {$ui remove_scene "ui/main_menu/main_menu.scene"}
+            {$ui remove_scene "ui/overshell/overshell.scene"}
+         )
+         (overshell_confirm_no
+            {$this show_state kState_RB4DXMain}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {set $optionaladd FALSE}
+      {$this show_state kState_RB4DXOptionalAdditions}
+      {$this trigger_cancel_effects }
+   )
+)
 (kState_RB4DXOptionalAddHowTo
    (view confirm_action)
    (enter 

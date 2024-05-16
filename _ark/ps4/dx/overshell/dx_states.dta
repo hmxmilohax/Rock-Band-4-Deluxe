@@ -8,6 +8,7 @@
          "Visual Settings"
          "Controller Settings"
          "Optional Additions"
+         "Screensaver"
       )
    }
 )
@@ -51,8 +52,8 @@
          (colsel
             {$this show_state kState_RB4DXColorSelector}
             {$this trigger_select_effects })
-         (screensaver
-            {$this show_state kState_RB4DXScreensaver}
+         ("Screensaver"
+            {$this show_state kState_RB4DXScreensaverWarn}
             {$this trigger_select_effects })
          ("lost menus"
             {$this show_state kState_RB4DXLostMenus}
