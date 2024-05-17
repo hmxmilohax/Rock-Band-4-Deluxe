@@ -1,9 +1,12 @@
-;apply no overdrive hooks
+;apply hit window hook, make sure its default and not calibration/precision
+{set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+
+;apply no overdrive hook
 {if $nood
    {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
 }
 
-;apply practice overdrive hooks
+;apply practice overdrive hook
 {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
 {if $practiceod
    {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}

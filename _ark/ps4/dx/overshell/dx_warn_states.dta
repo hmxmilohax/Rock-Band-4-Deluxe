@@ -92,9 +92,6 @@
                (noflames
                   DELETE_NOFLAMES_FILES
                )
-               (calibrationmode
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-               )
             }
             {if_else {== $optionaladd calibrationmode}
                {$this show_state kState_RB4DXDelayedEffectWarn}

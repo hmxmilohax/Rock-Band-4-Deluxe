@@ -1,6 +1,10 @@
 {set $dx_write_nul {array ()}}
 {set $speedmod 100}
 {set $dx_initialized TRUE}
+{set $calibrationmode FALSE}
+{if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+	{file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+}
 {set $nood {file_exists "nood.dta"}}
 {set $practiceod {file_exists "practiceod.dta"}}
 {set $blackbg {file_exists "blackbg.dta"}}
