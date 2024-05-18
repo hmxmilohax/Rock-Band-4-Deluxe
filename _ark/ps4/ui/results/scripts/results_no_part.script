@@ -1,0 +1,12 @@
+(define Interface 
+   (rev 0) 
+   (description "Passes the slot info from scene to No Part entity.") 
+   (was_interface TRUE) 
+   (props 
+      (slot_index int 
+         (set_on_instance TRUE) 
+         (help "The slot value for what Player's data should be used.") 
+         (default -1))))
+(exit
+   {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+)

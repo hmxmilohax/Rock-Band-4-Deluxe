@@ -1,3 +1,99 @@
+(kState_ChooseDiff 
+   (view list_medium) 
+   (song_settings_flow TRUE) 
+   (shows_extended_mic_arrows TRUE) 
+   (enter 
+      {$this clear_somp_difficulty } 
+      {$this setup_difficulty_list $this } 
+      {if 
+         {== 
+            {
+               {$this get_user }get_track_type }kTrackVocals }
+         {local $ui_list 
+            {$this get_ui_list }}
+         {local $list_data 
+            {$ui_list get_data_in_column token }}
+         {switch $list_data 
+            (overshell_easy 
+               {$this update_vocal_freestyle_icon kDifficultyEasy })
+            (overshell_medium 
+               {$this update_vocal_freestyle_icon kDifficultyMedium })
+            (overshell_hard 
+               {$this update_vocal_freestyle_icon kDifficultyHard })
+            (overshell_expert 
+               {$this update_vocal_freestyle_icon kDifficultyExpert })
+            (overshell_brutal 
+               {$this update_vocal_freestyle_icon kDifficultyExpert })}}) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+         {switch $list_data 
+            (overshell_easy 
+               {$this select_difficulty kDifficultyEasy })
+            (overshell_medium 
+               {$this select_difficulty kDifficultyMedium })
+            (overshell_hard 
+               {$this select_difficulty kDifficultyHard })
+            (overshell_expert 
+               {$this select_difficulty kDifficultyExpert })
+            (overshell_brutal 
+               {$this select_difficulty kDifficultyExpert })
+            (overshell_guitar_solo 
+               {$this select_difficulty kDifficultyEasy })} 
+      {$this trigger_select_effects }
+      {write_file "data:/GoldHEN/RB4DX/insong.dta" $dx_write_nul}
+      ) 
+   (list_focus 
+      ($obj_name $obj_id) 
+      {if 
+         {== 
+            {
+               {$this get_user }get_track_type }kTrackVocals }
+         {local $ui_list 
+            {$this get_ui_list }}
+         {local $list_data 
+            {$ui_list get_data_in_column token }}
+         {switch $list_data 
+            (overshell_easy 
+               {$this update_vocal_freestyle_icon kDifficultyEasy })
+            (overshell_medium 
+               {$this update_vocal_freestyle_icon kDifficultyMedium })
+            (overshell_hard 
+               {$this update_vocal_freestyle_icon kDifficultyHard })
+            (overshell_expert 
+               {$this update_vocal_freestyle_icon kDifficultyExpert })
+            (overshell_brutal 
+               {$this update_vocal_freestyle_icon kDifficultyExpert })}}) 
+   (on_cancel 
+      {$this leave_choose_difficulty }))
+
+(kState_QuitEarlyConfirm 
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions confirm_quit 
+         (overshell_confirm_yes overshell_confirm_no)overshell_confirm_no }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_confirm_yes 
+            {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+            {$this quit_early })
+         (overshell_confirm_no 
+            {if_else 
+               {$this in_venue_meta_mode }
+               {$this show_state kState_VenueMetaMenu }
+               {$this show_in_song_menu }})} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {if_else 
+         {$this in_venue_meta_mode }
+         {$this show_state kState_VenueMetaMenu }
+         {$this show_in_song_menu }} 
+      {$this trigger_cancel_effects }))
+
 #define RB4DXMAIN_DATA
 (
    {$this setup_confirm_actions a 
