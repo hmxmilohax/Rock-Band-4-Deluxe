@@ -5,7 +5,7 @@
 {if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
 }
-{if {file_exists "data:/GoldHEN/RB4DX/insong.dta"}
+{if {file_exists "insong.dta"}
 	{file_delete "data:/GoldHEN/RB4DX/insong.dta"}
 }
 {set $nood {file_exists "nood.dta"}}
