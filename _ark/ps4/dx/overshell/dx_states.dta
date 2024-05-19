@@ -2,16 +2,29 @@
 
 #define RB4DXMAIN_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         "Instrument Options"
-         "Song Speed"
-         "Gameplay Settings"
-         "Visual Settings"
-         "Controller Settings"
-         "Optional Additions"
-         "Screensaver"
-      )
+   {if_else {$this in_song}
+      {$this setup_confirm_actions a 
+         (
+            "Instrument Options"
+            "Gameplay Settings"
+            "Visual Settings"
+            "Controller Settings"
+            "Optional Additions"
+            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+         )
+      }
+      {$this setup_confirm_actions a 
+         (
+            "Instrument Options"
+            "Song Speed"
+            "Gameplay Settings"
+            "Visual Settings"
+            "Controller Settings"
+            "Optional Additions"
+            "Screensaver"
+            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+         )
+      }
    }
 )
 (kState_RB4DXMain
@@ -46,6 +59,15 @@
             {$this show_state kState_RB4DXOptionalAdditions}
             {$this trigger_select_effects}
          )
+         (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
+            {set $notifycolored {! $notifycolored}}
+            {if_else $notifycolored
+               {write_file "data:/GoldHEN/RB4DX/notifycolored.ini" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/notifycolored.ini"}
+            }
+            RB4DXMAIN_DATA
+            {$this trigger_select_effects }
+         )
          ("writefile"
             {set $dx_write_test {array ()}}
             {push_back $dx_write_test {sprint $this}}
@@ -74,7 +96,7 @@
 (kState_RB4DXSongSpeed
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
+      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
    )
    (SELECT_MSG 
       {local $list_data 
@@ -83,40 +105,59 @@
       {switch $list_data 
          ("+"
             {set $speedmod {+ $speedmod 5}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
          )
          ("0"
             {set $speedmod 100}
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
          )
          ("-"
             {unless {< {- $speedmod 5} 100}
                {set $speedmod {- $speedmod 5}}
             }
-            {$this setup_confirm_actions {sprintf "Song Speed: %.2f" {/ $speedmod 100}} ("+" "0" "-")}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
          )
 
          })
    (on_cancel 
+      {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
+      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects })
 )
 
 #define RB4DXGP_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
-         {if_else $nood "No OD: ON" "No OD: OFF"}
-         {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-         {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
-         {switch $trackmuting
-            (vanilla "Track Muting: Partial")
-            (off "Track Muting: Off")
-            (on "Track Muting: On")
-         }
-         {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
-      )
+   {if_else {$this in_song}
+      {$this setup_confirm_actions a 
+         (
+            {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
+            {if_else $nood "No OD: ON" "No OD: OFF"}
+            {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
+            {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
+            {switch $trackmuting
+               (vanilla "Track Muting: Partial")
+               (off "Track Muting: Off")
+               (on "Track Muting: On")
+            }
+            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
+         )
+      }
+      {$this setup_confirm_actions a 
+         (
+            {if_else $autoplay "Autoplay: ON" "Autoplay: OFF"}
+            {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
+            {if_else $nood "No OD: ON" "No OD: OFF"}
+            {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
+            {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
+            {switch $trackmuting
+               (vanilla "Track Muting: Partial")
+               (off "Track Muting: Off")
+               (on "Track Muting: On")
+            }
+            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
+         )
+      }
    }
 )
 (kState_RB4DXGPSettings
@@ -130,6 +171,15 @@
          {
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
+         (("Autoplay: ON" "Autoplay: OFF")
+            {set $autoplay {! $autoplay}}
+            {if_else $autoplay
+               {write_file "data:/GoldHEN/RB4DX/autoplay.ini" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+            }
+            RB4DXGP_DATA
+            {$this trigger_select_effects }
+         )
          (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
             {set $trackmuting
                {switch $trackmuting
