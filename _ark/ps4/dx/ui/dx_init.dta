@@ -5,14 +5,15 @@
 {if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
 }
+{if {file_exists "data:/GoldHEN/RB4DX/insong.dta"}
+	{file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+}
 {set $nood {file_exists "nood.dta"}}
 {set $practiceod {file_exists "practiceod.dta"}}
 {set $blackbg {file_exists "blackbg.dta"}}
 {set $60fpsbg {file_exists "60fpsbg.dta"}}
 {set $nomiss {file_exists "nomiss.dta"}}
 {set $nowhammyfx {file_exists "nowhammyfx.dta"}}
-{set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
-{set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
 {set $trackmuting
 	{cond
 		({file_exists "trackmutingoff.dta"}

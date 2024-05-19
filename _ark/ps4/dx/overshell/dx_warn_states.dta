@@ -92,6 +92,9 @@
                (noflames
                   DELETE_NOFLAMES_FILES
                )
+               (noui
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
+               )
             }
             {if_else {== $optionaladd calibrationmode}
                {$this show_state kState_RB4DXDelayedEffectWarn}
