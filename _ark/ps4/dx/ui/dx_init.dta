@@ -18,6 +18,7 @@
 {if {file_exists "autoplay.ini"}
 	{file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
 }
+{set $autoplayenabled {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
 {set $nood {file_exists "nood.dta"}}
 {set $practiceod {file_exists "practiceod.dta"}}
 {set $blackbg {file_exists "blackbg.dta"}}

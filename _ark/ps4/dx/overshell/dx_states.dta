@@ -145,7 +145,7 @@
       }
       {$this setup_confirm_actions a 
          (
-            {if_else $autoplay "Autoplay: ON" "Autoplay: OFF"}
+            {if_else $autoplayenabled {if_else $autoplay "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
             {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
             {if_else $nood "No OD: ON" "No OD: OFF"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
@@ -171,13 +171,22 @@
          {
             ($objId UIListCom)get_data_in_column token }}  
       {switch $list_data 
+         ("Autoplay: DISABLED"
+            {$this show_state kState_RB4DXAutoplayHowTo}
+            {$this trigger_select_effects }
+         )
          (("Autoplay: ON" "Autoplay: OFF")
             {set $autoplay {! $autoplay}}
             {if_else $autoplay
-               {write_file "data:/GoldHEN/RB4DX/autoplay.ini" $dx_write_nul}
-               {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/autoplay.ini" $dx_write_nul}
+                  {$this show_state kState_RB4DXAutoplayOn}
+               }
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+                  {$this show_state kState_RB4DXAutoplayOff}
+               }
             }
-            RB4DXGP_DATA
             {$this trigger_select_effects }
          )
          (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")

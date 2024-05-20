@@ -1,3 +1,29 @@
+(kState_RB4DXScreensaverWarn
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+   )
+   (SELECT_MSG
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         (overshell_confirm_yes
+            {$ui remove_scene "ui/main_menu/main_menu.scene"}
+            {$ui remove_scene "ui/overshell/overshell.scene"}
+         )
+         (overshell_confirm_no
+            {$this show_state kState_RB4DXMain}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects }
+   )
+)
+
 (kState_RB4DXDelayedEffectWarn
    (view confirm_action)
    (enter 
@@ -68,6 +94,7 @@
       {$this trigger_cancel_effects }
    )
 )
+
 (kState_RB4DXOptionalAddWarn
    (view confirm_action)
    (enter
@@ -117,31 +144,6 @@
       {$this trigger_cancel_effects }
    )
 )
-(kState_RB4DXScreensaverWarn
-   (view confirm_action)
-   (enter
-      {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
-   )
-   (SELECT_MSG
-      {local $list_data 
-         {($objId UIListCom) get_data_in_column token}
-      }  
-      {switch $list_data 
-         (overshell_confirm_yes
-            {$ui remove_scene "ui/main_menu/main_menu.scene"}
-            {$ui remove_scene "ui/overshell/overshell.scene"}
-         )
-         (overshell_confirm_no
-            {$this show_state kState_RB4DXMain}
-         )
-      }
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
-      {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects }
-   )
-)
 (kState_RB4DXOptionalAddHowTo
    (view confirm_action)
    (enter 
@@ -153,6 +155,51 @@
    )
    (on_cancel 
       {$this show_state kState_RB4DXOptionalAdditions}
+      {$this trigger_cancel_effects }
+   )
+)
+
+(kState_RB4DXAutoplayHowTo
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Autoplay will not work until you download and enable this plugin.
+(DISABLES SAVING)" (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_cancel_effects }
+   )
+)
+(kState_RB4DXAutoplayOn
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "If autoplay is not functioning, make sure you have the \qRB4DX-Autoplay.prx\q plugin enabled in \q/data/GoldHEN/plugins.ini\q.
+(DISABLES SAVING)" (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_cancel_effects }
+   )
+)
+(kState_RB4DXAutoplayOff
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "You will need to disable or delete the \qRB4DX-Autoplay.prx\q plugin to re-enable saving." (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
       {$this trigger_cancel_effects }
    )
 )
