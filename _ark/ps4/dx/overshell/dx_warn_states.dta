@@ -173,10 +173,25 @@
       {$this trigger_cancel_effects }
    )
 )
+(kState_RB4DXAutoplayOn
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "If autoplay is not functioning, make sure you have the \qRB4DX-Autoplay.prx\q plugin enabled in \q/data/GoldHEN/plugins.ini\q.
+(DISABLES SAVING)" (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_cancel_effects }
+   )
+)
 (kState_RB4DXAutoplayOff
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "You will need to disable and delete the \qRB4DX-Autoplay.prx\q plugin to disable autoplay." (overshell_confirm_ok)}
+      {$this setup_confirm_actions "You will need to disable and delete the \qRB4DX-Autoplay.prx\q plugin to re-enable saving." (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state kState_RB4DXGPSettings}

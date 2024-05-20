@@ -3,28 +3,22 @@
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
 {if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+   {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
 }
 {if {file_exists "data:/GoldHEN/RB4DX/ps4/track/track_camera.script_dta_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/track_camera.script_dta_ps4"}
+   {file_delete "data:/GoldHEN/RB4DX/ps4/track/track_camera.script_dta_ps4"}
 }
 {if {file_exists "insong.dta"}
-	{file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
 }
 {if {file_exists "RB4DX.ini"}
-	{file_delete "data:/GoldHEN/RB4DX/RB4DX.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/RB4DX.ini"}
 }
 {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
 {if {file_exists "autoplay.ini"}
-	{file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
 }
-{if_else {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}
-	{do
-		{set $autoplayenabled TRUE}
-		{write_file "data:/GoldHEN/RB4DX/autoplay.ini" $dx_write_nul}
-	}
-	{set $autoplayenabled FALSE}
-}
+{set $autoplayexists {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
 {set $nood {file_exists "nood.dta"}}
 {set $practiceod {file_exists "practiceod.dta"}}
 {set $blackbg {file_exists "blackbg.dta"}}
@@ -33,54 +27,54 @@
 {set $nowhammyfx {file_exists "nowhammyfx.dta"}}
 {set $notifycolored {file_exists "notifycolored.ini"}}
 {set $trackmuting
-	{cond
-		({file_exists "trackmutingoff.dta"}
-			off
-		)
-		({file_exists "trackmutingon.dta"}
-			on
-		)
-		({&& {! {file_exists "trackmutingoff.dta"}} {! {file_exists "trackmutingon.dta"}}}
-			vanilla
-		)
-	}
+   {cond
+      ({file_exists "trackmutingoff.dta"}
+         off
+      )
+      ({file_exists "trackmutingon.dta"}
+         on
+      )
+      ({&& {! {file_exists "trackmutingoff.dta"}} {! {file_exists "trackmutingon.dta"}}}
+         vanilla
+      )
+   }
 }
 {set $voxslt
-	{cond
-		({file_exists "voxgtr.dta"}
-			gtr
-		)
-		({file_exists "voxdrum.dta"}
-			drum
-		)
-		({&& {! {file_exists "voxdrum.dta"}} {! {file_exists "voxgtr.dta"}}}
-			vox
-		)
-	}
+   {cond
+      ({file_exists "voxgtr.dta"}
+         gtr
+      )
+      ({file_exists "voxdrum.dta"}
+         drum
+      )
+      ({&& {! {file_exists "voxdrum.dta"}} {! {file_exists "voxgtr.dta"}}}
+         vox
+      )
+   }
 }
 {set $gtrslt
-	{cond
-		({file_exists "gtrvox.dta"}
-			vox
-		)
-		({file_exists "gtrdrum.dta"}
-			drum
-		)
-		({&& {! {file_exists "gtrdrum.dta"}} {! {file_exists "gtrvox.dta"}}}
-			gtr
-		)
-	}
+   {cond
+      ({file_exists "gtrvox.dta"}
+         vox
+      )
+      ({file_exists "gtrdrum.dta"}
+         drum
+      )
+      ({&& {! {file_exists "gtrdrum.dta"}} {! {file_exists "gtrvox.dta"}}}
+         gtr
+      )
+   }
 }
 {set $drmslt
-	{cond
-		({file_exists "drumgtr.dta"}
-			gtr
-		)
-		({file_exists "drumvox.dta"}
-			vox
-		)
-		({&& {! {file_exists "drumvox.dta"}} {! {file_exists "drumgtr.dta"}}}
-			drum
-		)
-	}
+   {cond
+      ({file_exists "drumgtr.dta"}
+         gtr
+      )
+      ({file_exists "drumvox.dta"}
+         vox
+      )
+      ({&& {! {file_exists "drumvox.dta"}} {! {file_exists "drumgtr.dta"}}}
+         drum
+      )
+   }
 }
