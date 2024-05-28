@@ -2,11 +2,9 @@
 {set $speedmod 100}
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
+{set $track_curve 1}
 {if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
    {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-}
-{if {file_exists "data:/GoldHEN/RB4DX/ps4/track/track_camera.script_dta_ps4"}
-   {file_delete "data:/GoldHEN/RB4DX/ps4/track/track_camera.script_dta_ps4"}
 }
 {if {file_exists "insong.dta"}
    {file_delete "data:/GoldHEN/RB4DX/insong.dta"}

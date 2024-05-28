@@ -1,0 +1,66 @@
+(kState_RB4DXSongSpeed
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         ("+"
+            {set $speedmod {+ $speedmod 5}}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+         )
+         ("Reset"
+            {set $speedmod 100}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+         )
+         ("-"
+            {unless {< {- $speedmod 5} 100}
+               {set $speedmod {- $speedmod 5}}
+            }
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+         )
+
+         })
+   (on_cancel 
+      {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
+      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+      SET_TRACK_SPEEDS
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects })
+)
+
+(kState_RB4DXTrackCurve
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         ("-"
+            {unless {> {+ $track_curve 0.05} 1.5}
+               {set $track_curve {+ $track_curve 0.05}}
+            }
+            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+         )
+         ("Reset"
+            {set $track_curve 1}
+            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+         )
+         ("+"
+            {unless {< {- $track_curve 0.05} 0.45}
+               {set $track_curve {- $track_curve 0.05}}
+            }
+            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+         )
+
+         })
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings}
+      {$this trigger_cancel_effects })
+)

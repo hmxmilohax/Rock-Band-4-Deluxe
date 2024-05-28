@@ -11,15 +11,16 @@
          (overshell_confirm_yes
             {$ui remove_scene "ui/main_menu/main_menu.scene"}
             {$ui remove_scene "ui/overshell/overshell.scene"}
+            {$ui remove_scene "ui/songs/songs.scene"}
          )
          (overshell_confirm_no
-            {$this show_state kState_RB4DXMain}
+            {$this show_state kState_RB4DXExtras}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {$this show_state kState_RB4DXExtras}
       {$this trigger_cancel_effects }
    )
 )
@@ -40,6 +41,9 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
+         (sfx
+            {$this show_state kState_RB4DXSFXSettings}
+         )
       }
       {set $optionaladd FALSE}
       {$this trigger_select_effects }
@@ -54,6 +58,9 @@
          )
          (vis
             {$this show_state kState_RB4DXVisSettings}
+         )
+         (sfx
+            {$this show_state kState_RB4DXSFXSettings}
          )
       }
       {set $optionaladd FALSE}
@@ -76,6 +83,9 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
+         (sfx
+            {$this show_state kState_RB4DXSFXSettings}
+         )
       }
       {$this trigger_select_effects }
    )
@@ -89,6 +99,9 @@
          )
          (vis
             {$this show_state kState_RB4DXVisSettings}
+         )
+         (sfx
+            {$this show_state kState_RB4DXSFXSettings}
          )
       }
       {$this trigger_cancel_effects }
@@ -162,7 +175,8 @@
 (kState_RB4DXAutoplayHowTo
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Autoplay will not work until you download and enable this plugin." (overshell_confirm_ok)}
+      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Autoplay will not work until you download and enable this plugin.
+(DISABLES SAVING)" (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state kState_RB4DXGPSettings}
@@ -192,6 +206,22 @@
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "You will need to disable and delete the \qRB4DX-Autoplay.prx\q plugin to re-enable saving." (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_select_effects }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
+      {$this trigger_cancel_effects }
+   )
+)
+
+(kState_RB4DXDrunkModeHowTo
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Drunk Mode will not work until you download and enable this plugin.
+(DISABLES SAVING)" (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state kState_RB4DXGPSettings}

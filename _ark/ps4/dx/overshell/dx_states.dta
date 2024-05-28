@@ -7,10 +7,10 @@
          (
             "Instrument Options"
             "Gameplay Settings"
+            "SFX Settings"
             "Visual Settings"
             "Controller Settings"
-            "Optional Additions"
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            "Extras"
          )
       }
       {$this setup_confirm_actions a 
@@ -18,11 +18,10 @@
             "Instrument Options"
             "Song Speed"
             "Gameplay Settings"
+            "SFX Settings"
             "Visual Settings"
             "Controller Settings"
-            "Optional Additions"
-            "Screensaver"
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            "Extras"
          )
       }
    }
@@ -47,6 +46,10 @@
             {$this show_state kState_RB4DXGPSettings}
             {$this trigger_select_effects}
          )
+         ("SFX Settings"
+            {$this show_state kState_RB4DXSFXSettings}
+            {$this trigger_select_effects}
+         )
          ("Visual Settings"
             {$this show_state kState_RB4DXVisSettings}
             {$this trigger_select_effects}
@@ -55,18 +58,9 @@
             {$this show_state kState_RB4DXControllerSettings}
             {$this trigger_select_effects}
          )
-         ("Optional Additions"
-            {$this show_state kState_RB4DXOptionalAdditions}
+         ("Extras"
+            {$this show_state kState_RB4DXExtras}
             {$this trigger_select_effects}
-         )
-         (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
-            {set $notifycolored {! $notifycolored}}
-            {if_else $notifycolored
-               {write_file "data:/GoldHEN/RB4DX/notifycolored.ini" $dx_write_nul}
-               {file_delete "data:/GoldHEN/RB4DX/notifycolored.ini"}
-            }
-            RB4DXMAIN_DATA
-            {$this trigger_select_effects }
          )
          ("writefile"
             {set $dx_write_test {array ()}}
@@ -75,9 +69,6 @@
          )
          (colsel
             {$this show_state kState_RB4DXColorSelector}
-            {$this trigger_select_effects })
-         ("Screensaver"
-            {$this show_state kState_RB4DXScreensaverWarn}
             {$this trigger_select_effects })
          ("lost menus"
             {$this show_state kState_RB4DXLostMenus}
@@ -93,70 +84,28 @@
    )
 )
 
-(kState_RB4DXSongSpeed
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
-   )
-   (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
-      {switch $list_data 
-         ("+"
-            {set $speedmod {+ $speedmod 5}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
-         )
-         ("0"
-            {set $speedmod 100}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
-         )
-         ("-"
-            {unless {< {- $speedmod 5} 100}
-               {set $speedmod {- $speedmod 5}}
-            }
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "0" "-")}
-         )
-
-         })
-   (on_cancel 
-      {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
-      SET_TRACK_SPEEDS
-      {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects })
-)
-
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
-            {if_else $nood "No OD: ON" "No OD: OFF"}
+            {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-            {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
-            {switch $trackmuting
-               (vanilla "Track Muting: Partial")
-               (off "Track Muting: Off")
-               (on "Track Muting: On")
-            }
+            {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
+            {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
+            ;{if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
          )
       }
       {$this setup_confirm_actions a 
          (
             {if_else $autoplayexists {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
-            {if_else $nomiss "No Miss Sounds: ON" "No Miss Sounds: OFF"}
-            {if_else $nood "No OD: ON" "No OD: OFF"}
+            {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-            {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
-            {switch $trackmuting
-               (vanilla "Track Muting: Partial")
-               (off "Track Muting: Off")
-               (on "Track Muting: On")
-            }
+            {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
+            {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
+            ;{if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
          )
       }
    }
@@ -190,67 +139,7 @@
             }
             {$this trigger_select_effects }
          )
-         (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
-            {set $trackmuting
-               {switch $trackmuting
-                  (vanilla on)
-                  (on off)
-                  (off vanilla)
-               }
-            }
-            {switch $trackmuting
-               (vanilla 
-                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
-               )
-               (off 
-                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
-                  {write_file "data:/GoldHEN/RB4DX/trackmutingoff.dta" $dx_write_nul}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
-               )
-               (on 
-                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
-                  {write_file "data:/GoldHEN/RB4DX/trackmutingon.dta" $dx_write_nul}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
-               )
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXGP_DATA
-            }
-            {$this trigger_select_effects }
-         )
-         (("No Miss Sounds: ON" "No Miss Sounds: OFF")
-            {set $nomiss {! $nomiss}}
-            {if_else $nomiss
-               {do
-                  {write_file "data:/GoldHEN/RB4DX/nomiss.dta" $dx_write_nul}
-               }
-               {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
-            }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
-            {$this trigger_select_effects }
-         )
-         (("Whammy FX: OFF" "Whammy FX: ON")
-            {set $nowhammyfx {! $nowhammyfx}}
-            {if_else $nowhammyfx
-               {do
-                  {write_file "data:/GoldHEN/RB4DX/nowhammyfx.dta" $dx_write_nul}
-                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
-               }
-               {do
-                  {file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
-                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
-               }
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXGP_DATA
-            }
-            {$this trigger_select_effects }
-         )
-         (("No OD: ON" "No OD: OFF")
+         (("Overdrive Gain: OFF" "Overdrive Gain: ON")
             {set $nood {! $nood}}
             {if_else $nood
                {do
@@ -286,6 +175,15 @@
             }
             {$this trigger_select_effects }
          )
+         (("Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF")
+            {set $syncspeeds {! $syncspeeds}}
+            SET_TRACK_SPEEDS
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
          (("Calibration Mode: ON" "Calibration Mode: OFF")
             {set $calibrationmode {! $calibrationmode}}
             {if_else $calibrationmode
@@ -295,6 +193,131 @@
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
                RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Precision Mode: ON" "Precision Mode: OFF")
+            {set $precisionmode {! $precisionmode}}
+            {if_else $precisionmode
+               {set_elem {find $syscfg beatmatcher watcher slop} 1 50}
+               {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         ; ("Drunk Mode: DISABLED"
+         ;    {$this show_state kState_RB4DXDrunkModeHowTo}
+         ;    {$this trigger_select_effects }
+         ; )
+         ; (("Drunk Mode: ON" "Drunk Mode: OFF")
+         ;    {set $drunkmode {! $drunkmode}}
+         ;    {if_else $drunkmode
+         ;       {do
+         ;          {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
+         ;          RB4DXGP_DATA
+         ;       }
+         ;       {do
+         ;          {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+         ;          {$this show_state kState_RB4DXAutoplayOff}
+         ;       }
+         ;    }
+         ;    {$this trigger_select_effects }
+         ; )
+      }
+   ) 
+   (on_cancel 
+      {set $dx_cur_state FALSE}
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects }
+   )
+)
+
+#define RB4DXSFX_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         {if_else $nomiss "Miss Sounds: OFF" "Miss Sounds: ON"}
+         {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
+         {switch $trackmuting
+            (vanilla "Track Muting: Partial")
+            (off "Track Muting: Off")
+            (on "Track Muting: On")
+         }
+      )
+   }
+)
+(kState_RB4DXSFXSettings
+   (view {$this get_auto_list_view }) 
+   (enter
+      {set $dx_cur_state sfx}
+      RB4DXSFX_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         
+         (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
+            {set $trackmuting
+               {switch $trackmuting
+                  (vanilla on)
+                  (on off)
+                  (off vanilla)
+               }
+            }
+            {switch $trackmuting
+               (vanilla 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+               )
+               (off 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
+                  {write_file "data:/GoldHEN/RB4DX/trackmutingoff.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+               )
+               (on 
+                  {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
+                  {write_file "data:/GoldHEN/RB4DX/trackmutingon.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+               )
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Miss Sounds: OFF" "Miss Sounds: ON")
+            {set $nomiss {! $nomiss}}
+            {if_else $nomiss
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/nomiss.dta" $dx_write_nul}
+               }
+               {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         (("Whammy FX: OFF" "Whammy FX: ON")
+            {set $nowhammyfx {! $nowhammyfx}}
+            {if_else $nowhammyfx
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/nowhammyfx.dta" $dx_write_nul}
+                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
+               }
+               {do
+                  {file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
+                  {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS_DATA
             }
             {$this trigger_select_effects }
          )
@@ -315,6 +338,7 @@
          {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
          {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
          {if_else $noui "No HUD: ON" "No HUD: OFF"}
+         "Track Curvature"
       )
    }
 )
@@ -379,12 +403,68 @@
             }
             {$this trigger_select_effects }
          )
+         ("Track Curvature"
+            {$this show_state kState_RB4DXTrackCurve}
+            {$this trigger_select_effects }
+         )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects }
+   )
+)
+
+#define RB4DXEXTRA_DATA
+(
+   {if_else {$this in_song}
+      {$this setup_confirm_actions a 
+         (
+            "Optional Additions"
+            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+         )
+      }
+      {$this setup_confirm_actions a 
+         (
+            "Optional Additions"
+            "Screensaver"
+            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+         )
+      }
+   }
+)
+(kState_RB4DXExtras
+   (view {$this get_auto_list_view })
+   (enter
+      RB4DXEXTRA_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         ("Optional Additions"
+            {$this show_state kState_RB4DXOptionalAdditions}
+            {$this trigger_select_effects}
+         )
+         ("Screensaver"
+            {$this show_state kState_RB4DXScreensaverWarn}
+            {$this trigger_select_effects })
+         (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
+            {set $notifycolored {! $notifycolored}}
+            {if_else $notifycolored
+               {write_file "data:/GoldHEN/RB4DX/notifycolored.ini" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/notifycolored.ini"}
+            }
+            RB4DXEXTRA_DATA
+            {$this trigger_select_effects }
+         )
+      }
+   ) 
+   (on_cancel 
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
    )
 )
 
@@ -462,10 +542,11 @@
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
+      {$this show_state kState_RB4DXExtras}
       {$this trigger_cancel_effects}
    )
 )
 
+#include dx_slider_states.dta
 #include dx_warn_states.dta
 #include dx_controller_states.dta
