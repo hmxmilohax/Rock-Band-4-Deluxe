@@ -16,6 +16,9 @@
 {if {file_exists "autoplay.ini"}
    {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
 }
+{if {file_exists "drunkmode.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
+}
 {set $autoplayexists {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
 {set $nood {file_exists "nood.dta"}}
 {set $practiceod {file_exists "practiceod.dta"}}

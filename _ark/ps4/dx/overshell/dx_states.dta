@@ -94,7 +94,6 @@
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
             {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-            ;{if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
          )
       }
       {$this setup_confirm_actions a 
@@ -105,7 +104,7 @@
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
             {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-            ;{if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
+            {if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
          )
       }
    }
@@ -208,24 +207,26 @@
             }
             {$this trigger_select_effects }
          )
-         ; ("Drunk Mode: DISABLED"
-         ;    {$this show_state kState_RB4DXDrunkModeHowTo}
-         ;    {$this trigger_select_effects }
-         ; )
-         ; (("Drunk Mode: ON" "Drunk Mode: OFF")
-         ;    {set $drunkmode {! $drunkmode}}
-         ;    {if_else $drunkmode
-         ;       {do
-         ;          {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
-         ;          RB4DXGP_DATA
-         ;       }
-         ;       {do
-         ;          {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-         ;          {$this show_state kState_RB4DXAutoplayOff}
-         ;       }
-         ;    }
-         ;    {$this trigger_select_effects }
-         ; )
+         ("Drunk Mode: DISABLED"
+            {$this show_state kState_RB4DXDrunkModeHowTo}
+            {$this trigger_select_effects }
+         )
+         (("Drunk Mode: ON" "Drunk Mode: OFF")
+            {set $drunkmode {! $drunkmode}}
+            {if_else $drunkmode
+               {do
+                  {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
+                  {write_file "data:/GoldHEN/RB4DX/drunkmode.ini" $dx_write_nul}
+                  RB4DXGP_DATA
+               }
+               {do
+                  {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+                  {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
+                  {$this show_state kState_RB4DXAutoplayOff}
+               }
+            }
+            {$this trigger_select_effects }
+         )
       }
    ) 
    (on_cancel 
