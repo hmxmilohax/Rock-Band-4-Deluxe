@@ -41,7 +41,7 @@ Download [**Rock Band 4 Deluxe**](#-downloads), Extract the zip somewhere on you
 
 Once that is complete, open the folder called `GoldHEN`.
 
-Copy the `plugins` folder and `plugins.ini` file to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
+Copy the `plugins` folder, `RB4DX` folder, and `plugins.ini` file to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
 
 ```ini
 ; Rock Band 4 Deluxe Plugins
@@ -55,9 +55,7 @@ Copy the `plugins` folder and `plugins.ini` file to `/data/GoldHEN/` on your PS4
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-after that, copy the `RB4DX` folder to your ps4 also in the folder `/data/GoldHEN/`.
-
-If there is a `ps4` folder already in the `RB4DX` folder on your ps4, delete it before copying.
+To update RB4DX, first delete the `ps4` folder in the `/data/GoldHEN/RB4DX/` folder on your ps4, then follow the steps above again.
 
 ### Optional Additions
 
