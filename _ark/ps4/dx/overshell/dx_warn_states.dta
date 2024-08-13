@@ -135,8 +135,11 @@
                (noui
                   {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
                )
+               (menubg
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4"}
+               )
             }
-            {if_else {== $optionaladd calibrationmode}
+            {if_else {== $optionaladd menubg}
                {$this show_state kState_RB4DXDelayedEffectWarn}
                {if_else {$this in_song}
                   {$this show_state kState_RB4DXInGameWarn}

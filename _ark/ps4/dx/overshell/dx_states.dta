@@ -73,6 +73,8 @@
          ("lost menus"
             {$this show_state kState_RB4DXLostMenus}
             {$this trigger_select_effects })
+         ; ("test"
+         ;    {$ui add_scene "ui/character/character_customize/character_customize_track_r2t.scene"})
       }
    ) 
    (on_cancel 
@@ -481,6 +483,7 @@
             {if_else $noshine "No Shine: ON" "No Shine: OFF"}
             {if_else $noflames "No Flames: ON" "No Flames: OFF"}
             {if_else $noui "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
+            {if_else $menubg "No Menu BGs: ON" "No Menu BGs: OFF"}
          )
       }
    ) 
@@ -533,6 +536,16 @@
             {if_else $noui
                {do
                   {set $optionaladd noui}
+                  {$this show_state kState_RB4DXOptionalAddWarn}
+               }
+               {$this show_state kState_RB4DXOptionalAddHowTo}
+            }
+            {$this trigger_select_effects}
+         )
+         (("No Menu BGs: ON" "No Menu BGs: OFF")
+            {if_else $menubg 
+               {do
+                  {set $optionaladd menubg}
                   {$this show_state kState_RB4DXOptionalAddWarn}
                }
                {$this show_state kState_RB4DXOptionalAddHowTo}

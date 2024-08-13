@@ -5,6 +5,7 @@
 	{set $noshine {file_exists "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
 	{set $noflames {file_exists "data:/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
 	{set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
+	{set $menubg {file_exists "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4"}}
 )
 #define DELETE_NOFLAMES_FILES
 (
