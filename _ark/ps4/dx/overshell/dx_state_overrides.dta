@@ -191,7 +191,7 @@
                (overshell_change_diff 
                   {$this begin_override_flow kOverrideFlow_SongSettings })
                (instrument_options 
-                  {$this show_instrument_options })
+                  {$this show_state kState_RB4DXMain})
                (overshell_online_settings 
                   {$this show_online_settings })
                (
