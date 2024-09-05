@@ -41,7 +41,9 @@ Download [**Rock Band 4 Deluxe**](#-downloads), Extract the zip somewhere on you
 
 Once that is complete, open the folder called `GoldHEN`.
 
-Copy the `plugins` folder, `RB4DX` folder, and `plugins.ini` file to `/data/GoldHEN/` on your PS4 or edit your current `plugins.ini` file to add these lines
+Copy the `plugins` folder, `RB4DX` folder, and `plugins.ini` file to `/data/GoldHEN/` on your PS4.
+
+If you already have a `plugins.ini` on your PS4 and do not want to replace it, edit your current `plugins.ini` file to add these lines:
 
 ```ini
 ; Rock Band 4 Deluxe Plugins
@@ -58,6 +60,8 @@ Copy the `plugins` folder, `RB4DX` folder, and `plugins.ini` file to `/data/Gold
 To update RB4DX, first delete the `ps4` folder in the `/data/GoldHEN/RB4DX/` folder on your ps4, then follow the steps above again.
 
 If the plugin is not loading, you may need to change the file permissions of the plugin to allow it to run. This can be done with the PS4/GoldHen Cheats Manager, in the settings there is a button labelled `Set file permissions for Plugins`, pressing this should make the plugin load correctly.
+
+If the plugin is loading, but no dx modifications are showing up, then you may need to change the permissions of the RB4DX folder on the PS4, or retransfer the RB4DX folder entirely.
 
 ### Optional Additions
 
