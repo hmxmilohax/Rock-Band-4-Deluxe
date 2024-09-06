@@ -1,3 +1,31 @@
+(kState_JoinedDefault 
+   (view joined_default) 
+   (allows_input_to_shell TRUE) ;TODO: lock out inputs in Event Mode
+   (ready_to_play TRUE) 
+   (retracted_position TRUE) 
+   (enter 
+      {$this end_char_management_session } 
+      {$this hide_preview_char } 
+      {$this deactivate_preview_scene_if_needed } 
+      {$this end_somp_player_management_session } 
+      {$this clear_selected_emote_category } 
+      {$this clear_volume_slider_last_state }) 
+   (on_start 
+      ($user) 
+      {if 
+         {|| 
+            {$user is_participating }
+            {! 
+               {$this in_song }}}
+         {if_else 
+            {$this in_song }
+            {$this show_in_song_menu }
+            {if_else 
+               {$this in_venue_meta_mode }
+               {$this show_state kState_VenueMetaMenu }
+               {$this show_state kState_Options }}}
+         {$this trigger_start_effects }}))
+
 (kState_ChooseDiff 
    (view list_medium) 
    (song_settings_flow TRUE) 
