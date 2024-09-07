@@ -146,10 +146,12 @@
                {do
                   {write_file "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta" $dx_write_nul}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
+                  {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 FALSE}
                }
                {do
                   {file_delete "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta"}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 TRUE}
+                  {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 TRUE}
                }
             }
             {if_else {$this in_song}
@@ -164,10 +166,12 @@
                {do
                   {write_file "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta" $dx_write_nul}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
+                  {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
                }
                {do
                   {file_delete "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta"}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 FALSE}
+                  {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 FALSE}
                }
             }
             {if_else {$this in_song}
@@ -291,7 +295,7 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS_DATA
+               RB4DXSFX_DATA
             }
             {$this trigger_select_effects }
          )
@@ -320,7 +324,7 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS_DATA
+               RB4DXSFX_DATA
             }
             {$this trigger_select_effects }
          )
