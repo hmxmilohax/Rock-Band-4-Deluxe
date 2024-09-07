@@ -5,9 +5,9 @@
    (disable FALSE))
 #define VOX_SLOT_OVERRIDE
 (
-   {if_else {file_exists "voxgtr.dta"} 
+   {if_else {file_exists "settings/controller/type/voxgtr.dta"} 
       kControllerGuitar
-      {if_else {file_exists "voxdrum.dta"}
+      {if_else {file_exists "settings/controller/type/voxdrum.dta"}
       kControllerDrum
       kControllerVocals
       }
@@ -15,9 +15,9 @@
 )
 #define GTR_SLOT_OVERRIDE
 (
-   {if_else {file_exists "gtrvox.dta"} 
+   {if_else {file_exists "settings/controller/type/gtrvox.dta"} 
       kControllerVocals
-      {if_else {file_exists "gtrdrum.dta"}
+      {if_else {file_exists "settings/controller/type/gtrdrum.dta"}
       kControllerDrum
       kControllerGuitar
       }
@@ -25,9 +25,9 @@
 )
 #define DRUM_SLOT_OVERRIDE
 (
-   {if_else {file_exists "drumvox.dta"} 
+   {if_else {file_exists "settings/controller/type/drumvox.dta"} 
       kControllerVocals
-      {if_else {file_exists "drumgtr.dta"}
+      {if_else {file_exists "settings/controller/type/drumgtr.dta"}
       kControllerGuitar
       kControllerDrum
       }

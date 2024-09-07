@@ -1,5 +1,5 @@
 (title "Rock Band")
-(max_partial_framerate_scenes {if_else {file_exists "60fpsbg.dta"} 0 1})
+(max_partial_framerate_scenes {if_else {file_exists "settings/visuals/60fpsbg.dta"} 0 1})
 (multi_threaded_rendering_enabled FALSE)
 (use_lod FALSE)
 (use_gbuffer_vertex_normals FALSE)

@@ -1,0 +1,81 @@
+{set $dx_write_nul {array ()}}
+
+#define CREATE_SETTINGS_DIRS
+(
+	{file_mkdir "data:/GoldHEN/RB4DX/settings"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/visuals"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/gameplay"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/sfx"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type"}
+	;{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/binding"} ;TODO
+)
+#define UPDATE_SETTINGS
+(
+	;gp
+	{if {file_exists "nood.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/nood.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta" $dx_write_nul}
+	}
+	{if {file_exists "practiceod.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta" $dx_write_nul}
+	}
+
+	;vis
+	{if {file_exists "blackbg.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/visuals/blackbg.dta" $dx_write_nul}
+	}
+	{if {file_exists "60fpsbg.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/visuals/60fpsbg.dta" $dx_write_nul}
+	}
+
+	;sfx
+	{if {file_exists "nomiss.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/sfx/nomiss.dta" $dx_write_nul}
+	}
+	{if {file_exists "nowhammyfx.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/sfx/nowhammyfx.dta" $dx_write_nul}
+	}
+	{if {file_exists "trackmutingoff.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingoff.dta" $dx_write_nul}
+	}
+	{if {file_exists "trackmutingon.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingon.dta" $dx_write_nul}
+	}
+
+	;controller type
+	{if {file_exists "voxgtr.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta" $dx_write_nul}
+	}
+	{if {file_exists "voxdrum.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta" $dx_write_nul}
+	}
+	{if {file_exists "gtrvox.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta" $dx_write_nul}
+	}
+	{if {file_exists "gtrdrum.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta" $dx_write_nul}
+	}
+	{if {file_exists "drumgtr.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta" $dx_write_nul}
+	}
+	{if {file_exists "drumvox.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta" $dx_write_nul}
+	}
+)
+
+CREATE_SETTINGS_DIRS
+UPDATE_SETTINGS

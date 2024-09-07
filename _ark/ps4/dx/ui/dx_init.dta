@@ -1,4 +1,4 @@
-{set $dx_write_nul {array ()}}
+#include init_dev.dta
 {set $speedmod 100}
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
@@ -20,61 +20,69 @@
    {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
 }
 {set $autoplayexists {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
-{set $nood {file_exists "nood.dta"}}
-{set $practiceod {file_exists "practiceod.dta"}}
-{set $blackbg {file_exists "blackbg.dta"}}
-{set $60fpsbg {file_exists "60fpsbg.dta"}}
-{set $nomiss {file_exists "nomiss.dta"}}
-{set $nowhammyfx {file_exists "nowhammyfx.dta"}}
 {set $notifycolored {file_exists "notifycolored.ini"}}
+
+;gp settings
+{set $nood {file_exists "settings/gameplay/nood.dta"}}
+{set $practiceod {file_exists "settings/gameplay/practiceod.dta"}}
+
+;visual settings
+{set $blackbg {file_exists "settings/visuals/blackbg.dta"}}
+{set $60fpsbg {file_exists "settings/visuals/60fpsbg.dta"}}
+
+;sfx settings
+{set $nomiss {file_exists "settings/sfx/nomiss.dta"}}
+{set $nowhammyfx {file_exists "settings/sfx/nowhammyfx.dta"}}
 {set $trackmuting
    {cond
-      ({file_exists "trackmutingoff.dta"}
+      ({file_exists "settings/sfx/trackmutingoff.dta"}
          off
       )
-      ({file_exists "trackmutingon.dta"}
+      ({file_exists "settings/sfx/trackmutingon.dta"}
          on
       )
-      ({&& {! {file_exists "trackmutingoff.dta"}} {! {file_exists "trackmutingon.dta"}}}
+      ({&& {! {file_exists "settings/sfx/trackmutingoff.dta"}} {! {file_exists "settings/sfx/trackmutingon.dta"}}}
          vanilla
       )
    }
 }
+
+;controller type
 {set $voxslt
    {cond
-      ({file_exists "voxgtr.dta"}
+      ({file_exists "settings/controller/type/voxgtr.dta"}
          gtr
       )
-      ({file_exists "voxdrum.dta"}
+      ({file_exists "settings/controller/type/voxdrum.dta"}
          drum
       )
-      ({&& {! {file_exists "voxdrum.dta"}} {! {file_exists "voxgtr.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/voxdrum.dta"}} {! {file_exists "settings/controller/type/voxgtr.dta"}}}
          vox
       )
    }
 }
 {set $gtrslt
    {cond
-      ({file_exists "gtrvox.dta"}
+      ({file_exists "settings/controller/type/gtrvox.dta"}
          vox
       )
-      ({file_exists "gtrdrum.dta"}
+      ({file_exists "settings/controller/type/gtrdrum.dta"}
          drum
       )
-      ({&& {! {file_exists "gtrdrum.dta"}} {! {file_exists "gtrvox.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/gtrdrum.dta"}} {! {file_exists "settings/controller/type/gtrvox.dta"}}}
          gtr
       )
    }
 }
 {set $drmslt
    {cond
-      ({file_exists "drumgtr.dta"}
+      ({file_exists "settings/controller/type/drumgtr.dta"}
          gtr
       )
-      ({file_exists "drumvox.dta"}
+      ({file_exists "settings/controller/type/drumvox.dta"}
          vox
       )
-      ({&& {! {file_exists "drumvox.dta"}} {! {file_exists "drumgtr.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/drumvox.dta"}} {! {file_exists "settings/controller/type/drumgtr.dta"}}}
          drum
       )
    }

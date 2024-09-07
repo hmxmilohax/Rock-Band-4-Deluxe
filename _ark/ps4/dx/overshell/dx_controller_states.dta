@@ -4,6 +4,7 @@
       {$this setup_confirm_actions a 
       (
          "Change instrument type"
+         ;"Change instrument bindings"
       )
    }
    ) 
@@ -14,6 +15,9 @@
       {switch $list_data 
          ("Change instrument type"
             {$this show_state kState_RB4DXSlotOverride}
+         )
+         ("Change instrument bindings"
+            {$this show_state kState_RB4DXBindingOverride}
          )
       }
    ) 

@@ -144,11 +144,11 @@
             {set $nood {! $nood}}
             {if_else $nood
                {do
-                  {write_file "data:/GoldHEN/RB4DX/nood.dta" $dx_write_nul}
+                  {write_file "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta" $dx_write_nul}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
                }
                {do
-                  {file_delete "data:/GoldHEN/RB4DX/nood.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta"}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 TRUE}
                }
             }
@@ -162,11 +162,11 @@
             {set $practiceod {! $practiceod}}
             {if_else $practiceod
                {do
-                  {write_file "data:/GoldHEN/RB4DX/practiceod.dta" $dx_write_nul}
+                  {write_file "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta" $dx_write_nul}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
                }
                {do
-                  {file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta"}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 FALSE}
                }
             }
@@ -275,18 +275,18 @@
             {switch $trackmuting
                (vanilla 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/sfx/trackmutingoff.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/sfx/trackmutingon.dta"}
                )
                (off 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
-                  {write_file "data:/GoldHEN/RB4DX/trackmutingoff.dta" $dx_write_nul}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingoff.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/sfx/trackmutingon.dta"}
                )
                (on 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
-                  {write_file "data:/GoldHEN/RB4DX/trackmutingon.dta" $dx_write_nul}
-                  {file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingon.dta" $dx_write_nul}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/sfx/trackmutingoff.dta"}
                )
             }
             {if_else {$this in_song}
@@ -299,9 +299,9 @@
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
                {do
-                  {write_file "data:/GoldHEN/RB4DX/nomiss.dta" $dx_write_nul}
+                  {write_file "data:/GoldHEN/RB4DX/settings/sfx/nomiss.dta" $dx_write_nul}
                }
-               {file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
+               {file_delete "data:/GoldHEN/RB4DX/settings/sfx/nomiss.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
@@ -310,11 +310,11 @@
             {set $nowhammyfx {! $nowhammyfx}}
             {if_else $nowhammyfx
                {do
-                  {write_file "data:/GoldHEN/RB4DX/nowhammyfx.dta" $dx_write_nul}
+                  {write_file "data:/GoldHEN/RB4DX/settings/sfx/nowhammyfx.dta" $dx_write_nul}
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
                }
                {do
-                  {file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/sfx/nowhammyfx.dta"}
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
                }
             }
@@ -363,8 +363,8 @@
          (("Black Venue: ON" "Black Venue: OFF")
             {set $blackbg {! $blackbg}}
             {if_else $blackbg
-               {write_file "data:/GoldHEN/RB4DX/blackbg.dta" $dx_write_nul}
-               {file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
+               {write_file "data:/GoldHEN/RB4DX/settings/visuals/blackbg.dta" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/settings/visuals/blackbg.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
@@ -372,8 +372,8 @@
          (("60 FPS Venues: ON" "60 FPS Venues: OFF")
             {set $60fpsbg {! $60fpsbg}}
             {if_else $60fpsbg
-               {write_file "data:/GoldHEN/RB4DX/60fpsbg.dta" $dx_write_nul}
-               {file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
+               {write_file "data:/GoldHEN/RB4DX/settings/visuals/60fpsbg.dta" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/settings/visuals/60fpsbg.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
