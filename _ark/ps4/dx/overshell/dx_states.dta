@@ -339,8 +339,9 @@
       (
          {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
          {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-         {if_else $crowdmeter "No Crowd Meter: ON" "No Crowd Meter: OFF"}
-         {if_else $noui "No HUD: ON" "No HUD: OFF"}
+         {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+         {if_else $noui "HUD: OFF" "HUD: ON"}
+         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
          "Track Curvature"
       )
    }
@@ -350,6 +351,7 @@
    (enter
       {set $crowdmeter {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/crowd_meter.entity_ps4"}}
       {set $noui {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}}
+      {set $noaa {file_exists "data:/GoldHEN/RB4DX/ps4/shared/scene/antialias.scene_ps4"}}
       {set $dx_cur_state vis}
       RB4DXVIS_DATA
    ) 
@@ -376,7 +378,7 @@
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects }
          )
-         (("No Crowd Meter: ON" "No Crowd Meter: OFF")
+         (("Crowd Meter: ON" "Crowd Meter: OFF")
             {set $crowdmeter {! $crowdmeter}}
             {if_else $crowdmeter
                {do
@@ -394,11 +396,23 @@
             }
             {$this trigger_select_effects }
          )
-         (("No HUD: ON" "No HUD: OFF")
+         (("HUD: ON" "HUD: OFF")
             {set $noui {! $noui}}
             {if_else $noui
                {write_file "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" $dx_write_nul}
                {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Track Antialiasing: OFF" "Track Antialiasing: ON")
+            {set $noaa {! $noaa}}
+            {if_else $noaa
+               {write_file "data:/GoldHEN/RB4DX/ps4/shared/scene/antialias.scene_ps4" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/ps4/shared/scene/antialias.scene_ps4"}
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
