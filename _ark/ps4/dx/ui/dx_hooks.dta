@@ -33,3 +33,6 @@
 
 ;apply track speed hooks
 SET_TRACK_SPEEDS
+
+;apply pad binding hooks
+SET_PAD_BINDING_HOOK

@@ -72,3 +72,6 @@
       )
    }
 }
+
+;controller binding
+SET_PAD_BINDING_VAR

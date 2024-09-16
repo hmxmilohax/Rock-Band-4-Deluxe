@@ -42,3 +42,56 @@
    {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drum/drum.dta"}
    {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtr/gtr.dta"}
 )
+
+#define DELETE_PAD_BINDING_DTAS
+(
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rbgtr.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rbdrum.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rb4gtr.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rb4drum.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/ghgtr.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/binding/pad/ghdrum.dta"}
+)
+
+#define SET_PAD_BINDING_VAR
+(
+   {set $padbinding
+      {cond
+         ({file_exists "settings/controller/binding/pad/rbgtr.dta"}
+            hx_guitar_ps3
+         )
+         ({file_exists "settings/controller/binding/pad/rbdrum.dta"}
+            hx_drums_ps3
+         )
+         ({file_exists "settings/controller/binding/pad/rb4gtr.dta"}
+            mc_guitar_ps4
+         )
+         ({file_exists "settings/controller/binding/pad/rb4drum.dta"}
+            mc_drums_ps4
+         )
+         ({file_exists "settings/controller/binding/pad/ghgtr.dta"}
+            ro_guitar_ps3
+         )
+         ({file_exists "settings/controller/binding/pad/ghdrum.dta"}
+            ro_drums_ps3
+         )
+         ({&& 
+            {! {file_exists "settings/controller/binding/pad/rbgtr.dta"}} 
+            {! {file_exists "settings/controller/binding/pad/rbdrum.dta"}}
+            {! {file_exists "settings/controller/binding/pad/rb4gtr.dta"}} 
+            {! {file_exists "settings/controller/binding/pad/rb4drum.dta"}}
+            {! {file_exists "settings/controller/binding/pad/ghgtr.dta"}} 
+            {! {file_exists "settings/controller/binding/pad/ghdrum.dta"}}
+          }
+            joypad
+         )
+      }
+   }
+)
+
+#define SET_PAD_BINDING_HOOK
+(
+   {set_elem {find $syscfg joypad controller_mapping digital} 1 $padbinding}
+   {set_elem {find $syscfg joypad controller_mapping analog} 1 $padbinding}
+   {set_elem {find $syscfg joypad controller_mapping dualshock} 1 $padbinding}
+)
