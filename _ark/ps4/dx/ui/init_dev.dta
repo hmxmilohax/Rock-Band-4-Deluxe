@@ -111,3 +111,21 @@
 
 CREATE_SETTINGS_DIRS
 UPDATE_SETTINGS
+
+;clear invalid files
+{if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+   {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+}
+{if {file_exists "insong.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+}
+{if {file_exists "RB4DX.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/RB4DX.ini"}
+}
+{write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+{if {file_exists "autoplay.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+}
+{if {file_exists "drunkmode.ini"}
+   {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
+}

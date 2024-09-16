@@ -182,11 +182,12 @@
          )
          (("Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF")
             {set $syncspeeds {! $syncspeeds}}
-            SET_TRACK_SPEEDS
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXGP_DATA
+            {if_else $syncspeeds
+               {write_file "data:/GoldHEN/RB4DX/settings/gameplay/syncspeeds.dta" $dx_write_nul}
+               {file_delete "data:/GoldHEN/RB4DX/settings/gameplay/syncspeeds.dta"}
             }
+            SET_TRACK_SPEEDS
+            RB4DXGP_DATA
             {$this trigger_select_effects }
          )
          (("Calibration Mode: ON" "Calibration Mode: OFF")

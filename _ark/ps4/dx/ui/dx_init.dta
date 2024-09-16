@@ -3,28 +3,13 @@
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
 {set $track_curve 1}
-{if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-   {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-}
-{if {file_exists "insong.dta"}
-   {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
-}
-{if {file_exists "RB4DX.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/RB4DX.ini"}
-}
-{write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
-{if {file_exists "autoplay.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
-}
-{if {file_exists "drunkmode.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
-}
 {set $autoplayexists {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
 {set $notifycolored {file_exists "notifycolored.ini"}}
 
 ;gp settings
 {set $nood {file_exists "settings/gameplay/nood.dta"}}
 {set $practiceod {file_exists "settings/gameplay/practiceod.dta"}}
+{set $syncspeeds {file_exists "settings/gameplay/syncspeeds.dta"}}
 
 ;visual settings
 {set $blackbg {file_exists "settings/visuals/blackbg.dta"}}

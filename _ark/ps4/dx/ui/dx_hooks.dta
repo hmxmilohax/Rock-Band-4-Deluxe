@@ -30,3 +30,6 @@
 {if $nowhammyfx
    {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
 }
+
+;apply track speed hooks
+SET_TRACK_SPEEDS
