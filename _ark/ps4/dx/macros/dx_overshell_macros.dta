@@ -27,20 +27,3 @@
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
 	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
 )
-#define SET_TRACK_SPEEDS
-(
-	{set_elem {find $syscfg track_graphics view_times drum easy} 1 {* {if_else $syncspeeds 1.2 2.4} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times drum medium} 1 {* {if_else $syncspeeds 1.2 2.0} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times drum hard} 1 {* {if_else $syncspeeds 1.2 1.6} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times drum expert} 1 {* 1.2 {/ $speedmod 100}}}
-
-	{set_elem {find $syscfg track_graphics view_times bass easy} 1 {* {if_else $syncspeeds 1.2 2.4} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times bass medium} 1 {* {if_else $syncspeeds 1.2 2.0} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times bass hard} 1 {* {if_else $syncspeeds 1.2 1.6} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times bass expert} 1 {* 1.2 {/ $speedmod 100}}}
-
-	{set_elem {find $syscfg track_graphics view_times guitar easy} 1 {* {if_else $syncspeeds 1.2 2.4} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times guitar medium} 1 {* {if_else $syncspeeds 1.2 2.0} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times guitar hard} 1 {* {if_else $syncspeeds 1.2 1.6} {/ $speedmod 100}}}
-	{set_elem {find $syscfg track_graphics view_times guitar expert} 1 {* 1.2 {/ $speedmod 100}}}
-)
