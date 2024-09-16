@@ -1,6 +1,6 @@
 #define WRITE_SLOT_DTA
 (
-   {write_file {sprint "data:/GoldHEN/RB4DX/settings/controller/type/" $slot_changed $slot_to ".dta"} $dx_write_nul}
+   {write_file {sprint "data:/GoldHEN/RB4DX/settings/controller/type/" $slot_changed "/" $slot_to ".dta"} $dx_write_nul}
 )
 
 #define SET_SLOT_VAR
@@ -22,23 +22,23 @@
 (
    {switch $slot_changed
       (gtr
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta"}
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtr/drum.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtr/vox.dta"}
       )
       (drum
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta"}
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drum/gtr.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drum/vox.dta"}
       )
       (vox
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta"}
-         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/vox/gtr.dta"}
+         {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/vox/drum.dta"}
       )
    }
 )
 
 #define CLEAR_INVALID_SLOT_DTAS
 (
-   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxvox.dta"}
-   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumdrum.dta"}
-   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrgtr.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/vox/vox.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drum/drum.dta"}
+   {file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtr/gtr.dta"}
 )

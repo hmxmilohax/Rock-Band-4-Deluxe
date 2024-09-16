@@ -8,6 +8,9 @@
 	{file_mkdir "data:/GoldHEN/RB4DX/settings/sfx"}
 	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller"}
 	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/gtr"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/drum"}
+	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/vox"}
 	;{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/binding"} ;TODO
 )
 #define UPDATE_SETTINGS
@@ -55,25 +58,54 @@
 		{file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta" $dx_write_nul}
 	}
+	{if {file_exists "settings/controller/type/voxgtr.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/vox/gtr.dta" $dx_write_nul}
+	}
+
 	{if {file_exists "voxdrum.dta"}
 		{file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta" $dx_write_nul}
 	}
+	{if {file_exists "settings/controller/type/voxdrum.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/vox/drum.dta" $dx_write_nul}
+	}
+
 	{if {file_exists "gtrvox.dta"}
 		{file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta" $dx_write_nul}
 	}
+	{if {file_exists "settings/controller/type/gtrvox.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtr/vox.dta" $dx_write_nul}
+	}
+
 	{if {file_exists "gtrdrum.dta"}
 		{file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta" $dx_write_nul}
 	}
+	{if {file_exists "settings/controller/type/gtrdrum.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtr/drum.dta" $dx_write_nul}
+	}
+
 	{if {file_exists "drumgtr.dta"}
 		{file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta" $dx_write_nul}
 	}
+	{if {file_exists "settings/controller/type/drumgtr.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drum/gtr.dta" $dx_write_nul}
+	}
+
 	{if {file_exists "drumvox.dta"}
 		{file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
 		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta" $dx_write_nul}
+	}
+	{if {file_exists "settings/controller/type/drumvox.dta"}
+		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta"}
+		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drum/vox.dta" $dx_write_nul}
 	}
 )
 

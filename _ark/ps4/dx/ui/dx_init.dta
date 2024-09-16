@@ -50,39 +50,39 @@
 ;controller type
 {set $voxslt
    {cond
-      ({file_exists "settings/controller/type/voxgtr.dta"}
+      ({file_exists "settings/controller/type/vox/gtr.dta"}
          gtr
       )
-      ({file_exists "settings/controller/type/voxdrum.dta"}
+      ({file_exists "settings/controller/type/vox/drum.dta"}
          drum
       )
-      ({&& {! {file_exists "settings/controller/type/voxdrum.dta"}} {! {file_exists "settings/controller/type/voxgtr.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/vox/drum.dta"}} {! {file_exists "settings/controller/type/vox/gtr.dta"}}}
          vox
       )
    }
 }
 {set $gtrslt
    {cond
-      ({file_exists "settings/controller/type/gtrvox.dta"}
+      ({file_exists "settings/controller/type/gtr/vox.dta"}
          vox
       )
-      ({file_exists "settings/controller/type/gtrdrum.dta"}
+      ({file_exists "settings/controller/type/gtr/drum.dta"}
          drum
       )
-      ({&& {! {file_exists "settings/controller/type/gtrdrum.dta"}} {! {file_exists "settings/controller/type/gtrvox.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/gtr/drum.dta"}} {! {file_exists "settings/controller/type/gtr/vox.dta"}}}
          gtr
       )
    }
 }
 {set $drmslt
    {cond
-      ({file_exists "settings/controller/type/drumgtr.dta"}
+      ({file_exists "settings/controller/type/drum/gtr.dta"}
          gtr
       )
-      ({file_exists "settings/controller/type/drumvox.dta"}
+      ({file_exists "settings/controller/type/drum/vox.dta"}
          vox
       )
-      ({&& {! {file_exists "settings/controller/type/drumvox.dta"}} {! {file_exists "settings/controller/type/drumgtr.dta"}}}
+      ({&& {! {file_exists "settings/controller/type/drum/vox.dta"}} {! {file_exists "settings/controller/type/drum/gtr.dta"}}}
          drum
       )
    }
