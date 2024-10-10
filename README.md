@@ -63,14 +63,6 @@ If the plugin is not loading, you may need to change the file permissions of the
 
 If the plugin is loading, but no dx modifications are showing up, then you may need to change the permissions of the RB4DX folder on the PS4, or retransfer the RB4DX folder entirely.
 
-### Optional Additions
-
-*Rock Band 4 Deluxe* Comes with many goodies to change/improve the game
-
-All of them can be found in the dx_optional_additions folder in the download for RB4DX.
-
-To install these, copy the `ps4` folder inside each optional addition to your ps4 in the folder `/data/GoldHEN/RB4DX/` **AFTER** copying the main rb4dx ps4 folder.
-
 There is also a [tutorial for moving some in game HUD objects around](https://gist.github.com/LlysiX/839813295fb1c6ae1ae2ad60d40c646e) if you would like to personalize your RB4DX experience even more!
 
 # 🔨 Building (NOT standard download and install)
