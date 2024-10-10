@@ -32,14 +32,14 @@
    )
    (SELECT_MSG
       {switch $dx_cur_state
-         (optionaladd
-            {$this show_state kState_RB4DXOptionalAdditions}
-         )
          (gp
             {$this show_state kState_RB4DXGPSettings}
          )
          (vis
             {$this show_state kState_RB4DXVisSettings}
+         )
+         (vis1
+            {$this show_state kState_RB4DXVisSettings1}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -50,14 +50,14 @@
    )
    (on_cancel 
       {switch $dx_cur_state
-         (optionaladd
-            {$this show_state kState_RB4DXOptionalAdditions}
-         )
          (gp
             {$this show_state kState_RB4DXGPSettings}
          )
          (vis
             {$this show_state kState_RB4DXVisSettings}
+         )
+         (vis1
+            {$this show_state kState_RB4DXVisSettings1}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -74,14 +74,14 @@
    )
    (SELECT_MSG
       {switch $dx_cur_state
-         (optionaladd
-            {$this show_state kState_RB4DXOptionalAdditions}
-         )
          (gp
             {$this show_state kState_RB4DXGPSettings}
          )
          (vis
             {$this show_state kState_RB4DXVisSettings}
+         )
+         (vis1
+            {$this show_state kState_RB4DXVisSettings1}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -91,9 +91,6 @@
    )
    (on_cancel 
       {switch $dx_cur_state
-         (optionaladd
-            {$this show_state kState_RB4DXOptionalAdditions}
-         )
          (gp
             {$this show_state kState_RB4DXGPSettings}
          )
@@ -104,73 +101,6 @@
             {$this show_state kState_RB4DXSFXSettings}
          )
       }
-      {$this trigger_cancel_effects }
-   )
-)
-
-(kState_RB4DXOptionalAddWarn
-   (view confirm_action)
-   (enter
-      {$this setup_confirm_actions "You will need to re-add the optional addition from your RB4DX build zip/folder. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
-   )
-   (SELECT_MSG
-      {local $list_data 
-         {($objId UIListCom) get_data_in_column token}
-      }  
-      {switch $list_data 
-         (overshell_confirm_yes
-            {switch $optionaladd
-               (nohud
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
-               )
-               (songtitle
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
-               )
-               (noshine
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}
-               )
-               (noflames
-                  DELETE_NOFLAMES_FILES
-               )
-               (noui
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
-               )
-               (menubg
-                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4"}
-               )
-            }
-            {if_else {== $optionaladd menubg}
-               {$this show_state kState_RB4DXDelayedEffectWarn}
-               {if_else {$this in_song}
-                  {$this show_state kState_RB4DXInGameWarn}
-                  {$this show_state kState_RB4DXOptionalAdditions}
-               }
-            }
-         )
-         (overshell_confirm_no
-            {set $optionaladd FALSE}
-            {$this show_state kState_RB4DXOptionalAdditions}
-         )
-      }
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
-      {set $optionaladd FALSE}
-      {$this show_state kState_RB4DXOptionalAdditions}
-      {$this trigger_cancel_effects }
-   )
-)
-(kState_RB4DXOptionalAddHowTo
-   (view confirm_action)
-   (enter 
-      {$this setup_confirm_actions "This option cannot be changed in-game. go to the \qdx_optional_additions\q folder in your RB4DX build zip/folder, and copy the ps4 folder of the addition to \q/data/GoldHEN/RB4DX/\q." (overshell_confirm_ok)}
-   )
-   (SELECT_MSG
-      {$this show_state kState_RB4DXOptionalAdditions}
-      {$this trigger_select_effects }
-   )
-   (on_cancel 
-      {$this show_state kState_RB4DXOptionalAdditions}
       {$this trigger_cancel_effects }
    )
 )

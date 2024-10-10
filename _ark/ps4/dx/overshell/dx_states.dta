@@ -1,5 +1,7 @@
 #include dx_state_overrides.dta
 
+; max number of entries in a state = 7
+
 #define RB4DXMAIN_DATA
 (
    {if_else {$this in_song}
@@ -22,6 +24,7 @@
             "Visual Settings"
             "Controller Settings"
             "Extras"
+            ;"test" ; debugging
          )
       }
    }
@@ -73,8 +76,10 @@
          ("lost menus"
             {$this show_state kState_RB4DXLostMenus}
             {$this trigger_select_effects })
-         ; ("test"
-         ;    {$ui add_scene "ui/character/character_customize/character_customize_track_r2t.scene"})
+         ("test"
+            {file_rename "/data/GoldHEN/RB4DX/test.txt" "/data/GoldHEN/RB4DX/test1.txt"}
+            {$this trigger_select_effects }
+         )
       }
    ) 
    (on_cancel 
@@ -86,6 +91,7 @@
    )
 )
 
+;Gameplay Settings
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
@@ -243,6 +249,7 @@
    )
 )
 
+;SFX Settings
 #define RB4DXSFX_DATA
 (
    {$this setup_confirm_actions a 
@@ -338,6 +345,7 @@
    )
 )
 
+;Visual Settings
 #define RB4DXVIS_DATA
 (
    {$this setup_confirm_actions a 
@@ -348,6 +356,7 @@
          {if_else $noui "HUD: OFF" "HUD: ON"}
          {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
          "Track Curvature"
+         "Next"
       )
    }
 )
@@ -429,6 +438,166 @@
             {$this show_state kState_RB4DXTrackCurve}
             {$this trigger_select_effects }
          )
+         ("Next"
+            {$this show_state kState_RB4DXVisSettings1}
+            {$this trigger_select_effects}
+         )
+      }
+   ) 
+   (on_cancel 
+      {set $dx_cur_state FALSE}
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects }
+   )
+)
+; next page (TODO: Integrate this into one state)
+#define RB4DXVIS1_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         "Back"
+         {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+         {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
+         {if_else $noshine "Track Shine: OFF" "Track Shine: ON"}
+         {if_else $noflames "Flames: OFF" "Flames: ON"}
+         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
+         {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+      )
+   }
+)
+(kState_RB4DXVisSettings1
+   (view {$this get_auto_list_view }) 
+   (enter
+      {set $nohud {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}}
+      {set $songtitle {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}}
+      SONGTITLE_CHECK
+      {set $noshine {file_exists "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
+      {set $noflames {file_exists "data:/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
+      {set $micwarn {! {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud1.scene_ps4"}}}
+      {set $menubg {file_exists "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4"}}
+      {set $dx_cur_state vis1}
+      RB4DXVIS1_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }}  
+      {switch $list_data 
+         (("Performance Mode: ON" "Performance Mode: OFF")
+            {set $nohud {! $nohud}}
+            {if_else $nohud
+               {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
+               {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4"}
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         ("Song Title Always: ON"
+            {set $songtitle FALSE}
+            {switch $songtitletype
+               (default
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/songtitletype1.dta"}
+               )
+               (tl
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/songtitletypetl.dta"}
+               )
+               (a
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/songtitletypea.dta"}
+               )
+               (none
+                  {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
+               )
+            }
+            {file_delete "data:/GoldHEN/RB4DX/settings/visuals/songtitle.dta"}
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         ("Song Title Always: OFF"
+            {$this show_state kState_RB4DXSongTitleSelector}
+            {$this trigger_select_effects}
+         )
+         (("Track Shine: ON" "Track Shine: OFF")
+            {set $noshine {! $noshine}}
+            {if_else $noshine
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/visuals/noshine.dta" $dx_write_nul}
+               }
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/noshine.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Flames: OFF" "Flames: ON")
+            {set $noflames {! $noflames}}
+            {if_else $noflames
+               {do
+                  MOVE_NOFLAMES_FILES_ON
+                  {write_file "data:/GoldHEN/RB4DX/settings/visuals/noflames.dta" $dx_write_nul}
+               }
+               {do
+                  MOVE_NOFLAMES_FILES_OFF
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/noflames.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
+            {set $micwarn {! $micwarn}}
+            {if_else $micwarn
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/hud1.scene_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/visuals/micwarn.dta" $dx_write_nul}
+               }
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/hud.scene_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/hud1.scene_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/micwarn.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects }
+         )
+         (("Menu BGs: OFF" "Menu BGs: ON")
+            {set $menubg {! $menubg}}
+            {if_else $menubg
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/background/meta_background1.scene_ps4" "/data/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/visuals/menubg.dta" $dx_write_nul}
+               }
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/background/meta_background.scene_ps4" "/data/GoldHEN/RB4DX/ps4/ui/background/meta_background1.scene_ps4"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/menubg.dta"}
+               }
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects }
+         )
+         ("Back"
+            {$this show_state kState_RB4DXVisSettings}
+            {$this trigger_select_effects }
+         )
       }
    ) 
    (on_cancel 
@@ -438,19 +607,61 @@
    )
 )
 
+;Song Title Type Selector
+(kState_RB4DXSongTitleSelector
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "What location do you want the song title at?" ("Vanilla" "Top Left" "Acai; Below Twitch Chat")}
+   )
+   (SELECT_MSG
+      {local $list_data 
+         {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         ("Vanilla"
+            {set $songtitletype default}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/songtitletype1.dta" $dx_write_nul}
+            {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
+         )
+         ("Top Left"
+            {set $songtitletype tl}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/songtitletypetl.dta" $dx_write_nul}
+            {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
+         )
+         ("Acai; Below Twitch Chat"
+            {set $songtitletype a}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/songtitletypea.dta" $dx_write_nul}
+            {file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"}
+         )
+      }
+      {set $songtitle TRUE}
+      {write_file "data:/GoldHEN/RB4DX/settings/visuals/songtitle.dta" $dx_write_nul}
+      {if_else {$this in_song}
+         {$this show_state kState_RB4DXInGameWarn}
+         {$this show_state kState_RB4DXVisSettings1}
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings1}
+      {$this trigger_cancel_effects }
+   )
+)
+
+;Extras
 #define RB4DXEXTRA_DATA
 (
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            "Optional Additions"
+            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
             {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
          )
       }
       {$this setup_confirm_actions a 
          (
-            "Optional Additions"
             "Screensaver"
+            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
             {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
          )
       }
@@ -459,20 +670,32 @@
 (kState_RB4DXExtras
    (view {$this get_auto_list_view })
    (enter
+      {set $faststart {file_exists "data:/GoldHEN/RB4DX/ps4/ui/startup/mnemonix.bk2"}}
       RB4DXEXTRA_DATA
    ) 
    (SELECT_MSG 
       {local $list_data 
          {($objId UIListCom) get_data_in_column token}
       }  
-      {switch $list_data 
-         ("Optional Additions"
-            {$this show_state kState_RB4DXOptionalAdditions}
-            {$this trigger_select_effects}
-         )
+      {switch $list_data
          ("Screensaver"
             {$this show_state kState_RB4DXScreensaverWarn}
             {$this trigger_select_effects })
+         (("Fast Start: ON" "Fast Start: OFF")
+            {set $faststart {! $faststart}}
+            {if_else $faststart
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/startup/mnemonix1.bk2" "/data/GoldHEN/RB4DX/ps4/ui/startup/mnemonix.bk2"}
+                  {write_file "data:/GoldHEN/RB4DX/settings/visuals/faststart.dta" $dx_write_nul}
+               }
+               {do
+                  {file_rename "/data/GoldHEN/RB4DX/ps4/ui/startup/mnemonix.bk2" "/data/GoldHEN/RB4DX/ps4/ui/startup/mnemonix1.bk2"}
+                  {file_delete "data:/GoldHEN/RB4DX/settings/visuals/faststart.dta"}
+               }
+            }
+            RB4DXEXTRA_DATA
+            {$this trigger_select_effects }
+         )
          (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
             {set $notifycolored {! $notifycolored}}
             {if_else $notifycolored
@@ -486,96 +709,6 @@
    ) 
    (on_cancel 
       {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects}
-   )
-)
-
-(kState_RB4DXOptionalAdditions
-   (view {$this get_auto_list_view }) 
-   (enter
-      {set $dx_cur_state optionaladd}
-      OPTIONAL_ADDITIONS_CHECK
-      {$this setup_confirm_actions a 
-         (
-            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-            {if_else $noshine "No Shine: ON" "No Shine: OFF"}
-            {if_else $noflames "No Flames: ON" "No Flames: OFF"}
-            {if_else $noui "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
-            {if_else $menubg "No Menu BGs: ON" "No Menu BGs: OFF"}
-         )
-      }
-   ) 
-   (SELECT_MSG 
-      {local $list_data 
-         {($objId UIListCom) get_data_in_column token}
-      }  
-      {switch $list_data 
-         (("Performance Mode: ON" "Performance Mode: OFF")
-            {if_else $nohud
-               {do
-                  {set $optionaladd nohud}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("Song Title Always: ON" "Song Title Always: OFF")
-            {if_else $songtitle
-               {do
-                  {set $optionaladd songtitle}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("No Shine: ON" "No Shine: OFF")
-            {if_else $noshine
-               {do
-                  {set $optionaladd noshine}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("No Flames: ON" "No Flames: OFF")
-            {if_else $noflames
-               {do
-                  {set $optionaladd noflames}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
-            {if_else $noui
-               {do
-                  {set $optionaladd noui}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-         (("No Menu BGs: ON" "No Menu BGs: OFF")
-            {if_else $menubg 
-               {do
-                  {set $optionaladd menubg}
-                  {$this show_state kState_RB4DXOptionalAddWarn}
-               }
-               {$this show_state kState_RB4DXOptionalAddHowTo}
-            }
-            {$this trigger_select_effects}
-         )
-      }
-   ) 
-   (on_cancel 
-      {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXExtras}
       {$this trigger_cancel_effects}
    )
 )
