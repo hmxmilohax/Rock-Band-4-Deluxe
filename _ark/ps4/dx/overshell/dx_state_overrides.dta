@@ -4,252 +4,289 @@
    (ready_to_play TRUE) 
    (retracted_position TRUE) 
    (enter 
-      {$this end_char_management_session } 
-      {$this hide_preview_char } 
-      {$this deactivate_preview_scene_if_needed } 
-      {$this end_somp_player_management_session } 
-      {$this clear_selected_emote_category } 
-      {$this clear_volume_slider_last_state }) 
+      {$this end_char_management_session} 
+      {$this hide_preview_char} 
+      {$this deactivate_preview_scene_if_needed} 
+      {$this end_somp_player_management_session} 
+      {$this clear_selected_emote_category} 
+      {$this clear_volume_slider_last_state}
+   ) 
    (on_start 
       ($user) 
       {if 
-         {|| 
-            {$user is_participating }
-            {! 
-               {$this in_song }}}
-         {if_else 
-            {$this in_song }
-            {$this show_in_song_menu }
-            {if_else 
-               {$this in_venue_meta_mode }
-               {$this show_state kState_VenueMetaMenu }
-               {$this show_state kState_Options }}}
-         {$this trigger_start_effects }}))
+         {|| {$user is_participating} {! {$this in_song}}}
+         {if_else {$this in_song}
+            {$this show_in_song_menu}
+            {if_else {$this in_venue_meta_mode}
+               {$this show_state kState_VenueMetaMenu}
+               {$this show_state kState_Options}
+            }
+         }
+         {$this trigger_start_effects}
+      }
+   )
+)
 
 (kState_ChooseDiff 
    (view list_medium) 
    (song_settings_flow TRUE) 
    (shows_extended_mic_arrows TRUE) 
    (enter 
-      {$this clear_somp_difficulty } 
-      {$this setup_difficulty_list $this } 
-      {if 
-         {== 
-            {
-               {$this get_user }get_track_type }kTrackVocals }
-         {local $ui_list 
-            {$this get_ui_list }}
-         {local $list_data 
-            {$ui_list get_data_in_column token }}
+      {$this clear_somp_difficulty} 
+      {$this setup_difficulty_list $this} 
+      {if {== {{$this get_user} get_track_type} kTrackVocals}
+         {local $ui_list {$this get_ui_list}}
+         {local $list_data {$ui_list get_data_in_column token}}
          {switch $list_data 
             (overshell_easy 
-               {$this update_vocal_freestyle_icon kDifficultyEasy })
+               {$this update_vocal_freestyle_icon kDifficultyEasy})
             (overshell_medium 
-               {$this update_vocal_freestyle_icon kDifficultyMedium })
+               {$this update_vocal_freestyle_icon kDifficultyMedium})
             (overshell_hard 
-               {$this update_vocal_freestyle_icon kDifficultyHard })
+               {$this update_vocal_freestyle_icon kDifficultyHard})
             (overshell_expert 
-               {$this update_vocal_freestyle_icon kDifficultyExpert })
+               {$this update_vocal_freestyle_icon kDifficultyExpert})
             (overshell_brutal 
-               {$this update_vocal_freestyle_icon kDifficultyExpert })}}) 
+               {$this update_vocal_freestyle_icon kDifficultyExpert})
+         }
+      }
+   ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_data {($objId UIListCom) get_data_in_column token}} 
          {switch $list_data 
             (overshell_easy 
-               {$this select_difficulty kDifficultyEasy })
+               {$this select_difficulty kDifficultyEasy})
             (overshell_medium 
-               {$this select_difficulty kDifficultyMedium })
+               {$this select_difficulty kDifficultyMedium})
             (overshell_hard 
-               {$this select_difficulty kDifficultyHard })
+               {$this select_difficulty kDifficultyHard})
             (overshell_expert 
-               {$this select_difficulty kDifficultyExpert })
+               {$this select_difficulty kDifficultyExpert})
             (overshell_brutal 
-               {$this select_difficulty kDifficultyExpert })
+               {$this select_difficulty kDifficultyExpert})
             (overshell_guitar_solo 
-               {$this select_difficulty kDifficultyEasy })} 
-      {$this trigger_select_effects }
+               {$this select_difficulty kDifficultyEasy})
+         } 
+      {$this trigger_select_effects}
       {write_file "data:/GoldHEN/RB4DX/insong.dta" $dx_write_nul}
-      ) 
+   ) 
    (list_focus 
       ($obj_name $obj_id) 
       {if 
-         {== 
-            {
-               {$this get_user }get_track_type }kTrackVocals }
-         {local $ui_list 
-            {$this get_ui_list }}
-         {local $list_data 
-            {$ui_list get_data_in_column token }}
+         {== {{$this get_user} get_track_type} kTrackVocals}
+         {local $ui_list {$this get_ui_list}}
+         {local $list_data {$ui_list get_data_in_column token}}
          {switch $list_data 
             (overshell_easy 
-               {$this update_vocal_freestyle_icon kDifficultyEasy })
+               {$this update_vocal_freestyle_icon kDifficultyEasy})
             (overshell_medium 
-               {$this update_vocal_freestyle_icon kDifficultyMedium })
+               {$this update_vocal_freestyle_icon kDifficultyMedium})
             (overshell_hard 
-               {$this update_vocal_freestyle_icon kDifficultyHard })
+               {$this update_vocal_freestyle_icon kDifficultyHard})
             (overshell_expert 
-               {$this update_vocal_freestyle_icon kDifficultyExpert })
+               {$this update_vocal_freestyle_icon kDifficultyExpert})
             (overshell_brutal 
-               {$this update_vocal_freestyle_icon kDifficultyExpert })}}) 
+               {$this update_vocal_freestyle_icon kDifficultyExpert})
+         }
+      }
+   ) 
    (on_cancel 
-      {$this leave_choose_difficulty }))
+      {$this leave_choose_difficulty}
+   )
+)
 
 (kState_QuitEarlyConfirm 
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions confirm_quit 
-         (overshell_confirm_yes overshell_confirm_no)overshell_confirm_no }) 
+      {$this setup_confirm_actions
+         confirm_quit
+         (overshell_confirm_yes overshell_confirm_no)
+         overshell_confirm_no
+      }
+   ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_data {($objId UIListCom) get_data_in_column token}} 
       {switch $list_data 
          (overshell_confirm_yes 
             {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
-            {$this quit_early })
+            {$this quit_early}
+         )
          (overshell_confirm_no
             {write_file "data:/GoldHEN/RB4DX/insong.dta" $dx_write_nul}
-            {if_else 
-               {$this in_venue_meta_mode }
-               {$this show_state kState_VenueMetaMenu }
-               {$this show_in_song_menu }})} 
-      {$this trigger_select_effects }) 
+            {if_else {$this in_venue_meta_mode}
+               {$this show_state kState_VenueMetaMenu}
+               {$this show_in_song_menu}
+            }
+         )
+      } 
+      {$this trigger_select_effects}
+   ) 
    (on_cancel 
       {write_file "data:/GoldHEN/RB4DX/insong.dta" $dx_write_nul}
-      {if_else 
-         {$this in_venue_meta_mode }
-         {$this show_state kState_VenueMetaMenu }
-         {$this show_in_song_menu }} 
-      {$this trigger_cancel_effects }))
+      {if_else {$this in_venue_meta_mode}
+         {$this show_state kState_VenueMetaMenu}
+         {$this show_in_song_menu}
+      }
+      {$this trigger_cancel_effects}
+   )
+)
 
 (kState_OptionsEndGame 
    (view options_end_game) 
    (SELECT_MSG 
       {cond 
-         (
-            {$this is_quit_token 
-               {$component selected_sym }} 
+         ({$this is_quit_token {$component selected_sym}} 
             {do 
                {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
-               {$this attempt_quit }
-            })
-         (
-            {== 
-               {$component selected_sym }overshell_skip_song } 
-            {$this show_state kState_SkipSongConfirm })}) 
+               {$this attempt_quit}
+            }
+         )
+         ({== {$component selected_sym}overshell_skip_song} 
+            {$this show_state kState_SkipSongConfirm}
+         )
+      }
+   ) 
    (on_cancel 
-      {$this show_state kState_Options } 
-      {$this trigger_cancel_effects }))
+      {$this show_state kState_Options} 
+      {$this trigger_cancel_effects}
+   )
+)
 (kState_VenueMetaMenu 
    (view 
-      {$this get_auto_list_view }) 
+      {$this get_auto_list_view}
+   ) 
    (enter 
-      {$this setup_venue_meta_list }) 
+      {$this setup_venue_meta_list}
+   ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {local $list_widget 
-         {
-            ($objId UIListCom)get_data_in_column widget_type }} 
-      {if_else 
-         {== $list_widget kOvershellText }
+      {local $list_data {($objId UIListCom) get_data_in_column token}} 
+      {local $list_widget {($objId UIListCom) get_data_in_column widget_type}} 
+      {if_else {== $list_widget kOvershellText}
          {do 
             {switch $list_data 
                (overshell_leave 
-                  {$this venue_meta_drop_out })
-               (
-                  {$this get_current_overshell_quit_token }
+                  {$this venue_meta_drop_out}
+               )
+               ({$this get_current_overshell_quit_token}
                   {do
                      {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
-                     {$this attempt_quit }
-                  })
+                     {$this attempt_quit}
+                  }
+               )
                (overshell_online_settings 
-                  {$this show_online_settings })
+                  {$this show_online_settings}
+               )
                (overshell_somp_quit_session 
-                  {$this show_somp_quit_session_confirm })
+                  {$this show_somp_quit_session_confirm}
+               )
                (overshell_somp_return_to_green_room 
-                  {$this show_somp_return_to_green_room_confirm })
+                  {$this show_somp_return_to_green_room_confirm}
+               )
                (overshell_somp_return_to_music_library 
-                  {$this show_somp_return_to_music_library_confirm })
+                  {$this show_somp_return_to_music_library_confirm}
+               )
                (overshell_somp_exit_submenu 
-                  {$this show_online_exit_submenu })
+                  {$this show_online_exit_submenu}
+               )
                (overshell_online_emote 
-                  {$this show_somp_pick_emote_category })}
-            {$this trigger_select_effects }}
-         {$this trigger_select_disabled_effects }}) 
+                  {$this show_somp_pick_emote_category}
+               )
+            }
+            {$this trigger_select_effects}
+         }
+         {$this trigger_select_disabled_effects}
+      }
+   ) 
    (on_cancel 
-      {$this leave_options }) 
+      {$this leave_options}
+   ) 
    (on_start 
       ($user) 
-      {$this leave_options } 
-      {$this trigger_start_effects }))
+      {$this leave_options} 
+      {$this trigger_start_effects}
+   )
+)
 
 (kState_InSongMenu 
    (view list_long) 
    (enter 
-      {$this setup_in_song_menu } 
-      {$this clear_selected_emote_category }) 
+      {$this setup_in_song_menu} 
+      {$this clear_selected_emote_category}
+   ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }} 
-      {local $list_widget 
-         {
-            ($objId UIListCom)get_data_in_column widget_type }} 
-      {if_else 
-         {!= $list_widget kOvershellText }
-         {$this trigger_select_disabled_effects }
+      {local $list_data {($objId UIListCom) get_data_in_column token}} 
+      {local $list_widget {($objId UIListCom) get_data_in_column widget_type}} 
+      {if_else {!= $list_widget kOvershellText}
+         {$this trigger_select_disabled_effects}
          {do 
             {switch $list_data 
                (pause 
-                  {$this toggle_pause })
+                  {$this toggle_pause}
+               )
                (resume 
-                  {$this toggle_pause })
+                  {$this toggle_pause}
+               )
                (overshell_restart 
-                  {if_else 
-                     {$this show_restart_prompt }
-                     {$this show_state kState_RestartSongConfirm }
-                     {$this restart_song }})
-               (
-                  {$this get_current_overshell_skip_token } 
-                  {$this show_state kState_SkipSongConfirm })
+                  {if_else {$this show_restart_prompt}
+                     {$this show_state kState_RestartSongConfirm}
+                     {$this restart_song}
+                  }
+               )
+               ({$this get_current_overshell_skip_token} 
+                  {$this show_state kState_SkipSongConfirm}
+               )
                (overshell_change_diff 
-                  {$this begin_override_flow kOverrideFlow_SongSettings })
+                  {$this begin_override_flow kOverrideFlow_SongSettings}
+               )
                (instrument_options 
-                  {$this show_state kState_RB4DXMain})
+                  {$this show_state kState_RB4DXMain}
+               )
                (overshell_online_settings 
-                  {$this show_online_settings })
-               (
-                  {$this get_current_overshell_quit_token } 
+                  {$this show_online_settings}
+               )
+               ({$this get_current_overshell_quit_token} 
                   {do
                      {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
-                     {$this attempt_quit }
-                  })
+                     {$this attempt_quit}
+                  }
+               )
                (overshell_practice_new_section 
-                  {$this practice_new_section })
+                  {$this practice_new_section}
+               )
                (overshell_btm_restart_show 
-                  {$this show_state kState_RestartShowConfirm })
+                  {$this show_state kState_RestartShowConfirm}
+               )
                (overshell_leave 
-                  {$this show_state kState_RemoveUserInSongConfirm })
+                  {$this show_state kState_RemoveUserInSongConfirm}
+               )
                (overshell_somp_quit_session 
-                  {$this show_somp_quit_session_confirm })
+                  {$this show_somp_quit_session_confirm}
+               )
                (overshell_somp_return_to_green_room 
-                  {$this show_somp_return_to_green_room_confirm })
+                  {$this show_somp_return_to_green_room_confirm}
+               )
                (overshell_somp_return_to_music_library 
-                  {$this show_somp_return_to_music_library_confirm })
+                  {$this show_somp_return_to_music_library_confirm}
+               )
                (overshell_somp_exit_submenu 
-                  {$this show_online_exit_submenu })
+                  {$this show_online_exit_submenu}
+               )
                (overshell_online_emote 
-                  {$this show_somp_pick_emote_category })}
-            {$this trigger_select_effects }}}) 
+                  {$this show_somp_pick_emote_category}
+               )
+            }
+            {$this trigger_select_effects}
+         }
+      }
+   ) 
    (on_cancel 
-      {$this leave_options } 
-      {$this reset_list_focus }) 
+      {$this leave_options} 
+      {$this reset_list_focus}
+   ) 
    (on_start 
       ($user) 
-      {$this leave_options } 
-      {$this trigger_start_effects } 
-      {$this reset_list_focus }))
+      {$this leave_options} 
+      {$this trigger_start_effects} 
+      {$this reset_list_focus}
+   )
+)

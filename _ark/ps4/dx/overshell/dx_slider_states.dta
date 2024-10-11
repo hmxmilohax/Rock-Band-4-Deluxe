@@ -4,9 +4,7 @@
       {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
    )
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("+"
             {set $speedmod {+ $speedmod 5}}
@@ -29,7 +27,7 @@
       {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
       SET_TRACK_SPEEDS
       {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects })
+      {$this trigger_cancel_effects})
 )
 
 (kState_RB4DXTrackCurve
@@ -38,9 +36,7 @@
       {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
    )
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("-"
             {unless {> {+ $track_curve 0.05} 1.5}
@@ -62,5 +58,5 @@
          })
    (on_cancel 
       {$this show_state kState_RB4DXVisSettings}
-      {$this trigger_cancel_effects })
+      {$this trigger_cancel_effects})
 )

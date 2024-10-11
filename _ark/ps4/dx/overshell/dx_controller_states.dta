@@ -1,5 +1,5 @@
 (kState_RB4DXControllerSettings
-   (view {$this get_auto_list_view }) 
+   (view {$this get_auto_list_view}) 
    (enter
       {$this setup_confirm_actions a 
       (
@@ -9,9 +9,7 @@
    }
    ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
+      {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
          ("Change instrument type"
             {$this show_state kState_RB4DXSlotOverride}
@@ -23,7 +21,7 @@
    ) 
    (on_cancel 
       {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects }
+      {$this trigger_cancel_effects}
    )
 )
 #define RB4DXSLOT_DATA
@@ -55,30 +53,28 @@
       {set $slotentered TRUE}
    ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
+      {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
          (("guitar: guitar" "guitar: drums" "guitar: vocals")
             {set $slot_changed gtr}
             {$this show_state kState_RB4DXSlotChooser}
-            {$this trigger_select_effects }
+            {$this trigger_select_effects}
          )
          (("drums: guitar" "drums: drums" "drums: vocals")
             {set $slot_changed drum}
             {$this show_state kState_RB4DXSlotChooser}
-            {$this trigger_select_effects }
+            {$this trigger_select_effects}
          )
          (("vocals: guitar" "vocals: drums" "vocals: vocals")
             {set $slot_changed vox}
             {$this show_state kState_RB4DXSlotChooser}
-            {$this trigger_select_effects }
+            {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
       {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects }
+      {$this trigger_cancel_effects}
       {set $slotentered FALSE}
    )
 )
@@ -86,17 +82,15 @@
    (view confirm_action) 
    (enter
       {$this setup_confirm_actions "Select the controller type you want to change to:"
-      (
-         "guitar"
-         "drums"
-         "vocals"
-      )
-   }
+         (
+            "guitar"
+            "drums"
+            "vocals"
+         )
+      }
    ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}  
+      {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
          ("guitar"
             {set $slot_to gtr}
@@ -113,7 +107,7 @@
       SET_SLOT_VAR
       CLEAR_INVALID_SLOT_DTAS
       {$overshell update_all}
-      {$this trigger_select_effects }
+      {$this trigger_select_effects}
    )
    (exit
       {set $slot_changed FALSE}
@@ -122,11 +116,11 @@
    (on_cancel 
       {set $slot_changed FALSE}
       {$this show_state kState_RB4DXSlotOverride}
-      {$this trigger_cancel_effects }
+      {$this trigger_cancel_effects}
    )
 )
 (kState_RB4DXBindingOverride
-   (view {$this get_auto_list_view }) 
+   (view {$this get_auto_list_view}) 
    (enter
       {$this setup_confirm_actions a 
       (
@@ -141,9 +135,7 @@
    }
    ) 
    (SELECT_MSG 
-      {local $list_data 
-         {
-            ($objId UIListCom)get_data_in_column token }}
+      {local $list_data {($objId UIListCom)get_data_in_column token}}
       DELETE_PAD_BINDING_DTAS
       {switch $list_data 
          ("[Reset]")
@@ -170,10 +162,10 @@
       SET_PAD_BINDING_HOOK
       {$overshell update_all}
       {$this show_state kState_RB4DXControllerSettings}
-      {$this trigger_select_effects }
+      {$this trigger_select_effects}
    ) 
    (on_cancel 
       {$this show_state kState_RB4DXControllerSettings}
-      {$this trigger_cancel_effects }
+      {$this trigger_cancel_effects}
    )
 )

@@ -16,12 +16,12 @@
    #include ../../../dx/ui/dx_hooks.dta
 )
 (update_icon 
-   {if 
-      [$this slot_com ]
-      {set 
-         [DrawNode showing ]
+   {if [$this slot_com]
+      {set [DrawNode showing]
          {== 
-            [$this track_type ]
-            [
-               (
-                  [$this slot_com ] RBOvershellSlotCom)display_track_type ]}}})
+            [$this track_type]
+            [([$this slot_com] RBOvershellSlotCom) display_track_type]
+         }
+      }
+   }
+)
