@@ -2,16 +2,16 @@
 (
 	{set $songtitletype
    		{cond
-      		({&& {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+      		({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
          		default
       		)
-		    ({&& {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"}}
+		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
 		        tl
 		    )
-		    ({&& {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
 		        a
 		    )
-		    ({&& {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
 		    	none
 		    )
 	    }
@@ -19,41 +19,41 @@
 )
 #define MOVE_NOFLAMES_FILES_ON
 (
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit1.entity_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit.entity_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/fx_smasher_streaks1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/fx_smasher_streaks.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smashed_util1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smashed_util.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_beams1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_beams.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_flash1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_flash.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_shockwave1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_shockwave.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/spark01_color1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/spark01_color.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
+	{dx_file_rename "ps4/track/smasher/gem_smasher_unlit1.entity_ps4" "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}
+	{dx_file_rename "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks.bmp_ps4"}
+	{dx_file_rename "ps4/track/smasher/gem_smashed_util1.bmp_ps4" "ps4/track/smasher/gem_smashed_util.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_beams1.bmp_ps4" "ps4/track/shared/smasher_beams.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_flash1.bmp_ps4" "ps4/track/shared/smasher_flash.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_shockwave1.bmp_ps4" "ps4/track/shared/smasher_shockwave.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/spark01_color1.bmp_ps4" "ps4/track/shared/spark01_color.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4" "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
 )
 #define MOVE_NOFLAMES_FILES_OFF
 (
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit.entity_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/fx_smasher_streaks.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smashed_util.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_beams.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_beams1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_flash.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_flash1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_shockwave.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/smasher_shockwave1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/spark01_color.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/spark01_color1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
-	{file_rename "/data/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4" "/data/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
+	{dx_file_rename "ps4/track/smasher/gem_smasher_unlit.entity_ps4" "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
+	{dx_file_rename "ps4/track/smasher/fx_smasher_streaks.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
+	{dx_file_rename "ps4/track/smasher/gem_smashed_util.bmp_ps4" "ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_beams.bmp_ps4" "ps4/track/shared/smasher_beams1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_flash.bmp_ps4" "ps4/track/shared/smasher_flash1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/smasher_shockwave.bmp_ps4" "ps4/track/shared/smasher_shockwave1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/spark01_color.bmp_ps4" "ps4/track/shared/spark01_color1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
+	{dx_file_rename "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4" "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 )

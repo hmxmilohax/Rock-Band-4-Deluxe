@@ -24,7 +24,7 @@
          })
    (on_cancel 
       {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+      {dx_write_file "speedmod.ini" {array ({/ $speedmod 100})}}
       SET_TRACK_SPEEDS
       {$this show_state kState_RB4DXMain}
       {$this trigger_cancel_effects})

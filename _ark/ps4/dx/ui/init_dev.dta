@@ -1,111 +1,110 @@
-{set $dx_write_nul {array ()}}
 
 #define CREATE_SETTINGS_DIRS
 (
-	{file_mkdir "data:/GoldHEN/RB4DX/settings"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/visuals"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/gameplay"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/sfx"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/gtr"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/drum"}
-	{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/type/vox"}
+	{dx_file_mkdir "settings"}
+	{dx_file_mkdir "settings/visuals"}
+	{dx_file_mkdir "settings/gameplay"}
+	{dx_file_mkdir "settings/sfx"}
+	{dx_file_mkdir "settings/controller"}
+	{dx_file_mkdir "settings/controller/type"}
+	{dx_file_mkdir "settings/controller/type/gtr"}
+	{dx_file_mkdir "settings/controller/type/drum"}
+	{dx_file_mkdir "settings/controller/type/vox"}
 	;{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/binding"} ;TODO
 )
 #define UPDATE_SETTINGS
 (
 	;gp
 	{if {file_exists "nood.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/nood.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/gameplay/nood.dta" $dx_write_nul}
+		{dx_file_delete "nood.dta"}
+		{dx_write_null_file "settings/gameplay/nood.dta"}
 	}
 	{if {file_exists "practiceod.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/practiceod.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/gameplay/practiceod.dta" $dx_write_nul}
+		{dx_file_delete "practiceod.dta"}
+		{dx_write_null_file "settings/gameplay/practiceod.dta"}
 	}
 
 	;vis
 	{if {file_exists "blackbg.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/blackbg.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/visuals/blackbg.dta" $dx_write_nul}
+		{dx_file_delete "blackbg.dta"}
+		{dx_write_null_file "settings/visuals/blackbg.dta"}
 	}
 	{if {file_exists "60fpsbg.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/60fpsbg.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/visuals/60fpsbg.dta" $dx_write_nul}
+		{dx_file_delete "60fpsbg.dta"}
+		{dx_write_null_file "settings/visuals/60fpsbg.dta"}
 	}
 
 	;sfx
 	{if {file_exists "nomiss.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/nomiss.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/sfx/nomiss.dta" $dx_write_nul}
+		{dx_file_delete "nomiss.dta"}
+		{dx_write_null_file "settings/sfx/nomiss.dta"}
 	}
 	{if {file_exists "nowhammyfx.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/nowhammyfx.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/sfx/nowhammyfx.dta" $dx_write_nul}
+		{dx_file_delete "nowhammyfx.dta"}
+		{dx_write_null_file "settings/sfx/nowhammyfx.dta"}
 	}
 	{if {file_exists "trackmutingoff.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/trackmutingoff.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingoff.dta" $dx_write_nul}
+		{dx_file_delete "trackmutingoff.dta"}
+		{dx_write_null_file "settings/sfx/trackmutingoff.dta"}
 	}
 	{if {file_exists "trackmutingon.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/trackmutingon.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/sfx/trackmutingon.dta" $dx_write_nul}
+		{dx_file_delete "trackmutingon.dta"}
+		{dx_write_null_file "settings/sfx/trackmutingon.dta"}
 	}
 
 	;controller type
 	{if {file_exists "voxgtr.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/voxgtr.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta" $dx_write_nul}
+		{dx_file_delete "voxgtr.dta"}
+		{dx_write_null_file "settings/controller/type/voxgtr.dta"}
 	}
 	{if {file_exists "settings/controller/type/voxgtr.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxgtr.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/vox/gtr.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/voxgtr.dta"}
+		{dx_write_null_file "settings/controller/type/vox/gtr.dta"}
 	}
 
 	{if {file_exists "voxdrum.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/voxdrum.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta" $dx_write_nul}
+		{dx_file_delete "voxdrum.dta"}
+		{dx_write_null_file "settings/controller/type/voxdrum.dta"}
 	}
 	{if {file_exists "settings/controller/type/voxdrum.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/voxdrum.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/vox/drum.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/voxdrum.dta"}
+		{dx_write_null_file "settings/controller/type/vox/drum.dta"}
 	}
 
 	{if {file_exists "gtrvox.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/gtrvox.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta" $dx_write_nul}
+		{dx_file_delete "gtrvox.dta"}
+		{dx_write_null_file "settings/controller/type/gtrvox.dta"}
 	}
 	{if {file_exists "settings/controller/type/gtrvox.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrvox.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtr/vox.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/gtrvox.dta"}
+		{dx_write_null_file "settings/controller/type/gtr/vox.dta"}
 	}
 
 	{if {file_exists "gtrdrum.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/gtrdrum.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta" $dx_write_nul}
+		{dx_file_delete "gtrdrum.dta"}
+		{dx_write_null_file "settings/controller/type/gtrdrum.dta"}
 	}
 	{if {file_exists "settings/controller/type/gtrdrum.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/gtrdrum.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/gtr/drum.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/gtrdrum.dta"}
+		{dx_write_null_file "settings/controller/type/gtr/drum.dta"}
 	}
 
 	{if {file_exists "drumgtr.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/drumgtr.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta" $dx_write_nul}
+		{dx_file_delete "drumgtr.dta"}
+		{dx_write_null_file "settings/controller/type/drumgtr.dta"}
 	}
 	{if {file_exists "settings/controller/type/drumgtr.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumgtr.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drum/gtr.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/drumgtr.dta"}
+		{dx_write_null_file "settings/controller/type/drum/gtr.dta"}
 	}
 
 	{if {file_exists "drumvox.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/drumvox.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta" $dx_write_nul}
+		{dx_file_delete "drumvox.dta"}
+		{dx_write_null_file "settings/controller/type/drumvox.dta"}
 	}
 	{if {file_exists "settings/controller/type/drumvox.dta"}
-		{file_delete "data:/GoldHEN/RB4DX/settings/controller/type/drumvox.dta"}
-		{write_file "data:/GoldHEN/RB4DX/settings/controller/type/drum/vox.dta" $dx_write_nul}
+		{dx_file_delete "settings/controller/type/drumvox.dta"}
+		{dx_write_null_file "settings/controller/type/drum/vox.dta"}
 	}
 )
 
@@ -114,74 +113,74 @@ UPDATE_SETTINGS
 
 #define DELETE_INVALID_NOFLAMES_FILES
 (
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/smasher_beams1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/smasher_flash1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/smasher_shockwave1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/spark01_color1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
+	{dx_file_delete "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
+	{dx_file_delete "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
+	{dx_file_delete "ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/smasher_beams1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/smasher_flash1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/smasher_shockwave1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/spark01_color1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 )
 ;delete files if settings don't match
-{if {&& {file_exists "settings/visuals/faststart.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/startup/mnemonix1.bk2"}}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/ui/startup/mnemonix1.bk2"}
+{if {&& {file_exists "settings/visuals/faststart.dta"} {dx_file_exists "ps4/ui/startup/mnemonix1.bk2"}}
+	{dx_file_delete "ps4/ui/startup/mnemonix1.bk2"}
 }
-{if {&& {file_exists "settings/visuals/menubg.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background1.scene_ps4"}}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/ui/background/meta_background1.scene_ps4"}
+{if {&& {file_exists "settings/visuals/menubg.dta"} {dx_file_exists "ps4/ui/background/meta_background1.scene_ps4"}}
+	{dx_file_delete "ps4/ui/background/meta_background1.scene_ps4"}
 }
-{if {&& {file_exists "settings/visuals/micwarn.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/hud1.scene_ps4"}}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/hud1.scene_ps4"}
+{if {&& {file_exists "settings/visuals/micwarn.dta"} {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}
+	{dx_file_delete "ps4/ui/game/hud1.scene_ps4"}
 }
-{if {&& {file_exists "settings/visuals/noshine.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util1.bmp_ps4"}}
-	{file_delete "data:/GoldHEN/RB4DX/ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+{if {&& {file_exists "settings/visuals/noshine.dta"} {dx_file_exists "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}}
+	{dx_file_delete "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
 }
-{if {&& {file_exists "settings/visuals/noflames.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/track/shared/smasher_beams1.bmp_ps4"}}
+{if {&& {file_exists "settings/visuals/noflames.dta"} {dx_file_exists "ps4/track/shared/smasher_beams1.bmp_ps4"}}
 	DELETE_INVALID_NOFLAMES_FILES
 }
 {cond
-	({&& {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitle.dta"} {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitletype1.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"}}
-		{file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlay1.entity_ps4"}
+	({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletype1.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
+		{dx_file_delete "ps4/ui/game/song_artist_overlay1.entity_ps4"}
 	)
-    ({&& {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitle.dta"} {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitletypea.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"}}
-        {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaya.entity_ps4"}
+    ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypea.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"}}
+        {dx_file_delete "ps4/ui/game/song_artist_overlaya.entity_ps4"}
     )
-    ({&& {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitle.dta"} {file_exists "data:/GoldHEN/RB4DX/settings/visuals/songtitletypetl.dta"} {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
-        {file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/song_artist_overlaytl.entity_ps4"}
+    ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypetl.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+        {dx_file_delete "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
     )
 }
 
 ;reset settings that shouldn't save
-{if {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
-	{if_else {file_exists "data:/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4"}
-		{file_delete "data:/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4"}
-		{file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
+{if {dx_file_exists "ps4/ui/game/game.layout_ps4"}
+	{if {dx_file_exists "ps4/ui/game/game1.layout_ps4"}
+		{dx_file_delete "ps4/ui/game/game1.layout_ps4"}
 	}
+	{dx_file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
 }
 
 ;clear invalid files
-{if {file_exists "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
-   {file_delete "data:/GoldHEN/RB4DX/ps4/config/include/beatmatcher.dta_dta_ps4"}
+{if {dx_file_exists "ps4/config/include/beatmatcher.dta_dta_ps4"}
+   {dx_file_delete "ps4/config/include/beatmatcher.dta_dta_ps4"}
 }
 {if {file_exists "insong.dta"}
-   {file_delete "data:/GoldHEN/RB4DX/insong.dta"}
+   {dx_file_delete "insong.dta"}
 }
 {if {file_exists "RB4DX.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/RB4DX.ini"}
+   {dx_file_delete "RB4DX.ini"}
 }
-{write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+{dx_write_file "speedmod.ini" {array ({/ $speedmod 100})}}
 {if {file_exists "autoplay.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/autoplay.ini"}
+   {dx_file_delete "autoplay.ini"}
 }
 {if {file_exists "drunkmode.ini"}
-   {file_delete "data:/GoldHEN/RB4DX/drunkmode.ini"}
+   {dx_file_delete "drunkmode.ini"}
 }

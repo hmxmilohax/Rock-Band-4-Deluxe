@@ -1,3 +1,5 @@
+{set $dx_write_nul {array ()}}
+#include ../funcs/dx_funcs.dta
 #include init_dev.dta
 {set $speedmod 100}
 {set $dx_initialized TRUE}
