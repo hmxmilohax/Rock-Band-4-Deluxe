@@ -140,22 +140,22 @@
       {switch $list_data 
          ("[Reset]")
          ("Rock Band 1-3 Guitar"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rbgtr.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/rbgtr.dta"}
          )
          ("Rock Band 1-3 Drums"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rbdrum.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/rbdrum.dta"}
          )
          ("Rock Band 4 Guitar"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rb4gtr.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/rb4gtr.dta"}
          )
          ("Rock Band 4 Drums"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/rb4drum.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/rb4drum.dta"}
          )
          ("Guitar Hero Guitar"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/ghgtr.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/ghgtr.dta"}
          )
          ("Guitar Hero Drums"
-            {write_file "data:/GoldHEN/RB4DX/settings/controller/binding/pad/ghdrum.dta" $dx_write_nul}
+            {dx_write_null_file "settings/controller/binding/pad/ghdrum.dta"}
          )
       }
       SET_PAD_BINDING_VAR
