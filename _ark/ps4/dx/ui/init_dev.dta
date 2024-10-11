@@ -130,31 +130,59 @@ UPDATE_SETTINGS
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 )
-;delete files if settings don't match
+;delete/move files if settings don't match
 {if {&& {file_exists "settings/visuals/faststart.dta"} {dx_file_exists "ps4/ui/startup/mnemonix1.bk2"}}
-	{dx_file_delete "ps4/ui/startup/mnemonix1.bk2"}
+	{if_else {dx_file_exists "ps4/ui/startup/mnemonix.bk2"}
+		{dx_file_delete "ps4/ui/startup/mnemonix1.bk2"}
+		{dx_file_rename "ps4/ui/startup/mnemonix1.bk2" "ps4/ui/startup/mnemonix.bk2"}
+	}
 }
 {if {&& {file_exists "settings/visuals/menubg.dta"} {dx_file_exists "ps4/ui/background/meta_background1.scene_ps4"}}
-	{dx_file_delete "ps4/ui/background/meta_background1.scene_ps4"}
+	{if_else {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}
+		{dx_file_delete "ps4/ui/background/meta_background1.scene_ps4"}
+		{dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+	}
 }
 {if {&& {file_exists "settings/visuals/micwarn.dta"} {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}
-	{dx_file_delete "ps4/ui/game/hud1.scene_ps4"}
+	{if_else {dx_file_exists "ps4/ui/game/hud.scene_ps4"}
+		{dx_file_delete "ps4/ui/game/hud1.scene_ps4"}
+		{dx_file_rename "ps4/ui/game/hud1.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
+	}
 }
 {if {&& {file_exists "settings/visuals/noshine.dta"} {dx_file_exists "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}}
-	{dx_file_delete "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+	{if_else {dx_file_exists "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+		{dx_file_delete "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+		{dx_file_rename "ps4/track/shared/fx_noise_b_util1.bmp_ps4" "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+	}
 }
 {if {&& {file_exists "settings/visuals/noflames.dta"} {dx_file_exists "ps4/track/shared/smasher_beams1.bmp_ps4"}}
-	DELETE_INVALID_NOFLAMES_FILES
+	{if_else {dx_file_exists "ps4/track/shared/smasher_beams.bmp_ps4"}
+		{do
+			DELETE_INVALID_NOFLAMES_FILES
+		}
+		{do
+			MOVE_NOFLAMES_FILES_ON
+		}
+	}
 }
 {cond
 	({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletype1.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
-		{dx_file_delete "ps4/ui/game/song_artist_overlay1.entity_ps4"}
+		{if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			{dx_file_delete "ps4/ui/game/song_artist_overlay1.entity_ps4"}
+			{dx_file_rename "ps4/ui/game/song_artist_overlay1.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+		}
 	)
     ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypea.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"}}
-        {dx_file_delete "ps4/ui/game/song_artist_overlaya.entity_ps4"}
+        {if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			{dx_file_delete "ps4/ui/game/song_artist_overlaya.entity_ps4"}
+			{dx_file_rename "ps4/ui/game/song_artist_overlaya.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+		}
     )
     ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypetl.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
-        {dx_file_delete "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
+        {if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			{dx_file_delete "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
+			{dx_file_rename "ps4/ui/game/song_artist_overlaytl.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+		}
     )
 }
 
@@ -163,7 +191,7 @@ UPDATE_SETTINGS
 	{if {dx_file_exists "ps4/ui/game/game1.layout_ps4"}
 		{dx_file_delete "ps4/ui/game/game1.layout_ps4"}
 	}
-	{dx_file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4"}
+	{dx_file_rename "/data/GoldHEN/RB4DX/ps4/ui/game/game.layout_ps4" "/data/GoldHEN/RB4DX/ps4/ui/game/game1.layout_ps4"}
 }
 
 ;clear invalid files

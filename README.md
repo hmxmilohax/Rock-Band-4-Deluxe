@@ -57,7 +57,7 @@ If you already have a `plugins.ini` on your PS4 and do not want to replace it, e
 /data/GoldHEN/plugins/no_share_watermark.prx
 ```
 
-To update RB4DX, first delete the `ps4` folder in the `/data/GoldHEN/RB4DX/` folder on your ps4, then follow the steps above again.
+To update RB4DX, first delete the `ps4` folder in the `/data/GoldHEN/RB4DX/` folder on your ps4, then follow the steps above again (you do not need to edit `plugins.ini` if you have edited it for RB4DX before).
 
 If the plugin is not loading, you may need to change the file permissions of the plugin to allow it to run. This can be done with the PS4/GoldHen Cheats Manager, in the settings there is a button labelled `Set file permissions for Plugins`, pressing this should make the plugin load correctly.
 
