@@ -2,10 +2,10 @@
 	{file_mkdir {sprint "data:/GoldHEN/RB4DX/" $dir}}
 }
 {func dx_file_delete ($file)
-	{file_delete {sprint "data:/GoldHEN/RB4DX/" $file}
+	{file_delete {sprint "data:/GoldHEN/RB4DX/" $file}}
 }
 {func dx_file_exists ($file)
-	{file_exists {sprint "data:/GoldHEN/RB4DX/" $file}
+	{file_exists {sprint "data:/GoldHEN/RB4DX/" $file}}
 }
 {func dx_file_rename ($from $to)
 	{file_rename {sprint "/data/GoldHEN/RB4DX/" $from} {sprint "/data/GoldHEN/RB4DX/" $to}}
