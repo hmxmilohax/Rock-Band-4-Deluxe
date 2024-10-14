@@ -28,6 +28,9 @@
       ({file_exists "settings/venue/big_club_desert.dta"}
          venue/big_club/big_club_desert/big_club_desert.scene
       )
+      ({file_exists "settings/venue/big_club_practice.dta"}
+         venue/practice_mode/big_club_practice.scene
+      )
       ({file_exists "settings/venue/small_club_vwhall.dta"}
          venue/small_club/small_club_vwhall/small_club_vwhall.scene
       )

@@ -614,6 +614,7 @@
             "The Roadhouse"
             "The Basement (Trashed)"
             "The Arena"
+            "The Pracice Area"
          )
       }
    )
@@ -632,6 +633,7 @@
             {== $list_data "The Roadhouse"}
             {== $list_data "The Basement (Trashed)"}
             {== $list_data "The Arena"}
+            {== $list_data "The Pracice Area"}
             {== $list_data "[Random]"}
          }
          {switch $list_data
@@ -661,6 +663,9 @@
             )
             ("The Arena"
                {dx_write_null_file "settings/venue/arena.dta"}
+            )
+            ("The Pracice Area"
+               {dx_write_null_file "settings/venue/big_club_practice.dta"}
             )
             ("[Random]"
                {dx_file_delete "settings/venue/enabled.dta"}
