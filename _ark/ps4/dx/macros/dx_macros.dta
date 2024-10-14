@@ -1,5 +1,6 @@
 #include dx_overshell_macros.dta
 #include dx_controller_macros.dta
+
 #define SET_TRACK_SPEEDS
 (
 	{set_elem {find $syscfg track_graphics view_times drum easy} 1 {* {if_else $syncspeeds 1.2 2.4} {/ $speedmod 100}}}
@@ -16,4 +17,23 @@
 	{set_elem {find $syscfg track_graphics view_times guitar medium} 1 {* {if_else $syncspeeds 1.2 2.0} {/ $speedmod 100}}}
 	{set_elem {find $syscfg track_graphics view_times guitar hard} 1 {* {if_else $syncspeeds 1.2 1.6} {/ $speedmod 100}}}
 	{set_elem {find $syscfg track_graphics view_times guitar expert} 1 {* 1.2 {/ $speedmod 100}}}
+)
+
+#define DELETE_INVALID_VENUE_DTAS
+(
+	{dx_file_delete "settings/venue/none.dta"}
+	{dx_file_delete "settings/venue/big_club_toys.dta"}
+	{dx_file_delete "settings/venue/big_club_standard.dta"}
+	{dx_file_delete "settings/venue/big_club_industrial.dta"}
+	{dx_file_delete "settings/venue/big_club_gym.dta"}
+	{dx_file_delete "settings/venue/big_club_arcade.dta"}
+	{dx_file_delete "settings/venue/big_club_arcade_empty.dta"}
+	{dx_file_delete "settings/venue/big_club_boat.dta"}
+	{dx_file_delete "settings/venue/big_club_desert.dta"}
+	{dx_file_delete "settings/venue/small_club_vwhall.dta"}
+	{dx_file_delete "settings/venue/small_club_basement.dta"}
+	{dx_file_delete "settings/venue/small_club_industrial.dta"}
+	{dx_file_delete "settings/venue/small_club_roadhouse.dta"}
+	{dx_file_delete "settings/venue/small_club_trashed.dta"}
+	{dx_file_delete "settings/venue/arena.dta"}
 )

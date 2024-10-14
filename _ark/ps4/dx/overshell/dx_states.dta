@@ -1,6 +1,6 @@
 #include dx_state_overrides.dta
 
-; max number of entries in a state = 7
+; max number of entries in a state = 7 (only when in game!)
 
 #define RB4DXMAIN_DATA
 (
@@ -344,7 +344,7 @@
 (
    {$this setup_confirm_actions a 
       (
-         {if_else $blackbg "Black Venue: ON" "Black Venue: OFF"}
+         "Select Venue"
          {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
          {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
          {if_else $noui "HUD: OFF" "HUD: ON"}
@@ -366,13 +366,8 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         (("Black Venue: ON" "Black Venue: OFF")
-            {set $blackbg {! $blackbg}}
-            {if_else $blackbg
-               {dx_write_null_file "settings/visuals/blackbg.dta"}
-               {dx_file_delete "settings/visuals/blackbg.dta"}
-            }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+         ("Select Venue"
+            {$this show_state kState_RB4DXVenueSelector}
             {$this trigger_select_effects}
          )
          (("60 FPS Venues: ON" "60 FPS Venues: OFF")
@@ -593,6 +588,91 @@
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Venue Selector
+(kState_RB4DXVenueSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "[Random]"
+            "[None]"
+            "The Big Cassettes"
+            "The Club"
+            "The Industrial Club"
+            big_club_gym
+            big_club_arcade
+            "The Arcade (1 Audience Member)"
+            big_club_boat
+            big_club_desert
+            small_club_vwhall
+            small_club_basement
+            "The Barn"
+            "The Roadhouse"
+            "The Basement (Trashed)"
+            "The Arena"
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      DELETE_INVALID_VENUE_DTAS
+      {dx_write_null_file "settings/venue/enabled.dta"}
+      {if_else
+         {|| 
+            {== $list_data "[None]"} 
+            {== $list_data "The Big Cassettes"}
+            {== $list_data "The Club"}
+            {== $list_data "The Industrial Club"}
+            {== $list_data "The Arcade (1 Audience Member)"}
+            {== $list_data "The Barn"}
+            {== $list_data "The Roadhouse"}
+            {== $list_data "The Basement (Trashed)"}
+            {== $list_data "The Arena"}
+            {== $list_data "[Random]"}
+         }
+         {switch $list_data
+            ("[None]"
+               {dx_write_null_file "settings/venue/none.dta"}
+            )
+            ("The Big Cassettes"
+               {dx_write_null_file "settings/venue/big_club_toys.dta"}
+            )
+            ("The Club"
+               {dx_write_null_file "settings/venue/big_club_standard.dta"}
+            )
+            ("The Industrial Club"
+               {dx_write_null_file "settings/venue/big_club_industrial.dta"}
+            )
+            ("The Arcade (1 Audience Member)"
+               {dx_write_null_file "settings/venue/big_club_arcade_empty.dta"}
+            )
+            ("The Barn"
+               {dx_write_null_file "settings/venue/small_club_industrial.dta"}
+            )
+            ("The Roadhouse"
+               {dx_write_null_file "settings/venue/small_club_roadhouse.dta"}
+            )
+            ("The Basement (Trashed)"
+               {dx_write_null_file "settings/venue/small_club_trashed.dta"}
+            )
+            ("The Arena"
+               {dx_write_null_file "settings/venue/arena.dta"}
+            )
+            ("[Random]"
+               {dx_file_delete "settings/venue/enabled.dta"}
+            )
+         }
+         {dx_write_null_file {sprint "settings/venue/" $list_data ".dta"}}
+      }
+      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings}
       {$this trigger_cancel_effects}
    )
 )

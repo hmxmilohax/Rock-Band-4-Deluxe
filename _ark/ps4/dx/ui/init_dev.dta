@@ -2,6 +2,7 @@
 (
 	{dx_file_mkdir "settings"}
 	{dx_file_mkdir "settings/visuals"}
+	{dx_file_mkdir "settings/venue"}
 	{dx_file_mkdir "settings/gameplay"}
 	{dx_file_mkdir "settings/sfx"}
 	{dx_file_mkdir "settings/controller"}
@@ -28,6 +29,11 @@
 	{if {file_exists "blackbg.dta"}
 		{dx_file_delete "blackbg.dta"}
 		{dx_write_null_file "settings/visuals/blackbg.dta"}
+	}
+	{if {file_exists "settings/visuals/blackbg.dta"}
+		{dx_file_delete "settings/visuals/blackbg.dta"}
+		{dx_write_null_file "settings/venue/enabled.dta"}
+		{dx_write_null_file "settings/venue/none.dta"}
 	}
 	{if {file_exists "60fpsbg.dta"}
 		{dx_file_delete "60fpsbg.dta"}
@@ -196,6 +202,9 @@ UPDATE_SETTINGS
 }
 
 ;clear invalid files
+{if {! {file_exists "settings/venue/enabled.dta"}}
+	DELETE_INVALID_VENUE_DTAS
+}
 {if {dx_file_exists "ps4/config/include/beatmatcher.dta_dta_ps4"}
    {dx_file_delete "ps4/config/include/beatmatcher.dta_dta_ps4"}
 }
