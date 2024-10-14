@@ -40,6 +40,9 @@
          (vis1
             {$this show_state kState_RB4DXVisSettings1}
          )
+         (vis2
+            {$this show_state kState_RB4DXVisSettings2}
+         )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
          )
@@ -57,6 +60,9 @@
          )
          (vis1
             {$this show_state kState_RB4DXVisSettings1}
+         )
+         (vis2
+            {$this show_state kState_RB4DXVisSettings2}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -82,6 +88,9 @@
          (vis1
             {$this show_state kState_RB4DXVisSettings1}
          )
+         (vis2
+            {$this show_state kState_RB4DXVisSettings2}
+         )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
          )
@@ -96,10 +105,60 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
+         (vis1
+            {$this show_state kState_RB4DXVisSettings1}
+         )
+         (vis2
+            {$this show_state kState_RB4DXVisSettings2}
+         )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
          )
       }
+      {$this trigger_cancel_effects}
+   )
+)
+
+(kState_RB4DXAnglesWarn
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions "Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         (overshell_confirm_yes
+            {switch $trackangletype
+               (rr
+                  {dx_write_null_file "settings/visuals/trackanglerr.dta"}
+                  {dx_file_rename "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+               )
+               (rb2
+                  {dx_write_null_file "settings/visuals/trackanglerb2.dta"}
+                  {dx_file_rename "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+               )
+               (rb3
+                  {dx_write_null_file "settings/visuals/trackanglerb3.dta"}
+                  {dx_file_rename "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+               )
+            }
+            {set $trackangle TRUE}
+            {dx_write_null_file "settings/visuals/trackangle.dta"} 
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state kState_RB4DXVisSettings2}
+            }
+         )
+         (overshell_confirm_no
+            {set $trackangletype FALSE}
+            {$this show_state kState_RB4DXVisSettings2}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings2}
       {$this trigger_cancel_effects}
    )
 )

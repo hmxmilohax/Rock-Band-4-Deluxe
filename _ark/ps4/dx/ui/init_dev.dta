@@ -192,6 +192,26 @@ UPDATE_SETTINGS
 		}
     )
 }
+{cond
+	({&& {file_exists "settings/visuals/trackangle.dta"} {file_exists "settings/visuals/trackanglerr.dta"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+		{if_else {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+			{dx_file_delete "ps4/track/guitar_unlit_rr.scene_ps4"}
+			{dx_file_rename "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+		}
+	)
+    ({&& {file_exists "settings/visuals/trackangle.dta"} {file_exists "settings/visuals/trackanglerb2.dta"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"}}
+        {if_else {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+			{dx_file_delete "ps4/track/guitar_unlit_rb2.scene_ps4"}
+			{dx_file_rename "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+		}
+    )
+    ({&& {file_exists "settings/visuals/trackangle.dta"} {file_exists "settings/visuals/trackanglerb3.dta"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+        {if_else {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+			{dx_file_delete "ps4/track/guitar_unlit_rb3.scene_ps4"}
+			{dx_file_rename "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+		}
+    )
+}
 
 ;reset settings that shouldn't save
 {if {dx_file_exists "ps4/ui/game/game.layout_ps4"}

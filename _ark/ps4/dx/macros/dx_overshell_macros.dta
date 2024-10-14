@@ -1,3 +1,22 @@
+#define TRACKANGLE_CHECK
+(
+	{set $trackangletype
+   		{cond
+      		({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+         		rr
+      		)
+		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+		        rb2
+		    )
+		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+		        rb3
+		    )
+		    ({&& {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+		    	none
+		    )
+	    }
+	}
+)
 #define SONGTITLE_CHECK
 (
 	{set $songtitletype
