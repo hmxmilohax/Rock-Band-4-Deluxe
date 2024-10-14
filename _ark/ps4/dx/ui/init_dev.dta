@@ -9,7 +9,8 @@
 	{dx_file_mkdir "settings/controller/type/gtr"}
 	{dx_file_mkdir "settings/controller/type/drum"}
 	{dx_file_mkdir "settings/controller/type/vox"}
-	;{file_mkdir "data:/GoldHEN/RB4DX/settings/controller/binding"} ;TODO
+	{dx_file_mkdir "settings/controller/binding"}
+	{dx_file_mkdir "settings/controller/binding/pad"} ;TODO: maybe add bindings for non-pad controllers?
 )
 #define UPDATE_SETTINGS
 (

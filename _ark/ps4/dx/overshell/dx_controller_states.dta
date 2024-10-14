@@ -14,7 +14,7 @@
          ("Change instrument type"
             {$this show_state kState_RB4DXSlotOverride}
          )
-         ("Remap pad controls"
+         ("Change pad bindings"
             {$this show_state kState_RB4DXBindingOverride}
          )
       }
