@@ -1,6 +1,7 @@
 #include dx_state_overrides.dta
 
-; max number of entries in a state = 7 (only when in game!)
+; max number of entries in a state (in game) = 7 (can't scroll)
+; max number of entries in a state (in menus) = 8/infinity (can scroll)
 
 #define RB4DXMAIN_DATA
 (
@@ -11,6 +12,7 @@
             "Gameplay Settings"
             "SFX Settings"
             "Visual Settings"
+            "Track Settings"
             "Controller Settings"
             "Extras"
          )
@@ -22,6 +24,7 @@
             "Gameplay Settings"
             "SFX Settings"
             "Visual Settings"
+            "Track Settings"
             "Controller Settings"
             "Extras"
             ;"test" ; debugging
@@ -53,6 +56,10 @@
          )
          ("Visual Settings"
             {$this show_state kState_RB4DXVisSettings}
+            {$this trigger_select_effects}
+         )
+         ("Track Settings"
+            {$this show_state kState_RB4DXTrkSettings}
             {$this trigger_select_effects}
          )
          ("Controller Settings"
@@ -348,9 +355,9 @@
          {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
          {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
          {if_else $noui "HUD: OFF" "HUD: ON"}
-         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
-         "Track Curvature"
-         "Next"
+         {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+         {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
+         {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
       )
    }
 )
@@ -359,7 +366,10 @@
    (enter
       {set $crowdmeter {dx_file_exists "ps4/ui/game/crowd_meter.entity_ps4"}}
       {set $noui {dx_file_exists "ps4/ui/game/hud.scene_ps4"}}
-      {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
+      {set $nohud {dx_file_exists "ps4/ui/game/game.layout_ps4"}}
+      {set $songtitle {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}}
+      SONGTITLE_CHECK
+      {set $menubg {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}}
       {set $dx_cur_state vis}
       RB4DXVIS_DATA
    ) 
@@ -409,64 +419,6 @@
             }
             {$this trigger_select_effects}
          )
-         (("Track Antialiasing: OFF" "Track Antialiasing: ON")
-            {set $noaa {! $noaa}}
-            {if_else $noaa
-               {dx_write_null_file "ps4/shared/scene/antialias.scene_ps4"}
-               {dx_file_delete "ps4/shared/scene/antialias.scene_ps4"}
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS_DATA
-            }
-            {$this trigger_select_effects}
-         )
-         ("Track Curvature"
-            {$this show_state kState_RB4DXTrackCurve}
-            {$this trigger_select_effects}
-         )
-         ("Next"
-            {$this show_state kState_RB4DXVisSettings1}
-            {$this trigger_select_effects}
-         )
-      }
-   ) 
-   (on_cancel 
-      {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects}
-   )
-)
-; next page (TODO: Integrate this into one state)
-#define RB4DXVIS1_DATA
-(
-   {$this setup_confirm_actions a 
-      (
-         "Back"
-         {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-         {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-         {if_else $noshine "Track Shine: OFF" "Track Shine: ON"}
-         {if_else $noflames "Flames: OFF" "Flames: ON"}
-         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
-         "Next"
-      )
-   }
-)
-(kState_RB4DXVisSettings1
-   (view {$this get_auto_list_view}) 
-   (enter
-      {set $nohud {dx_file_exists "ps4/ui/game/game.layout_ps4"}}
-      {set $songtitle {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}}
-      SONGTITLE_CHECK
-      {set $noshine {dx_file_exists "ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
-      {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
-      {set $micwarn {! {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}}
-      {set $dx_cur_state vis1}
-      RB4DXVIS1_DATA
-   ) 
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
          (("Performance Mode: ON" "Performance Mode: OFF")
             {set $nohud {! $nohud}}
             {if_else $nohud
@@ -509,60 +461,6 @@
             {$this show_state kState_RB4DXSongTitleSelector}
             {$this trigger_select_effects}
          )
-         (("Track Shine: ON" "Track Shine: OFF")
-            {set $noshine {! $noshine}}
-            {if_else $noshine
-               {do
-                  {dx_file_rename "ps4/track/shared/fx_noise_b_util1.bmp_ps4" "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
-                  {dx_write_null_file "settings/visuals/noshine.dta"}
-               }
-               {do
-                  {dx_file_rename "ps4/track/shared/fx_noise_b_util.bmp_ps4" "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
-                  {dx_file_delete "settings/visuals/noshine.dta"}
-               }
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
-            }
-            {$this trigger_select_effects}
-         )
-         (("Flames: OFF" "Flames: ON")
-            {set $noflames {! $noflames}}
-            {if_else $noflames
-               {do
-                  MOVE_NOFLAMES_FILES_ON
-                  {dx_write_null_file "settings/visuals/noflames.dta"}
-               }
-               {do
-                  MOVE_NOFLAMES_FILES_OFF
-                  {dx_file_delete "settings/visuals/noflames.dta"}
-               }
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
-            }
-            {$this trigger_select_effects}
-         )
-         (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
-            {set $micwarn {! $micwarn}}
-            {if_else $micwarn
-               {do
-                  {dx_file_rename "ps4/ui/game/hud1.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/micwarn.dta"}
-               }
-               {do
-                  {dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/micwarn.dta"}
-               }
-            }
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
-            }
-            {$this trigger_select_effects}
-         )
          (("Menu BGs: OFF" "Menu BGs: ON")
             {set $menubg {! $menubg}}
             {if_else $menubg
@@ -578,96 +476,20 @@
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects}
          )
-         ("Back"
-            {$this show_state kState_RB4DXVisSettings}
-            {$this trigger_select_effects }
-         )
-         ("Next"
-            {$this show_state kState_RB4DXVisSettings2}
-            {$this trigger_select_effects}
-         )
       }
-   ) 
-   (on_cancel 
-      {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
-      {$this trigger_cancel_effects}
    )
-)
-; next page (TODO: Integrate this into one state)
-#define RB4DXVIS2_DATA
-(
-   {$this setup_confirm_actions a 
-      (
-         "Back"
-         {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
-         {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
-      )
-   }
-)
-(kState_RB4DXVisSettings2
-   (view {$this get_auto_list_view}) 
-   (enter
-      {set $trackangle {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}}
-      TRACKANGLE_CHECK
-      {set $menubg {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}}
-      {set $dx_cur_state vis2}
-      RB4DXVIS2_DATA
-   ) 
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
-         ("Custom Track Angle: ON"
-            {set $trackangle FALSE}
-            {switch $trackangletype
-               (rr
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rr.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
-               )
-               (rb2
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb2.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
-               )
-               (rb3
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb3.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
-               )
-               (none
-                  {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
-               )
-            }
-            {dx_file_delete "settings/visuals/trackangle.dta"}
-            {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS2_DATA
-            }
-            {$this trigger_select_effects}
-         )
-         ("Custom Track Angle: OFF"
-            {$this show_state kState_RB4DXTrackAngleSelector}
-            {$this trigger_select_effects}
-         )
-         (("Menu BGs: OFF" "Menu BGs: ON")
-            {set $menubg {! $menubg}}
-            {if_else $menubg
-               {do
-                  {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/menubg.dta"}
-               }
-               {do
-                  {dx_file_rename "ps4/ui/background/meta_background.scene_ps4" "ps4/ui/background/meta_background1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/menubg.dta"}
-               }
-            }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
-            {$this trigger_select_effects}
-         )
-         ("Back"
-            {$this show_state kState_RB4DXVisSettings1}
-            {$this trigger_select_effects }
-         )
-      }
-   ) 
+   ; (UI_BUTTON_DOWN_MSG ;TODO: Scroll to new list data on last entry, workaround for in game
+   ;    {local $list_data {($objId UIListCom) get_data_in_column token}}
+   ;    {switch $action
+   ;       (kAction_Up 
+   ;          {if $last_entry
+   ;             {set $last_entry FALSE}
+   ;          }
+   ;       )
+   ;       (kAction_Down 
+   ;          {if {== $list_data ""}})
+   ;    }
+   ; )
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
@@ -804,6 +626,144 @@
    )
 )
 
+;Track Settings
+#define RB4DXTRK_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         {if_else $noflames "Flames: OFF" "Flames: ON"}
+         {if_else $noshine "Track Shine: OFF" "Track Shine: ON"}
+         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
+         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
+         {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
+         "Track Curvature"
+      )
+   }
+)
+(kState_RB4DXTrkSettings
+   (view {$this get_auto_list_view}) 
+   (enter
+      {set $trackangle {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}}
+      TRACKANGLE_CHECK
+      {set $noshine {dx_file_exists "ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
+      {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
+      {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
+      {set $micwarn {! {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}}
+      {set $dx_cur_state trk}
+      RB4DXTRK_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("Custom Track Angle: ON"
+            {set $trackangle FALSE}
+            {switch $trackangletype
+               (rr
+                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rr.scene_ps4"}
+                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
+               )
+               (rb2
+                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb2.scene_ps4"}
+                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
+               )
+               (rb3
+                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb3.scene_ps4"}
+                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
+               )
+               (none
+                  {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
+               )
+            }
+            {dx_file_delete "settings/visuals/trackangle.dta"}
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS2_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         ("Custom Track Angle: OFF"
+            {$this show_state kState_RB4DXTrackAngleSelector}
+            {$this trigger_select_effects}
+         )
+         (("Track Shine: ON" "Track Shine: OFF")
+            {set $noshine {! $noshine}}
+            {if_else $noshine
+               {do
+                  {dx_file_rename "ps4/track/shared/fx_noise_b_util1.bmp_ps4" "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+                  {dx_write_null_file "settings/visuals/noshine.dta"}
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/fx_noise_b_util.bmp_ps4" "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+                  {dx_file_delete "settings/visuals/noshine.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Flames: OFF" "Flames: ON")
+            {set $noflames {! $noflames}}
+            {if_else $noflames
+               {do
+                  MOVE_NOFLAMES_FILES_ON
+                  {dx_write_null_file "settings/visuals/noflames.dta"}
+               }
+               {do
+                  MOVE_NOFLAMES_FILES_OFF
+                  {dx_file_delete "settings/visuals/noflames.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Track Antialiasing: OFF" "Track Antialiasing: ON")
+            {set $noaa {! $noaa}}
+            {if_else $noaa
+               {dx_write_null_file "ps4/shared/scene/antialias.scene_ps4"}
+               {dx_file_delete "ps4/shared/scene/antialias.scene_ps4"}
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
+            {set $micwarn {! $micwarn}}
+            {if_else $micwarn
+               {do
+                  {dx_file_rename "ps4/ui/game/hud1.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
+                  {dx_write_null_file "settings/visuals/micwarn.dta"}
+               }
+               {do
+                  {dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud1.scene_ps4"}
+                  {dx_file_delete "settings/visuals/micwarn.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXVIS1_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         ("Track Curvature"
+            {$this show_state kState_RB4DXTrackCurve}
+            {$this trigger_select_effects}
+         )
+      }
+   ) 
+   (on_cancel 
+      {set $dx_cur_state FALSE}
+      {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
+   )
+)
+
 ;Track Angle Type Selector
 (kState_RB4DXTrackAngleSelector
    (view confirm_action)
@@ -829,7 +789,7 @@
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings2}
+      {$this show_state kState_RB4DXTrkSettings}
       {$this trigger_cancel_effects}
    )
 )

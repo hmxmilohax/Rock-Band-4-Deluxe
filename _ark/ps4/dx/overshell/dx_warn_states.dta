@@ -37,11 +37,8 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
-         (vis1
-            {$this show_state kState_RB4DXVisSettings1}
-         )
-         (vis2
-            {$this show_state kState_RB4DXVisSettings2}
+         (trk
+            {$this show_state kState_RB4DXTrkSettings}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -58,11 +55,8 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
-         (vis1
-            {$this show_state kState_RB4DXVisSettings1}
-         )
-         (vis2
-            {$this show_state kState_RB4DXVisSettings2}
+         (trk
+            {$this show_state kState_RB4DXTrkSettings}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -85,11 +79,8 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
-         (vis1
-            {$this show_state kState_RB4DXVisSettings1}
-         )
-         (vis2
-            {$this show_state kState_RB4DXVisSettings2}
+         (trk
+            {$this show_state kState_RB4DXTrkSettings}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -105,11 +96,8 @@
          (vis
             {$this show_state kState_RB4DXVisSettings}
          )
-         (vis1
-            {$this show_state kState_RB4DXVisSettings1}
-         )
-         (vis2
-            {$this show_state kState_RB4DXVisSettings2}
+         (trk
+            {$this show_state kState_RB4DXTrkSettings}
          )
          (sfx
             {$this show_state kState_RB4DXSFXSettings}
@@ -147,18 +135,18 @@
             {dx_write_null_file "settings/visuals/trackangle.dta"} 
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               {$this show_state kState_RB4DXVisSettings2}
+               {$this show_state kState_RB4DXTrkSettings}
             }
          )
          (overshell_confirm_no
             {set $trackangletype FALSE}
-            {$this show_state kState_RB4DXVisSettings2}
+            {$this show_state kState_RB4DXTrkSettings}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings2}
+      {$this show_state kState_RB4DXTrkSettings}
       {$this trigger_cancel_effects}
    )
 )
