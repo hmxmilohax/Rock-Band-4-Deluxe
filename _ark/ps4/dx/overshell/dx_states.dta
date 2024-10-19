@@ -633,6 +633,7 @@
       (
          {if_else $noflames "Flames: OFF" "Flames: ON"}
          {if_else $noshine "Track Shine: OFF" "Track Shine: ON"}
+         {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
          {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
          {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
          {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
@@ -645,7 +646,8 @@
    (enter
       {set $trackangle {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}}
       TRACKANGLE_CHECK
-      {set $noshine {dx_file_exists "ps4/track/shared/fx_noise_b_util.bmp_ps4"}}
+      {set $noshine {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}}
+      {set $gemshine {dx_file_exists "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}}
       {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
       {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
       {set $micwarn {! {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}}
@@ -677,7 +679,7 @@
             {dx_file_delete "settings/visuals/trackangle.dta"}
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS2_DATA
+               RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
@@ -689,17 +691,37 @@
             {set $noshine {! $noshine}}
             {if_else $noshine
                {do
-                  {dx_file_rename "ps4/track/shared/fx_noise_b_util1.bmp_ps4" "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_skin_swap1.sgraph_ps4ps4" "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}
                   {dx_write_null_file "settings/visuals/noshine.dta"}
                }
                {do
-                  {dx_file_rename "ps4/track/shared/fx_noise_b_util.bmp_ps4" "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_skin_swap.sgraph_ps4ps4" "ps4/track/shared/track_skin_swap1.sgraph_ps4ps4"}
                   {dx_file_delete "settings/visuals/noshine.dta"}
                }
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
+               RB4DXTRK_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Gem Shine: ON" "Gem Shine: OFF")
+            {set $gemshine {! $gemshine}}
+            {if_else $gemshine
+               {do
+                  {dx_file_rename "ps4/track/guitar/gem_unlit1.sgraph_ps4ps4" "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}
+                  {dx_file_rename "ps4/track/drums/gem_cymbal_unlit1.sgraph_ps4ps4" "ps4/track/drums/gem_cymbal_unlit.sgraph_ps4ps4"}
+                  {dx_write_null_file "settings/visuals/gemshine.dta"}
+               }
+               {do
+                  {dx_file_rename "ps4/track/guitar/gem_unlit.sgraph_ps4ps4" "ps4/track/guitar/gem_unlit1.sgraph_ps4ps4"}
+                  {dx_file_rename "ps4/track/drums/gem_cymbal_unlit.sgraph_ps4ps4" "ps4/track/drums/gem_cymbal_unlit1.sgraph_ps4ps4"}
+                  {dx_file_delete "settings/visuals/gemshine.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state kState_RB4DXInGameWarn}
+               RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
@@ -717,7 +739,7 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
+               RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
@@ -729,7 +751,7 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS_DATA
+               RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
@@ -747,7 +769,7 @@
             }
             {if_else {$this in_song}
                {$this show_state kState_RB4DXInGameWarn}
-               RB4DXVIS1_DATA
+               RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
