@@ -135,7 +135,6 @@ UPDATE_SETTINGS
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
-	{dx_file_delete "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 )
 ;delete/move files if settings don't match
 {if {&& {file_exists "settings/visuals/faststart.dta"} {dx_file_exists "ps4/ui/startup/mnemonix1.bk2"}}
@@ -237,6 +236,9 @@ UPDATE_SETTINGS
 }
 {if {dx_file_exists "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/fx_noise_b_util1.bmp_ps4"}
+}
+{if {dx_file_exists "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
+	{dx_file_delete "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 }
 {if {! {file_exists "settings/venue/enabled.dta"}}
 	DELETE_INVALID_VENUE_DTAS

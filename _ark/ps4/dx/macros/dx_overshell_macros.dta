@@ -54,7 +54,6 @@
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4"}
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4" "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
 )
 #define MOVE_NOFLAMES_FILES_OFF
 (
@@ -74,5 +73,4 @@
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4" "ps4/track/shared/fx/flash_pot/particle_smoke1.bmp_ps4"}
 )
