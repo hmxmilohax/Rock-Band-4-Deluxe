@@ -36,6 +36,40 @@
 	    }
 	}
 )
+#define SET_HIGHWAY_TEX_VAR
+(
+	{set $enabledtex
+		{cond
+			({&& {! {dx_file_exists "settings/visuals/highwaytex.dta"}} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}
+				none
+			)
+			({dx_file_exists "settings/visuals/highwaytex_wood.dta"}
+				wood
+			)
+			({dx_file_exists "settings/visuals/highwaytex_black.dta"}
+				black
+			)
+			({dx_file_exists "settings/visuals/highwaytex_rb3_guitar.dta"}
+				rb3_guitar
+			)
+			({dx_file_exists "settings/visuals/highwaytex_rb3_bass.dta"}
+				rb3_bass
+			)
+			({dx_file_exists "settings/visuals/highwaytex_rb3_drums.dta"}
+				rb3_drums
+			)
+			({dx_file_exists "settings/visuals/highwaytex_rb3_keys.dta"}
+				rb3_keys
+			)
+			({dx_file_exists "settings/visuals/highwaytex_fnfestival.dta"}
+				fnfestival
+			)
+			({dx_file_exists "settings/visuals/highwaytex_fnfestival_beta.dta"}
+				fnfestival_beta
+			)
+		}
+	}
+)
 #define MOVE_NOFLAMES_FILES_ON
 (
 	{dx_file_rename "ps4/track/smasher/gem_smasher_unlit1.entity_ps4" "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}

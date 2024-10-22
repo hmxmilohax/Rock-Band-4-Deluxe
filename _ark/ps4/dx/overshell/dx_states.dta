@@ -629,16 +629,30 @@
 ;Track Settings
 #define RB4DXTRK_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         {if_else $noflames "Flames: OFF" "Flames: ON"}
-         {if_else $noshine "Track Shine: OFF" "Track Shine: ON"}
-         {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
-         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
-         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
-         {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
-         "Track Curvature"
-      )
+   {if_else {$this in_song}
+      {$this setup_confirm_actions a 
+         (
+            {if_else $noflames "Flames: OFF" "Flames: ON"}
+            {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}
+            {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
+            {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
+            {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
+            {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
+            "Track Curvature"
+         )
+      }
+      {$this setup_confirm_actions a 
+         (
+            "Highway Texture"
+            {if_else $noflames "Flames: OFF" "Flames: ON"}
+            {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}
+            {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
+            {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
+            {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
+            {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
+            "Track Curvature"
+         )
+      }
    }
 )
 (kState_RB4DXTrkSettings
@@ -687,7 +701,7 @@
             {$this show_state kState_RB4DXTrackAngleSelector}
             {$this trigger_select_effects}
          )
-         (("Track Shine: ON" "Track Shine: OFF")
+         (("Highway Shine: ON" "Highway Shine: OFF")
             {set $noshine {! $noshine}}
             {if_else $noshine
                {do
@@ -777,11 +791,507 @@
             {$this show_state kState_RB4DXTrackCurve}
             {$this trigger_select_effects}
          )
+         ("Highway Texture"
+            {$this show_state kState_RB4DXHWTexSelector}
+            {$this trigger_select_effects}
+         )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Highway Texture Selector (TODO: automatically create this state)
+(kState_RB4DXHWTexSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "[Default]"
+            "Black"
+            "RB3 Guitar"
+            "RB3 Bass"
+            "RB3 Drums"
+            "RB3 Keys"
+            "Fortnite Festival"
+            "Fortnite Festival (Beta)"
+            "Wood"
+         )
+      }
+      {set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data ;This is very jank, pls fix
+         ("[Default]"
+            {if $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_rb3_keys.dta"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_center_util.bmp_ps4" "ps4/track/shared/track_pattern_center_util1.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/track_pattern_side_util.bmp_ps4" "ps4/track/shared/track_pattern_side_util1.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                  )
+               }
+               {dx_file_delete "settings/visuals/highwaytex.dta"}
+            }
+         )
+         ("Wood"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_wood.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("Black"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_black.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("RB3 Guitar"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_rb3_guitar.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("RB3 Bass"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_rb3_bass.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("RB3 Drums"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_rb3_drums.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("RB3 Keys"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_rb3_keys.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("Fortnite Festival"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_fnfestival.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival_beta
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival_beta.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+         ("Fortnite Festival (Beta)"
+            {dx_write_null_file "settings/visuals/highwaytex.dta"}
+            {dx_write_null_file "settings/visuals/highwaytex_fnfestival_beta.dta"}
+            {if_else $customhw
+               {switch $enabledtex
+                  (none
+                     {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (wood
+                     {dx_file_delete "settings/visuals/highwaytex_wood.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (black
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_black.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_black.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_guitar
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_guitar.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_guitar.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_bass
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_bass.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_bass.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_drums
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_drums.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_drums.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (rb3_keys
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_rb3_keys.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_rb3_keys.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+                  (fnfestival
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival.bmp_ps4"}
+                     {dx_file_delete "settings/visuals/highwaytex_fnfestival.dta"}
+                     {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  )
+               }
+               {do
+                  {dx_file_rename "ps4/track/shared/gem_track_texture/gem_track_surface_fnfestival_beta.bmp_ps4" "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_rename "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+               }
+            }
+         )
+      }
+      {$this show_state kState_RB4DXTrkSettings}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXTrkSettings}
       {$this trigger_cancel_effects}
    )
 )
