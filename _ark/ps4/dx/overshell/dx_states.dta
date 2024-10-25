@@ -349,16 +349,30 @@
 ;Visual Settings
 #define RB4DXVIS_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         "Select Venue"
-         {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-         {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-         {if_else $noui "HUD: OFF" "HUD: ON"}
-         {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-         {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-         {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
-      )
+   {if_else {$this in_song}
+      {$this setup_confirm_actions a 
+         (
+            "Select Venue"
+            {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+            {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+            {if_else $noui "HUD: OFF" "HUD: ON"}
+            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
+            "Menu Theme"
+         )
+      }
+      {$this setup_confirm_actions a 
+         (
+            "Select Venue"
+            {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+            {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+            {if_else $noui "HUD: OFF" "HUD: ON"}
+            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
+            "Menu Theme"
+            {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+         )
+      }
    }
 )
 (kState_RB4DXVisSettings
@@ -474,6 +488,10 @@
                }
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this trigger_select_effects}
+         )
+         ("Menu Theme"
+            {$this show_state kState_RB4DXMenuTheme}
             {$this trigger_select_effects}
          )
       }
@@ -616,12 +634,42 @@
       {dx_write_null_file "settings/visuals/songtitle.dta"}
       {if_else {$this in_song}
          {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXVisSettings1}
+         {$this show_state kState_RB4DXVisSettings}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings1}
+      {$this show_state kState_RB4DXVisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Menu Theme
+(kState_RB4DXMenuTheme
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "Rock Band 4 Rivals"
+            "Launch Rock Band 4"
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("Rock Band 4 Rivals"
+            {dx_file_rename "ps4/ui/textures/overshell" "ps4/ui/textures/overshell_prerivals"}
+         )
+         ("Launch Rock Band 4"
+            {dx_file_rename "ps4/ui/textures/overshell_prerivals" "ps4/ui/textures/overshell"}
+         )
+      }
+      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -818,8 +866,8 @@
          {push_back $texturelist $entry}
       }
       {$this setup_confirm_actions a $texturelist}
-      {set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      SET_HIGHWAY_TEX_VAR
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
