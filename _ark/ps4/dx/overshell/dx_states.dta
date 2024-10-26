@@ -660,9 +660,11 @@
       {switch $list_data 
          ("Rock Band 4 Rivals"
             {dx_file_rename "ps4/ui/textures/overshell" "ps4/ui/textures/overshell_prerivals"}
+            {dx_file_rename "ps4/ui/overshell/slot.entity_ps4" "ps4/ui/overshell/slot_prerivals.entity_ps4"}
          )
          ("Launch Rock Band 4"
             {dx_file_rename "ps4/ui/textures/overshell_prerivals" "ps4/ui/textures/overshell"}
+            {dx_file_rename "ps4/ui/overshell/slot_prerivals.entity_ps4" "ps4/ui/overshell/slot.entity_ps4"}
          )
       }
       {$this show_state kState_RB4DXDelayedEffectWarn}
