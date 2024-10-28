@@ -266,7 +266,9 @@ UPDATE_SETTINGS
 {if {file_exists "RB4DX.ini"}
    {dx_file_delete "RB4DX.ini"}
 }
-{dx_write_file "speedmod.ini" {array ({/ $speedmod 100})}}
+{if {file_exists "speedmod.ini"}
+	{dx_file_delete "speedmod.ini"}
+}
 {if {file_exists "autoplay.ini"}
    {dx_file_delete "autoplay.ini"}
 }
