@@ -358,7 +358,7 @@
             {if_else $noui "HUD: OFF" "HUD: ON"}
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
             {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-            "Menu Theme"
+            "Overshell Theme"
          )
       }
       {$this setup_confirm_actions a 
@@ -369,7 +369,8 @@
             {if_else $noui "HUD: OFF" "HUD: ON"}
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
             {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-            "Menu Theme"
+            "Overshell Theme"
+            "UI Theme"
             {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
          )
       }
@@ -490,8 +491,12 @@
             {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects}
          )
-         ("Menu Theme"
+         ("Overshell Theme"
             {$this show_state kState_RB4DXMenuTheme}
+            {$this trigger_select_effects}
+         )
+         ("UI Theme"
+            {$this show_state kState_RB4DXUITheme}
             {$this trigger_select_effects}
          )
       }
@@ -665,6 +670,42 @@
          ("Launch Rock Band 4"
             {dx_file_rename "ps4/ui/textures/overshell_prerivals" "ps4/ui/textures/overshell"}
             {dx_file_rename "ps4/ui/overshell/slot_prerivals.entity_ps4" "ps4/ui/overshell/slot.entity_ps4"}
+         )
+      }
+      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;UI Theme
+(kState_RB4DXUITheme
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "Rock Band 4 Rivals"
+            "Launch Rock Band 4"
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("Rock Band 4 Rivals"
+            {unless {dx_file_exists "ps4/ui_prerivals"}
+               {dx_file_rename "ps4/ui" "ps4/ui_prerivals"}
+               {dx_file_rename "ps4/ui_bak" "ps4/ui"}
+            }
+         )
+         ("Launch Rock Band 4"
+            {if {dx_file_exists "ps4/ui_prerivals"}
+               {dx_file_rename "ps4/ui" "ps4/ui_bak"}
+               {dx_file_rename "ps4/ui_prerivals" "ps4/ui"}
+            }
          )
       }
       {$this show_state kState_RB4DXDelayedEffectWarn}
