@@ -112,3 +112,22 @@
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
 	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
 )
+
+#define WRITE_GEM_COLOR_DTAS
+(
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenr.dta" {array ({/ $gemcolgr 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greeng.dta" {array ({/ $gemcolgg 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenb.dta" {array ({/ $gemcolgb 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redr.dta" {array ({/ $gemcolrr 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redg.dta" {array ({/ $gemcolrg 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redb.dta" {array ({/ $gemcolrb 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowr.dta" {array ({/ $gemcolyr 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowg.dta" {array ({/ $gemcolyg 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowb.dta" {array ({/ $gemcolyb 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/bluer.dta" {array ({/ $gemcolbr 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueg.dta" {array ({/ $gemcolbg 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueb.dta" {array ({/ $gemcolbb 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ $gemcolor 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ $gemcolog 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ $gemcolob 255})}}
+)

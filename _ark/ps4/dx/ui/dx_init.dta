@@ -76,3 +76,20 @@
 
 ;controller binding
 SET_PAD_BINDING_VAR
+
+;default gem colors (TODO: READ FROM USER DTAS)
+{set $gemcolgr 33}
+{set $gemcolgg 93}
+{set $gemcolgb 2}
+{set $gemcolrr 229}
+{set $gemcolrg 4}
+{set $gemcolrb 8}
+{set $gemcolyr 202}
+{set $gemcolyg 164}
+{set $gemcolyb 8}
+{set $gemcolbr 3}
+{set $gemcolbg 82}
+{set $gemcolbb 139}
+{set $gemcolor 190}
+{set $gemcolog 48}
+{set $gemcolob 5}

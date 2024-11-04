@@ -60,3 +60,370 @@
       {$this show_state kState_RB4DXVisSettings}
       {$this trigger_cancel_effects})
 )
+
+#define RGB_DATA
+(
+   {switch $gemchanged
+      ("Green"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgr} ("+" "0" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgg} ("+" "0" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgb} ("+" "0" "-")}
+            )
+         }
+      )
+      ("Red"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrr} ("+" "0" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrg} ("+" "0" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrb} ("+" "0" "-")}
+            )
+         }
+      )
+      ("Yellow"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyr} ("+" "0" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyg} ("+" "0" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyb} ("+" "0" "-")}
+            )
+         }
+      )
+      ("Blue"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbr} ("+" "0" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbg} ("+" "0" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbb} ("+" "0" "-")}
+            )
+         }
+      )
+      ("Orange"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolor} ("+" "0" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolog} ("+" "0" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolob} ("+" "0" "-")}
+            )
+         }
+      )
+   }
+)
+#define RGB_ADD
+(
+   {switch $gemchanged
+      ("Green"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ $gemcolgr 1} 255}
+                  {set $gemcolgr {+ $gemcolgr 1}}
+               }
+            )
+            (G
+               {unless {> {+ $gemcolgg 1} 255}
+                  {set $gemcolgg {+ $gemcolgg 1}}
+               }
+            )
+            (B
+               {unless {> {+ $gemcolgb 1} 255}
+                  {set $gemcolgb {+ $gemcolgb 1}}
+               }
+            )
+         }
+      )
+      ("Red"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ $gemcolrr 1} 255}
+                  {set $gemcolrr {+ $gemcolrr 1}}
+               }
+            )
+            (G
+               {unless {> {+ $gemcolrg 1} 255}
+                  {set $gemcolrg {+ $gemcolrg 1}}
+               }
+            )
+            (B
+               {unless {> {+ $gemcolrb 1} 255}
+                  {set $gemcolrb {+ $gemcolrb 1}}
+               }
+            )
+         }
+      )
+      ("Yellow"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ $gemcolyr 1} 255}
+                  {set $gemcolyr {+ $gemcolyr 1}}
+               }
+            )
+            (G
+               {unless {> {+ $gemcolyg 1} 255}
+                  {set $gemcolyg {+ $gemcolyg 1}}
+               }
+            )
+            (B
+               {unless {> {+ $gemcolyb 1} 255}
+                  {set $gemcolyb {+ $gemcolyb 1}}
+               }
+            )
+         }
+      )
+      ("Blue"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ $gemcolbr 1} 255}
+                  {set $gemcolbr {+ $gemcolbr 1}}
+               }
+            )
+            (G
+               {unless {> {+ $gemcolbg 1} 255}
+                  {set $gemcolbg {+ $gemcolbg 1}}
+               }
+            )
+            (B
+               {unless {> {+ $gemcolbb 1} 255}
+                  {set $gemcolbb {+ $gemcolbb 1}}
+               }
+            )
+         }
+      )
+      ("Orange"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ $gemcolor 1} 255}
+                  {set $gemcolor {+ $gemcolor 1}}
+               }
+            )
+            (G
+               {unless {> {+ $gemcolgg 1} 255}
+                  {set $gemcolog {+ $gemcolog 1}}
+               }
+            )
+            (B
+               {unless {> {+ $gemcolgb 1} 255}
+                  {set $gemcolob {+ $gemcolob 1}}
+               }
+            )
+         }
+      )
+   }
+)
+#define RGB_SUB
+(
+   {switch $gemchanged
+      ("Green"
+         {switch $gemcolchanged
+            (R
+               {unless {< {- $gemcolgr 1} 0}
+                  {set $gemcolgr {- $gemcolgr 1}}
+               }
+            )
+            (G
+               {unless {< {- $gemcolgg 1} 0}
+                  {set $gemcolgg {- $gemcolgg 1}}
+               }
+            )
+            (B
+               {unless {< {- $gemcolgb 1} 0}
+                  {set $gemcolgb {- $gemcolgb 1}}
+               }
+            )
+         }
+      )
+      ("Red"
+         {switch $gemcolchanged
+            (R
+               {unless {< {<- $gemcolrr 1} 0}
+                  {set $gemcolrr {<- $gemcolrr 1}}
+               }
+            )
+            (G
+               {unless {< {<- $gemcolrg 1} 0}
+                  {set $gemcolrg {<- $gemcolrg 1}}
+               }
+            )
+            (B
+               {unless {< {<- $gemcolrb 1} 0}
+                  {set $gemcolrb {<- $gemcolrb 1}}
+               }
+            )
+         }
+      )
+      ("Yellow"
+         {switch $gemcolchanged
+            (R
+               {unless {< {<- $gemcolyr 1} 0}
+                  {set $gemcolyr {<- $gemcolyr 1}}
+               }
+            )
+            (G
+               {unless {< {<- $gemcolyg 1} 0}
+                  {set $gemcolyg {<- $gemcolyg 1}}
+               }
+            )
+            (B
+               {unless {< {<- $gemcolyb 1} 0}
+                  {set $gemcolyb {<- $gemcolyb 1}}
+               }
+            )
+         }
+      )
+      ("Blue"
+         {switch $gemcolchanged
+            (R
+               {unless {< {<- $gemcolbr 1} 0}
+                  {set $gemcolbr {<- $gemcolbr 1}}
+               }
+            )
+            (G
+               {unless {< {<- $gemcolbg 1} 0}
+                  {set $gemcolbg {<- $gemcolbg 1}}
+               }
+            )
+            (B
+               {unless {< {<- $gemcolbb 1} 0}
+                  {set $gemcolbb {<- $gemcolbb 1}}
+               }
+            )
+         }
+      )
+      ("Orange"
+         {switch $gemcolchanged
+            (R
+               {unless {< {<- $gemcolor 1} 0}
+                  {set $gemcolor {<- $gemcolor 1}}
+               }
+            )
+            (G
+               {unless {< {<- $gemcolgg 1} 0}
+                  {set $gemcolog {<- $gemcolog 1}}
+               }
+            )
+            (B
+               {unless {< {<- $gemcolgb 1} 0}
+                  {set $gemcolob {<- $gemcolob 1}}
+               }
+            )
+         }
+      )
+   }
+)
+#define RGB_RESET
+(
+   {switch $gemchanged
+      ("Green"
+         {switch $gemcolchanged
+            (R
+               {set $gemcolgr 0}
+            )
+            (G
+               {set $gemcolgg 0}
+            )
+            (B
+               {set $gemcolgb 0}
+            )
+         }
+      )
+      ("Red"
+         {switch $gemcolchanged
+            (R
+               {set $gemcolrr 0}
+            )
+            (G
+               {set $gemcolrg 0}
+            )
+            (B
+               {set $gemcolrb 0}
+            )
+         }
+      )
+      ("Yellow"
+         {switch $gemcolchanged
+            (R
+               {set $gemcolyr 0}
+            )
+            (G
+               {set $gemcolyg 0}
+            )
+            (B
+               {set $gemcolyb 0}
+            )
+         }
+      )
+      ("Blue"
+         {switch $gemcolchanged
+            (R
+               {set $gemcolbr 0}
+            )
+            (G
+               {set $gemcolbg 0}
+            )
+            (B
+               {set $gemcolbb 0}
+            )
+         }
+      )
+      ("Orange"
+         {switch $gemcolchanged
+            (R
+               {set $gemcolor 0}
+            )
+            (G
+               {set $gemcolog 0}
+            )
+            (B
+               {set $gemcolob 0}
+            )
+         }
+      )
+   }
+)
+(kState_RB4DXRGBSlider
+   (view confirm_action) 
+   (enter 
+      RGB_DATA
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            RGB_ADD
+            RGB_DATA
+         )
+         ("0"
+            RGB_RESET
+            RGB_DATA
+         )
+         ("-"
+            RGB_SUB
+            RGB_DATA
+         )
+      }
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXRGBSelect}
+      {$this trigger_cancel_effects})
+)

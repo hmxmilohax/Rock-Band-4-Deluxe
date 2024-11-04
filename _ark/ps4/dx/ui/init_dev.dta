@@ -12,6 +12,9 @@
 	{dx_file_mkdir "settings/controller/type/vox"}
 	{dx_file_mkdir "settings/controller/binding"}
 	{dx_file_mkdir "settings/controller/binding/pad"} ;TODO: maybe add bindings for non-pad controllers?
+	{dx_file_mkdir "settings/theme"}
+	{dx_file_mkdir "settings/theme/gem"}
+	{dx_file_mkdir "settings/theme/gem/colors"}
 )
 #define UPDATE_SETTINGS
 (

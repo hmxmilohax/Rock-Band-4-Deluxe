@@ -8,6 +8,7 @@
          "Strikeline Texture"
          {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}
          {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
+         {if_else $gemcolors "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}
       )
    }
 )
@@ -16,6 +17,7 @@
    (enter
       {set $noshine {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}}
       {set $gemshine {dx_file_exists "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}}
+      {set $gemcolors {file_exists "settings/theme/gem/colors/enabled.dta"}}
       {set $dx_cur_state thm}
       RB4DXTHM_DATA
    ) 
@@ -70,6 +72,14 @@
          )
          ("Strikeline Texture"
             {$this show_state kState_RB4DXSLTexSelector}
+            {$this trigger_select_effects}
+         )
+         ("Custom Gem Colors: ON"
+            {$this show_state kState_RB4DXGemColorConfirm}
+            {$this trigger_select_effects}
+         )
+         ("Custom Gem Colors: OFF"
+            {$this show_state kState_RB4DXGemColorSettings}
             {$this trigger_select_effects}
          )
       }
@@ -185,6 +195,47 @@
    )
    (on_cancel 
       {$this show_state kState_RB4DXTrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Gem Color Settings
+(kState_RB4DXGemColorSettings
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a ("Green" "Red" "Yellow" "Blue" "Orange")}
+      {unless $gemcolors
+         {dx_write_null_file "settings/theme/gem/colors/enabled.dta"}
+         WRITE_GEM_COLOR_DTAS
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {set $gemchanged $list_data}
+      {$this show_state kState_RB4DXRGBSelect}
+      {$this trigger_select_effects}
+   )
+   (on_cancel
+      WRITE_GEM_COLOR_DTAS
+      {$this show_state kState_RB4DXTrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Gem Color Settings
+(kState_RB4DXRGBSelect
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a ("R" "G" "B")}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {set $gemcolchanged $list_data}
+      {$this show_state kState_RB4DXRGBSlider}
+      {$this trigger_select_effects}
+   )
+   (on_cancel
+      {$this show_state kState_RB4DXGemColorSettings}
       {$this trigger_cancel_effects}
    )
 )

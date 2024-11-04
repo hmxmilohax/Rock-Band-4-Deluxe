@@ -163,6 +163,31 @@
    )
 )
 
+(kState_RB4DXGemColorConfirm
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" ("Reset" "Edit")}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}
+      }  
+      {switch $list_data 
+         ("Reset"
+            {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
+            {$this show_state kState_RB4DXTrackTheme}
+         )
+         ("Edit"
+            {$this show_state kState_RB4DXGemColorSettings}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXTrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
 (kState_RB4DXAutoplayHowTo
    (view confirm_action)
    (enter 
