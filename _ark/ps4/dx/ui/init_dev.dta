@@ -120,6 +120,11 @@
 CREATE_SETTINGS_DIRS
 UPDATE_SETTINGS
 
+;make ark/ps4 dirs that are used in game
+{dx_file_mkdir "ps4/shared"}
+{dx_file_mkdir "ps4/shared/scene"}
+{dx_file_mkdir "ps4/track/shared/gem_track_texture"}
+
 #define DELETE_INVALID_NOFLAMES_FILES
 (
 	{dx_file_delete "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
@@ -141,6 +146,7 @@ UPDATE_SETTINGS
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
 )
+
 ;delete/move files if settings don't match
 {if {&& {file_exists "settings/visuals/faststart.dta"} {dx_file_exists "ps4/ui/startup/mnemonix1.bk2"}}
 	{if_else {dx_file_exists "ps4/ui/startup/mnemonix.bk2"}
