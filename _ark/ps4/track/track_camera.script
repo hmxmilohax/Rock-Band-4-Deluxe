@@ -14,13 +14,22 @@
                (y "y" "") 
                (z "z" ""))))))
 (poll 
-   {set 
-      [Transform 
-         [$this axis ]]
-      [
-         (
-            [$this track_com ] RBTrack)now_offset ]}
+   ;{if_else {== [$this axis] y}
+   ;   {set 
+   ;      [Transform 
+   ;         [$this axis ]]
+   ;      {- [
+   ;         (
+   ;            [$this track_com ] RBTrack)now_offset ] 1}} ; min ??, max ?? // old hw length, very jank, affects hit window too
+      {set 
+         [Transform 
+            [$this axis ]]
+         [
+            (
+               [$this track_com ] RBTrack)now_offset ]}
+   ;}
 )
 (enter
    {set [Transform z_scale] $track_curve}
+   ;{set [Transform y_scale] 2} ; hw length, min 0.6, max ~25
 )
