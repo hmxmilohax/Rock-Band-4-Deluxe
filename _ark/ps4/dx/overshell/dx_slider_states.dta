@@ -85,10 +85,14 @@
             }
             {if_else {< $hwlength 0.74}
                {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                  {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                     {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  }
                }
                {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                     {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  }
                }
             }
             {$this setup_confirm_actions
@@ -105,7 +109,9 @@
          ("Reset"
             {set $hwlength 1}
             {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-               {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               }
             }
             {$this setup_confirm_actions
                {sprintf 
@@ -124,10 +130,14 @@
             }
             {if_else {< $hwlength 0.74}
                {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                  {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                     {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  }
                }
                {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                     {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  }
                }
             }
             {$this setup_confirm_actions

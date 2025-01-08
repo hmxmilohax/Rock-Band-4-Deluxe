@@ -113,6 +113,9 @@
       {dx_file_delete "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
       {dx_file_delete "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
       {dx_file_delete "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+      {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+         {dx_file_delete "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+      }
       {unless {== $list_data "[Default]"}
          {if_else {== $list_data "yarg"}
             {do
@@ -120,10 +123,13 @@
                {dx_file_copy {sprint "ps4/dx/custom_textures/highways/" $list_data ".png_ps4"} "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
                {dx_file_copy {sprint "ps4/dx/custom_textures/highways/special/" $list_data ".png_ps4"} "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
             }
-            {do
-               {dx_file_copy "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
-               {dx_file_copy "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
-               {dx_file_copy {sprint "ps4/dx/custom_textures/highways/" $list_data ".png_ps4"} "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+            {if_else {== $list_data "transparent"}
+               {dx_write_null_file "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               {do
+                  {dx_file_copy "ps4/track/shared/track_pattern_center_util1.bmp_ps4" "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
+                  {dx_file_copy "ps4/track/shared/track_pattern_side_util1.bmp_ps4" "ps4/track/shared/track_pattern_side_util.bmp_ps4"}
+                  {dx_file_copy {sprint "ps4/dx/custom_textures/highways/" $list_data ".png_ps4"} "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}
+               }
             }
          }
       }
