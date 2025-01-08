@@ -728,6 +728,7 @@
          {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
          {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
          "Track Curvature"
+         "Highway Length"
       )
    }
 )
@@ -827,6 +828,10 @@
          )
          ("Track Curvature"
             {$this show_state kState_RB4DXTrackCurve}
+            {$this trigger_select_effects}
+         )
+         ("Highway Length"
+            {$this show_state kState_RB4DXHighwayLength}
             {$this trigger_select_effects}
          )
          ("Track Theme"

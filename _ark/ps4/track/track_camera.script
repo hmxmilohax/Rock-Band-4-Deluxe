@@ -31,5 +31,5 @@
 )
 (enter
    {set [Transform z_scale] $track_curve}
-   ;{set [Transform y_scale] 2} ; hw length, min 0.6, max ~25
+   {set [Transform y_scale] $hwlength} ; hw length, min 0.6, max ~25
 )

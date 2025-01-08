@@ -4,6 +4,7 @@
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
 {set $track_curve 1}
+{set $hwlength 1}
 {set $autoplayexists {file_exists "data:/GoldHEN/plugins/RB4DX-Autoplay.prx"}}
 {set $notifycolored {file_exists "notifycolored.ini"}}
 

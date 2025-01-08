@@ -57,7 +57,94 @@
 
          })
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings}
+      {$this show_state kState_RB4DXTrkSettings}
+      {$this trigger_cancel_effects})
+)
+
+(kState_RB4DXHighwayLength
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions
+         {sprintf 
+            "Highway Length: %.2fX" 
+            {if_else {> $hwlength 1}
+               {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+               {+ {* $hwlength -1.25} 2.25}
+            }
+            $hwlength
+         }
+         ("+" "Reset" "-")
+      }
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("-"
+            {unless {> {+ $hwlength 0.05} 2.54}
+               {set $hwlength {+ $hwlength 0.05}}
+            }
+            {if_else {< $hwlength 0.74}
+               {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               }
+               {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               }
+            }
+            {$this setup_confirm_actions
+               {sprintf 
+                  "Highway Length: %.2fX" 
+                  {if_else {> $hwlength 1}
+                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                     {+ {* $hwlength -1.25} 2.25}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+         ("Reset"
+            {set $hwlength 1}
+            {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+            }
+            {$this setup_confirm_actions
+               {sprintf 
+                  "Highway Length: %.2fX" 
+                  {if_else {> $hwlength 1}
+                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                     {+ {* $hwlength -1.25} 2.25}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+         ("+"
+            {unless {< {- $hwlength 0.05} 0.56}
+               {set $hwlength {- $hwlength 0.05}}
+            }
+            {if_else {< $hwlength 0.74}
+               {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                  {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               }
+               {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               }
+            }
+            {$this setup_confirm_actions
+               {sprintf 
+                  "Highway Length: %.2fX" 
+                  {if_else {> $hwlength 1}
+                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                     {+ {* $hwlength -1.25} 2.25}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+
+         })
+   (on_cancel 
+      {$this show_state kState_RB4DXTrkSettings}
       {$this trigger_cancel_effects})
 )
 
