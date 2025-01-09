@@ -561,7 +561,7 @@
             {== $list_data "The Roadhouse"}
             {== $list_data "The Basement (Trashed)"}
             {== $list_data "The Arena"}
-            {== $list_data "The Pracice Area"}
+            {== $list_data "The Practice Area"}
             {== $list_data "[Random]"}
          }
          {switch $list_data
@@ -592,7 +592,7 @@
             ("The Arena"
                {dx_write_null_file "settings/venue/arena.dta"}
             )
-            ("The Pracice Area"
+            ("The Practice Area"
                {dx_write_null_file "settings/venue/big_club_practice.dta"}
             )
             ("[Random]"
