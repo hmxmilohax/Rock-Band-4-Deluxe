@@ -264,6 +264,7 @@
             (off "Track Muting: Off")
             (on "Track Muting: On")
          }
+         {if_else $speedpitch "Speedup Pitch Correction: OFF" "Speedup Pitch Correction: ON"}
       )
    }
 )
@@ -335,6 +336,15 @@
                {$this show_state kState_RB4DXInGameWarn}
                RB4DXSFX_DATA
             }
+            {$this trigger_select_effects}
+         )
+         (("Speedup Pitch Correction: OFF" "Speedup Pitch Correction: ON")
+            {set $speedpitch {! $speedpitch}}
+            {if_else $speedpitch
+               {dx_write_null_file "settings/sfx/speedpitch.dta"}
+               {dx_file_delete "settings/sfx/speedpitch.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects}
          )
       }

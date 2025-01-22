@@ -33,6 +33,7 @@
       )
    }
 }
+{set $speedpitch {file_exists "settings/sfx/speedpitch.dta"}}
 
 ;controller type
 {set $voxslt

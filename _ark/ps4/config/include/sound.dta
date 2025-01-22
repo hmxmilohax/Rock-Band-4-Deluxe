@@ -1,0 +1,24 @@
+(record_mic FALSE)
+(capture_mic_and_energy FALSE)
+(song_previews 
+   (wait_to_play_sec 0.25) 
+   (preview_loop_fade_out_sec 1.0) 
+   (preview_loop_fade_in_sec 0.5) 
+   (preview_stop_fade_out_sec 0.5) 
+   (preview_db -8.0))
+(mic_volume_default_index 8)
+(mic_volume_values 
+   (-96 -14 -12 -10 -8 -6 -4 -2 0 3 6 9))
+(vocal_stem_volume_default_index 8)
+(vocal_stem_volume_values 
+   (-12 -10 -8 -6 -4 -3 -2 -1 0 1 2 3))
+(igs_volume_default_index 6)
+(igs_volume_values 
+   (-6 -5 -4 -3 -2 -1 0 1 2 3 4 5))
+(mogg_timestretch_config 
+   (stretcher_type {if_else {file_exists "settings/sfx/speedpitch.dta"} 2 1}) 
+   (smb_config 
+      (window_size 2048) 
+      (overlap 4) 
+      (mono_cutoff 600)) 
+   (soundtouch_config))
