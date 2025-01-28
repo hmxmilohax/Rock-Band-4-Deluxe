@@ -4,6 +4,8 @@
 * Option to skip the harmonix logo intro movie
 * Remote Play support via GoldHen Plugin
 * New "Deluxe Settings" menu for new modifications
+* Customizable Track Themes
+* Additional Menu Themes
 * Modifier to disable Overdrive gain so you can focus on hitting the notes more
 * Modifier to enable Overdrive gain in practice mode
 * Option to disable whammy pitch-bending
@@ -13,7 +15,7 @@
 * 60 FPS Venues modifier to make the backrounds smoother and light your PS4 on fire
 * Black Venue modifier with decreased load times and system load
 * Song title always visible modifier
-	* optional position adjustment for the song title to move it out of the way of gameplay
+    * optional position adjustment for the song title to move it out of the way of gameplay
 * Calibration Mode modifier that shrinks the hit window to help perfect your calibration numbers
 
 ## Authoring
