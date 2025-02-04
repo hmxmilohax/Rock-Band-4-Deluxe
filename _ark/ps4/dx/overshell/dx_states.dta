@@ -537,7 +537,7 @@
       {$this setup_confirm_actions a
          (
             "[Random]"
-            "[None]"
+            "Static Background"
             "The Big Cassettes"
             "The Club"
             "The Industrial Club"
@@ -562,7 +562,7 @@
       {dx_write_null_file "settings/venue/enabled.dta"}
       {if_else
          {|| 
-            {== $list_data "[None]"} 
+            {== $list_data "Static Background"} 
             {== $list_data "The Big Cassettes"}
             {== $list_data "The Club"}
             {== $list_data "The Industrial Club"}
@@ -575,8 +575,8 @@
             {== $list_data "[Random]"}
          }
          {switch $list_data
-            ("[None]"
-               {dx_write_null_file "settings/venue/none.dta"}
+            ("Static Background"
+               {$this show_state kState_RB4DXStaticBackgroudSelector}
             )
             ("The Big Cassettes"
                {dx_write_null_file "settings/venue/big_club_toys.dta"}
@@ -611,11 +611,50 @@
          }
          {dx_write_null_file {sprint "settings/venue/" $list_data ".dta"}}
       }
-      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {unless {== $list_data "Static Background"}
+         {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+         {$this show_state kState_RB4DXDelayedEffectWarn}
+      }
       {$this trigger_select_effects}
    )
    (on_cancel 
       {$this show_state kState_RB4DXVisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Static Background Selector
+(kState_RB4DXStaticBackgroudSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist             0}}
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {if {dx_file_exists "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+         {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+         {dx_write_null_file "settings/venue/none.dta"}
+      }
+      {dx_file_copy {sprint "ps4/dx/custom_textures/backgrounds/" $list_data ".png_ps4"} "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+      {if_else {file_exists "settings/venue/none.dta"}
+         {if_else {$this in_song}
+            {$this show_state kState_RB4DXInGameWarn}
+            {$this show_state kState_RB4DXVisSettings}
+         }
+         {do
+            {dx_write_null_file "settings/venue/none.dta"}
+            {$this show_state kState_RB4DXDelayedEffectWarn}
+         }
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXVenueSelector}
       {$this trigger_cancel_effects}
    )
 )
