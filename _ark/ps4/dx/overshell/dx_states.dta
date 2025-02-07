@@ -112,6 +112,7 @@
       {$this setup_confirm_actions a 
          (
             {if_else $autoplayexists {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
+            {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -147,6 +148,23 @@
                   {$this show_state kState_RB4DXAutoplayOff}
                }
             }
+            {$this trigger_select_effects}
+         )
+         (("Insta Fail: ON" "Insta Fail: OFF")
+            {set $instafail {! $instafail}}
+            {if_else $instafail
+               {do
+                  {dx_write_null_file "settings/gameplay/instafail.dta"}
+                  {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
+                  ENABLE_INSTA_FAIL
+               }
+               {do
+                  {dx_file_delete "settings/gameplay/instafail.dta"}
+                  {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
+                  DISABLE_INSTA_FAIL
+               }
+            }
+            RB4DXGP_DATA
             {$this trigger_select_effects}
          )
          (("Overdrive Gain: OFF" "Overdrive Gain: ON")

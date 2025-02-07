@@ -37,3 +37,35 @@
 	{dx_file_delete "settings/venue/small_club_trashed.dta"}
 	{dx_file_delete "settings/venue/arena.dta"}
 )
+
+#define ENABLE_INSTA_FAIL
+(
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy default note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy drum note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy vocals note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium default note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium drum note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium vocals note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard default note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard drum note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard vocals note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert default note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert drum note_weight} 1 99999999}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert vocals note_weight} 1 99999999}
+)
+
+#define DISABLE_INSTA_FAIL
+(
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy default note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy drum note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyEasy vocals note_weight} 1 0.02}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium default note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium drum note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyMedium vocals note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard default note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard drum note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyHard vocals note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert default note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert drum note_weight} 1 0.01}
+	{set_elem {find $syscfg scoring crowd kDifficultyExpert vocals note_weight} 1 0.01}
+)

@@ -9,6 +9,7 @@
 {set $notifycolored {file_exists "notifycolored.ini"}}
 
 ;gp settings
+{set $instafail {file_exists "settings/gameplay/instafail.dta"}}
 {set $nood {file_exists "settings/gameplay/nood.dta"}}
 {set $practiceod {file_exists "settings/gameplay/practiceod.dta"}}
 {set $syncspeeds {file_exists "settings/gameplay/syncspeeds.dta"}}

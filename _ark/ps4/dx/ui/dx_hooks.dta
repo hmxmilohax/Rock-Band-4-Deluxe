@@ -36,3 +36,8 @@ SET_TRACK_SPEEDS
 
 ;apply pad binding hooks
 SET_PAD_BINDING_HOOK
+
+{if $instafail
+   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
+   ENABLE_INSTA_FAIL
+}
