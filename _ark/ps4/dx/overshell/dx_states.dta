@@ -82,7 +82,7 @@
             {$this show_state kState_RB4DXLostMenus}
             {$this trigger_select_effects})
          ("test"
-            {dx_file_copy "test 1.scene_ps4" "test1.scene_ps4"}
+            {set_system_settings}
             {$this trigger_select_effects}
          )
       }
@@ -100,17 +100,28 @@
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
-      {$this setup_confirm_actions a 
-         (
-            {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
-            {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-            {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
-            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
-            {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-         )
+      {if_else {|| $calibrationmode $precisionmode}
+         {$this setup_confirm_actions a 
+            (
+               "Enter Calibration Numbers"
+               {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
+               {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
+               {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
+               {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
+               {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
+            )
+         }
+         {$this setup_confirm_actions a 
+            (
+               {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
+               {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
+               {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
+            )
+         }
       }
       {$this setup_confirm_actions a 
          (
+            "Enter Calibration Numbers"
             {if_else $autoplayexists {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
@@ -132,6 +143,10 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
+         ("Enter Calibration Numbers"
+            {$this show_state kState_RB4DXCalibrationSelector}
+            {$this trigger_select_effects}
+         )
          ("Autoplay: DISABLED"
             {$this show_state kState_RB4DXAutoplayHowTo}
             {$this trigger_select_effects}
@@ -266,6 +281,31 @@
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state kState_RB4DXMain}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Calibration selector
+(kState_RB4DXCalibrationSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "Video"
+            "Audio"
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {switch $list_data 
+         ("Video" {$this show_state kState_RB4DXVideoCalibration})
+         ("Audio" {$this show_state kState_RB4DXAudioCalibration})
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXGPSettings}
       {$this trigger_cancel_effects}
    )
 )
