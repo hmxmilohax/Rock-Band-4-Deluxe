@@ -1,4 +1,3 @@
-git pull https://github.com/LlysiX/rock-band-4-deluxe main
 @echo OFF
 mkdir _tmpbuild
 for /R "%~dp0_build\ps4" %%f in (*) do del "%%f"

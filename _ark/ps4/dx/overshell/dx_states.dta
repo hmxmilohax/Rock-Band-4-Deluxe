@@ -124,6 +124,7 @@
             "Enter Calibration Numbers"
             {if_else $autoplayexists {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
+            {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -169,6 +170,10 @@
             {set $instafail {! $instafail}}
             {if_else $instafail
                {do
+                  {if $toughcrowd
+                     {set $toughcrowd 0}
+                     {dx_file_delete "settings/gameplay/toughcrowd.dta"}
+                  }
                   {dx_write_null_file "settings/gameplay/instafail.dta"}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
                   ENABLE_INSTA_FAIL
@@ -177,6 +182,27 @@
                   {dx_file_delete "settings/gameplay/instafail.dta"}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
                   DISABLE_INSTA_FAIL
+               }
+            }
+            RB4DXGP_DATA
+            {$this trigger_select_effects}
+         )
+         (("Tough Crowd: ON" "Tough Crowd: OFF")
+            {set $toughcrowd {! $toughcrowd}}
+            {if_else $toughcrowd
+               {do
+                  {if $instafail
+                     {set $instafail 0}
+                     {dx_file_delete "settings/gameplay/instafail.dta"}
+                  }
+                  {dx_write_null_file "settings/gameplay/toughcrowd.dta"}
+                  {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
+                  ENABLE_TOUGH_CROWD
+               }
+               {do
+                  {dx_file_delete "settings/gameplay/toughcrowd.dta"}
+                  {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
+                  DISABLE_TOUGH_CROWD
                }
             }
             RB4DXGP_DATA
