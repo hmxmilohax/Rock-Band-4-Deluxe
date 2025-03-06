@@ -100,7 +100,7 @@
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
-      {if_else {|| $calibrationmode $precisionmode}
+      {if_else {|| {! {file_exists "saving.ini"}} $calibrationmode $precisionmode}
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
@@ -122,7 +122,7 @@
       {$this setup_confirm_actions a 
          (
             "Enter Calibration Numbers"
-            {if_else $autoplayexists {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"} "Autoplay: DISABLED"}
+            {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
@@ -130,7 +130,7 @@
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
             {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-            {if_else $autoplayexists {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"} "Drunk Mode: DISABLED"}
+            {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"}
          )
       }
    }
@@ -148,20 +148,14 @@
             {$this show_state kState_RB4DXCalibrationSelector}
             {$this trigger_select_effects}
          )
-         ("Autoplay: DISABLED"
-            {$this show_state kState_RB4DXAutoplayHowTo}
-            {$this trigger_select_effects}
-         )
          (("Autoplay: OFF" "Autoplay: ON")
-            {set $autoplayenabled {! $autoplayenabled}}
+            {set $cheat_option autoplay}
             {if_else $autoplayenabled
                {do
-                  {dx_write_null_file "autoplay.ini"}
-                  {$this show_state kState_RB4DXAutoplayOn}
+                  {$this show_state kState_RB4DXSavingDisabled}
                }
                {do
-                  {dx_file_delete "autoplay.ini"}
-                  {$this show_state kState_RB4DXAutoplayOff}
+                  {$this show_state kState_RB4DXSavingWarn}
                }
             }
             {$this trigger_select_effects}
@@ -282,22 +276,14 @@
             }
             {$this trigger_select_effects}
          )
-         ("Drunk Mode: DISABLED"
-            {$this show_state kState_RB4DXDrunkModeHowTo}
-            {$this trigger_select_effects}
-         )
          (("Drunk Mode: ON" "Drunk Mode: OFF")
-            {set $drunkmode {! $drunkmode}}
+            {set $cheat_option drunkmode}
             {if_else $drunkmode
                {do
-                  {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
-                  {dx_write_null_file "drunkmode.ini"}
-                  RB4DXGP_DATA
+                  {$this show_state kState_RB4DXSavingDisabled}
                }
                {do
-                  {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-                  {dx_file_delete "drunkmode.ini"}
-                  {$this show_state kState_RB4DXAutoplayOff}
+                  {$this show_state kState_RB4DXSavingWarn}
                }
             }
             {$this trigger_select_effects}

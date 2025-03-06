@@ -4,8 +4,7 @@
       {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
-      {local $list_data {($objId UIListCom) get_data_in_column token}
-      }  
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data 
          (overshell_confirm_yes
             {$ui remove_scene "ui/main_menu/main_menu.scene"}
@@ -125,8 +124,7 @@
       {$this setup_confirm_actions "Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
-      {local $list_data {($objId UIListCom) get_data_in_column token}
-      }  
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          (overshell_confirm_yes
             {switch $trackangletype
@@ -169,8 +167,7 @@
       {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" ("Reset" "Edit")}
    )
    (SELECT_MSG
-      {local $list_data {($objId UIListCom) get_data_in_column token}
-      }  
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("Reset"
             {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
@@ -188,13 +185,28 @@
    )
 )
 
-(kState_RB4DXAutoplayHowTo
+(kState_RB4DXSavingWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Autoplay will not work until you download and enable this plugin.
-(DISABLES SAVING)" (overshell_confirm_ok)}
+      {$this setup_confirm_actions "This setting will disable saving until you restart the game. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {if {== $list_data overshell_confirm_yes}
+         {switch $cheat_option
+            (autoplay
+               {set $autoplayenabled TRUE}
+               {dx_write_null_file "autoplay.ini"}
+               {dx_file_delete "saving.ini"}
+            )
+            (drunkmode
+               {set $drunkmode TRUE}
+               {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
+               {dx_write_null_file "drunkmode.ini"}
+               {dx_file_delete "saving.ini"}
+            )
+         }
+      }
       {$this show_state kState_RB4DXGPSettings}
       {$this trigger_select_effects}
    )
@@ -203,47 +215,38 @@
       {$this trigger_cancel_effects}
    )
 )
-(kState_RB4DXAutoplayOn
+(kState_RB4DXSavingDisabled
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "If autoplay is not functioning, make sure you have the \qRB4DX-Autoplay.prx\q plugin enabled in \q/data/GoldHEN/plugins.ini\q.
-(DISABLES SAVING)" (overshell_confirm_ok)}
+      {$this setup_confirm_actions "You will need to restart the game to re-enable saving." (overshell_confirm_ok)}
    )
    (SELECT_MSG
+      {switch $cheat_option
+         (autoplay
+            {set $autoplayenabled FALSE}
+            {dx_file_delete "autoplay.ini"}
+         )
+         (drunkmode
+            {set $drunkmode FALSE}
+            {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+            {dx_file_delete "drunkmode.ini"}
+         )
+      }
       {$this show_state kState_RB4DXGPSettings}
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXGPSettings}
-      {$this trigger_cancel_effects}
-   )
-)
-(kState_RB4DXAutoplayOff
-   (view confirm_action)
-   (enter 
-      {$this setup_confirm_actions "You will need to disable and delete the \qRB4DX-Autoplay.prx\q plugin to re-enable saving." (overshell_confirm_ok)}
-   )
-   (SELECT_MSG
-      {$this show_state kState_RB4DXGPSettings}
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
-      {$this show_state kState_RB4DXGPSettings}
-      {$this trigger_cancel_effects}
-   )
-)
-
-(kState_RB4DXDrunkModeHowTo
-   (view confirm_action)
-   (enter 
-      {$this setup_confirm_actions "You are missing the \qRB4DX-Autoplay.prx\q plugin file. Drunk Mode will not work until you download and enable this plugin.
-(DISABLES SAVING)" (overshell_confirm_ok)}
-   )
-   (SELECT_MSG
-      {$this show_state kState_RB4DXGPSettings}
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
+      {switch $cheat_option
+         (autoplay
+            {set $autoplayenabled FALSE}
+            {dx_file_delete "autoplay.ini"}
+         )
+         (drunkmode
+            {set $drunkmode FALSE}
+            {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
+            {dx_file_delete "drunkmode.ini"}
+         )
+      }
       {$this show_state kState_RB4DXGPSettings}
       {$this trigger_cancel_effects}
    )

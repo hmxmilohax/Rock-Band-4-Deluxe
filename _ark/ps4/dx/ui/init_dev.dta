@@ -290,3 +290,4 @@ UPDATE_SETTINGS
 {if {file_exists "drunkmode.ini"}
    {dx_file_delete "drunkmode.ini"}
 }
+{dx_write_null_file "saving.ini"}
