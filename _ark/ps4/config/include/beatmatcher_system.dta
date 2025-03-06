@@ -56,5 +56,5 @@
 (mercury_switch_filter 
    (any_sign_filter 
       (window 0.5) 
-      (num_frames 1) 
-      (threshold 0.75)))
+      (num_frames {if_else {file_exists "settings/gameplay/tiltsens.dta"} 1 12}) 
+      (threshold {if_else {file_exists "settings/gameplay/tiltsens.dta"} 0.72 0.78})))

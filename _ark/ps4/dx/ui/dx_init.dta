@@ -12,6 +12,7 @@
 {set $nood {file_exists "settings/gameplay/nood.dta"}}
 {set $practiceod {file_exists "settings/gameplay/practiceod.dta"}}
 {set $syncspeeds {file_exists "settings/gameplay/syncspeeds.dta"}}
+{set $tiltsens {file_exists "settings/gameplay/tiltsens.dta"}}
 
 ;visual settings
 {set $blackbg {file_exists "settings/visuals/blackbg.dta"}}

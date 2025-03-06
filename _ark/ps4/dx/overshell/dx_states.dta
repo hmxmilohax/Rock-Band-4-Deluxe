@@ -104,6 +104,7 @@
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
+               {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -113,6 +114,7 @@
          }
          {$this setup_confirm_actions a 
             (
+               {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -125,6 +127,7 @@
             {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
+            {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -151,12 +154,8 @@
          (("Autoplay: OFF" "Autoplay: ON")
             {set $cheat_option autoplay}
             {if_else $autoplayenabled
-               {do
-                  {$this show_state kState_RB4DXSavingDisabled}
-               }
-               {do
-                  {$this show_state kState_RB4DXSavingWarn}
-               }
+               {$this show_state kState_RB4DXSavingDisabled}
+               {$this show_state kState_RB4DXSavingWarn}
             }
             {$this trigger_select_effects}
          )
@@ -279,13 +278,18 @@
          (("Drunk Mode: ON" "Drunk Mode: OFF")
             {set $cheat_option drunkmode}
             {if_else $drunkmode
-               {do
-                  {$this show_state kState_RB4DXSavingDisabled}
-               }
-               {do
-                  {$this show_state kState_RB4DXSavingWarn}
-               }
+               {$this show_state kState_RB4DXSavingDisabled}
+               {$this show_state kState_RB4DXSavingWarn}
             }
+            {$this trigger_select_effects}
+         )
+         (("Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF")
+            {set $tiltsens {! $tiltsens}}
+            {if_else $tiltsens
+               {dx_write_null_file "settings/gameplay/tiltsens.dta"}
+               {dx_file_delete "settings/gameplay/tiltsens.dta"}
+            }
+            {$this show_state kState_RB4DXDelayedEffectWarn}
             {$this trigger_select_effects}
          )
       }
@@ -382,9 +386,7 @@
          (("Miss Sounds: OFF" "Miss Sounds: ON")
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
-               {do
-                  {dx_write_null_file "settings/sfx/nomiss.dta"}
-               }
+               {dx_write_null_file "settings/sfx/nomiss.dta"}
                {dx_file_delete "settings/sfx/nomiss.dta"}
             }
             {$this show_state kState_RB4DXDelayedEffectWarn}
