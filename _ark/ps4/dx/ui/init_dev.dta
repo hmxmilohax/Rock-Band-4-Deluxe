@@ -124,6 +124,9 @@ UPDATE_SETTINGS
 {dx_file_mkdir "ps4/shared"}
 {dx_file_mkdir "ps4/shared/scene"}
 {dx_file_mkdir "ps4/track/shared/gem_track_texture"}
+{dx_file_mkdir "ps4/track/vocals"}
+{dx_file_mkdir "ps4/track/vocals/tubes"}
+{dx_file_mkdir "ps4/track/vocals/tambourine"}
 {dx_file_mkdir "ps4/ui/game/textures"}
 
 #define DELETE_INVALID_NOFLAMES_FILES

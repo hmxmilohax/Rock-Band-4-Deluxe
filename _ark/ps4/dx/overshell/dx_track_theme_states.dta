@@ -14,6 +14,7 @@
          {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}
          {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
          {if_else $gemcolors "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}
+         "Vocal Notes"
       )
    }
 )
@@ -105,6 +106,10 @@
          )
          ("Custom Gem Colors: OFF"
             {$this show_state kState_RB4DXGemColorSettings}
+            {$this trigger_select_effects}
+         )
+         ("Vocal Notes"
+            {$this show_state kState_RB4DXVoxNotesTexSelector}
             {$this trigger_select_effects}
          )
       }
@@ -429,6 +434,37 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {dx_file_delete "ps4/ui/textures/crowd_meter_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/crowd meter/" $list_data ".png_ps4"} "ps4/ui/textures/crowd_meter_ui.png_ps4"}
+      {if_else {$this in_song}
+         {$this show_state kState_RB4DXInGameWarn}
+         {$this show_state kState_RB4DXTrackTheme}
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state kState_RB4DXTrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Vocal Notes Texture Selector
+(kState_RB4DXVoxNotesTexSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/vocal notes/tubes/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist 0}}
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_delete "ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4"}
+      {dx_file_delete "ps4/track/vocals/tambourine/tambourine_c.bmp_ps4"}
+      {dx_file_delete "ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tubes/" $list_data ".png_ps4"} "ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_c.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine normal/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4"}
       {if_else {$this in_song}
          {$this show_state kState_RB4DXInGameWarn}
          {$this show_state kState_RB4DXTrackTheme}
