@@ -174,7 +174,7 @@
 (kState_RB4DXGemTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 4 (Beta)")}
+      {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 4 (Beta)" "Rock Band 1")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -182,10 +182,17 @@
          ("Rock Band 4"
             {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
          )
          ("Rock Band 4 (Beta)"
+            {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_copy "ps4/track/guitar/gem.entity_ps4" "ps4/track/guitar/gem_unlit.entity_ps4"}
             {dx_file_copy "ps4/track/guitar/gem.entity_ps4" "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+         )
+         ("Rock Band 1"
+            {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+            {dx_file_copy "ps4/track/guitar/gem_hopo_util_rb1.bmp_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
          )
       }
       {if_else {$this in_song}
