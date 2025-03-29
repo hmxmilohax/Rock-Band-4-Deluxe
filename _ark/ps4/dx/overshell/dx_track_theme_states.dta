@@ -311,7 +311,7 @@
    (enter
       {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/score/*.png_ps4"}}
-      {remove_elem $texturelist {elem $texturelist             0}}
+      {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
       ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
       ;SET_HIGHWAY_TEX_VAR
@@ -338,7 +338,7 @@
    (enter
       {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/countdown/timer/*.png_ps4"}}
-      {remove_elem $texturelist {elem $texturelist             0}}
+      {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
       ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
       ;SET_HIGHWAY_TEX_VAR
@@ -369,7 +369,7 @@
    (enter
       {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/stars/score_star_frame/*.png_ps4"}}
-      {remove_elem $texturelist {elem $texturelist             0}}
+      {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
       ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
       ;SET_HIGHWAY_TEX_VAR
@@ -420,7 +420,7 @@
    (enter
       {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/crowd meter/*.png_ps4"}}
-      {remove_elem $texturelist {elem $texturelist             0}}
+      {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
       ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
       ;SET_HIGHWAY_TEX_VAR
