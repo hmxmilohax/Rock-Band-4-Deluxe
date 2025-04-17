@@ -15,6 +15,7 @@
          {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
          {if_else $gemcolors "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}
          "Vocal Notes"
+         "Vocal Arrows"
       )
    }
 )
@@ -110,6 +111,10 @@
          )
          ("Vocal Notes"
             {$this show_state dxState_VoxNotesTexSelector}
+            {$this trigger_select_effects}
+         )
+         ("Vocal Arrows"
+            {$this show_state dxState_VoxArrowsTexSelector}
             {$this trigger_select_effects}
          )
       }
@@ -465,6 +470,37 @@
       {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tubes/" $list_data ".png_ps4"} "ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_c.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine normal/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4"}
+      {if_else {$this in_song}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_TrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Vocal Arrows Texture Selector
+(dxState_VoxArrowsTexSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/vocal arrows/1/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist 0}}
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_delete "ps4/ui/textures/vocals/vocal_arrow_1_ui.png_ps4"}
+      {dx_file_delete "ps4/ui/textures/vocals/vocal_arrow_2_ui.png_ps4"}
+      {dx_file_delete "ps4/ui/textures/vocals/vocal_arrow_3_ui.png_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal arrows/1/" $list_data ".png_ps4"} "ps4/ui/textures/vocals/vocal_arrow_1_ui.png_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal arrows/2/" $list_data ".png_ps4"} "ps4/ui/textures/vocals/vocal_arrow_2_ui.png_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/vocal arrows/3/" $list_data ".png_ps4"} "ps4/ui/textures/vocals/vocal_arrow_3_ui.png_ps4"}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
          {$this show_state dxState_TrackTheme}
