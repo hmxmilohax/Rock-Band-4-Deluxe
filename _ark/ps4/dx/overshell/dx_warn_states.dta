@@ -1,4 +1,4 @@
-(kState_RB4DXScreensaverWarn
+(dxState_ScreensaverWarn
    (view confirm_action)
    (enter
       {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
@@ -12,18 +12,18 @@
             {$ui remove_scene "ui/songs/songs.scene"}
          )
          (overshell_confirm_no
-            {$this show_state kState_RB4DXExtras}
+            {$this show_state dxState_Extras}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXExtras}
+      {$this show_state dxState_Extras}
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXDelayedEffectWarn
+(dxState_DelayedEffectWarn
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
@@ -31,19 +31,19 @@
    (SELECT_MSG
       {switch $dx_cur_state
          (gp
-            {$this show_state kState_RB4DXGPSettings}
+            {$this show_state dxState_GPSettings}
          )
          (vis
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_VisSettings}
          )
          (trk
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
          )
          (thm
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
          )
          (sfx
-            {$this show_state kState_RB4DXSFXSettings}
+            {$this show_state dxState_SFXSettings}
          )
       }
       {set $optionaladd FALSE}
@@ -52,26 +52,26 @@
    (on_cancel 
       {switch $dx_cur_state
          (gp
-            {$this show_state kState_RB4DXGPSettings}
+            {$this show_state dxState_GPSettings}
          )
          (vis
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_VisSettings}
          )
          (trk
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
          )
          (thm
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
          )
          (sfx
-            {$this show_state kState_RB4DXSFXSettings}
+            {$this show_state dxState_SFXSettings}
          )
       }
       {set $optionaladd FALSE}
       {$this trigger_cancel_effects}
    )
 )
-(kState_RB4DXInGameWarn
+(dxState_InGameWarn
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
@@ -79,19 +79,19 @@
    (SELECT_MSG
       {switch $dx_cur_state
          (gp
-            {$this show_state kState_RB4DXGPSettings}
+            {$this show_state dxState_GPSettings}
          )
          (vis
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_VisSettings}
          )
          (trk
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
          )
          (thm
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
          )
          (sfx
-            {$this show_state kState_RB4DXSFXSettings}
+            {$this show_state dxState_SFXSettings}
          )
       }
       {$this trigger_select_effects}
@@ -99,26 +99,26 @@
    (on_cancel 
       {switch $dx_cur_state
          (gp
-            {$this show_state kState_RB4DXGPSettings}
+            {$this show_state dxState_GPSettings}
          )
          (vis
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_VisSettings}
          )
          (trk
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
          )
          (thm
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
          )
          (sfx
-            {$this show_state kState_RB4DXSFXSettings}
+            {$this show_state dxState_SFXSettings}
          )
       }
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXAnglesWarn
+(dxState_AnglesWarn
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
@@ -144,24 +144,24 @@
             {set $trackangle TRUE}
             {dx_write_null_file "settings/visuals/trackangle.dta"} 
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
-               {$this show_state kState_RB4DXTrkSettings}
+               {$this show_state dxState_InGameWarn}
+               {$this show_state dxState_TrkSettings}
             }
          )
          (overshell_confirm_no
             {set $trackangletype FALSE}
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrkSettings}
+      {$this show_state dxState_TrkSettings}
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXGemColorConfirm
+(dxState_GemColorConfirm
    (view confirm_action)
    (enter
       {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" ("Reset" "Edit")}
@@ -171,21 +171,21 @@
       {switch $list_data 
          ("Reset"
             {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
          )
          ("Edit"
-            {$this show_state kState_RB4DXGemColorSettings}
+            {$this show_state dxState_GemColorSettings}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXSavingWarn
+(dxState_SavingWarn
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "This setting will disable saving until you restart the game. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
@@ -207,15 +207,15 @@
             )
          }
       }
-      {$this show_state kState_RB4DXGPSettings}
+      {$this show_state dxState_GPSettings}
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXGPSettings}
+      {$this show_state dxState_GPSettings}
       {$this trigger_cancel_effects}
    )
 )
-(kState_RB4DXSavingDisabled
+(dxState_SavingDisabled
    (view confirm_action)
    (enter 
       {$this setup_confirm_actions "You will need to restart the game to re-enable saving." (overshell_confirm_ok)}
@@ -232,7 +232,7 @@
             {dx_file_delete "drunkmode.ini"}
          )
       }
-      {$this show_state kState_RB4DXGPSettings}
+      {$this show_state dxState_GPSettings}
       {$this trigger_select_effects}
    )
    (on_cancel 
@@ -247,7 +247,7 @@
             {dx_file_delete "drunkmode.ini"}
          )
       }
-      {$this show_state kState_RB4DXGPSettings}
+      {$this show_state dxState_GPSettings}
       {$this trigger_cancel_effects}
    )
 )

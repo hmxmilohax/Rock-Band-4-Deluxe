@@ -18,7 +18,7 @@
       )
    }
 )
-(kState_RB4DXTrackTheme
+(dxState_TrackTheme
    (view {$this get_auto_list_view}) 
    (enter
       {set $noshine {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}}
@@ -43,7 +43,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTHM_DATA
             }
             {$this trigger_select_effects}
@@ -63,66 +63,66 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTHM_DATA
             }
             {$this trigger_select_effects}
          )
          ("Highway"
-            {$this show_state kState_RB4DXHWTexSelector}
+            {$this show_state dxState_HWTexSelector}
             {$this trigger_select_effects}
          )
          ("Gem"
-            {$this show_state kState_RB4DXGemTexSelector}
+            {$this show_state dxState_GemTexSelector}
             {$this trigger_select_effects}
          )
          ("Strikeline"
-            {$this show_state kState_RB4DXSLTexSelector}
+            {$this show_state dxState_SLTexSelector}
             {$this trigger_select_effects}
          )
          ("Solo Box"
-            {$this show_state kState_RB4DXSoloBoxTexSelector}
+            {$this show_state dxState_SoloBoxTexSelector}
             {$this trigger_select_effects}
          )
          ("Score"
-            {$this show_state kState_RB4DXScoreTexSelector}
+            {$this show_state dxState_ScoreTexSelector}
             {$this trigger_select_effects}
          )
          ("Countdown"
-            {$this show_state kState_RB4DXCountdownTexSelector}
+            {$this show_state dxState_CountdownTexSelector}
             {$this trigger_select_effects}
          )
          ("Stars"
-            {$this show_state kState_RB4DXStarsTexSelector}
+            {$this show_state dxState_StarsTexSelector}
             {$this trigger_select_effects}
          )
          ("Crowd Meter"
-            {$this show_state kState_RB4DXCrowdMeterTexSelector}
+            {$this show_state dxState_CrowdMeterTexSelector}
             {$this trigger_select_effects}
          )
          ("Custom Gem Colors: ON"
-            {$this show_state kState_RB4DXGemColorConfirm}
+            {$this show_state dxState_GemColorConfirm}
             {$this trigger_select_effects}
          )
          ("Custom Gem Colors: OFF"
-            {$this show_state kState_RB4DXGemColorSettings}
+            {$this show_state dxState_GemColorSettings}
             {$this trigger_select_effects}
          )
          ("Vocal Notes"
-            {$this show_state kState_RB4DXVoxNotesTexSelector}
+            {$this show_state dxState_VoxNotesTexSelector}
             {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXTrkSettings}
+      {$this show_state dxState_TrkSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Highway Texture Selector
-(kState_RB4DXHWTexSelector
+(dxState_HWTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -164,19 +164,19 @@
          }
       }
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Gem Texture Selector
-(kState_RB4DXGemTexSelector
+(dxState_GemTexSelector
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 4 (Beta)" "Rock Band 1")}
@@ -201,19 +201,19 @@
          )
       }
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Smasher/Strikeline Texture Selector
-(kState_RB4DXSLTexSelector
+(dxState_SLTexSelector
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 2")}
@@ -231,19 +231,19 @@
          )
       }
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Gem Color Settings
-(kState_RB4DXGemColorSettings
+(dxState_GemColorSettings
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a ("Green" "Red" "Yellow" "Blue" "Orange")}
@@ -255,18 +255,18 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {set $gemchanged $list_data}
-      {$this show_state kState_RB4DXRGBSelect}
+      {$this show_state dxState_RGBSelect}
       {$this trigger_select_effects}
    )
    (on_cancel
       WRITE_GEM_COLOR_DTAS
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Gem Color Settings
-(kState_RB4DXRGBSelect
+(dxState_RGBSelect
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a ("R" "G" "B")}
@@ -274,17 +274,17 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {set $gemcolchanged $list_data}
-      {$this show_state kState_RB4DXRGBSlider}
+      {$this show_state dxState_RGBSlider}
       {$this trigger_select_effects}
    )
    (on_cancel
-      {$this show_state kState_RB4DXGemColorSettings}
+      {$this show_state dxState_GemColorSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Solo Box Texture Selector
-(kState_RB4DXSoloBoxTexSelector
+(dxState_SoloBoxTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -299,19 +299,19 @@
       {dx_file_delete "ps4/ui/game/textures/frame_a_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/solo box/" $list_data ".png_ps4"} "ps4/ui/game/textures/frame_a_ui.png_ps4"}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Score Box Texture Selector
-(kState_RB4DXScoreTexSelector
+(dxState_ScoreTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -326,19 +326,19 @@
       {dx_file_delete "ps4/ui/game/textures/frame_e_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/score/" $list_data ".png_ps4"} "ps4/ui/game/textures/frame_e_ui.png_ps4"}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Countdown Box Texture Selector
-(kState_RB4DXCountdownTexSelector
+(dxState_CountdownTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -357,19 +357,19 @@
          {dx_file_copy {sprint "ps4/dx/custom_textures/countdown/get ready/" $list_data ".png_ps4"} "ps4/ui/game/textures/frame_f_ui.png_ps4"}
       ;}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Stars Texture Selector
-(kState_RB4DXStarsTexSelector
+(dxState_StarsTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -408,19 +408,19 @@
          {dx_file_copy {sprint "ps4/dx/custom_textures/stars/score_star_crimson_fill/" $list_data ".png_ps4"} "ps4/ui/game/textures/star_red_ui.bmp_ps4"}
       ;}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Crowd Meter Texture Selector
-(kState_RB4DXCrowdMeterTexSelector
+(dxState_CrowdMeterTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -435,19 +435,19 @@
       {dx_file_delete "ps4/ui/textures/crowd_meter_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/crowd meter/" $list_data ".png_ps4"} "ps4/ui/textures/crowd_meter_ui.png_ps4"}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Vocal Notes Texture Selector
-(kState_RB4DXVoxNotesTexSelector
+(dxState_VoxNotesTexSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -466,13 +466,13 @@
       {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_c.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/vocal notes/tambourine normal/" $list_data ".png_ps4"} "ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4"}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXTrackTheme}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_TrackTheme}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrackTheme}
+      {$this show_state dxState_TrackTheme}
       {$this trigger_cancel_effects}
    )
 )

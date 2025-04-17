@@ -10,7 +10,7 @@
          (
             "Instrument Options"
             "Gameplay Settings"
-            "SFX Settings"
+            "Audio & SFX"
             "Visual Settings"
             "Track Settings"
             "Controller Settings"
@@ -22,7 +22,7 @@
             "Instrument Options"
             "Song Speed"
             "Gameplay Settings"
-            "SFX Settings"
+            "Audio & SFX"
             "Visual Settings"
             "Track Settings"
             "Controller Settings"
@@ -32,7 +32,7 @@
       }
    }
 )
-(kState_RB4DXMain
+(dxState_DeluxeSettings
    (view {$this get_auto_list_view}) 
    (enter
       RB4DXMAIN_DATA
@@ -44,30 +44,30 @@
             {$this show_instrument_options}
             {$this trigger_select_effects})
          ("Song Speed"
-            {$this show_state kState_RB4DXSongSpeed}
+            {$this show_state dxState_SongSpeed}
             {$this trigger_select_effects})
          ("Gameplay Settings"
-            {$this show_state kState_RB4DXGPSettings}
+            {$this show_state dxState_GPSettings}
             {$this trigger_select_effects}
          )
-         ("SFX Settings"
-            {$this show_state kState_RB4DXSFXSettings}
+         ("Audio & SFX"
+            {$this show_state dxState_SFXSettings}
             {$this trigger_select_effects}
          )
          ("Visual Settings"
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_VisSettings}
             {$this trigger_select_effects}
          )
          ("Track Settings"
-            {$this show_state kState_RB4DXTrkSettings}
+            {$this show_state dxState_TrkSettings}
             {$this trigger_select_effects}
          )
          ("Controller Settings"
-            {$this show_state kState_RB4DXControllerSettings}
+            {$this show_state dxState_ControllerSettings}
             {$this trigger_select_effects}
          )
          ("Extras"
-            {$this show_state kState_RB4DXExtras}
+            {$this show_state dxState_Extras}
             {$this trigger_select_effects}
          )
          ("writefile"
@@ -76,10 +76,10 @@
             {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
          )
          (colsel
-            {$this show_state kState_RB4DXColorSelector}
+            {$this show_state dxState_ColorSelector}
             {$this trigger_select_effects})
          ("lost menus"
-            {$this show_state kState_RB4DXLostMenus}
+            {$this show_state dxState_LostMenus}
             {$this trigger_select_effects})
          ("test"
             {set_system_settings}
@@ -138,7 +138,7 @@
       }
    }
 )
-(kState_RB4DXGPSettings
+(dxState_GPSettings
    (view {$this get_auto_list_view}) 
    (enter
       {set $dx_cur_state gp}
@@ -148,14 +148,14 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("Enter Calibration Numbers"
-            {$this show_state kState_RB4DXCalibrationSelector}
+            {$this show_state dxState_CalibrationSelector}
             {$this trigger_select_effects}
          )
          (("Autoplay: OFF" "Autoplay: ON")
             {set $cheat_option autoplay}
             {if_else $autoplayenabled
-               {$this show_state kState_RB4DXSavingDisabled}
-               {$this show_state kState_RB4DXSavingWarn}
+               {$this show_state dxState_SavingDisabled}
+               {$this show_state dxState_SavingWarn}
             }
             {$this trigger_select_effects}
          )
@@ -216,7 +216,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXGP_DATA
             }
             {$this trigger_select_effects}
@@ -236,7 +236,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXGP_DATA
             }
             {$this trigger_select_effects}
@@ -258,7 +258,7 @@
                {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXGP_DATA
             }
             {$this trigger_select_effects}
@@ -270,7 +270,7 @@
                {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXGP_DATA
             }
             {$this trigger_select_effects}
@@ -278,8 +278,8 @@
          (("Drunk Mode: ON" "Drunk Mode: OFF")
             {set $cheat_option drunkmode}
             {if_else $drunkmode
-               {$this show_state kState_RB4DXSavingDisabled}
-               {$this show_state kState_RB4DXSavingWarn}
+               {$this show_state dxState_SavingDisabled}
+               {$this show_state dxState_SavingWarn}
             }
             {$this trigger_select_effects}
          )
@@ -289,20 +289,20 @@
                {dx_write_null_file "settings/gameplay/tiltsens.dta"}
                {dx_file_delete "settings/gameplay/tiltsens.dta"}
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Calibration selector
-(kState_RB4DXCalibrationSelector
+(dxState_CalibrationSelector
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a
@@ -315,13 +315,13 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data 
-         ("Video" {$this show_state kState_RB4DXVideoCalibration})
-         ("Audio" {$this show_state kState_RB4DXAudioCalibration})
+         ("Video" {$this show_state dxState_VideoCalibration})
+         ("Audio" {$this show_state dxState_AudioCalibration})
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXGPSettings}
+      {$this show_state dxState_GPSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -342,7 +342,7 @@
       )
    }
 )
-(kState_RB4DXSFXSettings
+(dxState_SFXSettings
    (view {$this get_auto_list_view}) 
    (enter
       {set $dx_cur_state sfx}
@@ -378,7 +378,7 @@
                )
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXSFX_DATA
             }
             {$this trigger_select_effects}
@@ -389,7 +389,7 @@
                {dx_write_null_file "settings/sfx/nomiss.dta"}
                {dx_file_delete "settings/sfx/nomiss.dta"}
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
          (("Whammy FX: OFF" "Whammy FX: ON")
@@ -405,7 +405,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXSFX_DATA
             }
             {$this trigger_select_effects}
@@ -416,14 +416,14 @@
                {dx_write_null_file "settings/sfx/speedpitch.dta"}
                {dx_file_delete "settings/sfx/speedpitch.dta"}
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -458,7 +458,7 @@
       }
    }
 )
-(kState_RB4DXVisSettings
+(dxState_VisSettings
    (view {$this get_auto_list_view}) 
    (enter
       {set $crowdmeter {dx_file_exists "ps4/ui/game/crowd_meter.entity_ps4"}}
@@ -474,7 +474,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("Select Venue"
-            {$this show_state kState_RB4DXVenueSelector}
+            {$this show_state dxState_VenueSelector}
             {$this trigger_select_effects}
          )
          (("60 FPS Venues: ON" "60 FPS Venues: OFF")
@@ -483,7 +483,7 @@
                {dx_write_null_file "settings/visuals/60fpsbg.dta"}
                {dx_file_delete "settings/visuals/60fpsbg.dta"}
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
          (("Crowd Meter: ON" "Crowd Meter: OFF")
@@ -499,7 +499,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXVIS_DATA
             }
             {$this trigger_select_effects}
@@ -511,7 +511,7 @@
                {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXVIS_DATA
             }
             {$this trigger_select_effects}
@@ -523,7 +523,7 @@
                {dx_file_rename "ps4/ui/game/game.layout_ps4" "ps4/ui/game/game1.layout_ps4"}
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXVIS1_DATA
             }
             {$this trigger_select_effects}
@@ -549,13 +549,13 @@
             }
             {dx_file_delete "settings/visuals/songtitle.dta"}
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXVIS1_DATA
             }
             {$this trigger_select_effects}
          )
          ("Song Title Always: OFF"
-            {$this show_state kState_RB4DXSongTitleSelector}
+            {$this show_state dxState_SongTitleSelector}
             {$this trigger_select_effects}
          )
          (("Menu BGs: OFF" "Menu BGs: ON")
@@ -570,15 +570,15 @@
                   {dx_file_delete "settings/visuals/menubg.dta"}
                }
             }
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
          ("Overshell Theme"
-            {$this show_state kState_RB4DXMenuTheme}
+            {$this show_state dxState_MenuTheme}
             {$this trigger_select_effects}
          )
          ("UI Theme"
-            {$this show_state kState_RB4DXUITheme}
+            {$this show_state dxState_UITheme}
             {$this trigger_select_effects}
          )
       }
@@ -597,13 +597,13 @@
    ; )
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Venue Selector
-(kState_RB4DXVenueSelector
+(dxState_VenueSelector
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a
@@ -648,7 +648,7 @@
          }
          {switch $list_data
             ("Static Background"
-               {$this show_state kState_RB4DXStaticBackgroudSelector}
+               {$this show_state dxState_StaticBackgroudSelector}
             )
             ("The Big Cassettes"
                {dx_write_null_file "settings/venue/big_club_toys.dta"}
@@ -685,18 +685,18 @@
       }
       {unless {== $list_data "Static Background"}
          {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
-         {$this show_state kState_RB4DXDelayedEffectWarn}
+         {$this show_state dxState_DelayedEffectWarn}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings}
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Static Background Selector
-(kState_RB4DXStaticBackgroudSelector
+(dxState_StaticBackgroudSelector
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
@@ -715,24 +715,24 @@
       {dx_file_copy {sprint "ps4/dx/custom_textures/backgrounds/" $list_data ".png_ps4"} "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
       {if_else {file_exists "settings/venue/none.dta"}
          {if_else {$this in_song}
-            {$this show_state kState_RB4DXInGameWarn}
-            {$this show_state kState_RB4DXVisSettings}
+            {$this show_state dxState_InGameWarn}
+            {$this show_state dxState_VisSettings}
          }
          {do
             {dx_write_null_file "settings/venue/none.dta"}
-            {$this show_state kState_RB4DXDelayedEffectWarn}
+            {$this show_state dxState_DelayedEffectWarn}
          }
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVenueSelector}
+      {$this show_state dxState_VenueSelector}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Song Title Type Selector
-(kState_RB4DXSongTitleSelector
+(dxState_SongTitleSelector
    (view confirm_action)
    (enter
       {$this setup_confirm_actions "What location do you want the song title at?" ("Vanilla" "Top Left" "Acai; Below Twitch Chat")}
@@ -759,19 +759,19 @@
       {set $songtitle TRUE}
       {dx_write_null_file "settings/visuals/songtitle.dta"}
       {if_else {$this in_song}
-         {$this show_state kState_RB4DXInGameWarn}
-         {$this show_state kState_RB4DXVisSettings}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_VisSettings}
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings}
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Menu Theme
-(kState_RB4DXMenuTheme
+(dxState_MenuTheme
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a
@@ -793,17 +793,17 @@
             {dx_file_rename "ps4/ui/overshell/slot_prerivals.entity_ps4" "ps4/ui/overshell/slot.entity_ps4"}
          )
       }
-      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings}
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;UI Theme
-(kState_RB4DXUITheme
+(dxState_UITheme
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a
@@ -829,11 +829,11 @@
             }
          )
       }
-      {$this show_state kState_RB4DXDelayedEffectWarn}
+      {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXVisSettings}
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -853,7 +853,7 @@
       )
    }
 )
-(kState_RB4DXTrkSettings
+(dxState_TrkSettings
    (view {$this get_auto_list_view}) 
    (enter
       {set $trackangle {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}}
@@ -890,13 +890,13 @@
             }
             {dx_file_delete "settings/visuals/trackangle.dta"}
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
          ("Custom Track Angle: OFF"
-            {$this show_state kState_RB4DXTrackAngleSelector}
+            {$this show_state dxState_TrackAngleSelector}
             {$this trigger_select_effects}
          )
          (("Flames: OFF" "Flames: ON")
@@ -912,7 +912,7 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
@@ -924,7 +924,7 @@
                {dx_file_delete "ps4/shared/scene/antialias.scene_ps4"}
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
@@ -942,34 +942,34 @@
                }
             }
             {if_else {$this in_song}
-               {$this show_state kState_RB4DXInGameWarn}
+               {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
          ("Track Curvature"
-            {$this show_state kState_RB4DXTrackCurve}
+            {$this show_state dxState_TrackCurve}
             {$this trigger_select_effects}
          )
          ("Highway Length"
-            {$this show_state kState_RB4DXHighwayLength}
+            {$this show_state dxState_HighwayLength}
             {$this trigger_select_effects}
          )
          ("Track Theme"
-            {$this show_state kState_RB4DXTrackTheme}
+            {$this show_state dxState_TrackTheme}
             {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
       {set $dx_cur_state FALSE}
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )
 
 ;Track Angle Type Selector
-(kState_RB4DXTrackAngleSelector
+(dxState_TrackAngleSelector
    (view confirm_action)
    (enter
       {$this setup_confirm_actions "Which Track Angle do you want?" ("Rock Revolution" "Rock Band 2" "Rock Band 3")}
@@ -979,21 +979,21 @@
       {switch $list_data 
          ("Rock Revolution"
             {set $trackangletype rr}
-            {$this show_state kState_RB4DXAnglesWarn}
+            {$this show_state dxState_AnglesWarn}
          )
          ("Rock Band 2"
             {set $trackangletype rb2}
-            {$this show_state kState_RB4DXAnglesWarn}
+            {$this show_state dxState_AnglesWarn}
          )
          ("Rock Band 3"
             {set $trackangletype rb3}
-            {$this show_state kState_RB4DXAnglesWarn}
+            {$this show_state dxState_AnglesWarn}
          )
       }
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state kState_RB4DXTrkSettings}
+      {$this show_state dxState_TrkSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -1017,7 +1017,7 @@
       }
    }
 )
-(kState_RB4DXExtras
+(dxState_Extras
    (view {$this get_auto_list_view})
    (enter
       {set $faststart {dx_file_exists "ps4/ui/startup/mnemonix.bk2"}}
@@ -1027,7 +1027,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data
          ("Screensaver"
-            {$this show_state kState_RB4DXScreensaverWarn}
+            {$this show_state dxState_ScreensaverWarn}
             {$this trigger_select_effects})
          (("Fast Start: ON" "Fast Start: OFF")
             {set $faststart {! $faststart}}
@@ -1056,7 +1056,7 @@
       }
    ) 
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )

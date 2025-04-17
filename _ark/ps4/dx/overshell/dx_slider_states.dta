@@ -1,4 +1,4 @@
-(kState_RB4DXSongSpeed
+(dxState_SongSpeed
    (view confirm_action) 
    (enter 
       {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
@@ -26,11 +26,11 @@
       {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
       {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
       SET_TRACK_SPEEDS
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})
 )
 
-(kState_RB4DXVideoCalibration
+(dxState_VideoCalibration
    (view confirm_action) 
    (enter 
       {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
@@ -58,12 +58,12 @@
    )
    (on_cancel 
       {write_file "data:/GoldHEN/RB4DX/videocalib.ini" {array ({get_video_calibration})}}
-      {$this show_state kState_RB4DXCalibrationSelector}
+      {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXAudioCalibration
+(dxState_AudioCalibration
    (view confirm_action) 
    (enter 
       {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
@@ -91,12 +91,12 @@
    )
    (on_cancel 
       {write_file "data:/GoldHEN/RB4DX/audiocalib.ini" {array ({get_audio_calibration})}}
-      {$this show_state kState_RB4DXCalibrationSelector}
+      {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
 )
 
-(kState_RB4DXTrackCurve
+(dxState_TrackCurve
    (view confirm_action) 
    (enter 
       {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
@@ -123,11 +123,11 @@
 
          })
    (on_cancel 
-      {$this show_state kState_RB4DXTrkSettings}
+      {$this show_state dxState_TrkSettings}
       {$this trigger_cancel_effects})
 )
 
-(kState_RB4DXHighwayLength
+(dxState_HighwayLength
    (view confirm_action) 
    (enter 
       {$this setup_confirm_actions
@@ -220,7 +220,7 @@
 
          })
    (on_cancel 
-      {$this show_state kState_RB4DXTrkSettings}
+      {$this show_state dxState_TrkSettings}
       {$this trigger_cancel_effects})
 )
 
@@ -564,7 +564,7 @@
       )
    }
 )
-(kState_RB4DXRGBSlider
+(dxState_RGBSlider
    (view confirm_action) 
    (enter 
       RGB_DATA
@@ -587,6 +587,6 @@
       }
    )
    (on_cancel 
-      {$this show_state kState_RB4DXRGBSelect}
+      {$this show_state dxState_RGBSelect}
       {$this trigger_cancel_effects})
 )

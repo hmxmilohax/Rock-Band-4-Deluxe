@@ -1,4 +1,4 @@
-(kState_RB4DXControllerSettings
+(dxState_ControllerSettings
    (view {$this get_auto_list_view}) 
    (enter
       {$this setup_confirm_actions a 
@@ -12,15 +12,15 @@
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
          ("Change instrument type"
-            {$this show_state kState_RB4DXSlotOverride}
+            {$this show_state dxState_SlotOverride}
          )
          ("Change pad bindings"
-            {$this show_state kState_RB4DXBindingOverride}
+            {$this show_state dxState_BindingOverride}
          )
       }
    ) 
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -46,7 +46,7 @@
       )
    }
 )
-(kState_RB4DXSlotOverride
+(dxState_SlotOverride
    (view confirm_action) 
    (enter
       RB4DXSLOT_DATA
@@ -57,28 +57,28 @@
       {switch $list_data 
          (("guitar: guitar" "guitar: drums" "guitar: vocals")
             {set $slot_changed gtr}
-            {$this show_state kState_RB4DXSlotChooser}
+            {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
          (("drums: guitar" "drums: drums" "drums: vocals")
             {set $slot_changed drum}
-            {$this show_state kState_RB4DXSlotChooser}
+            {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
          (("vocals: guitar" "vocals: drums" "vocals: vocals")
             {set $slot_changed vox}
-            {$this show_state kState_RB4DXSlotChooser}
+            {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
       }
    ) 
    (on_cancel 
-      {$this show_state kState_RB4DXMain}
+      {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects}
       {set $slotentered FALSE}
    )
 )
-(kState_RB4DXSlotChooser
+(dxState_SlotChooser
    (view confirm_action) 
    (enter
       {$this setup_confirm_actions "Select the controller type you want to change to:"
@@ -115,11 +115,11 @@
    )
    (on_cancel 
       {set $slot_changed FALSE}
-      {$this show_state kState_RB4DXSlotOverride}
+      {$this show_state dxState_SlotOverride}
       {$this trigger_cancel_effects}
    )
 )
-(kState_RB4DXBindingOverride
+(dxState_BindingOverride
    (view {$this get_auto_list_view}) 
    (enter
       {$this setup_confirm_actions a 
@@ -161,11 +161,11 @@
       SET_PAD_BINDING_VAR
       SET_PAD_BINDING_HOOK
       {$overshell update_all}
-      {$this show_state kState_RB4DXControllerSettings}
+      {$this show_state dxState_ControllerSettings}
       {$this trigger_select_effects}
    ) 
    (on_cancel 
-      {$this show_state kState_RB4DXControllerSettings}
+      {$this show_state dxState_ControllerSettings}
       {$this trigger_cancel_effects}
    )
 )
