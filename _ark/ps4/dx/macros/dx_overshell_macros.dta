@@ -1,3 +1,20 @@
+#define AUTO_LIST_VIEW
+(
+	{local $ui_list 
+        {$this get_ui_list}} 
+    {local $list_length 
+        {$ui_list get_num_rows}} 
+    {if_else 
+        {> $list_length 5}
+        list_long 
+        {if_else 
+            {> $list_length 3}
+            list_medium
+            list_short
+        }
+    }
+)
+
 #define TRACKANGLE_CHECK
 (
 	{set $trackangletype

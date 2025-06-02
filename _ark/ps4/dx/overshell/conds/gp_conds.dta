@@ -1,0 +1,3074 @@
+{cond
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& $instafail {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: ON'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} $toughcrowd {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: ON'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} $tiltsens {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: ON'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} $nood {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: OFF'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} $practiceod {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: ON'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} $syncspeeds {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: ON'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} $calibrationmode {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: ON'
+      'Precision Mode: OFF'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} $precisionmode }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: ON'
+    )}
+  )
+  ({&& {! $instafail} {! $toughcrowd} {! $tiltsens} {! $nood} {! $practiceod} {! $syncspeeds} {! $calibrationmode} {! $precisionmode} }
+    {$this setup_confirm_actions a (
+      'Insta Fail: OFF'
+      'Tough Crowd: OFF'
+      'Increased Tilt Sensitivity: OFF'
+      'Overdrive Gain: ON'
+      'OD in Practice: OFF'
+      'Sync Difficulty Speeds: OFF'
+      'Calibration Mode: OFF'
+      'Precision Mode: OFF'
+    )}
+  )
+}

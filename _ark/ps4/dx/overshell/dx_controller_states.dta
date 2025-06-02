@@ -1,13 +1,5 @@
 (dxState_ControllerSettings
-   (view 
-      {local $ui_list 
-         {$this get_ui_list }} 
-      {local $list_length 
-         {$ui_list get_num_rows }} 
-      {if_else 
-         {> $list_length 5 }list_long 
-         {if_else 
-            {> $list_length 3 }list_medium list_short }}) 
+   (view AUTO_LIST_VIEW) 
    (enter
       {$this setup_confirm_actions a 
       (
@@ -36,22 +28,27 @@
 (
    {$this setup_confirm_actions 'Select the controller type you want to change:'
       (
-         {switch $gtrslt
-            (gtr 'guitar: guitar')
-            (drum 'guitar: drums')
-            (vox 'guitar: vocals')
-         }
-         {switch $drmslt
-            (gtr 'drums: guitar')
-            (drum 'drums: drums')
-            (vox 'drums: vocals')
-         }
-         {switch $voxslt
-            (gtr 'vocals: guitar')
-            (drum 'vocals: drums')
-            (vox 'vocals: vocals')
-         }
+         'guitar'
+         'drums'
+         'vocals'
       )
+      ; (
+      ;    {switch $gtrslt
+      ;       (gtr 'guitar: guitar')
+      ;       (drum 'guitar: drums')
+      ;       (vox 'guitar: vocals')
+      ;    }
+      ;    {switch $drmslt
+      ;       (gtr 'drums: guitar')
+      ;       (drum 'drums: drums')
+      ;       (vox 'drums: vocals')
+      ;    }
+      ;    {switch $voxslt
+      ;       (gtr 'vocals: guitar')
+      ;       (drum 'vocals: drums')
+      ;       (vox 'vocals: vocals')
+      ;    }
+      ; )
    }
 )
 (dxState_SlotOverride
@@ -63,17 +60,17 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         (('guitar: guitar' 'guitar: drums' 'guitar: vocals')
+         (('guitar' 'guitar: guitar' 'guitar: drums' 'guitar: vocals')
             {set $slot_changed gtr}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
-         (('drums: guitar' 'drums: drums' 'drums: vocals')
+         (('drums'  'drums: guitar' 'drums: drums' 'drums: vocals')
             {set $slot_changed drum}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
-         (('vocals: guitar' 'vocals: drums' 'vocals: vocals')
+         (('vocals'  'vocals: guitar' 'vocals: drums' 'vocals: vocals')
             {set $slot_changed vox}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
@@ -128,15 +125,7 @@
    )
 )
 (dxState_BindingOverride
-   (view 
-      {local $ui_list 
-         {$this get_ui_list }} 
-      {local $list_length 
-         {$ui_list get_num_rows }} 
-      {if_else 
-         {> $list_length 5 }list_long 
-         {if_else 
-            {> $list_length 3 }list_medium list_short }}) 
+   (view AUTO_LIST_VIEW) 
    (enter
       {$this setup_confirm_actions a 
       (

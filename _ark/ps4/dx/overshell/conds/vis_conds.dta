@@ -1,0 +1,82 @@
+{cond
+   ({&& $60fpsbg $crowdmeter {! $noui}}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: ON'
+            'Crowd Meter: OFF'
+            'HUD: ON'
+         )
+      }
+   )
+   ({&& $60fpsbg {! $crowdmeter} $noui}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: ON'
+            'Crowd Meter: ON'
+            'HUD: OFF'
+         )
+      }
+   )
+   ({&& {! $60fpsbg} $crowdmeter $noui}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: OFF'
+            'Crowd Meter: OFF'
+            'HUD: OFF'
+         )
+      }
+   )
+   ({&& {! $60fpsbg} {! $crowdmeter} $noui}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: OFF'
+            'Crowd Meter: ON'
+            'HUD: OFF'
+         )
+      }
+   )
+   ({&& {! $60fpsbg} $crowdmeter {! $noui}}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: OFF'
+            'Crowd Meter: OFF'
+            'HUD: ON'
+         )
+      }
+   )
+   ({&& $60fpsbg {! $crowdmeter} {! $noui}}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: ON'
+            'Crowd Meter: ON'
+            'HUD: ON'
+         )
+      }
+   )
+   ({&& {! $60fpsbg} {! $crowdmeter} {! $noui}}
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: OFF'
+            'Crowd Meter: ON'
+            'HUD: ON'
+         )
+      }
+   )
+   (TRUE
+      {$this setup_confirm_actions a 
+         (
+            'Select Venue'
+            '60 FPS Venues: ON'
+            'Crowd Meter: OFF'
+            'HUD: OFF'
+         )
+      }
+   )
+}

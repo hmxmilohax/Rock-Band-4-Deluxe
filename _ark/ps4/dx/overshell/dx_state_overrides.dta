@@ -153,15 +153,7 @@
 )
 (kState_VenueMetaMenu 
    (view 
-      
-      {local $ui_list 
-         {$this get_ui_list }} 
-      {local $list_length 
-         {$ui_list get_num_rows }} 
-      {if_else 
-         {> $list_length 5 }list_long 
-         {if_else 
-            {> $list_length 3 }list_medium list_short }}
+      AUTO_LIST_VIEW
    ) 
    (enter 
       {$this setup_venue_meta_list}
@@ -274,15 +266,7 @@
       {$this reset_list_focus }))
 
 (kState_Options 
-   (view 
-      {local $ui_list 
-         {$this get_ui_list }} 
-      {local $list_length 
-         {$ui_list get_num_rows }} 
-      {if_else 
-         {> $list_length 5 }list_long 
-         {if_else 
-            {> $list_length 3 }list_medium list_short }}) 
+   (view AUTO_LIST_VIEW) 
    (enter 
       {$this setup_options_list $this } 
       {$this end_char_management_session } 
