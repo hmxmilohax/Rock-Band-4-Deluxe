@@ -1,30 +1,30 @@
 (dxState_SongSpeed
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+      {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("+"
+         ('+'
             {set $speedmod {+ $speedmod 5}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
          )
-         ("Reset"
+         ('Reset'
             {set $speedmod 100}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
          )
-         ("-"
+         ('-'
             {unless {< {- $speedmod 5} 100}
                {set $speedmod {- $speedmod 5}}
             }
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
          )
 
          })
    (on_cancel 
       {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+      {write_file 'data:/GoldHEN/RB4DX/speedmod.ini' {array ({/ $speedmod 100})}}
       SET_TRACK_SPEEDS
       {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})
@@ -33,31 +33,31 @@
 (dxState_VideoCalibration
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
+      {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("+"
+         ('+'
             {unless {< {- {get_video_calibration} 1} -300}
                {set_video_calibration {- {get_video_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
          )
-         ("Reset"
+         ('Reset'
             {set_video_calibration 0}
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
          )
-         ("-"
+         ('-'
             {unless {> {+ {get_video_calibration} 1} 300}
                {set_video_calibration {+ {get_video_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
          )
       }
    )
    (on_cancel 
-      {write_file "data:/GoldHEN/RB4DX/videocalib.ini" {array ({get_video_calibration})}}
+      {write_file 'data:/GoldHEN/RB4DX/videocalib.ini' {array ({get_video_calibration})}}
       {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
@@ -66,31 +66,31 @@
 (dxState_AudioCalibration
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
+      {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("+"
+         ('+'
             {unless {< {- {get_audio_calibration} 1} -300}
                {set_audio_calibration {- {get_audio_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
          )
-         ("Reset"
+         ('Reset'
             {set_audio_calibration 0}
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
          )
-         ("-"
+         ('-'
             {unless {> {+ {get_audio_calibration} 1} 300}
                {set_audio_calibration {+ {get_audio_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
          )
       }
    )
    (on_cancel 
-      {write_file "data:/GoldHEN/RB4DX/audiocalib.ini" {array ({get_audio_calibration})}}
+      {write_file 'data:/GoldHEN/RB4DX/audiocalib.ini' {array ({get_audio_calibration})}}
       {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
@@ -99,26 +99,26 @@
 (dxState_TrackCurve
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+      {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("-"
+         ('-'
             {unless {> {+ $track_curve 0.05} 1.5}
                {set $track_curve {+ $track_curve 0.05}}
             }
-            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
          )
-         ("Reset"
+         ('Reset'
             {set $track_curve 1}
-            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
          )
-         ("+"
+         ('+'
             {unless {< {- $track_curve 0.05} 0.45}
                {set $track_curve {- $track_curve 0.05}}
             }
-            {$this setup_confirm_actions {sprintf "Track Curve: %.2fX" {+ {* $track_curve -2} 3}} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
          )
 
          })
@@ -132,89 +132,89 @@
    (enter 
       {$this setup_confirm_actions
          {sprintf 
-            "Highway Length: %.2fX" 
+            'Highway Length: %.2fX' 
             {if_else {> $hwlength 1}
                {+ {* $hwlength -0.333333333333333} 1.333333333333333}
                {+ {* $hwlength -1.25} 2.25}
             }
             $hwlength
          }
-         ("+" "Reset" "-")
+         ('+' 'Reset' '-')
       }
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("-"
+         ('-'
             {unless {> {+ $hwlength 0.05} 2.54}
                {set $hwlength {+ $hwlength 0.05}}
             }
             {if_else {< $hwlength 0.74}
-               {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                  {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                     {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
+                  {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+                     {dx_file_rename 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
                   }
                }
-               {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                  {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                     {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+                  {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
+                     {dx_file_rename 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
                   }
                }
             }
             {$this setup_confirm_actions
                {sprintf 
-                  "Highway Length: %.2fX" 
+                  'Highway Length: %.2fX' 
                   {if_else {> $hwlength 1}
                      {+ {* $hwlength -0.333333333333333} 1.333333333333333}
                      {+ {* $hwlength -1.25} 2.25}
                   }
                }
-               ("+" "Reset" "-")
+               ('+' 'Reset' '-')
             }
          )
-         ("Reset"
+         ('Reset'
             {set $hwlength 1}
-            {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-               {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                  {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+            {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+               {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
+                  {dx_file_rename 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
                }
             }
             {$this setup_confirm_actions
                {sprintf 
-                  "Highway Length: %.2fX" 
+                  'Highway Length: %.2fX' 
                   {if_else {> $hwlength 1}
                      {+ {* $hwlength -0.333333333333333} 1.333333333333333}
                      {+ {* $hwlength -1.25} 2.25}
                   }
                }
-               ("+" "Reset" "-")
+               ('+' 'Reset' '-')
             }
          )
-         ("+"
+         ('+'
             {unless {< {- $hwlength 0.05} 0.56}
                {set $hwlength {- $hwlength 0.05}}
             }
             {if_else {< $hwlength 0.74}
-               {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                  {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                     {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+               {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
+                  {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+                     {dx_file_rename 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
                   }
                }
-               {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                  {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
-                     {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+               {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+                  {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
+                     {dx_file_rename 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
                   }
                }
             }
             {$this setup_confirm_actions
                {sprintf 
-                  "Highway Length: %.2fX" 
+                  'Highway Length: %.2fX' 
                   {if_else {> $hwlength 1}
                      {+ {* $hwlength -0.333333333333333} 1.333333333333333}
                      {+ {* $hwlength -1.25} 2.25}
                   }
                }
-               ("+" "Reset" "-")
+               ('+' 'Reset' '-')
             }
          )
 
@@ -227,68 +227,68 @@
 #define RGB_DATA
 (
    {switch $gemchanged
-      ("Green"
+      ('Green'
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgr} ('+' '0' '-')}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgg} ('+' '0' '-')}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgb} ('+' '0' '-')}
             )
          }
       )
-      ("Red"
+      ('Red'
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrr} ('+' '0' '-')}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrg} ('+' '0' '-')}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrb} ('+' '0' '-')}
             )
          }
       )
-      ("Yellow"
+      ('Yellow'
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyr} ('+' '0' '-')}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyg} ('+' '0' '-')}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyb} ('+' '0' '-')}
             )
          }
       )
-      ("Blue"
+      ('Blue'
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbr} ('+' '0' '-')}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbg} ('+' '0' '-')}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbb} ('+' '0' '-')}
             )
          }
       )
-      ("Orange"
+      ('Orange'
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolor} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolor} ('+' '0' '-')}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolog} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolog} ('+' '0' '-')}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolob} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolob} ('+' '0' '-')}
             )
          }
       )
@@ -297,7 +297,7 @@
 #define RGB_ADD
 (
    {switch $gemchanged
-      ("Green"
+      ('Green'
          {switch $gemcolchanged
             (R
                {unless {> {+ $gemcolgr 1} 255}
@@ -316,7 +316,7 @@
             )
          }
       )
-      ("Red"
+      ('Red'
          {switch $gemcolchanged
             (R
                {unless {> {+ $gemcolrr 1} 255}
@@ -335,7 +335,7 @@
             )
          }
       )
-      ("Yellow"
+      ('Yellow'
          {switch $gemcolchanged
             (R
                {unless {> {+ $gemcolyr 1} 255}
@@ -354,7 +354,7 @@
             )
          }
       )
-      ("Blue"
+      ('Blue'
          {switch $gemcolchanged
             (R
                {unless {> {+ $gemcolbr 1} 255}
@@ -373,7 +373,7 @@
             )
          }
       )
-      ("Orange"
+      ('Orange'
          {switch $gemcolchanged
             (R
                {unless {> {+ $gemcolor 1} 255}
@@ -397,7 +397,7 @@
 #define RGB_SUB
 (
    {switch $gemchanged
-      ("Green"
+      ('Green'
          {switch $gemcolchanged
             (R
                {unless {< {- $gemcolgr 1} 0}
@@ -416,7 +416,7 @@
             )
          }
       )
-      ("Red"
+      ('Red'
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolrr 1} 0}
@@ -435,7 +435,7 @@
             )
          }
       )
-      ("Yellow"
+      ('Yellow'
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolyr 1} 0}
@@ -454,7 +454,7 @@
             )
          }
       )
-      ("Blue"
+      ('Blue'
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolbr 1} 0}
@@ -473,7 +473,7 @@
             )
          }
       )
-      ("Orange"
+      ('Orange'
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolor 1} 0}
@@ -497,7 +497,7 @@
 #define RGB_RESET
 (
    {switch $gemchanged
-      ("Green"
+      ('Green'
          {switch $gemcolchanged
             (R
                {set $gemcolgr 0}
@@ -510,7 +510,7 @@
             )
          }
       )
-      ("Red"
+      ('Red'
          {switch $gemcolchanged
             (R
                {set $gemcolrr 0}
@@ -523,7 +523,7 @@
             )
          }
       )
-      ("Yellow"
+      ('Yellow'
          {switch $gemcolchanged
             (R
                {set $gemcolyr 0}
@@ -536,7 +536,7 @@
             )
          }
       )
-      ("Blue"
+      ('Blue'
          {switch $gemcolchanged
             (R
                {set $gemcolbr 0}
@@ -549,7 +549,7 @@
             )
          }
       )
-      ("Orange"
+      ('Orange'
          {switch $gemcolchanged
             (R
                {set $gemcolor 0}
@@ -572,15 +572,15 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("+"
+         ('+'
             RGB_ADD
             RGB_DATA
          )
-         ("0"
+         ('0'
             RGB_RESET
             RGB_DATA
          )
-         ("-"
+         ('-'
             RGB_SUB
             RGB_DATA
          )

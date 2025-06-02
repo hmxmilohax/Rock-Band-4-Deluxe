@@ -68,7 +68,7 @@
                {$this select_difficulty kDifficultyEasy})
          } 
       {$this trigger_select_effects}
-      {dx_write_null_file "insong.dta"}
+      {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
    ) 
    (list_focus 
       ($obj_name $obj_id) 
@@ -108,11 +108,11 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}} 
       {switch $list_data 
          (overshell_confirm_yes 
-            {dx_file_delete "insong.dta"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
             {$this quit_early}
          )
          (overshell_confirm_no
-            {dx_write_null_file "insong.dta"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
             {if_else {$this in_venue_meta_mode}
                {$this show_state kState_VenueMetaMenu}
                {$this show_in_song_menu}
@@ -122,7 +122,7 @@
       {$this trigger_select_effects}
    ) 
    (on_cancel 
-      {dx_write_null_file "insong.dta"}
+      {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
       {if_else {$this in_venue_meta_mode}
          {$this show_state kState_VenueMetaMenu}
          {$this show_in_song_menu}
@@ -137,7 +137,7 @@
       {cond 
          ({$this is_quit_token {$component selected_sym}} 
             {do 
-               {dx_file_delete "insong.dta"}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
                {$this attempt_quit}
             }
          )
@@ -153,7 +153,15 @@
 )
 (kState_VenueMetaMenu 
    (view 
-      {$this get_auto_list_view}
+      
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}
    ) 
    (enter 
       {$this setup_venue_meta_list}
@@ -169,7 +177,7 @@
                )
                ({$this get_current_overshell_quit_token}
                   {do
-                     {dx_file_delete "insong.dta"}
+                     {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
                      {$this attempt_quit}
                   }
                )
@@ -210,86 +218,271 @@
 (kState_InSongMenu 
    (view list_long) 
    (enter 
-      {$this setup_in_song_menu} 
-      {$this clear_selected_emote_category}
-   ) 
+      {$this setup_in_song_menu }) 
    (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}} 
-      {local $list_widget {($objId UIListCom) get_data_in_column widget_type}} 
-      {if_else {!= $list_widget kOvershellText}
-         {$this trigger_select_disabled_effects}
-         {do 
-            {switch $list_data 
-               (pause 
-                  {$this toggle_pause}
-               )
-               (resume 
-                  {$this toggle_pause}
-               )
-               (overshell_restart 
-                  {if_else {$this show_restart_prompt}
-                     {$this show_state kState_RestartSongConfirm}
-                     {$this restart_song}
-                  }
-               )
-               ({$this get_current_overshell_skip_token} 
-                  {$this show_state kState_SkipSongConfirm}
-               )
-               (overshell_change_diff 
-                  {$this begin_override_flow kOverrideFlow_SongSettings}
-               )
-               (instrument_options 
-                  {$this show_state dxState_DeluxeSettings}
-               )
-               (overshell_online_settings 
-                  {$this show_online_settings}
-               )
-               ({$this get_current_overshell_quit_token} 
-                  {do
-                     {dx_file_delete "insong.dta"}
-                     {$this attempt_quit}
-                  }
-               )
-               (overshell_practice_new_section 
-                  {$this practice_new_section}
-               )
-               (overshell_btm_restart_show 
-                  {$this show_state kState_RestartShowConfirm}
-               )
-               (overshell_leave 
-                  {$this show_state kState_RemoveUserInSongConfirm}
-               )
-               (overshell_somp_quit_session 
-                  {$this show_somp_quit_session_confirm}
-               )
-               (overshell_somp_return_to_green_room 
-                  {$this show_somp_return_to_green_room_confirm}
-               )
-               (overshell_somp_return_to_music_library 
-                  {$this show_somp_return_to_music_library_confirm}
-               )
-               (overshell_somp_exit_submenu 
-                  {$this show_online_exit_submenu}
-               )
-               (overshell_online_emote 
-                  {$this show_somp_pick_emote_category}
-               )
-            }
-            {$this trigger_select_effects}
-         }
-      }
-   ) 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (pause 
+            {local $list_widget 
+               {
+                  ($objId UIListCom)get_data_in_column widget_type }} 
+            {if_else 
+               {== $list_widget kOvershellText }
+               {do 
+                  {$this toggle_pause }
+                  {$this trigger_select_effects }}
+               {$this trigger_select_disabled_effects }})
+         (resume 
+            {$this toggle_pause } 
+            {$this trigger_select_effects })
+         (overshell_restart 
+            {if_else 
+               {$this show_restart_prompt }
+               {$this show_state kState_RestartConfirm }
+               {$this restart_song }} 
+            {$this trigger_select_effects })
+         (
+            {$this get_current_overshell_skip_token } 
+            {$this show_state kState_SkipSongConfirm } 
+            {$this trigger_select_effects })
+         (overshell_change_diff 
+            {$this begin_override_flow kOverrideFlow_SongSettings } 
+            {$this trigger_select_effects })
+         (overshell_game_options 
+            {$this show_state dxState_DeluxeSettings} 
+            {$this trigger_select_effects })
+         (
+            {$this get_current_overshell_quit_token } 
+            {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
+            {$this attempt_quit}
+            {$this trigger_select_effects })
+         (overshell_practice_new_section 
+            {$this practice_new_section } 
+            {$this trigger_select_effects })
+         (overshell_leave 
+            {$this show_state kState_RemoveUserInSongConfirm } 
+            {$this trigger_select_effects })}) 
    (on_cancel 
-      {$this leave_options} 
-      {$this reset_list_focus}
-   ) 
+      {$this leave_options } 
+      {$this reset_list_focus }) 
    (on_start 
       ($user) 
-      {$this leave_options} 
-      {$this trigger_start_effects} 
-      {$this reset_list_focus}
-   )
-)
+      {$this leave_options } 
+      {$this trigger_start_effects } 
+      {$this reset_list_focus }))
+
+(kState_Options 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
+   (enter 
+      {$this setup_options_list $this } 
+      {$this end_char_management_session } 
+      {$this hide_preview_char } 
+      {$this deactivate_preview_scene_if_needed }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_return 
+            {$this leave_options })
+         (overshell_change_character 
+            {$this show_choose_char } 
+            {$this trigger_select_effects })
+         (overshell_game_options 
+            {$this show_state dxState_DeluxeSettings} 
+            {$this trigger_select_effects })
+         (profile_stats 
+            {do 
+               {local $widget_type 
+                  {
+                     ($objId UIListCom)get_data_in_column widget_type }}
+               {if_else 
+                  {== $widget_type kOvershellText }
+                  {do 
+                     {$this go_to_player_stats }
+                     {$this trigger_select_effects }}
+                  {$this trigger_select_disabled_effects }}})
+         (overshell_change_profile 
+            {$this change_profile } 
+            {$this trigger_select_effects })
+         (overshell_leave 
+            {$this attempt_remove_user } 
+            {$this trigger_select_effects })}) 
+   (on_cancel 
+      {$this leave_options }) 
+   (on_start 
+      ($user) 
+      {$this leave_options } 
+      {$this trigger_start_effects }))
+
+(kState_OptionsGuitar 
+   (view list_medium) 
+   (enter 
+      {$this setup_instrument_options $this }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_widget 
+         {
+            ($objId UIListCom)get_data_in_column widget_type }} 
+      {switch $list_data 
+         (overshell_lefty_flip 
+            {$this toggle_lefty_flip })
+         (overshell_guitar_solo 
+            {if_else 
+               {== $list_widget kOvershellCheckbox }
+               {$this toggle_guitar_solo_mode }
+               {$this trigger_select_disabled_effects }})
+         (options_volume_guitar_freestyle 
+            {if_else 
+               {== $list_widget kOvershellText }
+               {do 
+                  {$this activate_volume_slider }
+                  {$this trigger_select_effects }}
+               {$this trigger_select_disabled_effects }})
+         (mod_doublespeed 
+            {$this activate_text_slider } 
+            {$this trigger_select_effects })
+         (mod_no_fail_band 
+            {if_else 
+               {== $list_widget kOvershellCheckbox }
+               {$this toggle_no_fail }
+               {$this trigger_select_disabled_effects }})}) 
+   (on_cancel 
+      {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects }))
+
+(kState_OptionsDrum 
+   (view 
+      {local $score_type 
+         {
+            {$this get_user }get_preferred_score_type }} 
+      {if_else 
+         {== $score_type kScoreRealDrum }list_long list_medium }) 
+   (enter 
+      {$this setup_instrument_options $this }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_widget 
+         {
+            ($objId UIListCom)get_data_in_column widget_type }} 
+      {switch $list_data 
+         (overshell_lefty_flip 
+            {$this toggle_lefty_flip })
+         (overshell_drumfill_freestyle 
+            {if_else 
+               {== $list_widget kOvershellComboBox }
+               {do 
+                  {$this cycle_drum_fills_forward }
+                  {$this trigger_widget_scroll_effects }}
+               {$this trigger_select_disabled_effects }})
+         (overshell_drumfill_static 
+            {if_else 
+               {== $list_widget kOvershellComboBox }
+               {do 
+                  {$this cycle_drum_fills_forward }
+                  {$this trigger_widget_scroll_effects }}
+               {$this trigger_select_disabled_effects }})
+         (overshell_drumfill_dynamic 
+            {if_else 
+               {== $list_widget kOvershellComboBox }
+               {do 
+                  {$this cycle_drum_fills_forward }
+                  {$this trigger_widget_scroll_effects }}
+               {$this trigger_select_disabled_effects }})
+         (overshell_yellow_cym 
+            {$this toggle_cymbal kCymbalSlotYellow })
+         (overshell_blue_cym 
+            {$this toggle_cymbal kCymbalSlotBlue })
+         (overshell_green_cym 
+            {$this toggle_cymbal kCymbalSlotGreen })
+         (overshell_red_cym 
+            {$this toggle_cymbal kCymbalSlotGreen })
+         (mod_doublespeed 
+            {$this activate_text_slider } 
+            {$this trigger_select_effects })
+         (mod_no_fail_band 
+            {if_else 
+               {== $list_widget kOvershellCheckbox }
+               {$this toggle_no_fail }
+               {$this trigger_select_disabled_effects }})}) 
+   (UI_BUTTON_DOWN_MSG 
+      {local $list_widget 
+         {
+            {$this get_ui_list }get_data_in_column widget_type }} 
+      {if_else 
+         {== $list_widget kOvershellComboBox }
+         {if_else 
+            {== $action kAction_Left }
+            {do 
+               {$this cycle_drum_fills_backward }
+               {$this trigger_widget_scroll_effects }}
+            {if_else 
+               {== $action kAction_Right }
+               {do 
+                  {$this cycle_drum_fills_forward }
+                  {$this trigger_widget_scroll_effects }}}}}) 
+   (on_cancel 
+      {$this show_state dxState_DeluxeSettings} 
+      {$this finish_cymbal_selection FALSE } 
+      {$this trigger_cancel_effects }))
+
+(kState_OptionsVocal 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long list_medium }) 
+   (enter 
+      {$this setup_instrument_options $this }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_widget 
+         {
+            ($objId UIListCom)get_data_in_column widget_type }} 
+      {switch $list_data 
+         (overshell_vox_solo 
+            {if_else 
+               {== $list_widget kOvershellCheckbox }
+               {$this toggle_vocal_improv }
+               {$this trigger_select_disabled_effects }})
+         (overshell_vocal_track_vol 
+            {$this activate_volume_slider } 
+            {$this trigger_select_effects })
+         (mic_1_gain 
+            {$this activate_volume_slider } 
+            {$this trigger_select_effects })
+         (mic_2_gain 
+            {$this activate_volume_slider } 
+            {$this trigger_select_effects })
+         (mic_3_gain 
+            {$this activate_volume_slider } 
+            {$this trigger_select_effects })
+         (mod_no_fail_band 
+            {if_else 
+               {== $list_widget kOvershellCheckbox }
+               {$this toggle_no_fail }
+               {$this trigger_select_disabled_effects }})}) 
+   (on_cancel 
+      {$this show_state dxState_DeluxeSettings} 
+      {$this trigger_cancel_effects }))
 
 ; (kState_ChoosePart 
 ;    (view list_short) 

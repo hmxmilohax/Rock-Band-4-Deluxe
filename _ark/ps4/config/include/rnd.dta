@@ -1,10 +1,11 @@
 (title "Rock Band")
 (max_partial_framerate_scenes {if_else {file_exists "settings/visuals/60fpsbg.dta"} 0 1})
-(multi_threaded_rendering_enabled FALSE)
-(use_lod FALSE)
-(use_gbuffer_vertex_normals FALSE)
-(max_shadow_contrib_buffers 2)
-(xb1 
-   (resolutions 1920x1080))
-(ps4 
-   (resolutions 1920x1080))
+(max_shadow_blur_buffers 2)
+(spotlight_shadow_resolution 4096)
+(max_spotlight_shadow_casters 2)
+
+#ifdef HX_XB1
+
+(console_resolution 1600 900)
+
+#endif 

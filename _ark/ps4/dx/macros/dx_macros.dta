@@ -21,21 +21,21 @@
 
 #define DELETE_INVALID_VENUE_DTAS
 (
-	{dx_file_delete "settings/venue/none.dta"}
-	{dx_file_delete "settings/venue/big_club_toys.dta"}
-	{dx_file_delete "settings/venue/big_club_standard.dta"}
-	{dx_file_delete "settings/venue/big_club_industrial.dta"}
-	{dx_file_delete "settings/venue/big_club_gym.dta"}
-	{dx_file_delete "settings/venue/big_club_arcade.dta"}
-	{dx_file_delete "settings/venue/big_club_arcade_empty.dta"}
-	{dx_file_delete "settings/venue/big_club_boat.dta"}
-	{dx_file_delete "settings/venue/big_club_desert.dta"}
-	{dx_file_delete "settings/venue/small_club_vwhall.dta"}
-	{dx_file_delete "settings/venue/small_club_basement.dta"}
-	{dx_file_delete "settings/venue/small_club_industrial.dta"}
-	{dx_file_delete "settings/venue/small_club_roadhouse.dta"}
-	{dx_file_delete "settings/venue/small_club_trashed.dta"}
-	{dx_file_delete "settings/venue/arena.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/none.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_toys.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_standard.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_industrial.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_gym.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_arcade.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_arcade_empty.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_boat.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/big_club_desert.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/small_club_vwhall.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/small_club_basement.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/small_club_industrial.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/small_club_roadhouse.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/small_club_trashed.dta"}
+	{file_delete "data:/GoldHen/RB4DX-1.08/settings/venue/arena.dta"}
 )
 
 #define ENABLE_INSTA_FAIL

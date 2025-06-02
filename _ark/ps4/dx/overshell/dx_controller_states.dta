@@ -1,20 +1,28 @@
 (dxState_ControllerSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
       {$this setup_confirm_actions a 
       (
-         "Change instrument type"
-         "Change pad bindings"
+         'Change instrument type'
+         'Change pad bindings'
       )
    }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         ("Change instrument type"
+         ('Change instrument type'
             {$this show_state dxState_SlotOverride}
          )
-         ("Change pad bindings"
+         ('Change pad bindings'
             {$this show_state dxState_BindingOverride}
          )
       }
@@ -26,22 +34,22 @@
 )
 #define RB4DXSLOT_DATA
 (
-   {$this setup_confirm_actions "Select the controller type you want to change:"
+   {$this setup_confirm_actions 'Select the controller type you want to change:'
       (
          {switch $gtrslt
-            (gtr "guitar: guitar")
-            (drum "guitar: drums")
-            (vox "guitar: vocals")
+            (gtr 'guitar: guitar')
+            (drum 'guitar: drums')
+            (vox 'guitar: vocals')
          }
          {switch $drmslt
-            (gtr "drums: guitar")
-            (drum "drums: drums")
-            (vox "drums: vocals")
+            (gtr 'drums: guitar')
+            (drum 'drums: drums')
+            (vox 'drums: vocals')
          }
          {switch $voxslt
-            (gtr "vocals: guitar")
-            (drum "vocals: drums")
-            (vox "vocals: vocals")
+            (gtr 'vocals: guitar')
+            (drum 'vocals: drums')
+            (vox 'vocals: vocals')
          }
       )
    }
@@ -55,17 +63,17 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         (("guitar: guitar" "guitar: drums" "guitar: vocals")
+         (('guitar: guitar' 'guitar: drums' 'guitar: vocals')
             {set $slot_changed gtr}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
-         (("drums: guitar" "drums: drums" "drums: vocals")
+         (('drums: guitar' 'drums: drums' 'drums: vocals')
             {set $slot_changed drum}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
          )
-         (("vocals: guitar" "vocals: drums" "vocals: vocals")
+         (('vocals: guitar' 'vocals: drums' 'vocals: vocals')
             {set $slot_changed vox}
             {$this show_state dxState_SlotChooser}
             {$this trigger_select_effects}
@@ -81,24 +89,24 @@
 (dxState_SlotChooser
    (view confirm_action) 
    (enter
-      {$this setup_confirm_actions "Select the controller type you want to change to:"
+      {$this setup_confirm_actions 'Select the controller type you want to change to:'
          (
-            "guitar"
-            "drums"
-            "vocals"
+            'guitar'
+            'drums'
+            'vocals'
          )
       }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         ("guitar"
+         ('guitar'
             {set $slot_to gtr}
          )
-         ("drums"
+         ('drums'
             {set $slot_to drum}
          )
-         ("vocals"
+         ('vocals'
             {set $slot_to vox}
          )
       }
@@ -120,17 +128,25 @@
    )
 )
 (dxState_BindingOverride
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
       {$this setup_confirm_actions a 
       (
-         "[Reset]"
-         "Rock Band 1-3 Guitar"
-         "Rock Band 1-3 Drums"
-         "Rock Band 4 Guitar"
-         "Rock Band 4 Drums"
-         "Guitar Hero Guitar"
-         "Guitar Hero Drums"
+         '[Reset]'
+         'Rock Band 1-3 Guitar'
+         'Rock Band 1-3 Drums'
+         'Rock Band 4 Guitar'
+         'Rock Band 4 Drums'
+         'Guitar Hero Guitar'
+         'Guitar Hero Drums'
       )
    }
    ) 
@@ -138,24 +154,24 @@
       {local $list_data {($objId UIListCom)get_data_in_column token}}
       DELETE_PAD_BINDING_DTAS
       {switch $list_data 
-         ("[Reset]")
-         ("Rock Band 1-3 Guitar"
-            {dx_write_null_file "settings/controller/binding/pad/rbgtr.dta"}
+         ('[Reset]')
+         ('Rock Band 1-3 Guitar'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rbgtr.dta' ()}
          )
-         ("Rock Band 1-3 Drums"
-            {dx_write_null_file "settings/controller/binding/pad/rbdrum.dta"}
+         ('Rock Band 1-3 Drums'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rbdrum.dta' ()}
          )
-         ("Rock Band 4 Guitar"
-            {dx_write_null_file "settings/controller/binding/pad/rb4gtr.dta"}
+         ('Rock Band 4 Guitar'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rb4gtr.dta' ()}
          )
-         ("Rock Band 4 Drums"
-            {dx_write_null_file "settings/controller/binding/pad/rb4drum.dta"}
+         ('Rock Band 4 Drums'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rb4drum.dta' ()}
          )
-         ("Guitar Hero Guitar"
-            {dx_write_null_file "settings/controller/binding/pad/ghgtr.dta"}
+         ('Guitar Hero Guitar'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/ghgtr.dta' ()}
          )
-         ("Guitar Hero Drums"
-            {dx_write_null_file "settings/controller/binding/pad/ghdrum.dta"}
+         ('Guitar Hero Drums'
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/ghdrum.dta' ()}
          )
       }
       SET_PAD_BINDING_VAR

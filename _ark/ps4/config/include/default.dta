@@ -1,0 +1,54 @@
+
+#include version.dta
+
+(system 
+   (language 
+      (default eng) 
+      (supported 
+         (eng ita fre deu esl mex)) 
+#ifndef _SHIP
+    
+      (cheat_supported 
+         (eng ita fre deu esl mex)) 
+#endif 
+   ) 
+   (ps4_map_file "rockband_ps4_%s.map") 
+   (xb1_map_file "../build/xb1/rockband_xb1_%s/Layout/Image/Loose/rockband_xb1_%s.map") 
+   (connect_fmod 0))
+(locale ../../ui/locale/eng/locale_keep.dta ../../dx/locale/eng/dx_locale.dta)
+(ui 
+   (verbose_locale_notifies TRUE))
+(crucible 
+   (project "rockband"))
+(timer 
+   (cpu 
+      (budget 16.66)) 
+   (draw 
+      (budget 8.0)) 
+   (poll_layout_mgr 
+      (budget 8.0)) 
+   (system_poll 
+      (budget 0.25)) 
+   (soundmanager_poll 
+      (budget 1.0)))
+(song_converter 
+   (shot_5_cats 
+      (coop_k_behind coop_all_behind coop_front_behind) 
+      (coop_k_closeup_hand coop_all_far coop_all_near coop_front_near) 
+      (coop_k_closeup_head coop_all_far coop_all_near coop_front_near) 
+      (coop_k_near coop_all_far coop_all_near coop_front_near) 
+      (coop_bk_behind coop_b_behind) 
+      (coop_bk_near coop_b_near) 
+      (coop_gk_behind coop_g_behind) 
+      (coop_gk_near coop_g_near) 
+      (coop_kv_behind coop_v_behind) 
+      (coop_kv_near coop_v_near) 
+      (directed_keys ) 
+      (directed_keys_cam ) 
+      (directed_keys_np ) 
+      (directed_duo_kg ) 
+      (directed_duo_kb ) 
+      (directed_duo_kv )))
+
+#include spew.dta
+

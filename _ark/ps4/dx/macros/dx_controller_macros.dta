@@ -1,6 +1,6 @@
 #define WRITE_SLOT_DTA
 (
-   {dx_write_null_file {sprint "settings/controller/type/" $slot_changed "/" $slot_to ".dta"}}
+   {write_file {sprint "data:/GoldHen/RB4DX-1.08/settings/controller/type/" $slot_changed "/" $slot_to ".dta"} ()}
 )
 
 #define SET_SLOT_VAR
@@ -22,35 +22,35 @@
 (
    {switch $slot_changed
       (gtr
-         {dx_file_delete "settings/controller/type/gtr/drum.dta"}
-         {dx_file_delete "settings/controller/type/gtr/vox.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/gtr/drum.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/gtr/vox.dta"}
       )
       (drum
-         {dx_file_delete "settings/controller/type/drum/gtr.dta"}
-         {dx_file_delete "settings/controller/type/drum/vox.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/drum/gtr.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/drum/vox.dta"}
       )
       (vox
-         {dx_file_delete "settings/controller/type/vox/gtr.dta"}
-         {dx_file_delete "settings/controller/type/vox/drum.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/vox/gtr.dta"}
+         {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/vox/drum.dta"}
       )
    }
 )
 
 #define CLEAR_INVALID_SLOT_DTAS
 (
-   {dx_file_delete "settings/controller/type/vox/vox.dta"}
-   {dx_file_delete "settings/controller/type/drum/drum.dta"}
-   {dx_file_delete "settings/controller/type/gtr/gtr.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/vox/vox.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/drum/drum.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/type/gtr/gtr.dta"}
 )
 
 #define DELETE_PAD_BINDING_DTAS
 (
-   {dx_file_delete "settings/controller/binding/pad/rbgtr.dta"}
-   {dx_file_delete "settings/controller/binding/pad/rbdrum.dta"}
-   {dx_file_delete "settings/controller/binding/pad/rb4gtr.dta"}
-   {dx_file_delete "settings/controller/binding/pad/rb4drum.dta"}
-   {dx_file_delete "settings/controller/binding/pad/ghgtr.dta"}
-   {dx_file_delete "settings/controller/binding/pad/ghdrum.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rbgtr.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rbdrum.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rb4gtr.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/rb4drum.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/ghgtr.dta"}
+   {file_delete "data:/GoldHen/RB4DX-1.08/settings/controller/binding/pad/ghdrum.dta"}
 )
 
 #define SET_PAD_BINDING_VAR

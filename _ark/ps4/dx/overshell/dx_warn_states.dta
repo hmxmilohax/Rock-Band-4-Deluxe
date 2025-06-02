@@ -1,7 +1,7 @@
 (dxState_ScreensaverWarn
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions 'You will need to restart the game to continue playing. Do you want to continue?' (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -26,7 +26,7 @@
 (dxState_DelayedEffectWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
+      {$this setup_confirm_actions 'This option will take effect the next time you restart the game.' (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $dx_cur_state
@@ -74,7 +74,7 @@
 (dxState_InGameWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
+      {$this setup_confirm_actions 'This option will take effect when you go back to music library.' (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $dx_cur_state
@@ -121,7 +121,7 @@
 (dxState_AnglesWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions 'Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?' (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -129,20 +129,20 @@
          (overshell_confirm_yes
             {switch $trackangletype
                (rr
-                  {dx_write_null_file "settings/visuals/trackanglerr.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerr.dta' ()}
+                  {dx_file_rename 'ps4/track/guitar_unlit_rr.scene_ps4' 'ps4/track/guitar_unlit.scene_ps4'}
                )
                (rb2
-                  {dx_write_null_file "settings/visuals/trackanglerb2.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb2.dta' ()}
+                  {dx_file_rename 'ps4/track/guitar_unlit_rb2.scene_ps4' 'ps4/track/guitar_unlit.scene_ps4'}
                )
                (rb3
-                  {dx_write_null_file "settings/visuals/trackanglerb3.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb3.dta' ()}
+                  {dx_file_rename 'ps4/track/guitar_unlit_rb3.scene_ps4' 'ps4/track/guitar_unlit.scene_ps4'}
                )
             }
             {set $trackangle TRUE}
-            {dx_write_null_file "settings/visuals/trackangle.dta"} 
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackangle.dta' ()} 
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                {$this show_state dxState_TrkSettings}
@@ -164,16 +164,16 @@
 (dxState_GemColorConfirm
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" ("Reset" "Edit")}
+      {$this setup_confirm_actions 'Would you like to reset gem colors to default or edit your colors?' ('Reset' 'Edit')}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Reset"
-            {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
+         ('Reset'
+            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/theme/gem/colors/enabled.dta'}
             {$this show_state dxState_TrackTheme}
          )
-         ("Edit"
+         ('Edit'
             {$this show_state dxState_GemColorSettings}
          )
       }
@@ -188,7 +188,7 @@
 (dxState_SavingWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This setting will disable saving until you restart the game. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions 'This setting will disable saving until you restart the game. Do you want to continue?' (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -196,14 +196,14 @@
          {switch $cheat_option
             (autoplay
                {set $autoplayenabled TRUE}
-               {dx_write_null_file "autoplay.ini"}
-               {dx_file_delete "saving.ini"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/autoplay.ini' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/saving.ini'}
             )
             (drunkmode
                {set $drunkmode TRUE}
                {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
-               {dx_write_null_file "drunkmode.ini"}
-               {dx_file_delete "saving.ini"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/drunkmode.ini' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/saving.ini'}
             )
          }
       }
@@ -218,18 +218,18 @@
 (dxState_SavingDisabled
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "You will need to restart the game to re-enable saving." (overshell_confirm_ok)}
+      {$this setup_confirm_actions 'You will need to restart the game to re-enable saving.' (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {dx_file_delete "autoplay.ini"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {dx_file_delete "drunkmode.ini"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}
@@ -239,12 +239,12 @@
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {dx_file_delete "autoplay.ini"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {dx_file_delete "drunkmode.ini"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}

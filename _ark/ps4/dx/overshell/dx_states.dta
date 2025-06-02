@@ -8,80 +8,88 @@
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            "Instrument Options"
-            "Gameplay Settings"
-            "Audio & SFX"
-            "Visual Settings"
-            "Track Settings"
-            "Controller Settings"
-            "Extras"
+            'Instrument Options'
+            'Gameplay Settings'
+            'Audio & SFX'
+            'Visual Settings'
+            'Track Settings'
+            'Controller Settings'
+            'Extras'
          )
       }
       {$this setup_confirm_actions a 
          (
-            "Instrument Options"
-            "Song Speed"
-            "Gameplay Settings"
-            "Audio & SFX"
-            "Visual Settings"
-            "Track Settings"
-            "Controller Settings"
-            "Extras"
-            ;"test" ; debugging
+            'Instrument Options'
+            ;'Song Speed'
+            'Gameplay Settings'
+            'Audio & SFX'
+            'Visual Settings'
+            'Track Settings'
+            'Controller Settings'
+            'Extras'
+            ;'test' ; debugging
          )
       }
    }
 )
 (dxState_DeluxeSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
       RB4DXMAIN_DATA
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Instrument Options"
+         ('Instrument Options'
             {$this show_instrument_options}
             {$this trigger_select_effects})
-         ("Song Speed"
+         ('Song Speed'
             {$this show_state dxState_SongSpeed}
             {$this trigger_select_effects})
-         ("Gameplay Settings"
+         ('Gameplay Settings'
             {$this show_state dxState_GPSettings}
             {$this trigger_select_effects}
          )
-         ("Audio & SFX"
+         ('Audio & SFX'
             {$this show_state dxState_SFXSettings}
             {$this trigger_select_effects}
          )
-         ("Visual Settings"
+         ('Visual Settings'
             {$this show_state dxState_VisSettings}
             {$this trigger_select_effects}
          )
-         ("Track Settings"
+         ('Track Settings'
             {$this show_state dxState_TrkSettings}
             {$this trigger_select_effects}
          )
-         ("Controller Settings"
+         ('Controller Settings'
             {$this show_state dxState_ControllerSettings}
             {$this trigger_select_effects}
          )
-         ("Extras"
+         ('Extras'
             {$this show_state dxState_Extras}
             {$this trigger_select_effects}
          )
-         ("writefile"
+         ('writefile'
             {set $dx_write_test {array ()}}
             {push_back $dx_write_test {sprint $this}}
-            {write_file "data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta" $dx_write_test}
+            {write_file 'data:/GoldHEN/AFR/CUSA02084/ps4/dx/overshell/this.dta' $dx_write_test}
          )
          (colsel
             {$this show_state dxState_ColorSelector}
             {$this trigger_select_effects})
-         ("lost menus"
+         ('lost menus'
             {$this show_state dxState_LostMenus}
             {$this trigger_select_effects})
-         ("test"
+         ('test'
             {set_system_settings}
             {$this trigger_select_effects}
          )
@@ -100,46 +108,54 @@
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
-      {if_else {|| {! {file_exists "saving.ini"}} $calibrationmode $precisionmode}
+      {if_else {|| {! {file_exists 'saving.ini'}} $calibrationmode $precisionmode}
          {$this setup_confirm_actions a 
             (
-               "Enter Calibration Numbers"
-               {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
-               {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
-               {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-               {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
-               {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
-               {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
+               ;'Enter Calibration Numbers'
+               {if_else $tiltsens 'Increased Tilt Sensitivity: ON' 'Increased Tilt Sensitivity: OFF'}
+               {if_else $nood 'Overdrive Gain: OFF' 'Overdrive Gain: ON'}
+               {if_else $practiceod 'OD in Practice: ON' 'OD in Practice: OFF'}
+               {if_else $syncspeeds 'Sync Difficulty Speeds: ON' 'Sync Difficulty Speeds: OFF'}
+               {if_else $calibrationmode 'Calibration Mode: ON' 'Calibration Mode: OFF'}
+               {if_else $precisionmode 'Precision Mode: ON' 'Precision Mode: OFF'}
             )
          }
          {$this setup_confirm_actions a 
             (
-               {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
-               {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
-               {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-               {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
+               {if_else $tiltsens 'Increased Tilt Sensitivity: ON' 'Increased Tilt Sensitivity: OFF'}
+               {if_else $nood 'Overdrive Gain: OFF' 'Overdrive Gain: ON'}
+               {if_else $practiceod 'OD in Practice: ON' 'OD in Practice: OFF'}
+               {if_else $syncspeeds 'Sync Difficulty Speeds: ON' 'Sync Difficulty Speeds: OFF'}
             )
          }
       }
       {$this setup_confirm_actions a 
          (
-            "Enter Calibration Numbers"
-            {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"}
-            {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
-            {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
-            {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
-            {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
-            {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
-            {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
-            {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
-            {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-            {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"}
+            ;'Enter Calibration Numbers'
+            ;{if_else $autoplayenabled 'Autoplay: ON' 'Autoplay: OFF'}
+            {if_else $instafail 'Insta Fail: ON' 'Insta Fail: OFF'}
+            {if_else $toughcrowd 'Tough Crowd: ON' 'Tough Crowd: OFF'}
+            {if_else $tiltsens 'Increased Tilt Sensitivity: ON' 'Increased Tilt Sensitivity: OFF'}
+            {if_else $nood 'Overdrive Gain: OFF' 'Overdrive Gain: ON'}
+            {if_else $practiceod 'OD in Practice: ON' 'OD in Practice: OFF'}
+            {if_else $syncspeeds 'Sync Difficulty Speeds: ON' 'Sync Difficulty Speeds: OFF'}
+            {if_else $calibrationmode 'Calibration Mode: ON' 'Calibration Mode: OFF'}
+            {if_else $precisionmode 'Precision Mode: ON' 'Precision Mode: OFF'}
+            ;{if_else $drunkmode 'Drunk Mode: ON' 'Drunk Mode: OFF'}
          )
       }
    }
 )
 (dxState_GPSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
       {set $dx_cur_state gp}
       RB4DXGP_DATA
@@ -147,11 +163,11 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Enter Calibration Numbers"
+         ('Enter Calibration Numbers'
             {$this show_state dxState_CalibrationSelector}
             {$this trigger_select_effects}
          )
-         (("Autoplay: OFF" "Autoplay: ON")
+         (('Autoplay: OFF' 'Autoplay: ON')
             {set $cheat_option autoplay}
             {if_else $autoplayenabled
                {$this show_state dxState_SavingDisabled}
@@ -159,20 +175,20 @@
             }
             {$this trigger_select_effects}
          )
-         (("Insta Fail: ON" "Insta Fail: OFF")
+         (('Insta Fail: ON' 'Insta Fail: OFF')
             {set $instafail {! $instafail}}
             {if_else $instafail
                {do
                   {if $toughcrowd
                      {set $toughcrowd 0}
-                     {dx_file_delete "settings/gameplay/toughcrowd.dta"}
+                     {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta'}
                   }
-                  {dx_write_null_file "settings/gameplay/instafail.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta' ()}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
                   ENABLE_INSTA_FAIL
                }
                {do
-                  {dx_file_delete "settings/gameplay/instafail.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
                   DISABLE_INSTA_FAIL
                }
@@ -180,20 +196,20 @@
             RB4DXGP_DATA
             {$this trigger_select_effects}
          )
-         (("Tough Crowd: ON" "Tough Crowd: OFF")
+         (('Tough Crowd: ON' 'Tough Crowd: OFF')
             {set $toughcrowd {! $toughcrowd}}
             {if_else $toughcrowd
                {do
                   {if $instafail
                      {set $instafail 0}
-                     {dx_file_delete "settings/gameplay/instafail.dta"}
+                     {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta'}
                   }
-                  {dx_write_null_file "settings/gameplay/toughcrowd.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta' ()}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
                   ENABLE_TOUGH_CROWD
                }
                {do
-                  {dx_file_delete "settings/gameplay/toughcrowd.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
                   DISABLE_TOUGH_CROWD
                }
@@ -201,16 +217,16 @@
             RB4DXGP_DATA
             {$this trigger_select_effects}
          )
-         (("Overdrive Gain: OFF" "Overdrive Gain: ON")
+         (('Overdrive Gain: OFF' 'Overdrive Gain: ON')
             {set $nood {! $nood}}
             {if_else $nood
                {do
-                  {dx_write_null_file "settings/gameplay/nood.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/nood.dta' ()}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 FALSE}
                   {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 FALSE}
                }
                {do
-                  {dx_file_delete "settings/gameplay/nood.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/nood.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 TRUE}
                   {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 TRUE}
                }
@@ -221,16 +237,16 @@
             }
             {$this trigger_select_effects}
          )
-         (("OD in Practice: ON" "OD in Practice: OFF")
+         (('OD in Practice: ON' 'OD in Practice: OFF')
             {set $practiceod {! $practiceod}}
             {if_else $practiceod
                {do
-                  {dx_write_null_file "settings/gameplay/practiceod.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/practiceod.dta' ()}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 TRUE}
                   {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
                }
                {do
-                  {dx_file_delete "settings/gameplay/practiceod.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/practiceod.dta'}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 FALSE}
                   {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 FALSE}
                }
@@ -241,17 +257,17 @@
             }
             {$this trigger_select_effects}
          )
-         (("Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF")
+         (('Sync Difficulty Speeds: ON' 'Sync Difficulty Speeds: OFF')
             {set $syncspeeds {! $syncspeeds}}
             {if_else $syncspeeds
-               {dx_write_null_file "settings/gameplay/syncspeeds.dta"}
-               {dx_file_delete "settings/gameplay/syncspeeds.dta"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/syncspeeds.dta' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/syncspeeds.dta'}
             }
             SET_TRACK_SPEEDS
             RB4DXGP_DATA
             {$this trigger_select_effects}
          )
-         (("Calibration Mode: ON" "Calibration Mode: OFF")
+         (('Calibration Mode: ON' 'Calibration Mode: OFF')
             {set $calibrationmode {! $calibrationmode}}
             {if_else $calibrationmode
                {set_elem {find $syscfg beatmatcher watcher slop} 1 15}
@@ -263,7 +279,7 @@
             }
             {$this trigger_select_effects}
          )
-         (("Precision Mode: ON" "Precision Mode: OFF")
+         (('Precision Mode: ON' 'Precision Mode: OFF')
             {set $precisionmode {! $precisionmode}}
             {if_else $precisionmode
                {set_elem {find $syscfg beatmatcher watcher slop} 1 50}
@@ -275,7 +291,7 @@
             }
             {$this trigger_select_effects}
          )
-         (("Drunk Mode: ON" "Drunk Mode: OFF")
+         (('Drunk Mode: ON' 'Drunk Mode: OFF')
             {set $cheat_option drunkmode}
             {if_else $drunkmode
                {$this show_state dxState_SavingDisabled}
@@ -283,11 +299,11 @@
             }
             {$this trigger_select_effects}
          )
-         (("Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF")
+         (('Increased Tilt Sensitivity: ON' 'Increased Tilt Sensitivity: OFF')
             {set $tiltsens {! $tiltsens}}
             {if_else $tiltsens
-               {dx_write_null_file "settings/gameplay/tiltsens.dta"}
-               {dx_file_delete "settings/gameplay/tiltsens.dta"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/tiltsens.dta' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/tiltsens.dta'}
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -303,20 +319,28 @@
 
 ;Calibration selector
 (dxState_CalibrationSelector
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
       {$this setup_confirm_actions a
          (
-            "Video"
-            "Audio"
+            'Video'
+            'Audio'
          )
       }
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data 
-         ("Video" {$this show_state dxState_VideoCalibration})
-         ("Audio" {$this show_state dxState_AudioCalibration})
+         ('Video' {$this show_state dxState_VideoCalibration})
+         ('Audio' {$this show_state dxState_AudioCalibration})
       }
       {$this trigger_select_effects}
    )
@@ -331,19 +355,27 @@
 (
    {$this setup_confirm_actions a 
       (
-         {if_else $nomiss "Miss Sounds: OFF" "Miss Sounds: ON"}
-         {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
+         ;{if_else $nomiss 'Miss Sounds: OFF' 'Miss Sounds: ON'}
+         {if_else $nowhammyfx 'Whammy FX: OFF' 'Whammy FX: ON'}
          {switch $trackmuting
-            (vanilla "Track Muting: Partial")
-            (off "Track Muting: Off")
-            (on "Track Muting: On")
+            (vanilla 'Track Muting: Partial')
+            (off 'Track Muting: Off')
+            (on 'Track Muting: On')
          }
-         {if_else $speedpitch "Speedup Pitch Correction: OFF" "Speedup Pitch Correction: ON"}
+         {if_else $speedpitch 'Speedup Pitch Correction: OFF' 'Speedup Pitch Correction: ON'}
       )
    }
 )
 (dxState_SFXSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
       {set $dx_cur_state sfx}
       RB4DXSFX_DATA
@@ -352,7 +384,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          
-         (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
+         (('Track Muting: Partial' 'Track Muting: Off' 'Track Muting: On')
             {set $trackmuting
                {switch $trackmuting
                   (vanilla on)
@@ -363,18 +395,18 @@
             {switch $trackmuting
                (vanilla 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
-                  {dx_file_delete "settings/sfx/trackmutingoff.dta"}
-                  {dx_file_delete "settings/sfx/trackmutingon.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta'}
                )
                (off 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
-                  {dx_write_null_file "settings/sfx/trackmutingoff.dta"}
-                  {dx_file_delete "settings/sfx/trackmutingon.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta' ()}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta'}
                )
                (on 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
-                  {dx_write_null_file "settings/sfx/trackmutingon.dta"}
-                  {dx_file_delete "settings/sfx/trackmutingoff.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta' ()}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta'}
                )
             }
             {if_else {$this in_song}
@@ -383,24 +415,24 @@
             }
             {$this trigger_select_effects}
          )
-         (("Miss Sounds: OFF" "Miss Sounds: ON")
+         (('Miss Sounds: OFF' 'Miss Sounds: ON')
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
-               {dx_write_null_file "settings/sfx/nomiss.dta"}
-               {dx_file_delete "settings/sfx/nomiss.dta"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/nomiss.dta' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/nomiss.dta'}
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
-         (("Whammy FX: OFF" "Whammy FX: ON")
+         (('Whammy FX: OFF' 'Whammy FX: ON')
             {set $nowhammyfx {! $nowhammyfx}}
             {if_else $nowhammyfx
                {do
-                  {dx_write_null_file "settings/sfx/nowhammyfx.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/nowhammyfx.dta' ()}
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
                }
                {do
-                  {dx_file_delete "settings/sfx/nowhammyfx.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/nowhammyfx.dta'}
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
                }
             }
@@ -410,11 +442,11 @@
             }
             {$this trigger_select_effects}
          )
-         (("Speedup Pitch Correction: OFF" "Speedup Pitch Correction: ON")
+         (('Speedup Pitch Correction: OFF' 'Speedup Pitch Correction: ON')
             {set $speedpitch {! $speedpitch}}
             {if_else $speedpitch
-               {dx_write_null_file "settings/sfx/speedpitch.dta"}
-               {dx_file_delete "settings/sfx/speedpitch.dta"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/speedpitch.dta' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/speedpitch.dta'}
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -434,68 +466,76 @@
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            "Select Venue"
-            {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-            {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            {if_else $noui "HUD: OFF" "HUD: ON"}
-            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-            "Overshell Theme"
+            'Select Venue'
+            {if_else $60fpsbg '60 FPS Venues: ON' '60 FPS Venues: OFF'}
+            {if_else $crowdmeter 'Crowd Meter: OFF' 'Crowd Meter: ON'}
+            {if_else $noui 'HUD: OFF' 'HUD: ON'}
+            ;{if_else $nohud 'Performance Mode: ON' 'Performance Mode: OFF'}
+            ;{if_else $songtitle 'Song Title Always: ON' 'Song Title Always: OFF'}
+            ;'Overshell Theme'
          )
       }
       {$this setup_confirm_actions a 
          (
-            "Select Venue"
-            {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-            {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            {if_else $noui "HUD: OFF" "HUD: ON"}
-            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            {if_else $songtitle "Song Title Always: ON" "Song Title Always: OFF"}
-            "Overshell Theme"
-            "UI Theme"
-            {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+            'Select Venue'
+            {if_else $60fpsbg '60 FPS Venues: ON' '60 FPS Venues: OFF'}
+            {if_else $crowdmeter 'Crowd Meter: OFF' 'Crowd Meter: ON'}
+            {if_else $noui 'HUD: OFF' 'HUD: ON'}
+            ;{if_else $nohud 'Performance Mode: ON' 'Performance Mode: OFF'}
+            ;{if_else $songtitle 'Song Title Always: ON' 'Song Title Always: OFF'}
+            ;'Overshell Theme'
+            ;'UI Theme'
+            ;{if_else $menubg 'Menu BGs: OFF' 'Menu BGs: ON'}
          )
       }
    }
 )
 (dxState_VisSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
-      {set $crowdmeter {dx_file_exists "ps4/ui/game/crowd_meter.entity_ps4"}}
-      {set $noui {dx_file_exists "ps4/ui/game/hud.scene_ps4"}}
-      {set $nohud {dx_file_exists "ps4/ui/game/game.layout_ps4"}}
-      {set $songtitle {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}}
+      {set $crowdmeter {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/crowd_meter.entity_ps4'}}
+      {set $noui {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4'}}
+      {set $nohud {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/game.layout_ps4'}}
+      {set $songtitle {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4'}}
       SONGTITLE_CHECK
-      {set $menubg {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}}
+      {set $menubg {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4'}}
       {set $dx_cur_state vis}
       RB4DXVIS_DATA
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Select Venue"
+         ('Select Venue'
             {$this show_state dxState_VenueSelector}
             {$this trigger_select_effects}
          )
-         (("60 FPS Venues: ON" "60 FPS Venues: OFF")
+         (('60 FPS Venues: ON' '60 FPS Venues: OFF')
             {set $60fpsbg {! $60fpsbg}}
             {if_else $60fpsbg
-               {dx_write_null_file "settings/visuals/60fpsbg.dta"}
-               {dx_file_delete "settings/visuals/60fpsbg.dta"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/60fpsbg.dta' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/60fpsbg.dta'}
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
-         (("Crowd Meter: ON" "Crowd Meter: OFF")
+         (('Crowd Meter: ON' 'Crowd Meter: OFF')
             {set $crowdmeter {! $crowdmeter}}
             {if_else $crowdmeter
                {do
-                  {dx_write_null_file "ps4/ui/game/crowd_meter.entity_ps4"}
-                  {dx_write_null_file "ps4/ui/game/join_band.entity_ps4"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/crowd_meter.entity_ps4' ()}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/join_band.entity_ps4' ()}
                }
                {do
-                  {dx_file_delete "ps4/ui/game/crowd_meter.entity_ps4"}
-                  {dx_file_delete "ps4/ui/game/join_band.entity_ps4"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/crowd_meter.entity_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/join_band.entity_ps4'}
                }
             }
             {if_else {$this in_song}
@@ -504,11 +544,11 @@
             }
             {$this trigger_select_effects}
          )
-         (("HUD: ON" "HUD: OFF")
+         (('HUD: ON' 'HUD: OFF')
             {set $noui {! $noui}}
             {if_else $noui
-               {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
-               {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4'}
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -516,11 +556,11 @@
             }
             {$this trigger_select_effects}
          )
-         (("Performance Mode: ON" "Performance Mode: OFF")
+         (('Performance Mode: ON' 'Performance Mode: OFF')
             {set $nohud {! $nohud}}
             {if_else $nohud
-               {dx_file_rename "ps4/ui/game/game1.layout_ps4" "ps4/ui/game/game.layout_ps4"}
-               {dx_file_rename "ps4/ui/game/game.layout_ps4" "ps4/ui/game/game1.layout_ps4"}
+               {dx_file_rename 'ps4/ui/game/game1.layout_ps4' 'ps4/ui/game/game.layout_ps4'}
+               {dx_file_rename 'ps4/ui/game/game.layout_ps4' 'ps4/ui/game/game1.layout_ps4'}
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -528,56 +568,56 @@
             }
             {$this trigger_select_effects}
          )
-         ("Song Title Always: ON"
+         ('Song Title Always: ON'
             {set $songtitle FALSE}
             {switch $songtitletype
                (default
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlay1.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletype1.dta"}
+                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlay1.entity_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletype1.dta'}
                )
                (tl
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletypetl.dta"}
+                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaytl.entity_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypetl.dta'}
                )
                (a
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlaya.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletypea.dta"}
+                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaya.entity_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypea.dta'}
                )
                (none
-                  {dx_file_delete "ps4/ui/game/song_artist_overlay.entity_ps4"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4'}
                )
             }
-            {dx_file_delete "settings/visuals/songtitle.dta"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitle.dta'}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXVIS1_DATA
             }
             {$this trigger_select_effects}
          )
-         ("Song Title Always: OFF"
+         ('Song Title Always: OFF'
             {$this show_state dxState_SongTitleSelector}
             {$this trigger_select_effects}
          )
-         (("Menu BGs: OFF" "Menu BGs: ON")
+         (('Menu BGs: OFF' 'Menu BGs: ON')
             {set $menubg {! $menubg}}
             {if_else $menubg
                {do
-                  {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/menubg.dta"}
+                  {dx_file_rename 'ps4/ui/background/meta_background1.scene_ps4' 'ps4/ui/background/meta_background.scene_ps4'}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta' ()}
                }
                {do
-                  {dx_file_rename "ps4/ui/background/meta_background.scene_ps4" "ps4/ui/background/meta_background1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/menubg.dta"}
+                  {dx_file_rename 'ps4/ui/background/meta_background.scene_ps4' 'ps4/ui/background/meta_background1.scene_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta'}
                }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
          )
-         ("Overshell Theme"
+         ('Overshell Theme'
             {$this show_state dxState_MenuTheme}
             {$this trigger_select_effects}
          )
-         ("UI Theme"
+         ('UI Theme'
             {$this show_state dxState_UITheme}
             {$this trigger_select_effects}
          )
@@ -592,7 +632,7 @@
    ;          }
    ;       )
    ;       (kAction_Down 
-   ;          {if {== $list_data ""}})
+   ;          {if {== $list_data ''}})
    ;    }
    ; )
    (on_cancel 
@@ -604,87 +644,95 @@
 
 ;Venue Selector
 (dxState_VenueSelector
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
       {$this setup_confirm_actions a
          (
-            "[Random]"
-            "Static Background"
-            "The Big Cassettes"
-            "The Club"
-            "The Industrial Club"
-            big_club_gym
-            big_club_arcade
-            "The Arcade (1 Audience Member)"
-            big_club_boat
-            big_club_desert
-            small_club_vwhall
-            small_club_basement
-            "The Barn"
-            "The Roadhouse"
-            "The Basement (Trashed)"
-            "The Arena"
-            "The Practice Area"
+            '[Random]'
+            'black Background'
+            ;'The Big Cassettes'
+            'The Club'
+            'The Industrial Club'
+            ;big_club_gym
+            ;big_club_arcade
+            ;'The Arcade (1 Audience Member)'
+            ;big_club_boat
+            ;big_club_desert
+            ;small_club_vwhall
+            ;small_club_basement
+            'The Barn'
+            'The Roadhouse'
+            'The Basement (Trashed)'
+            'The Arena'
+            'The Practice Area'
          )
       }
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       DELETE_INVALID_VENUE_DTAS
-      {dx_write_null_file "settings/venue/enabled.dta"}
+      {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/enabled.dta' ()}
       {if_else
          {|| 
-            {== $list_data "Static Background"} 
-            {== $list_data "The Big Cassettes"}
-            {== $list_data "The Club"}
-            {== $list_data "The Industrial Club"}
-            {== $list_data "The Arcade (1 Audience Member)"}
-            {== $list_data "The Barn"}
-            {== $list_data "The Roadhouse"}
-            {== $list_data "The Basement (Trashed)"}
-            {== $list_data "The Arena"}
-            {== $list_data "The Practice Area"}
-            {== $list_data "[Random]"}
+            {== $list_data 'black Background'} 
+            {== $list_data 'The Big Cassettes'}
+            {== $list_data 'The Club'}
+            {== $list_data 'The Industrial Club'}
+            {== $list_data 'The Arcade (1 Audience Member)'}
+            {== $list_data 'The Barn'}
+            {== $list_data 'The Roadhouse'}
+            {== $list_data 'The Basement (Trashed)'}
+            {== $list_data 'The Arena'}
+            {== $list_data 'The Practice Area'}
+            {== $list_data '[Random]'}
          }
          {switch $list_data
-            ("Static Background"
-               {$this show_state dxState_StaticBackgroudSelector}
+            ('black Background'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/none.dta' ()}
             )
-            ("The Big Cassettes"
-               {dx_write_null_file "settings/venue/big_club_toys.dta"}
+            ('The Big Cassettes'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_toys.dta' ()}
             )
-            ("The Club"
-               {dx_write_null_file "settings/venue/big_club_standard.dta"}
+            ('The Club'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_standard.dta' ()}
             )
-            ("The Industrial Club"
-               {dx_write_null_file "settings/venue/big_club_industrial.dta"}
+            ('The Industrial Club'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_industrial.dta' ()}
             )
-            ("The Arcade (1 Audience Member)"
-               {dx_write_null_file "settings/venue/big_club_arcade_empty.dta"}
+            ('The Arcade (1 Audience Member)'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_arcade_empty.dta' ()}
             )
-            ("The Barn"
-               {dx_write_null_file "settings/venue/small_club_industrial.dta"}
+            ('The Barn'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/small_club_industrial.dta' ()}
             )
-            ("The Roadhouse"
-               {dx_write_null_file "settings/venue/small_club_roadhouse.dta"}
+            ('The Roadhouse'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/small_club_roadhouse.dta' ()}
             )
-            ("The Basement (Trashed)"
-               {dx_write_null_file "settings/venue/small_club_trashed.dta"}
+            ('The Basement (Trashed)'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/small_club_trashed.dta' ()}
             )
-            ("The Arena"
-               {dx_write_null_file "settings/venue/arena.dta"}
+            ('The Arena'
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/arena.dta' ()}
             )
-            ("The Practice Area"
-               {dx_write_null_file "settings/venue/big_club_practice.dta"}
+            ('The Practice Area'
+               { 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_practice.dta' ()}
             )
-            ("[Random]"
-               {dx_file_delete "settings/venue/enabled.dta"}
+            ('[Random]'
+               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/venue/enabled.dta'}
             )
          }
-         {dx_write_null_file {sprint "settings/venue/" $list_data ".dta"}}
+         {write_file {sprint 'data:/GoldHen/RB4DX-1.08/settings/venue/' $list_data '.dta'} ()}
       }
-      {unless {== $list_data "Static Background"}
-         {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+      {unless {== $list_data 'Static Background'}
+         {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
          {$this show_state dxState_DelayedEffectWarn}
       }
       {$this trigger_select_effects}
@@ -697,29 +745,37 @@
 
 ;Static Background Selector
 (dxState_StaticBackgroudSelector
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
       {set $texturelist ()}
-      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
+      {set $texturelist {file_list 'data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4'}}
       {remove_elem $texturelist {elem $texturelist             0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;{set $customhw {|| {file_exists 'data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex.dta'} {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4'}}}
       ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {if {dx_file_exists "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
-         {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
-         {dx_write_null_file "settings/venue/none.dta"}
+      {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+         {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+         {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/none.dta' ()}
       }
-      {dx_file_copy {sprint "ps4/dx/custom_textures/backgrounds/" $list_data ".png_ps4"} "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
-      {if_else {file_exists "settings/venue/none.dta"}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/backgrounds/' $list_data '.png_ps4'} 'ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+      {if_else {file_exists 'settings/venue/none.dta'}
          {if_else {$this in_song}
             {$this show_state dxState_InGameWarn}
             {$this show_state dxState_VisSettings}
          }
          {do
-            {dx_write_null_file "settings/venue/none.dta"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/none.dta' ()}
             {$this show_state dxState_DelayedEffectWarn}
          }
       }
@@ -735,29 +791,29 @@
 (dxState_SongTitleSelector
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "What location do you want the song title at?" ("Vanilla" "Top Left" "Acai; Below Twitch Chat")}
+      {$this setup_confirm_actions 'What location do you want the song title at?' ('Vanilla' 'Top Left' 'Acai; Below Twitch Chat')}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Vanilla"
+         ('Vanilla'
             {set $songtitletype default}
-            {dx_write_null_file "settings/visuals/songtitletype1.dta"}
-            {dx_file_rename "ps4/ui/game/song_artist_overlay1.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletype1.dta' ()}
+            {dx_file_rename 'ps4/ui/game/song_artist_overlay1.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
          )
-         ("Top Left"
+         ('Top Left'
             {set $songtitletype tl}
-            {dx_write_null_file "settings/visuals/songtitletypetl.dta"}
-            {dx_file_rename "ps4/ui/game/song_artist_overlaytl.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypetl.dta' ()}
+            {dx_file_rename 'ps4/ui/game/song_artist_overlaytl.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
          )
-         ("Acai; Below Twitch Chat"
+         ('Acai; Below Twitch Chat'
             {set $songtitletype a}
-            {dx_write_null_file "settings/visuals/songtitletypea.dta"}
-            {dx_file_rename "ps4/ui/game/song_artist_overlaya.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypea.dta' ()}
+            {dx_file_rename 'ps4/ui/game/song_artist_overlaya.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
          )
       }
       {set $songtitle TRUE}
-      {dx_write_null_file "settings/visuals/songtitle.dta"}
+      {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitle.dta' ()}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
          {$this show_state dxState_VisSettings}
@@ -772,25 +828,33 @@
 
 ;Menu Theme
 (dxState_MenuTheme
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
       {$this setup_confirm_actions a
          (
-            "Rock Band 4 Rivals"
-            "Launch Rock Band 4"
+            'Rock Band 4 Rivals'
+            'Launch Rock Band 4'
          )
       }
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Rock Band 4 Rivals"
-            {dx_file_rename "ps4/ui/textures/overshell" "ps4/ui/textures/overshell_prerivals"}
-            {dx_file_rename "ps4/ui/overshell/slot.entity_ps4" "ps4/ui/overshell/slot_prerivals.entity_ps4"}
+         ('Rock Band 4 Rivals'
+            {dx_file_rename 'ps4/ui/textures/overshell' 'ps4/ui/textures/overshell_prerivals'}
+            {dx_file_rename 'ps4/ui/overshell/slot.entity_ps4' 'ps4/ui/overshell/slot_prerivals.entity_ps4'}
          )
-         ("Launch Rock Band 4"
-            {dx_file_rename "ps4/ui/textures/overshell_prerivals" "ps4/ui/textures/overshell"}
-            {dx_file_rename "ps4/ui/overshell/slot_prerivals.entity_ps4" "ps4/ui/overshell/slot.entity_ps4"}
+         ('Launch Rock Band 4'
+            {dx_file_rename 'ps4/ui/textures/overshell_prerivals' 'ps4/ui/textures/overshell'}
+            {dx_file_rename 'ps4/ui/overshell/slot_prerivals.entity_ps4' 'ps4/ui/overshell/slot.entity_ps4'}
          )
       }
       {$this show_state dxState_DelayedEffectWarn}
@@ -804,28 +868,36 @@
 
 ;UI Theme
 (dxState_UITheme
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
       {$this setup_confirm_actions a
          (
-            "Rock Band 4 Rivals"
-            "Launch Rock Band 4"
+            'Rock Band 4 Rivals'
+            'Launch Rock Band 4'
          )
       }
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Rock Band 4 Rivals"
-            {unless {dx_file_exists "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui" "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui_bak" "ps4/ui"}
+         ('Rock Band 4 Rivals'
+            {unless {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui_prerivals'}
+               {dx_file_rename 'ps4/ui' 'ps4/ui_prerivals'}
+               {dx_file_rename 'ps4/ui_bak' 'ps4/ui'}
             }
          )
-         ("Launch Rock Band 4"
-            {if {dx_file_exists "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui" "ps4/ui_bak"}
-               {dx_file_rename "ps4/ui_prerivals" "ps4/ui"}
+         ('Launch Rock Band 4'
+            {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui_prerivals'}
+               {dx_file_rename 'ps4/ui' 'ps4/ui_bak'}
+               {dx_file_rename 'ps4/ui_prerivals' 'ps4/ui'}
             }
          )
       }
@@ -843,72 +915,80 @@
 (
    {$this setup_confirm_actions a 
       (
-         "Track Theme"
-         {if_else $noflames "Flames: OFF" "Flames: ON"}
-         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
-         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
-         {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
-         "Track Curvature"
-         "Highway Length"
+         ;'Track Theme'
+         ;{if_else $noflames 'Flames: OFF' 'Flames: ON'}
+         {if_else $noaa 'Track Antialiasing: OFF' 'Track Antialiasing: ON'}
+         ;{if_else $micwarn 'Hide Mic Warning: ON' 'Hide Mic Warning: OFF'}
+         ;{if_else $trackangle 'Custom Track Angle: ON' 'Custom Track Angle: OFF'}
+         'Track Curvature'
+         'Highway Length'
       )
    }
 )
 (dxState_TrkSettings
-   (view {$this get_auto_list_view}) 
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }}) 
    (enter
-      {set $trackangle {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}}
+      {set $trackangle {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4'}}
       TRACKANGLE_CHECK
-      {set $noshine {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}}
-      {set $gemshine {dx_file_exists "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}}
-      {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
-      {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
-      {set $micwarn {! {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}}
+      {set $noshine {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/shared/track_skin_swap.sgraph_ps4ps4'}}
+      {set $gemshine {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_unlit.sgraph_ps4ps4'}}
+      {set $noflames {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/gem_smasher_unlit.entity_ps4'}}
+      {set $noaa {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/shared/scene/antialias.scene_ps4'}}
+      {set $micwarn {! {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud1.scene_ps4'}}}
       {set $dx_cur_state trk}
       RB4DXTRK_DATA
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Custom Track Angle: ON"
+         ('Custom Track Angle: ON'
             {set $trackangle FALSE}
             {switch $trackangletype
                (rr
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rr.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
+                  {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rr.scene_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerr.dta'}
                )
                (rb2
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb2.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
+                  {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rb2.scene_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb2.dta'}
                )
                (rb3
-                  {dx_file_rename "ps4/track/guitar_unlit.scene_ps4" "ps4/track/guitar_unlit_rb3.scene_ps4"}
-                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
+                  {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rb3.scene_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb3.dta'}
                )
                (none
-                  {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4'}
                )
             }
-            {dx_file_delete "settings/visuals/trackangle.dta"}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackangle.dta'}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
             }
             {$this trigger_select_effects}
          )
-         ("Custom Track Angle: OFF"
+         ('Custom Track Angle: OFF'
             {$this show_state dxState_TrackAngleSelector}
             {$this trigger_select_effects}
          )
-         (("Flames: OFF" "Flames: ON")
+         (('Flames: OFF' 'Flames: ON')
             {set $noflames {! $noflames}}
             {if_else $noflames
                {do
                   MOVE_NOFLAMES_FILES_ON
-                  {dx_write_null_file "settings/visuals/noflames.dta"}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/noflames.dta' ()}
                }
                {do
                   MOVE_NOFLAMES_FILES_OFF
-                  {dx_file_delete "settings/visuals/noflames.dta"}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/noflames.dta'}
                }
             }
             {if_else {$this in_song}
@@ -917,11 +997,11 @@
             }
             {$this trigger_select_effects}
          )
-         (("Track Antialiasing: OFF" "Track Antialiasing: ON")
+         (('Track Antialiasing: OFF' 'Track Antialiasing: ON')
             {set $noaa {! $noaa}}
             {if_else $noaa
-               {dx_write_null_file "ps4/shared/scene/antialias.scene_ps4"}
-               {dx_file_delete "ps4/shared/scene/antialias.scene_ps4"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/ps4/shared/scene/antialias.scene_ps4' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/shared/scene/antialias.scene_ps4'}
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -929,16 +1009,16 @@
             }
             {$this trigger_select_effects}
          )
-         (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
+         (('Hide Mic Warning: ON' 'Hide Mic Warning: OFF')
             {set $micwarn {! $micwarn}}
             {if_else $micwarn
                {do
-                  {dx_file_rename "ps4/ui/game/hud1.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/micwarn.dta"}
+                  {dx_file_rename 'ps4/ui/game/hud1.scene_ps4' 'ps4/ui/game/hud.scene_ps4'}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/micwarn.dta' ()}
                }
                {do
-                  {dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/micwarn.dta"}
+                  {dx_file_rename 'ps4/ui/game/hud.scene_ps4' 'ps4/ui/game/hud1.scene_ps4'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/micwarn.dta'}
                }
             }
             {if_else {$this in_song}
@@ -947,15 +1027,15 @@
             }
             {$this trigger_select_effects}
          )
-         ("Track Curvature"
+         ('Track Curvature'
             {$this show_state dxState_TrackCurve}
             {$this trigger_select_effects}
          )
-         ("Highway Length"
+         ('Highway Length'
             {$this show_state dxState_HighwayLength}
             {$this trigger_select_effects}
          )
-         ("Track Theme"
+         ('Track Theme'
             {$this show_state dxState_TrackTheme}
             {$this trigger_select_effects}
          )
@@ -972,20 +1052,20 @@
 (dxState_TrackAngleSelector
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Which Track Angle do you want?" ("Rock Revolution" "Rock Band 2" "Rock Band 3")}
+      {$this setup_confirm_actions 'Which Track Angle do you want?' ('Rock Revolution' 'Rock Band 2' 'Rock Band 3')}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Rock Revolution"
+         ('Rock Revolution'
             {set $trackangletype rr}
             {$this show_state dxState_AnglesWarn}
          )
-         ("Rock Band 2"
+         ('Rock Band 2'
             {set $trackangletype rb2}
             {$this show_state dxState_AnglesWarn}
          )
-         ("Rock Band 3"
+         ('Rock Band 3'
             {set $trackangletype rb3}
             {$this show_state dxState_AnglesWarn}
          )
@@ -1004,51 +1084,59 @@
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            ;{if_else $faststart 'Fast Start: ON' 'Fast Start: OFF'}
+            {if_else $notifycolored 'Plugin Notification Icon: Colored' 'Plugin Notification Icon: B/W'}
          )
       }
       {$this setup_confirm_actions a 
          (
-            "Screensaver"
-            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            'Screensaver'
+            ;{if_else $faststart 'Fast Start: ON' 'Fast Start: OFF'}
+            {if_else $notifycolored 'Plugin Notification Icon: Colored' 'Plugin Notification Icon: B/W'}
          )
       }
    }
 )
 (dxState_Extras
-   (view {$this get_auto_list_view})
+   (view 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_length 
+         {$ui_list get_num_rows }} 
+      {if_else 
+         {> $list_length 5 }list_long 
+         {if_else 
+            {> $list_length 3 }list_medium list_short }})
    (enter
-      {set $faststart {dx_file_exists "ps4/ui/startup/mnemonix.bk2"}}
+      {set $faststart {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/startup/mnemonix.bk2'}}
       RB4DXEXTRA_DATA
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data
-         ("Screensaver"
+         ('Screensaver'
             {$this show_state dxState_ScreensaverWarn}
             {$this trigger_select_effects})
-         (("Fast Start: ON" "Fast Start: OFF")
+         (('Fast Start: ON' 'Fast Start: OFF')
             {set $faststart {! $faststart}}
             {if_else $faststart
                {do
-                  {dx_file_rename "ps4/ui/startup/mnemonix1.bk2" "ps4/ui/startup/mnemonix.bk2"}
-                  {dx_write_null_file "settings/visuals/faststart.dta"}
+                  {dx_file_rename 'ps4/ui/startup/mnemonix1.bk2' 'ps4/ui/startup/mnemonix.bk2'}
+                  {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/faststart.dta' ()}
                }
                {do
-                  {dx_file_rename "ps4/ui/startup/mnemonix.bk2" "ps4/ui/startup/mnemonix1.bk2"}
-                  {dx_file_delete "settings/visuals/faststart.dta"}
+                  {dx_file_rename 'ps4/ui/startup/mnemonix.bk2' 'ps4/ui/startup/mnemonix1.bk2'}
+                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/faststart.dta'}
                }
             }
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}
          )
-         (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
+         (('Plugin Notification Icon: Colored' 'Plugin Notification Icon: B/W')
             {set $notifycolored {! $notifycolored}}
             {if_else $notifycolored
-               {dx_write_null_file "notifycolored.ini"}
-               {dx_file_delete "notifycolored.ini"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/notifycolored.ini' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/notifycolored.ini'}
             }
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}

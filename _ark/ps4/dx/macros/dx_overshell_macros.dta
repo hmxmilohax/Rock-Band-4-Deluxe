@@ -2,16 +2,16 @@
 (
 	{set $trackangletype
    		{cond
-      		({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+      		({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb2.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb3.scene_ps4"}}
          		rr
       		)
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb3.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rr.scene_ps4"}}
 		        rb2
 		    )
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb2.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rr.scene_ps4"}}
 		        rb3
 		    )
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rr.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb2.scene_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit_rb3.scene_ps4"}}
 		    	none
 		    )
 	    }
@@ -21,16 +21,16 @@
 (
 	{set $songtitletype
    		{cond
-      		({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+      		({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
          		default
       		)
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay1.entity_ps4"}}
 		        tl
 		    )
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay1.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
 		        a
 		    )
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+		    ({&& {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaya.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay1.entity_ps4"} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
 		    	none
 		    )
 	    }
@@ -40,31 +40,31 @@
 (
 	{set $enabledtex
 		{cond
-			({&& {! {dx_file_exists "settings/visuals/highwaytex.dta"}} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}
+			({&& {! {file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex.dta"}} {file_exists "data:/GoldHen/RB4DX-1.08/ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}
 				none
 			)
-			({dx_file_exists "settings/visuals/highwaytex_wood.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_wood.dta"}
 				wood
 			)
-			({dx_file_exists "settings/visuals/highwaytex_black.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_black.dta"}
 				black
 			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_guitar.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_rb3_guitar.dta"}
 				rb3_guitar
 			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_bass.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_rb3_bass.dta"}
 				rb3_bass
 			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_drums.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_rb3_drums.dta"}
 				rb3_drums
 			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_keys.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_rb3_keys.dta"}
 				rb3_keys
 			)
-			({dx_file_exists "settings/visuals/highwaytex_fnfestival.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_fnfestival.dta"}
 				fnfestival
 			)
-			({dx_file_exists "settings/visuals/highwaytex_fnfestival_beta.dta"}
+			({file_exists "data:/GoldHen/RB4DX-1.08/settings/visuals/highwaytex_fnfestival_beta.dta"}
 				fnfestival_beta
 			)
 		}

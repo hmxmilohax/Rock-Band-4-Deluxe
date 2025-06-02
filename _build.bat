@@ -1,7 +1,7 @@
 @echo OFF
 mkdir _tmpbuild
 for /R "%~dp0_build\ps4" %%f in (*) do del "%%f"
-rmdir /s /q "%~dp0_build\GoldHEN\RB4DX\ps4"
+rmdir /s /q "%~dp0_build\GoldHEN\RB4DX-1.08\ps4"
 echo:Building Rock Band 4 Deluxe files...
 for /R "%~dp0_ark" %%f in (*.dta) do IF NOT "%%~xf" == ".dta_dta_ps4" dependencies\dtacheck "%%f" "%~dp0dependencies\dtacheckfns"
 for /R "%~dp0_ark" %%f in (*.script) do dependencies\dtacheck "%%f" "%~dp0dependencies\dtacheckfns"
@@ -16,9 +16,9 @@ echo:Converting pngs...
 for /R "%~dp0_tmpbuild" %%f in (*.png) do IF NOT "%%~xf" == ".png_ps4" dependencies\forgetool\forgetool png2tex "%%f" "%%~dpnf.png_ps4"
 for /R "%~dp0_tmpbuild" %%f in (*.png) do IF NOT "%%~xf" == ".png_ps4" del "%%f"
 for /R "%~dp0_tmpbuild" %%f in (*.gitkeep) do del "%%f"
-xcopy /q /e /y _tmpbuild _build\GoldHEN\RB4DX\ps4\
+xcopy /q /e /y _tmpbuild _build\GoldHEN\RB4DX-1.08\ps4\
 for /R "%~dp0_tmpbuild" %%f in (*) do del "%%f"
 rmdir /s /q "%~dp0_tmpbuild"
 echo:Created Rock Band 4 Deluxe files.
-echo:Complete! Copy the ps4 folder in _build into /data/GoldHEN/RB4DX/ on your PS4.
+echo:Complete! Copy the ps4 folder in _build into /data/GoldHEN/RB4DX-1.08/ on your PS4.
 pause
