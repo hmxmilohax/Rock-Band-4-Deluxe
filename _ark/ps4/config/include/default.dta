@@ -15,7 +15,7 @@
    (ps4_map_file "rockband_ps4_%s.map") 
    (xb1_map_file "../build/xb1/rockband_xb1_%s/Layout/Image/Loose/rockband_xb1_%s.map") 
    (connect_fmod 0))
-(locale ../../ui/locale/eng/locale_keep.dta ../../dx/locale/eng/dx_locale.dta)
+(locale ../../ui/locale/eng/locale_keep.dta)
 (ui 
    (verbose_locale_notifies TRUE))
 (crucible 

@@ -1,4 +1,0 @@
-(percent_s "%s")
-(tc "Track Curve: %.2fX")
-(trackcurve_msg {eval {sprintf {localize tc} {+ {* $track_curve -2} 3}} })
-(highwaylength_msg "Highway Length: %.2fX")
