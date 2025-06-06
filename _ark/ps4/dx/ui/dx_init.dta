@@ -1,6 +1,6 @@
 #include init_dev.dta
 {set $speedmod 100}
-{write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+{write_file "data:/GoldHEN/RB4DX/plugin/speedmod.ini" {array ({/ $speedmod 100})}}
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
 {set $track_curve 1}

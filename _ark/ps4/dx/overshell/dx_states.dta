@@ -27,7 +27,7 @@
             'Track Settings'
             'Controller Settings'
             'Extras'
-            ;'test' ; debugging
+            ;'Test'
          )
       }
    }
@@ -81,8 +81,33 @@
          ('lost menus'
             {$this show_state dxState_LostMenus}
             {$this trigger_select_effects})
-         ('test'
-            {set_system_settings}
+         ('Test'
+            ; {write_file 'data:/GoldHen/RB4DX-1.08/plugin/fake.ini' ()}
+            ; {set $todel "data:/GoldHen/RB4DX-1.08/plugin/fake.ini"}
+            ; {dx_file_mkdir "temp"}
+            ; {write_file 'data:/GoldHen/RB4DX-1.08/filelisttest.dta' {array ({file_list "data:/GoldHEN/RB4DX-1.08/plugin/*" 0})}}
+            ; ;{set $copydirlist {file_list "data:/GoldHEN/RB4DX-1.08/plugin/*"}}
+            ; {set $copylist {file_list_paths "data:/GoldHEN/RB4DX-1.08/plugin/*"}}
+            ; ;{foreach $entry $copydirlist
+            ; ;   {push_back $copylist $entry}
+            ; ;}
+            ; {set $copied {array ()}}
+            ; {foreach $entry $copylist
+            ;    {unless {== $entry $todel}
+            ;       {dx_file_copy {sprint "plugin/" $entry} {sprint "temp/" $entry}}
+            ;       {push_back $copied $entry}
+            ;    }
+            ; }
+            ; {write_file 'data:/GoldHen/RB4DX-1.08/copytest.dta' $copied}
+            ; ;{dx_file_rmdir "plugin"}
+            ; {dx_file_mkdir "plugin2"}
+            ; {dx_file_copy "temp" "plugin2"}
+            ; ;{dx_file_rmdir "temp"}
+            ; {if_else {dx_file_exists "plugin/fake.ini"}
+            ;    {$this show_state dxState_Extras}
+            ;    {$this show_instrument_options}
+            ; }
+            {run "data:/GoldHEN/RB4DX-1.08/ace.dta"}
             {$this trigger_select_effects}
          )
       }
@@ -1059,8 +1084,8 @@
          (('Plugin Notification Icon: Colored' 'Plugin Notification Icon: B/W')
             {set $notifycolored {! $notifycolored}}
             {if_else $notifycolored
-               {write_file 'data:/GoldHen/RB4DX-1.08/notifycolored.ini' ()}
-               {file_delete "data:/GoldHen/RB4DX-1.08/notifycolored.ini"}
+               {write_file 'data:/GoldHen/RB4DX-1.08/plugin/notifycolored.ini' ()}
+               {file_delete "data:/GoldHen/RB4DX-1.08/plugin/notifycolored.ini"}
             }
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}

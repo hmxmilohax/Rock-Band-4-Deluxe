@@ -68,7 +68,7 @@
                {$this select_difficulty kDifficultyEasy})
          } 
       {$this trigger_select_effects}
-      {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
+      {write_file 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta' ()}
    ) 
    (list_focus 
       ($obj_name $obj_id) 
@@ -108,11 +108,11 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}} 
       {switch $list_data 
          (overshell_confirm_yes 
-            {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta'}
             {$this quit_early}
          )
          (overshell_confirm_no
-            {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta' ()}
             {if_else {$this in_venue_meta_mode}
                {$this show_state kState_VenueMetaMenu}
                {$this show_in_song_menu}
@@ -122,7 +122,7 @@
       {$this trigger_select_effects}
    ) 
    (on_cancel 
-      {write_file 'data:/GoldHen/RB4DX-1.08/insong.dta' ()}
+      {write_file 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta' ()}
       {if_else {$this in_venue_meta_mode}
          {$this show_state kState_VenueMetaMenu}
          {$this show_in_song_menu}
@@ -137,7 +137,7 @@
       {cond 
          ({$this is_quit_token {$component selected_sym}} 
             {do 
-               {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta'}
                {$this attempt_quit}
             }
          )
@@ -169,7 +169,7 @@
                )
                ({$this get_current_overshell_quit_token}
                   {do
-                     {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
+                     {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta'}
                      {$this attempt_quit}
                   }
                )
@@ -247,7 +247,7 @@
             {$this trigger_select_effects })
          (
             {$this get_current_overshell_quit_token } 
-            {file_delete 'data:/GoldHen/RB4DX-1.08/insong.dta'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/insong.dta'}
             {$this attempt_quit}
             {$this trigger_select_effects })
          (overshell_practice_new_section 

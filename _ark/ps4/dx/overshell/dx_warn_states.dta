@@ -196,14 +196,14 @@
          {switch $cheat_option
             (autoplay
                {set $autoplayenabled TRUE}
-               {write_file 'data:/GoldHen/RB4DX-1.08/autoplay.ini' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/saving.ini'}
+               {write_file 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/saving.ini'}
             )
             (drunkmode
                {set $drunkmode TRUE}
                {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
-               {write_file 'data:/GoldHen/RB4DX-1.08/drunkmode.ini' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/saving.ini'}
+               {write_file 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini' ()}
+               {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/saving.ini'}
             )
          }
       }
@@ -224,12 +224,12 @@
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/autoplay.ini'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/drunkmode.ini'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}
@@ -239,12 +239,12 @@
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/autoplay.ini'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/drunkmode.ini'}
+            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}
