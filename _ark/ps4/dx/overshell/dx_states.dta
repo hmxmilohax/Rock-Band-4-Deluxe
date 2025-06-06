@@ -604,7 +604,7 @@
             {set $menubg {! $menubg}}
             {if_else $menubg
                {do
-                  {write_file 'data:/GoldHEN/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4' ()}
+                  {file_copy 'data:/GoldHEN/RB4DX-1.08/ps4/ui/dev_menu/dev_menu.scene_ps4' 'data:/GoldHEN/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4'}
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta' ()}
                }
                {do

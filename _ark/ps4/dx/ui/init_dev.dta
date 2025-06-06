@@ -22,24 +22,4 @@
 
 CREATE_SETTINGS_DIRS
 
-;clear invalid files
-{if {! {file_exists "settings/venue/enabled.dta"}}
-	DELETE_INVALID_VENUE_DTAS
-}
-{if {file_exists "plugin/insong.dta"}
-   {dx_file_delete "plugin/insong.dta"}
-   {dx_emu_file_delete "plugin" "insong.dta"}
-}
-{if {file_exists "plugin/speedmod.ini"}
-	{dx_file_delete "plugin/speedmod.ini"}
-	{dx_emu_file_delete "plugin" "speedmod.ini"}
-}
-{if {file_exists "plugin/autoplay.ini"}
-   {dx_file_delete "plugin/autoplay.ini"}
-   {dx_emu_file_delete "plugin" "autoplay.ini"}
-}
-{if {file_exists "plugin/drunkmode.ini"}
-   {dx_file_delete "plugin/drunkmode.ini"}
-   {dx_emu_file_delete "plugin" "drunkmode.ini"}
-}
 {write_file "data:/GoldHen/RB4DX-1.08/plugin/saving.ini" ()}

@@ -41,3 +41,24 @@ SET_PAD_BINDING_HOOK
    {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
    ENABLE_INSTA_FAIL
 }
+
+;clear invalid files
+{if {! {file_exists "settings/venue/enabled.dta"}}
+   DELETE_INVALID_VENUE_DTAS
+}
+{if {file_exists "plugin/speedmod.ini"}
+   {dx_file_delete "plugin/speedmod.ini"}
+   {dx_emu_file_delete "plugin" "speedmod.ini"}
+}
+{if {file_exists "plugin/autoplay.ini"}
+   {dx_file_delete "plugin/autoplay.ini"}
+   {dx_emu_file_delete "plugin" "autoplay.ini"}
+}
+{if {file_exists "plugin/drunkmode.ini"}
+   {dx_file_delete "plugin/drunkmode.ini"}
+   {dx_emu_file_delete "plugin" "drunkmode.ini"}
+}
+{if {file_exists "plugin/insong.dta"}
+   {dx_file_delete "plugin/insong.dta"}
+   {dx_emu_file_delete "plugin" "insong.dta"}
+}
