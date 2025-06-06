@@ -1,0 +1,41 @@
+; these are set in code, but i left the dta here to quickly see what these funcs do -LX
+{func dx_file_mkdir ($dir)
+	{file_mkdir {sprint "data:/GoldHEN/RB4DX-1.08/" $dir}}
+}
+{func dx_file_rmdir ($dir)
+	{file_rmdir {sprint "/data/GoldHEN/RB4DX-1.08/" $dir}}
+}
+{func dx_file_delete ($file) ; DOESN'T WORK ON EMU
+	{file_delete {sprint "data:/GoldHEN/RB4DX-1.08/" $file}}
+}
+{func dx_file_exists ($file)
+	{file_exists {sprint "data:/GoldHEN/RB4DX-1.08/" $file}}
+}
+{func dx_file_rename ($from $to) ; DOESN'T WORK ON EMU
+	{file_rename {sprint "/data/GoldHEN/RB4DX-1.08/" $from} {sprint "/data/GoldHEN/RB4DX-1.08/" $to}}
+}
+{func dx_file_copy ($from $to)
+	{file_copy {sprint "/data/GoldHEN/RB4DX-1.08/" $from} {sprint "/data/GoldHEN/RB4DX-1.08/" $to}}
+}
+{func dx_write_null_file ($file)
+	{write_file {sprint "data:/GoldHEN/RB4DX-1.08/" $file} {array ()}}
+}
+{func emu_file_delete ($path $file)
+	; $path ex: "/data/GoldHEN/RB4DX-1.08/path"
+	; $file ex: "file.txt"
+	{dx_file_mkdir "temp"}
+	{set $todel $file}
+	{set $copylist {file_list_paths {sprint $path "/*"}}}
+	{foreach $entry $copylist
+		{unless {== {basename_ext $entry} $todel}
+			{file_copy {sprint $path "/" {basename_ext $entry}} {sprint "/data/GoldHEN/RB4DX-1.08/temp/" {basename_ext $entry}}}
+		}
+	}
+	{file_rmdir $path}
+	{file_mkdir $path}
+	{file_copy "/data/GoldHEN/RB4DX-1.08/temp" $path}
+	{dx_file_rmdir "temp"}
+}
+{func dx_emu_file_delete ($path $file)
+	{emu_file_delete {sprint "/data/GoldHEN/RB4DX-1.08/" $path} $file}
+}

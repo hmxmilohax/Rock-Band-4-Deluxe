@@ -183,14 +183,16 @@
                {do
                   {if $toughcrowd
                      {set $toughcrowd 0}
-                     {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta'}
+                     {dx_file_delete 'settings/gameplay/toughcrowd.dta'}
+                     {dx_emu_file_delete 'settings/gameplay' 'toughcrowd.dta'}
                   }
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta' ()}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
                   ENABLE_INSTA_FAIL
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta'}
+                  {dx_file_delete 'settings/gameplay/instafail.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'instafail.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
                   DISABLE_INSTA_FAIL
                }
@@ -204,14 +206,16 @@
                {do
                   {if $instafail
                      {set $instafail 0}
-                     {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/instafail.dta'}
+                     {dx_file_delete 'settings/gameplay/instafail.dta'}
+                     {dx_emu_file_delete 'settings/gameplay' 'instafail.dta'}
                   }
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta' ()}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
                   ENABLE_TOUGH_CROWD
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/toughcrowd.dta'}
+                  {dx_file_delete 'settings/gameplay/toughcrowd.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'toughcrowd.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 TRUE}
                   DISABLE_TOUGH_CROWD
                }
@@ -228,7 +232,8 @@
                   {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 FALSE}
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/nood.dta'}
+                  {dx_file_delete 'settings/gameplay/nood.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'nood.dta'}
                   {set_elem {find $syscfg gamemodes defaults allow_overdrive_phrases} 1 TRUE}
                   {set_elem {find $syscfg gamemodes defaults enable_overdrive} 1 TRUE}
                }
@@ -248,7 +253,8 @@
                   {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 TRUE}
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/practiceod.dta'}
+                  {dx_file_delete 'settings/gameplay/practiceod.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'practiceod.dta'}
                   {set_elem {find $syscfg gamemodes practice allow_overdrive_phrases} 1 FALSE}
                   {set_elem {find $syscfg gamemodes practice enable_overdrive} 1 FALSE}
                }
@@ -263,7 +269,10 @@
             {set $syncspeeds {! $syncspeeds}}
             {if_else $syncspeeds
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/syncspeeds.dta' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/syncspeeds.dta'}
+               {do
+                  {dx_file_delete 'settings/gameplay/syncspeeds.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'syncspeeds.dta'}
+               }
             }
             SET_TRACK_SPEEDS
             RB4DXGP_DATA
@@ -305,7 +314,10 @@
             {set $tiltsens {! $tiltsens}}
             {if_else $tiltsens
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/gameplay/tiltsens.dta' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/gameplay/tiltsens.dta'}
+               {do
+                  {dx_file_delete 'settings/gameplay/tiltsens.dta'}
+                  {dx_emu_file_delete 'settings/gameplay' 'tiltsens.dta'}
+               }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -385,18 +397,22 @@
             {switch $trackmuting
                (vanilla 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -16.0}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta'}
+                  {dx_file_delete 'settings/sfx/trackmutingoff.dta'}
+                  {dx_file_delete 'settings/sfx/trackmutingon.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'trackmutingoff.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'trackmutingon.dta'}
                )
                (off 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 0.0}
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta' ()}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta'}
+                  {dx_file_delete 'settings/sfx/trackmutingon.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'trackmutingon.dta'}
                )
                (on 
                   {set_elem {find $syscfg beatmatcher audio mute_volume} 1 -96.0}
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingon.dta' ()}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/trackmutingoff.dta'}
+                  {dx_file_delete 'settings/sfx/trackmutingoff.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'trackmutingoff.dta'}
                )
             }
             {if_else {$this in_song}
@@ -409,7 +425,10 @@
             {set $nomiss {! $nomiss}}
             {if_else $nomiss
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/nomiss.dta' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/nomiss.dta'}
+               {do
+                  {dx_file_delete 'settings/sfx/nomiss.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'nomiss.dta'}
+               }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -422,7 +441,8 @@
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 0}
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/nowhammyfx.dta'}
+                  {dx_file_delete 'settings/sfx/nowhammyfx.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'nowhammyfx.dta'}
                   {set_elem {find $syscfg beatmatcher watcher pitch_bend_range} 1 1}
                }
             }
@@ -436,7 +456,10 @@
             {set $speedpitch {! $speedpitch}}
             {if_else $speedpitch
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/sfx/speedpitch.dta' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/sfx/speedpitch.dta'}
+               {do
+                  {dx_file_delete 'settings/sfx/speedpitch.dta'}
+                  {dx_emu_file_delete 'settings/sfx' 'speedpitch.dta'}
+               }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -492,7 +515,10 @@
             {set $60fpsbg {! $60fpsbg}}
             {if_else $60fpsbg
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/60fpsbg.dta' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/60fpsbg.dta'}
+               {do
+                  {dx_file_delete 'settings/visuals/60fpsbg.dta'}
+                  {dx_emu_file_delete 'settings/visuals' '60fpsbg.dta'}
+               }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
@@ -505,8 +531,10 @@
                   {write_file 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/join_band.entity_ps4' ()}
                }
                {do
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/crowd_meter.entity_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/join_band.entity_ps4'}
+                  {dx_file_delete 'ps4/ui/game/crowd_meter.entity_ps4'}
+                  {dx_file_delete 'ps4/ui/game/join_band.entity_ps4'}
+                  {dx_emu_file_delete 'ps4/ui/game' 'crowd_meter.entity_ps4'}
+                  {dx_emu_file_delete 'ps4/ui/game' 'join_band.entity_ps4'}
                }
             }
             {if_else {$this in_song}
@@ -519,7 +547,10 @@
             {set $noui {! $noui}}
             {if_else $noui
                {write_file 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4'}
+               {do
+                  {dx_file_delete 'ps4/ui/game/hud.scene_ps4'}
+                  {dx_emu_file_delete 'ps4/ui/game' 'hud.scene_ps4'}
+               }
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -544,21 +575,21 @@
             {switch $songtitletype
                (default
                   {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlay1.entity_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletype1.dta'}
+                  {dx_file_delete 'settings/visuals/songtitletype1.dta'}
                )
                (tl
                   {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaytl.entity_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypetl.dta'}
+                  {dx_file_delete 'settings/visuals/songtitletypetl.dta'}
                )
                (a
                   {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaya.entity_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitletypea.dta'}
+                  {dx_file_delete 'settings/visuals/songtitletypea.dta'}
                )
                (none
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4'}
+                  {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
                )
             }
-            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitle.dta'}
+            {dx_file_delete 'settings/visuals/songtitle.dta'}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXVIS_DATA
@@ -573,12 +604,14 @@
             {set $menubg {! $menubg}}
             {if_else $menubg
                {do
-                  {dx_file_rename 'ps4/ui/background/meta_background1.scene_ps4' 'ps4/ui/background/meta_background.scene_ps4'}
+                  {write_file 'data:/GoldHEN/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4' ()}
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta' ()}
                }
                {do
-                  {dx_file_rename 'ps4/ui/background/meta_background.scene_ps4' 'ps4/ui/background/meta_background1.scene_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta'}
+                  {dx_file_delete 'ps4/ui/background/meta_background.scene_ps4'}
+                  {dx_file_delete 'settings/visuals/menubg.dta'}
+                  {dx_emu_file_delete 'ps4/ui/background' 'meta_background.scene_ps4'}
+                  {dx_emu_file_delete 'settings/visuals' 'menubg.dta'}
                }
             }
             {$this show_state dxState_DelayedEffectWarn}
@@ -686,16 +719,17 @@
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/arena.dta' ()}
             )
             ('The Practice Area'
-               { 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_practice.dta' ()}
+               {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/big_club_practice.dta' ()}
             )
             ('[Random]'
-               {file_delete 'data:/GoldHen/RB4DX-1.08/settings/venue/enabled.dta'}
+               {dx_file_delete 'settings/venue/enabled.dta'}
+               {dx_emu_file_delete 'settings/venue' 'enabled.dta'}
             )
          }
          {write_file {sprint 'data:/GoldHen/RB4DX-1.08/settings/venue/' $list_data '.dta'} ()}
       }
       {unless {== $list_data 'Static Background'}
-         {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+         ;{dx_file_delete 'ps4/ui/shared/fake_bg_ui.bmp_ps4'}
          {$this show_state dxState_DelayedEffectWarn}
       }
       {$this trigger_select_effects}
@@ -720,7 +754,7 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
-         {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+         {dx_file_delete 'ps4/ui/shared/fake_bg_ui.bmp_ps4'}
          {write_file 'data:/GoldHen/RB4DX-1.08/settings/venue/none.dta' ()}
       }
       {dx_file_copy {sprint 'ps4/dx/custom_textures/backgrounds/' $list_data '.png_ps4'} 'ps4/ui/shared/fake_bg_ui.bmp_ps4'}
@@ -904,21 +938,21 @@
             {switch $trackangletype
                (rr
                   {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rr.scene_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerr.dta'}
+                  {dx_file_delete 'settings/visuals/trackanglerr.dta'}
                )
                (rb2
                   {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rb2.scene_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb2.dta'}
+                  {dx_file_delete 'settings/visuals/trackanglerb2.dta'}
                )
                (rb3
                   {dx_file_rename 'ps4/track/guitar_unlit.scene_ps4' 'ps4/track/guitar_unlit_rb3.scene_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackanglerb3.dta'}
+                  {dx_file_delete 'settings/visuals/trackanglerb3.dta'}
                )
                (none
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar_unlit.scene_ps4'}
+                  {dx_file_delete 'ps4/track/guitar_unlit.scene_ps4'}
                )
             }
-            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/trackangle.dta'}
+            {dx_file_delete 'settings/visuals/trackangle.dta'}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXTRK_DATA
@@ -938,7 +972,7 @@
                }
                {do
                   MOVE_NOFLAMES_FILES_OFF
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/noflames.dta'}
+                  {dx_file_delete 'settings/visuals/noflames.dta'}
                }
             }
             {if_else {$this in_song}
@@ -951,7 +985,10 @@
             {set $noaa {! $noaa}}
             {if_else $noaa
                {write_file 'data:/GoldHen/RB4DX-1.08/ps4/shared/scene/antialias.scene_ps4' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/shared/scene/antialias.scene_ps4'}
+               {do
+                  {dx_file_delete 'ps4/shared/scene/antialias.scene_ps4'}
+                  {dx_emu_file_delete 'ps4/shared/scene' 'antialias.scene_ps4'}
+               }
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -968,7 +1005,7 @@
                }
                {do
                   {dx_file_rename 'ps4/ui/game/hud.scene_ps4' 'ps4/ui/game/hud1.scene_ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/micwarn.dta'}
+                  {dx_file_delete 'settings/visuals/micwarn.dta'}
                }
             }
             {if_else {$this in_song}
@@ -1075,7 +1112,7 @@
                }
                {do
                   {dx_file_rename 'ps4/ui/startup/mnemonix.bk2' 'ps4/ui/startup/mnemonix1.bk2'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/faststart.dta'}
+                  {dx_file_delete 'settings/visuals/faststart.dta'}
                }
             }
             RB4DXEXTRA_DATA
@@ -1085,7 +1122,10 @@
             {set $notifycolored {! $notifycolored}}
             {if_else $notifycolored
                {write_file 'data:/GoldHen/RB4DX-1.08/plugin/notifycolored.ini' ()}
-               {file_delete "data:/GoldHen/RB4DX-1.08/plugin/notifycolored.ini"}
+               {do
+                  {dx_file_delete "plugin/notifycolored.ini"}
+                  {dx_emu_file_delete "plugin" "notifycolored.ini"}
+               }
             }
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}

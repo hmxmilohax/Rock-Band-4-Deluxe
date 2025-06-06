@@ -40,7 +40,7 @@
                }
                {do
                   {dx_file_rename 'ps4/track/shared/track_skin_swap.sgraph_ps4ps4' 'ps4/track/shared/track_skin_swap1.sgraph_ps4ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/noshine.dta'}
+                  {dx_file_delete 'settings/visuals/noshine.dta'}
                }
             }
             {if_else {$this in_song}
@@ -60,7 +60,7 @@
                {do
                   {dx_file_rename 'ps4/track/guitar/gem_unlit.sgraph_ps4ps4' 'ps4/track/guitar/gem_unlit1.sgraph_ps4ps4'}
                   {dx_file_rename 'ps4/track/drums/gem_cymbal_unlit.sgraph_ps4ps4' 'ps4/track/drums/gem_cymbal_unlit1.sgraph_ps4ps4'}
-                  {file_delete 'data:/GoldHen/RB4DX-1.08/settings/visuals/gemshine.dta'}
+                  {dx_file_delete 'settings/visuals/gemshine.dta'}
                }
             }
             {if_else {$this in_song}
@@ -145,11 +145,11 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/shared/track_pattern_center_util.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/shared/track_pattern_side_util.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4'}
+      {dx_file_delete 'ps4/track/shared/track_pattern_center_util.bmp_ps4'}
+      {dx_file_delete 'ps4/track/shared/track_pattern_side_util.bmp_ps4'}
+      {dx_file_delete 'ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4'}
       {if {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
-         {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
+         {dx_file_delete 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4'}
       }
       {unless {== $list_data '[Default]'}
          {if_else {== $list_data 'yarg'}
@@ -190,18 +190,18 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data
          ('Rock Band 4'
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_unlit.entity_ps4'}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_hopo_unlit.entity_ps4'}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_hopo_util.bmp_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_unlit.entity_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_hopo_unlit.entity_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_hopo_util.bmp_ps4'}
          )
          ('Rock Band 4 (Beta)'
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_hopo_util.bmp_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_hopo_util.bmp_ps4'}
             {dx_file_copy 'ps4/track/guitar/gem.entity_ps4' 'ps4/track/guitar/gem_unlit.entity_ps4'}
             {dx_file_copy 'ps4/track/guitar/gem.entity_ps4' 'ps4/track/guitar/gem_hopo_unlit.entity_ps4'}
          )
          ('Rock Band 1'
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_unlit.entity_ps4'}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/guitar/gem_hopo_unlit.entity_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_unlit.entity_ps4'}
+            {dx_file_delete 'ps4/track/guitar/gem_hopo_unlit.entity_ps4'}
             {dx_file_copy 'ps4/track/guitar/gem_hopo_util_rb1.bmp_ps4' 'ps4/track/guitar/gem_hopo_util.bmp_ps4'}
          )
       }
@@ -227,8 +227,8 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data
          ('Rock Band 4'
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/smasher_normal.bmp_ps4'}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/smasher/smasher_util.bmp_ps4'}
+            {dx_file_delete 'ps4/track/smasher/smasher_normal.bmp_ps4'}
+            {dx_file_delete 'ps4/track/smasher/smasher_util.bmp_ps4'}
          )
          ('Rock Band 2'
             {dx_file_copy 'ps4/track/smasher/smasher_normal_rb2.bmp_ps4' 'ps4/track/smasher/smasher_normal.bmp_ps4'}
@@ -301,7 +301,7 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/frame_a_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/frame_a_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/solo box/' $list_data '.png_ps4'} 'ps4/ui/game/textures/frame_a_ui.png_ps4'}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
@@ -328,7 +328,7 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/frame_e_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/frame_e_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/score/' $list_data '.png_ps4'} 'ps4/ui/game/textures/frame_e_ui.png_ps4'}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
@@ -355,8 +355,8 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/frame_g_ui.png_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/frame_f_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/frame_g_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/frame_f_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/countdown/timer/' $list_data '.png_ps4'} 'ps4/ui/game/textures/frame_g_ui.png_ps4'}
       ;{if {file_exists {sprint 'data:/GoldHEN/RB4DX/ps4/dx/custom_textures/countdown/get ready/' $list_data '.png_ps4'}} ; doesn't work for some reason
          {dx_file_copy {sprint 'ps4/dx/custom_textures/countdown/get ready/' $list_data '.png_ps4'} 'ps4/ui/game/textures/frame_f_ui.png_ps4'}
@@ -386,13 +386,13 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/grey_star.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_gold.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_gold_full.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_increment_circle.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_red_full_ui.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_red_ui.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/textures/star_white.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/grey_star.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_gold.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_gold_full.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_increment_circle.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_red_full_ui.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_red_ui.bmp_ps4'}
+      {dx_file_delete 'ps4/ui/game/textures/star_white.bmp_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/stars/score_star_frame/' $list_data '.png_ps4'} 'ps4/ui/game/textures/star_white.bmp_ps4'}
       ;{if {file_exists {sprint 'data:/GoldHEN/RB4DX/ps4/dx/custom_textures/stars/score_star_empty/' $list_data '.png_ps4'}}
          {dx_file_copy {sprint 'ps4/dx/custom_textures/stars/score_star_empty/' $list_data '.png_ps4'} 'ps4/ui/game/textures/grey_star.bmp_ps4'}
@@ -437,7 +437,7 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/textures/crowd_meter_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/textures/crowd_meter_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/crowd meter/' $list_data '.png_ps4'} 'ps4/ui/textures/crowd_meter_ui.png_ps4'}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
@@ -464,9 +464,9 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/vocals/tambourine/tambourine_c.bmp_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4'}
+      {dx_file_delete 'ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4'}
+      {dx_file_delete 'ps4/track/vocals/tambourine/tambourine_c.bmp_ps4'}
+      {dx_file_delete 'ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal notes/tubes/' $list_data '.png_ps4'} 'ps4/track/vocals/tubes/vocal_tube_matrix.bmp_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal notes/tambourine/' $list_data '.png_ps4'} 'ps4/track/vocals/tambourine/tambourine_c.bmp_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal notes/tambourine normal/' $list_data '.png_ps4'} 'ps4/track/vocals/tambourine/tambourine_normal.bmp_ps4'}
@@ -495,9 +495,9 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/textures/vocals/vocal_arrow_1_ui.png_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/textures/vocals/vocal_arrow_2_ui.png_ps4'}
-      {file_delete 'data:/GoldHen/RB4DX-1.08/ps4/ui/textures/vocals/vocal_arrow_3_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/textures/vocals/vocal_arrow_1_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/textures/vocals/vocal_arrow_2_ui.png_ps4'}
+      {dx_file_delete 'ps4/ui/textures/vocals/vocal_arrow_3_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal arrows/1/' $list_data '.png_ps4'} 'ps4/ui/textures/vocals/vocal_arrow_1_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal arrows/2/' $list_data '.png_ps4'} 'ps4/ui/textures/vocals/vocal_arrow_2_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/vocal arrows/3/' $list_data '.png_ps4'} 'ps4/ui/textures/vocals/vocal_arrow_3_ui.png_ps4'}

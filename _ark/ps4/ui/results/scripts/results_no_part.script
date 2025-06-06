@@ -8,5 +8,6 @@
          (help "The slot value for what Player's data should be used.") 
          (default -1))))
 (exit
-   {file_delete "data:/GoldHen/RB4DX-1.08/plugin/insong.dta"}
+   {dx_file_delete "plugin/insong.dta"}
+   {dx_emu_file_delete "plugin" "insong.dta"}
 )

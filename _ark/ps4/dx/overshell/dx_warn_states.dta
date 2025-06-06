@@ -170,7 +170,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ('Reset'
-            {file_delete 'data:/GoldHen/RB4DX-1.08/settings/theme/gem/colors/enabled.dta'}
+            {dx_file_delete 'settings/theme/gem/colors/enabled.dta'}
             {$this show_state dxState_TrackTheme}
          )
          ('Edit'
@@ -197,13 +197,15 @@
             (autoplay
                {set $autoplayenabled TRUE}
                {write_file 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/saving.ini'}
+               {dx_file_delete 'plugin/saving.ini'}
+               {dx_emu_file_delete 'plugin' 'saving.ini'}
             )
             (drunkmode
                {set $drunkmode TRUE}
                {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
                {write_file 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini' ()}
-               {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/saving.ini'}
+               {dx_file_delete 'plugin/saving.ini'}
+               {dx_emu_file_delete 'plugin' 'saving.ini'}
             )
          }
       }
@@ -224,12 +226,14 @@
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini'}
+            {dx_file_delete 'plugin/autoplay.ini'}
+            {dx_emu_file_delete 'plugin' 'autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini'}
+            {dx_file_delete 'plugin/drunkmode.ini'}
+            {dx_emu_file_delete 'plugin' 'drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}
@@ -239,12 +243,14 @@
       {switch $cheat_option
          (autoplay
             {set $autoplayenabled FALSE}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/autoplay.ini'}
+            {dx_file_delete 'plugin/autoplay.ini'}
+            {dx_emu_file_delete 'plugin' 'autoplay.ini'}
          )
          (drunkmode
             {set $drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {file_delete 'data:/GoldHen/RB4DX-1.08/plugin/drunkmode.ini'}
+            {dx_file_delete 'plugin/drunkmode.ini'}
+            {dx_emu_file_delete 'plugin' 'drunkmode.ini'}
          )
       }
       {$this show_state dxState_GPSettings}

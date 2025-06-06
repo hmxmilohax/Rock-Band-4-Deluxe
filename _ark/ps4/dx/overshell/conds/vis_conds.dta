@@ -1,71 +1,71 @@
 {cond
-   ({&& $60fpsbg $crowdmeter {! $noui}}
+   ({&& $60fpsbg $crowdmeter {! $menubg}}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: ON'
             'Crowd Meter: OFF'
-            'HUD: ON'
+            'Menu BGs: ON'
          )
       }
    )
-   ({&& $60fpsbg {! $crowdmeter} $noui}
+   ({&& $60fpsbg {! $crowdmeter} $menubg}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: ON'
             'Crowd Meter: ON'
-            'HUD: OFF'
+            'Menu BGs: OFF'
          )
       }
    )
-   ({&& {! $60fpsbg} $crowdmeter $noui}
+   ({&& {! $60fpsbg} $crowdmeter $menubg}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: OFF'
             'Crowd Meter: OFF'
-            'HUD: OFF'
+            'Menu BGs: OFF'
          )
       }
    )
-   ({&& {! $60fpsbg} {! $crowdmeter} $noui}
+   ({&& {! $60fpsbg} {! $crowdmeter} $menubg}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: OFF'
             'Crowd Meter: ON'
-            'HUD: OFF'
+            'Menu BGs: OFF'
          )
       }
    )
-   ({&& {! $60fpsbg} $crowdmeter {! $noui}}
+   ({&& {! $60fpsbg} $crowdmeter {! $menubg}}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: OFF'
             'Crowd Meter: OFF'
-            'HUD: ON'
+            'Menu BGs: ON'
          )
       }
    )
-   ({&& $60fpsbg {! $crowdmeter} {! $noui}}
+   ({&& $60fpsbg {! $crowdmeter} {! $menubg}}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: ON'
             'Crowd Meter: ON'
-            'HUD: ON'
+            'Menu BGs: ON'
          )
       }
    )
-   ({&& {! $60fpsbg} {! $crowdmeter} {! $noui}}
+   ({&& {! $60fpsbg} {! $crowdmeter} {! $menubg}}
       {$this setup_confirm_actions a 
          (
             'Select Venue'
             '60 FPS Venues: OFF'
             'Crowd Meter: ON'
-            'HUD: ON'
+            'Menu BGs: ON'
          )
       }
    )
@@ -75,7 +75,7 @@
             'Select Venue'
             '60 FPS Venues: ON'
             'Crowd Meter: OFF'
-            'HUD: OFF'
+            'Menu BGs: OFF'
          )
       }
    )
