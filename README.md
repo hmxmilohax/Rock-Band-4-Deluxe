@@ -25,9 +25,9 @@
 
 *Rock Band 4 Deluxe recieves infrequent updates. You can click the `Watch` button (All Activity) to be notified about any updates that occur.*
 
-![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe?label=last%20updated%3A)
+![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe/1.08?label=last%20updated%3A)
 
-### 📥 [Playstation 4/ShadPS4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
+### 📥 [Playstation 4/ShadPS4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/1.08/RB4DX-PS4.zip)
 
 <br/>
 
