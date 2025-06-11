@@ -2,7 +2,7 @@
 
 ![Header Image](dependencies/header.png)
 
-## *Rock Band 4 Deluxe* is a Quality-of-Life Improvement Mod for PlayStation 4.
+## *Rock Band 4 Deluxe (1.08)* is a Quality-of-Life Improvement Mod for PlayStation 4.
 
 ### 👉 See [Full Feature List](https://github.com/hmxmilohax/rock-band-4-deluxe/blob/main/dependencies/features.md#features)
 
@@ -12,10 +12,12 @@
 
 # ✍️ What You'll Need
 
-### Playing *Rock Band 4 Deluxe* requires these things:
+### Playing *Rock Band 4 Deluxe (1.08)* requires these things:
 
+- The Rock Band 4/Amplitude specific build of [ShadPS4 Emulator](nightly.link/LlysiX/shadPS4/workflows/build/rb4-testing)
 - a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 11.00 or lower)
-- a copy of Rock Band 4 version 2.21 (shows up as 2.3.7 in game) installed on your PS4.
+- a copy of Rock Band 4 version 1.08 (shows up as 1.3.0 in game) installed on your PS4/emulator.
+  - if you are looking for a build better suited for a real PS4 on the latest version of Rock Band 4, you can find that [here](https://github.com/hmxmilohax/Rock-Band-4-Deluxe?tab=readme-ov-file)
 
 <br/>
 
@@ -25,14 +27,15 @@
 
 ![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe?label=last%20updated%3A)
 
-### 📥 [Playstation 4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
+### 📥 [Playstation 4/ShadPS4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
 
 <br/>
 
 > Continue to: 
-    - [Installing](#-installing)
+    - [Installing on PS4](#-installing-on-ps4)
+    - [Installing on ShadPS4](#-installing-on-shadps4)
     
-## 📩 Installing
+## 📩 Installing on PS4
 **NOTE: You WILL need a JAILBROKEN (GoldHen 2.3.0+) PS4 in order to play this mod on console. We hope this is clear.**
 
 download the latest release of the [GoldHEN plugins repository.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository/releases/latest) install that to your PS4 following the instructions found [here.](https://github.com/GoldHEN/GoldHEN_Plugins_Repository#quick-start)
@@ -61,9 +64,19 @@ To update RB4DX, first delete the `ps4` folder in the `/data/GoldHEN/RB4DX/` fol
 
 If the plugin is not loading, you may need to change the file permissions of the plugin to allow it to run. This can be done with the PS4/GoldHen Cheats Manager, in the settings there is a button labelled `Set file permissions for Plugins`, pressing this should make the plugin load correctly.
 
-If the plugin is loading, but no dx modifications are showing up, then you may need to change the permissions of the RB4DX folder on the PS4, or retransfer the RB4DX folder entirely.
+If the plugin is loading, but no dx modifications are showing up, then you may need to change the permissions of the RB4DX folder on the PS4, or retransfer the RB4DX folder entirely
 
-There is also a [tutorial for moving some in game HUD objects around](https://gist.github.com/LlysiX/839813295fb1c6ae1ae2ad60d40c646e) if you would like to personalize your RB4DX experience even more!
+## 📩 Installing on ShadPS4
+
+Download [**Rock Band 4 Deluxe (1.08)**](#-downloads), Extract the zip somewhere on your PC.
+
+Once that is complete, open the folder called `GoldHEN`.
+
+open the `plugins` folder, and copy the file inside it to the `sce_module` folder in the games files (right click rb4, open folder->open game folder).
+
+Then copy the `RB4DX-1.08` folder to `user/data/CUSA02084/GoldHEN/` in the emulator files. If the folder doesn't exist, create it.
+
+To update RB4DX, first delete the `ps4` folder in the `user/data/CUSA02084/GoldHEN/RB4DX-1.08/` folder on your ps4, then follow the steps above again.
 
 # 🔨 Building (NOT standard download and install)
 
