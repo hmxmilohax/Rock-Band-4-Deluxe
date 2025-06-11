@@ -15,7 +15,9 @@
 ### Playing *Rock Band 4 Deluxe* requires these things:
 
 - a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 11.00 or lower)
+- - The Rock Band 4/Amplitude specific build of [ShadPS4 Emulator](nightly.link/LlysiX/shadPS4/workflows/build/rb4-testing)
 - a copy of Rock Band 4 version 2.21 (shows up as 2.3.7 in game) installed on your PS4.
+  - if you are looking for a build better suited for a ShadPS4 on version 1.08 of Rock Band 4, you can find that [here](https://github.com/hmxmilohax/Rock-Band-4-Deluxe/tree/1.08?tab=readme-ov-file)
 
 <br/>
 
@@ -25,12 +27,12 @@
 
 ![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe?label=last%20updated%3A)
 
-### 📥 [Playstation 4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
+### 📥 [Playstation 4/ShadPS4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
 
 <br/>
 
 > Continue to: 
-    - [Installing](#-installing)
+    - [Installing on PS4](#-installing)
     
 ## 📩 Installing
 **NOTE: You WILL need a JAILBROKEN (GoldHen 2.3.0+) PS4 in order to play this mod on console. We hope this is clear.**
