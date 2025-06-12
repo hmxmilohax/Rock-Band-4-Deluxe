@@ -17,7 +17,7 @@
 - The Rock Band 4/Amplitude specific build of [ShadPS4 Emulator](nightly.link/LlysiX/shadPS4/workflows/build/rb4-testing)
 - a Hackable PS4 running GoldHEN 2.3.0+ (sytem software 11.00 or lower)
 - a copy of Rock Band 4 version 1.08 (shows up as 1.3.0 in game) installed on your PS4/emulator.
-  - if you are looking for a build better suited for a real PS4 on the latest version of Rock Band 4, you can find that [here](https://github.com/hmxmilohax/Rock-Band-4-Deluxe?tab=readme-ov-file)
+  - if you are looking for a build better suited for a real PS4 on the latest version of Rock Band 4, you can find that [here.](https://github.com/hmxmilohax/Rock-Band-4-Deluxe?tab=readme-ov-file)
 
 <br/>
 
