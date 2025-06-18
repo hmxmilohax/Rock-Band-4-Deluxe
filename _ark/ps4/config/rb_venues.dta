@@ -2,7 +2,7 @@
 (
    {cond
       ({file_exists "settings/venue/none.dta"}
-         ui/shared/fake_bg.scene
+         ui/dev_menu/dev_menu.scene
       )
       ({file_exists "settings/venue/big_club_standard.dta"}
          venue/big_club/big_club_standard/big_club_standard.scene
