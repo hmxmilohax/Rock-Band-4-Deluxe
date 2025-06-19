@@ -134,9 +134,27 @@
       ;    )
       ; }
 
-      ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-      ;TODO pls make this better...
-      #include conds/gp_ingame_conds.dta
+      ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+      {do
+         {set $dxsettings {array ()}}
+         {if_else $tiltsens
+            {push_back $dxsettings 'Increased Tilt Sensitivity: ON'}
+            {push_back $dxsettings 'Increased Tilt Sensitivity: OFF'}
+         }
+         {if_else $nood
+            {push_back $dxsettings 'Overdrive Gain: OFF'}
+            {push_back $dxsettings 'Overdrive Gain: ON'}
+         }
+         {if_else $practiceod
+            {push_back $dxsettings 'OD in Practice: ON'}
+            {push_back $dxsettings 'OD in Practice: OFF'}
+         }
+         {if_else $syncspeeds
+            {push_back $dxsettings 'Sync Difficulty Speeds: ON'}
+            {push_back $dxsettings 'Sync Difficulty Speeds: OFF'}
+         }
+         {$this setup_confirm_actions a $dxsettings}
+      }
       
       ; {$this setup_confirm_actions a 
       ;    (
@@ -151,9 +169,43 @@
       ;    )
       ; }
 
-      ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-      ;TODO pls make this better...
-      #include conds/gp_conds.dta
+      ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+      {do
+         {set $dxsettings {array ()}}
+         {if_else $instafail
+            {push_back $dxsettings 'Insta Fail: ON'}
+            {push_back $dxsettings 'Insta Fail: OFF'}
+         }
+         {if_else $toughcrowd
+            {push_back $dxsettings 'Tough Crowd: ON'}
+            {push_back $dxsettings 'Tough Crowd: OFF'}
+         }
+         {if_else $tiltsens
+            {push_back $dxsettings 'Increased Tilt Sensitivity: ON'}
+            {push_back $dxsettings 'Increased Tilt Sensitivity: OFF'}
+         }
+         {if_else $nood
+            {push_back $dxsettings 'Overdrive Gain: OFF'}
+            {push_back $dxsettings 'Overdrive Gain: ON'}
+         }
+         {if_else $practiceod
+            {push_back $dxsettings 'OD in Practice: ON'}
+            {push_back $dxsettings 'OD in Practice: OFF'}
+         }
+         {if_else $syncspeeds
+            {push_back $dxsettings 'Sync Difficulty Speeds: ON'}
+            {push_back $dxsettings 'Sync Difficulty Speeds: OFF'}
+         }
+         {if_else $calibrationmode
+            {push_back $dxsettings 'Calibration Mode: ON'}
+            {push_back $dxsettings 'Calibration Mode: OFF'}
+         }
+         {if_else $precisionmode
+            {push_back $dxsettings 'Precision Mode: ON'}
+            {push_back $dxsettings 'Precision Mode: OFF'}
+         }
+         {$this setup_confirm_actions a $dxsettings}
+      }
    }
 )
 (dxState_GPSettings
@@ -358,7 +410,7 @@
 
 ;SFX Settings
 #define RB4DXSFX_DATA
-(
+({do
    ; {$this setup_confirm_actions a 
    ;    (
    ;       ;{if_else $nomiss 'Miss Sounds: OFF' 'Miss Sounds: ON'}
@@ -372,10 +424,23 @@
    ;    )
    ; }
 
-   ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-   ;TODO pls make this better...
-   #include conds/sfx_conds.dta
-)
+   ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+   {set $dxsettings {array ()}}
+   {if_else $nowhammyfx
+      {push_back $dxsettings 'Whammy FX: OFF'}
+      {push_back $dxsettings 'Whammy FX: ON'}
+   }
+   {switch $trackmuting
+      (vanilla {push_back $dxsettings 'Track Muting: Partial'})
+      (off {push_back $dxsettings 'Track Muting: Off'})
+      (on {push_back $dxsettings 'Track Muting: On'})
+   }
+   {if_else $speedpitch
+      {push_back $dxsettings 'Speedup Pitch Correction: OFF'}
+      {push_back $dxsettings 'Speedup Pitch Correction: ON'}
+   }
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_SFXSettings
    (view AUTO_LIST_VIEW) 
    (enter
@@ -475,7 +540,7 @@
 
 ;Visual Settings
 #define RB4DXVIS_DATA
-(
+({do
    ; {$this setup_confirm_actions a 
    ;    (
    ;       'Select Venue'
@@ -488,10 +553,23 @@
    ;    )
    ; }
 
-   ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-   ;TODO pls make this better...
-   #include conds/vis_conds.dta
-)
+   ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+   {set $dxsettings {array ()}}
+   {push_back $dxsettings 'Select Venue'}
+   {if_else $60fpsbg
+      {push_back $dxsettings '60 FPS Venues: ON'}
+      {push_back $dxsettings '60 FPS Venues: OFF'}
+   }
+   {if_else $crowdmeter
+      {push_back $dxsettings 'Crowd Meter: OFF'}
+      {push_back $dxsettings 'Crowd Meter: ON'}
+   }
+   {if_else $noui
+      {push_back $dxsettings 'HUD: OFF'}
+      {push_back $dxsettings 'HUD: ON'}
+   }
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_VisSettings
    (view AUTO_LIST_VIEW) 
    (enter
@@ -885,7 +963,7 @@
 
 ;Track Settings
 #define RB4DXTRK_DATA
-(
+({do
    ; {$this setup_confirm_actions a 
    ;    (
    ;       ;'Track Theme'
@@ -898,25 +976,16 @@
    ;    )
    ; }
 
-   ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-   ;TODO pls make this better...
+   ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+   {set $dxsettings {array ()}}
    {if_else $noaa
-      {$this setup_confirm_actions a 
-         (
-            'Track Antialiasing: OFF'
-            'Track Curvature'
-            'Highway Length'
-         )
-      }
-      {$this setup_confirm_actions a 
-         (
-            'Track Antialiasing: ON'
-            'Track Curvature'
-            'Highway Length'
-         )
-      }
+      {push_back $dxsettings 'Track Antialiasing: OFF'}
+      {push_back $dxsettings 'Track Antialiasing: ON'}
    }
-)
+   {push_back $dxsettings 'Track Curvature'}
+   {push_back $dxsettings 'Highway Length'}
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_TrkSettings
    (view AUTO_LIST_VIEW) 
    (enter
@@ -1084,12 +1153,15 @@
    ;    }
    ; }
 
-   ;jank solution to 1.08 overshell not running dta in the list, make it a huge cond statement instead
-   ;TODO pls make this better...
+   ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
+{do   
+   {set $dxsettings {array ()}}
    {if_else $notifycolored
-      {$this setup_confirm_actions a ('Plugin Notification Icon: Colored')}
-      {$this setup_confirm_actions a ('Plugin Notification Icon: B/W')}
+      {push_back $dxsettings 'Plugin Notification Icon: Colored'}
+      {push_back $dxsettings 'Plugin Notification Icon: B/W'}
    }
+   {$this setup_confirm_actions a $dxsettings}
+}
 )
 (dxState_Extras
    (view AUTO_LIST_VIEW)
