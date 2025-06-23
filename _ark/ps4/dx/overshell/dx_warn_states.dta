@@ -71,6 +71,20 @@
       {$this trigger_cancel_effects}
    )
 )
+(dxState_BlackBGWarn
+   (view confirm_action)
+   (enter 
+      {$this setup_confirm_actions 'You will also need to disable Menu BGs for Black Venue to function properly (Restart Required).' (overshell_confirm_ok)}
+   )
+   (SELECT_MSG
+      {$this show_state dxState_VisSettings}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_VisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
 (dxState_InGameWarn
    (view confirm_action)
    (enter 

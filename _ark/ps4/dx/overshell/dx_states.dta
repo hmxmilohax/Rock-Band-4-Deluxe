@@ -564,9 +564,17 @@
       {push_back $dxsettings 'Crowd Meter: OFF'}
       {push_back $dxsettings 'Crowd Meter: ON'}
    }
-   {if_else $noui
-      {push_back $dxsettings 'HUD: OFF'}
-      {push_back $dxsettings 'HUD: ON'}
+   ; {if_else $noui
+   ;    {push_back $dxsettings 'HUD: OFF'}
+   ;    {push_back $dxsettings 'HUD: ON'}
+   ; }
+   {if_else $songtitle
+      {push_back $dxsettings 'Song Title Always: ON'}
+      {push_back $dxsettings 'Song Title Always: OFF'}
+   }
+   {if_else $menubg
+      {push_back $dxsettings 'Menu BGs: OFF'}
+      {push_back $dxsettings 'Menu BGs: ON'}
    }
    {$this setup_confirm_actions a $dxsettings}
 })
@@ -650,24 +658,10 @@
          )
          ('Song Title Always: ON'
             {set $songtitle FALSE}
-            {switch $songtitletype
-               (default
-                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlay1.entity_ps4'}
-                  {dx_file_delete 'settings/visuals/songtitletype1.dta'}
-               )
-               (tl
-                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaytl.entity_ps4'}
-                  {dx_file_delete 'settings/visuals/songtitletypetl.dta'}
-               )
-               (a
-                  {dx_file_rename 'ps4/ui/game/song_artist_overlay.entity_ps4' 'ps4/ui/game/song_artist_overlaya.entity_ps4'}
-                  {dx_file_delete 'settings/visuals/songtitletypea.dta'}
-               )
-               (none
-                  {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-               )
-            }
             {dx_file_delete 'settings/visuals/songtitle.dta'}
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {dx_emu_file_delete 'settings/visuals' 'songtitle.dta'}
+            {dx_emu_file_delete 'ps4/ui/game' 'song_artist_overlay.entity_ps4'}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXVIS_DATA
@@ -675,14 +669,16 @@
             {$this trigger_select_effects}
          )
          ('Song Title Always: OFF'
-            {$this show_state dxState_SongTitleSelector}
+            {set $songtitle TRUE}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitle.dta' ()}
+            {dx_file_copy 'ps4/ui/game/song_artist_overlay1.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {$this trigger_select_effects}
          )
          (('Menu BGs: OFF' 'Menu BGs: ON')
             {set $menubg {! $menubg}}
             {if_else $menubg
                {do
-                  {file_copy '/data/GoldHEN/RB4DX-1.08/ps4/ui/dev_menu/dev_menu.scene_ps4' '/data/GoldHEN/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4'}
+                  {dx_file_copy 'ps4/ui/dev_menu/dev_menu.scene_ps4' 'ps4/ui/background/meta_background.scene_ps4'}
                   {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/menubg.dta' ()}
                }
                {do
@@ -806,8 +802,8 @@
          }
          {write_file {sprint 'data:/GoldHen/RB4DX-1.08/settings/venue/' $list_data '.dta'} ()}
       }
-      {unless {== $list_data 'Static Background'}
-         ;{dx_file_delete 'ps4/ui/shared/fake_bg_ui.bmp_ps4'}
+      {if_else {== $list_data 'black Background'}
+         {$this show_state dxState_BlackBGWarn}
          {$this show_state dxState_DelayedEffectWarn}
       }
       {$this trigger_select_effects}
