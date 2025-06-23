@@ -96,10 +96,18 @@
    )
 )
 
+#define RB4DXCURVE_DATA
+({do
+   {set $dxsettings {array ({force_sym {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}}})}}
+   {push_back $dxsettings '+'}
+   {push_back $dxsettings 'Reset'}
+   {push_back $dxsettings '-'}
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_TrackCurve
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
+   (view AUTO_LIST_VIEW) 
+   (enter
+      RB4DXCURVE_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -108,17 +116,17 @@
             {unless {> {+ $track_curve 0.05} 1.5}
                {set $track_curve {+ $track_curve 0.05}}
             }
-            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
+            RB4DXCURVE_DATA
          )
          ('Reset'
             {set $track_curve 1}
-            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
+            RB4DXCURVE_DATA
          )
          ('+'
             {unless {< {- $track_curve 0.05} 0.45}
                {set $track_curve {- $track_curve 0.05}}
             }
-            {$this setup_confirm_actions {sprintf 'Track Curve: %.2fX' {+ {* $track_curve -2} 3}} ('+' 'Reset' '-')}
+            RB4DXCURVE_DATA
          )
 
          })
@@ -127,20 +135,32 @@
       {$this trigger_cancel_effects})
 )
 
-(dxState_HighwayLength
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions
-         {sprintf 
-            'Highway Length: %.2fX' 
-            {if_else {> $hwlength 1}
-               {+ {* $hwlength -0.333333333333333} 1.333333333333333}
-               {+ {* $hwlength -1.25} 2.25}
+#define RB4DXHWLEN_DATA
+({do
+   {set $dxsettings 
+      {array 
+         (
+            {force_sym
+               {sprintf 'Highway Length: %.2fX' 
+                  {if_else {> $hwlength 1}
+                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                     {+ {* $hwlength -1.25} 2.25}
+                  }
+                  $hwlength
+               }
             }
-            $hwlength
-         }
-         ('+' 'Reset' '-')
+         )
       }
+   }
+   {push_back $dxsettings '+'}
+   {push_back $dxsettings 'Reset'}
+   {push_back $dxsettings '-'}
+   {$this setup_confirm_actions a $dxsettings}
+})
+(dxState_HighwayLength
+   (view AUTO_LIST_VIEW) 
+   (enter 
+      RB4DXHWLEN_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -161,16 +181,7 @@
                   }
                }
             }
-            {$this setup_confirm_actions
-               {sprintf 
-                  'Highway Length: %.2fX' 
-                  {if_else {> $hwlength 1}
-                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
-                     {+ {* $hwlength -1.25} 2.25}
-                  }
-               }
-               ('+' 'Reset' '-')
-            }
+            RB4DXHWLEN_DATA
          )
          ('Reset'
             {set $hwlength 1}
@@ -179,16 +190,7 @@
                   {dx_file_rename 'ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4' 'ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4'}
                }
             }
-            {$this setup_confirm_actions
-               {sprintf 
-                  'Highway Length: %.2fX' 
-                  {if_else {> $hwlength 1}
-                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
-                     {+ {* $hwlength -1.25} 2.25}
-                  }
-               }
-               ('+' 'Reset' '-')
-            }
+            RB4DXHWLEN_DATA
          )
          ('+'
             {unless {< {- $hwlength 0.05} 0.56}
@@ -206,16 +208,7 @@
                   }
                }
             }
-            {$this setup_confirm_actions
-               {sprintf 
-                  'Highway Length: %.2fX' 
-                  {if_else {> $hwlength 1}
-                     {+ {* $hwlength -0.333333333333333} 1.333333333333333}
-                     {+ {* $hwlength -1.25} 2.25}
-                  }
-               }
-               ('+' 'Reset' '-')
-            }
+            RB4DXHWLEN_DATA
          )
 
          })

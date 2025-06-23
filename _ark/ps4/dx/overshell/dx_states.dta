@@ -982,7 +982,7 @@
       {push_back $dxsettings 'Track Antialiasing: OFF'}
       {push_back $dxsettings 'Track Antialiasing: ON'}
    }
-   {push_back $dxsettings 'Track Curvature'}
+   ;{push_back $dxsettings 'Track Curvature'}
    {push_back $dxsettings 'Highway Length'}
    {$this setup_confirm_actions a $dxsettings}
 })
