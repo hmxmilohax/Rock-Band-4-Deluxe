@@ -672,6 +672,10 @@
             {set $songtitle TRUE}
             {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/songtitle.dta' ()}
             {dx_file_copy 'ps4/ui/game/song_artist_overlay1.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXVIS_DATA
+            }
             {$this trigger_select_effects}
          )
          (('Menu BGs: OFF' 'Menu BGs: ON')
