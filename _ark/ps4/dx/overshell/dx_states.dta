@@ -556,6 +556,9 @@
    ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
    {set $dxsettings {array ()}}
    {push_back $dxsettings 'Select Venue'}
+   {if {is_emu}
+      {push_back $dxsettings 'Set Resolution'}
+   }
    {if_else $60fpsbg
       {push_back $dxsettings '60 FPS Venues: ON'}
       {push_back $dxsettings '60 FPS Venues: OFF'}
@@ -595,6 +598,10 @@
       {switch $list_data 
          ('Select Venue'
             {$this show_state dxState_VenueSelector}
+            {$this trigger_select_effects}
+         )
+         ('Set Resolution'
+            {$this show_state dxState_ResolutionSelector}
             {$this trigger_select_effects}
          )
          (('60 FPS Venues: ON' '60 FPS Venues: OFF')
@@ -810,6 +817,169 @@
          {$this show_state dxState_BlackBGWarn}
          {$this show_state dxState_DelayedEffectWarn}
       }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_VisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Resolution Selector
+(dxState_ResolutionSelector
+   (view AUTO_LIST_VIEW)
+   (enter
+      {$this setup_confirm_actions a
+         (
+            1280x720
+            1280x800
+            1360x768
+            1366x768
+            1440x900
+            1536x864
+            1600x900
+            1680x1050
+            1920x1080
+            1920x1200
+            2048x1152
+            2560x1080
+            2560x1440
+            2560x1600
+            3440x1440
+            '3k'
+            'max'
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_rmdir "settings/resolution"}
+      {dx_file_mkdir "settings/resolution"}
+      {switch $list_data
+         (1280x720
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1280' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/720' ()}
+         )
+         (1280x800
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1280' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/800' ()}
+         )
+         (1360x768
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1360' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/768' ()}
+         )
+         (1366x768
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1366' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/768' ()}
+         )
+         (1440x900
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1440' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/900' ()}
+         )
+         (1536x864
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1536' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/864' ()}
+         )
+         (1600x900
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1600' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/900' ()}
+         )
+         (1680x1050
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/1680' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1050' ()}
+         )
+         (1920x1200
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1200' ()}
+         )
+         (2048x1152
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/2048' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1152' ()}
+         )
+         (2560x1080
+            {dx_file_mkdir "settings/resolution/width"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/2560' ()}
+         )
+         (2560x1440
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/2560' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1440' ()}
+         )
+         (2560x1600
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/2560' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1600' ()}
+         )
+         (3440x1440
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/3440' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1440' ()}
+         )
+         ('3k'
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/3264' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/1836' ()}
+         )
+         ('max'
+            {dx_file_mkdir "settings/resolution/width"}
+            {dx_file_mkdir "settings/resolution/height"}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height.dta' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/width/3632' ()}
+            {write_file 'data:/GoldHen/RB4DX-1.08/settings/resolution/height/2043' ()}
+         )
+      }
+      {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )
    (on_cancel 
