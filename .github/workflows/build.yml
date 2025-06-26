@@ -19,5 +19,5 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: RB4DX-PS4
+          name: RB4DX-1.08-PS4
           path: _build
