@@ -426,6 +426,10 @@
 
    ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
    {set $dxsettings {array ()}}
+   {if_else $nomiss 
+      {push_back $dxsettings 'Miss Sounds: OFF'}
+      {push_back $dxsettings 'Miss Sounds: ON'}
+   }
    {if_else $nowhammyfx
       {push_back $dxsettings 'Whammy FX: OFF'}
       {push_back $dxsettings 'Whammy FX: ON'}
