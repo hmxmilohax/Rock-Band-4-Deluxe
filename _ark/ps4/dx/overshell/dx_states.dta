@@ -137,6 +137,9 @@
       ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
       {do
          {set $dxsettings {array ()}}
+         {if {|| $calibrationmode $precisionmode}
+            {push_back $dxsettings 'Enter Calibration Numbers'}
+         }
          {if_else $tiltsens
             {push_back $dxsettings 'Increased Tilt Sensitivity: ON'}
             {push_back $dxsettings 'Increased Tilt Sensitivity: OFF'}
@@ -172,6 +175,7 @@
       ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
       {do
          {set $dxsettings {array ()}}
+         {push_back $dxsettings 'Enter Calibration Numbers'}
          {if_else $instafail
             {push_back $dxsettings 'Insta Fail: ON'}
             {push_back $dxsettings 'Insta Fail: OFF'}

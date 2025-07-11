@@ -24,16 +24,24 @@
          })
    (on_cancel 
       {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file 'data:/GoldHEN/RB4DX/plugin/speedmod.ini' {array ({/ $speedmod 100})}}
+      {write_file 'data:/GoldHEN/RB4DX-1.08/plugin/speedmod.ini' {array ({/ $speedmod 100})}}
       SET_TRACK_SPEEDS
       {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})
 )
 
+#define RB4DXVIDEOCALIB_DATA
+({do
+   {set $dxsettings {array ({force_sym {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}}})}}
+   {push_back $dxsettings '+'}
+   {push_back $dxsettings 'Reset'}
+   {push_back $dxsettings '-'}
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_VideoCalibration
-   (view confirm_action) 
+   (view AUTO_LIST_VIEW) 
    (enter 
-      {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
+      RB4DXVIDEOCALIB_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -42,31 +50,46 @@
             {unless {< {- {get_video_calibration} 1} -300}
                {set_video_calibration {- {get_video_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXVIDEOCALIB_DATA
          )
          ('Reset'
             {set_video_calibration 0}
-            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXVIDEOCALIB_DATA
          )
          ('-'
             {unless {> {+ {get_video_calibration} 1} 300}
                {set_video_calibration {+ {get_video_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf 'Video Calibration: %d ms' {* {get_video_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXVIDEOCALIB_DATA
          )
       }
    )
    (on_cancel 
-      {write_file 'data:/GoldHEN/RB4DX/plugin/videocalib.ini' {array ({get_video_calibration})}}
+      {write_file 'data:/GoldHEN/RB4DX-1.08/plugin/calibration.ini' 
+         {array 
+            (
+               (video (video {get_video_calibration}))
+               (audio (audio {get_audio_calibration}))
+            )
+         }
+      }
       {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
 )
 
+#define RB4DXAUDIOCALIB_DATA
+({do
+   {set $dxsettings {array ({force_sym {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}}})}}
+   {push_back $dxsettings '+'}
+   {push_back $dxsettings 'Reset'}
+   {push_back $dxsettings '-'}
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_AudioCalibration
-   (view confirm_action) 
+   (view AUTO_LIST_VIEW) 
    (enter 
-      {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
+      RB4DXAUDIOCALIB_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -75,22 +98,29 @@
             {unless {< {- {get_audio_calibration} 1} -300}
                {set_audio_calibration {- {get_audio_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXAUDIOCALIB_DATA
          )
          ('Reset'
             {set_audio_calibration 0}
-            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXAUDIOCALIB_DATA
          )
          ('-'
             {unless {> {+ {get_audio_calibration} 1} 300}
                {set_audio_calibration {+ {get_audio_calibration} 1}}
             }
-            {$this setup_confirm_actions {sprintf 'Audio Calibration: %d ms' {* {get_audio_calibration} -1}} ('+' 'Reset' '-')}
+            RB4DXAUDIOCALIB_DATA
          )
       }
    )
    (on_cancel 
-      {write_file 'data:/GoldHEN/RB4DX/plugin/audiocalib.ini' {array ({get_audio_calibration})}}
+      {write_file 'data:/GoldHEN/RB4DX-1.08/plugin/calibration.ini' 
+         {array 
+            (
+               (video (video {get_video_calibration}))
+               (audio (audio {get_audio_calibration}))
+            )
+         }
+      }
       {$this show_state dxState_CalibrationSelector}
       {$this trigger_cancel_effects}
    )
