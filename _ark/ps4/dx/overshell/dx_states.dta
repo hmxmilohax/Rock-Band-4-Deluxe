@@ -449,10 +449,6 @@
       (off {push_back $dxsettings 'Track Muting: Off'})
       (on {push_back $dxsettings 'Track Muting: On'})
    }
-   {if_else $speedpitch
-      {push_back $dxsettings 'Speedup Pitch Correction: OFF'}
-      {push_back $dxsettings 'Speedup Pitch Correction: ON'}
-   }
    {$this setup_confirm_actions a $dxsettings}
 })
 (dxState_SFXSettings
