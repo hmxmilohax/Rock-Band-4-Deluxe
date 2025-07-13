@@ -1,30 +1,38 @@
+#define RB4DXSONGSPEED_DATA
+({do
+   {set $dxsettings {array ({force_sym {sprintf 'Song Speed: %d%%' $speedmod}})}}
+   {push_back $dxsettings '+'}
+   {push_back $dxsettings 'Reset'}
+   {push_back $dxsettings '-'}
+   {$this setup_confirm_actions a $dxsettings}
+})
 (dxState_SongSpeed
-   (view confirm_action) 
+   (view AUTO_LIST_VIEW) 
    (enter 
-      {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
+      RB4DXSONGSPEED_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ('+'
             {set $speedmod {+ $speedmod 5}}
-            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
+            RB4DXSONGSPEED_DATA
          )
          ('Reset'
             {set $speedmod 100}
-            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
+            RB4DXSONGSPEED_DATA
          )
          ('-'
             {unless {< {- $speedmod 5} 100}
                {set $speedmod {- $speedmod 5}}
             }
-            {$this setup_confirm_actions {sprintf 'Song Speed: %d%%' $speedmod} ('+' 'Reset' '-')}
+            RB4DXSONGSPEED_DATA
          )
 
          })
    (on_cancel 
       {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file 'data:/GoldHEN/RB4DX-1.08/plugin/speedmod.ini' {array ({/ $speedmod 100})}}
+      {set_song_speed {/ $speedmod 100}}
       SET_TRACK_SPEEDS
       {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})

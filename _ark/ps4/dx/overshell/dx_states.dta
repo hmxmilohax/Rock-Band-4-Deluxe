@@ -15,19 +15,20 @@
             'Track Settings'
             'Controller Settings'
             'Extras'
+            'Test'
          )
       }
       {$this setup_confirm_actions a 
          (
             'Instrument Options'
-            ;'Song Speed'
+            'Song Speed'
             'Gameplay Settings'
             'Audio & SFX'
             'Visual Settings'
             'Track Settings'
             'Controller Settings'
             'Extras'
-            ;'Test'
+            'Test'
          )
       }
    }
