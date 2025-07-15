@@ -15,7 +15,7 @@
             'Track Settings'
             'Controller Settings'
             'Extras'
-            'Test'
+            ;'Test'
          )
       }
       {$this setup_confirm_actions a 
@@ -28,7 +28,7 @@
             'Track Settings'
             'Controller Settings'
             'Extras'
-            'Test'
+            ;'Test'
          )
       }
    }
