@@ -595,7 +595,6 @@
       {set $crowdmeter {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/crowd_meter.entity_ps4'}}
       {set $noui {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/hud.scene_ps4'}}
       {set $nohud {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/game.layout_ps4'}}
-      SONGTITLE_CHECK
       {set $menubg {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/background/meta_background.scene_ps4'}}
       {set $dx_cur_state vis}
       RB4DXVIS_DATA
@@ -754,7 +753,7 @@
 (dxState_MTVElements
    (view AUTO_LIST_VIEW) 
    (enter
-      {set $songtitle {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4'}}
+      {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
       {set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
       {set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
       {set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
@@ -840,7 +839,7 @@
 (dxState_MTVInfo
    (view AUTO_LIST_VIEW) 
    (enter
-      {set $songtitle {file_exists 'data:/GoldHen/RB4DX-1.08/ps4/ui/game/song_artist_overlay.entity_ps4'}}
+      {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
       {set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
       {set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
       {set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
