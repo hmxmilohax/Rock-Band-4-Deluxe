@@ -98,6 +98,9 @@
          (vis
             {$this show_state dxState_VisSettings}
          )
+         (mtv
+            {$this show_state dxState_MTVElements}
+         )
          (trk
             {$this show_state dxState_TrkSettings}
          )
