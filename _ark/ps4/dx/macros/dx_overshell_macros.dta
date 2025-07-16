@@ -21,17 +21,14 @@
 (
 	{set $songtitletype
    		{cond
-      		({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
-         		default
-      		)
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
+		    ({file_exists "settings/visuals/songtitletypetl.dta"}
 		        tl
 		    )
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
+		    ({file_exists "settings/visuals/songtitletypea.dta"}
 		        a
 		    )
-		    ({&& {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
-		    	none
+		    (TRUE
+		    	default
 		    )
 	    }
 	}

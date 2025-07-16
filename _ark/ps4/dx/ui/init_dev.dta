@@ -209,25 +209,53 @@ UPDATE_SETTINGS
 		{dx_file_rename "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4" "ps4/track/smasher/kick_drum_smasher_unlit.entity_ps4"}
 	}
 }
+{dx_file_delete "ps4/ui/game/song_artist_overlay.entity_ps4"}
 {cond
-	({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletype1.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlay1.entity_ps4"}}
-		{if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
-			{dx_file_delete "ps4/ui/game/song_artist_overlay1.entity_ps4"}
-			{dx_file_rename "ps4/ui/game/song_artist_overlay1.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+   ({file_exists "settings/visuals/songtitletypea.dta"}
+      {cond
+			({&& {file_exists "settings/visuals/songtitle.dta"} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlayad.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {file_exists "settings/visuals/songtitle.dta"} {! {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlaya.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {! {file_exists "settings/visuals/songtitle.dta"}} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlayadn.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			(TRUE
+				{dx_file_copy "ps4/ui/game/song_artist_overlayan.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+		}
+   )
+   ({file_exists "settings/visuals/songtitletypetl.dta"}
+      {cond
+			({&& {file_exists "settings/visuals/songtitle.dta"} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlaytld.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {file_exists "settings/visuals/songtitle.dta"} {! {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlaytl.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {! {file_exists "settings/visuals/songtitle.dta"}} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlaytldn.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			(TRUE
+				{dx_file_copy "ps4/ui/game/song_artist_overlaytln.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+		}
+   )
+	(TRUE
+		{cond
+			({&& {file_exists "settings/visuals/songtitle.dta"} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlay1d.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {file_exists "settings/visuals/songtitle.dta"} {! {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlay1.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
+			({&& {! {file_exists "settings/visuals/songtitle.dta"}} {|| {file_exists "settings/visuals/albumtxt.dta"} {file_exists "settings/visuals/genretxt.dta"} {file_exists "settings/visuals/origintxt.dta"}}}
+				{dx_file_copy "ps4/ui/game/song_artist_overlayd.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
+			)
 		}
 	)
-    ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypea.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaya.entity_ps4"}}
-        {if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
-			{dx_file_delete "ps4/ui/game/song_artist_overlaya.entity_ps4"}
-			{dx_file_rename "ps4/ui/game/song_artist_overlaya.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-		}
-    )
-    ({&& {file_exists "settings/visuals/songtitle.dta"} {file_exists "settings/visuals/songtitletypetl.dta"} {dx_file_exists "ps4/ui/game/song_artist_overlaytl.entity_ps4"}}
-        {if_else {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}
-			{dx_file_delete "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
-			{dx_file_rename "ps4/ui/game/song_artist_overlaytl.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-		}
-    )
 }
 {cond
 	({&& {file_exists "settings/visuals/trackangle.dta"} {file_exists "settings/visuals/trackanglerr.dta"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
