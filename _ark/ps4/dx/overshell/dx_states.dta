@@ -671,6 +671,7 @@
          )
          ('Song Title...'
             {$this show_state dxState_MTVElements}
+            {$this trigger_select_effects}
          )
          ('Song Title Always: ON'
             {set $songtitle FALSE}
