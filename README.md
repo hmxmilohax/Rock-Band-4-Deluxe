@@ -26,8 +26,8 @@
 
 ![last updated:](https://img.shields.io/github/last-commit/hmxmilohax/Rock-Band-4-Deluxe?label=last%20updated%3A)
 
-### 📥 [Playstation 4/ShadPS4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
-
+### 📥 [Playstation 4](https://nightly.link/hmxmilohax/rock-band-4-deluxe/workflows/build/main/RB4DX-PS4.zip)
+  - if you are looking for a build better suited for the ShadPS4 emulator on version 1.08 of Rock Band 4, you can find that [here.](https://github.com/hmxmilohax/Rock-Band-4-Deluxe/tree/1.08?tab=readme-ov-file)
 <br/>
 
 > Continue to: 
