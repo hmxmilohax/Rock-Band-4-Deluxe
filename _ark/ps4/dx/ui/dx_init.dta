@@ -5,6 +5,7 @@
 {set $track_curve 1}
 {set $hwlength 1}
 {set $notifycolored {file_exists "notifycolored.ini"}}
+{set_plugin_var insong FALSE}
 
 ;gp settings
 {set $instafail {file_exists "settings/gameplay/instafail.dta"}}
@@ -16,6 +17,14 @@
 ;visual settings
 {set $blackbg {file_exists "settings/visuals/blackbg.dta"}}
 {set $60fpsbg {file_exists "settings/visuals/60fpsbg.dta"}}
+
+;song title settings
+{set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
+{set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}
+{set_plugin_var albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
+{set_plugin_var yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
+{set_plugin_var genretxt {file_exists "settings/visuals/genretxt.dta"}}
+{set_plugin_var origintxt {file_exists "settings/visuals/origintxt.dta"}}
 
 ;sfx settings
 {set $nomiss {file_exists "settings/sfx/nomiss.dta"}}

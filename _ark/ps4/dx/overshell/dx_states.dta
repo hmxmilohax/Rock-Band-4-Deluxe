@@ -855,6 +855,7 @@
       {switch $list_data 
          (('Artist: ON' 'Artist: OFF')
             {set $noartisttxt {! $noartisttxt}}
+            {set_plugin_var noartisttxt $noartisttxt}
             {if_else $noartisttxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/noartisttxt.dta' ()}
                {do
@@ -879,6 +880,7 @@
          )
          (('Famous By: ON' 'Famous By: OFF')
             {set $covertxt {! $covertxt}}
+            {set_plugin_var covertxt $covertxt}
             {if_else $covertxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/covertxt.dta' ()}
                {do
@@ -903,6 +905,7 @@
          )
          (('Album: ON' 'Album: OFF')
             {set $albumtxt {! $albumtxt}}
+            {set_plugin_var albumtxt $albumtxt}
             {if_else $albumtxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/albumtxt.dta' ()}
                {do
@@ -927,6 +930,7 @@
          )
          (('Year: ON' 'Year: OFF')
             {set $yeartxt {! $yeartxt}}
+            {set_plugin_var yeartxt $yeartxt}
             {if_else $yeartxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/yeartxt.dta' ()}
                {do
@@ -951,6 +955,7 @@
          )
          (('Genre: ON' 'Genre: OFF')
             {set $genretxt {! $genretxt}}
+            {set_plugin_var genretxt $genretxt}
             {if_else $genretxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/genretxt.dta' ()}
                {do
@@ -975,6 +980,7 @@
          )
          (('Source: ON' 'Source: OFF')
             {set $origintxt {! $origintxt}}
+            {set_plugin_var origintxt $origintxt}
             {if_else $origintxt
                {write_file 'data:/GoldHen/RB4DX-1.08/settings/visuals/origintxt.dta' ()}
                {do
