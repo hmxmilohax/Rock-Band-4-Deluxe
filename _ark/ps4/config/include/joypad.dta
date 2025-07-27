@@ -56,51 +56,42 @@
 
 #define VOX_SLOT_OVERRIDE
 (
-   {cond
-      ({file_exists "settings/controller/type/vox/gtr.dta"}
+   {switch $voxslt
+      (gtr
          kControllerGuitar
       )
-      ({file_exists "settings/controller/type/vox/drum.dta"}
+      (drum
          kControllerDrum
       )
-      ({&& 
-         {! {file_exists "settings/controller/type/vox/drum.dta"}} 
-         {! {file_exists "settings/controller/type/vox/gtr.dta"}}
-       }
+      ((vox 0)
          kControllerVocals
       )
    }
 )
 #define GTR_SLOT_OVERRIDE
 (
-   {cond
-      ({file_exists "settings/controller/type/gtr/vox.dta"}
+   {switch $gtrslt
+      (vox
          kControllerVocals
       )
-      ({file_exists "settings/controller/type/gtr/drum.dta"}
+      (drum
          kControllerDrum
       )
-      ({&& 
-         {! {file_exists "settings/controller/type/gtr/drum.dta"}}
-         {! {file_exists "settings/controller/type/gtr/vox.dta"}}
-       }
+      ((gtr 0)
          kControllerGuitar
       )
    }
 )
 #define DRUM_SLOT_OVERRIDE
 (
-   {cond
-      ({file_exists "settings/controller/type/drum/gtr.dta"}
+   {switch $drmslt
+      (gtr
          kControllerGuitar
       )
-      ({file_exists "settings/controller/type/drum/vox.dta"}
+      (vox
          kControllerVocals
       )
-      ({&& 
-         {! {file_exists "settings/controller/type/drum/vox.dta"}} 
-         {! {file_exists "settings/controller/type/drum/gtr.dta"}}
-       }
+      ((drum 0)
          kControllerDrum
       )
    }
