@@ -23,3 +23,4 @@
 CREATE_SETTINGS_DIRS
 
 {write_file "data:/GoldHen/RB4DX-1.08/plugin/saving.ini" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/plugin/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}
