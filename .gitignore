@@ -3,3 +3,5 @@ _build/GoldHEN/RB4DX-1.08/ps4/*
 *.dta_dta_ps4
 !_ark/ps4/ui/overshell/slot_states/slot_states.dta_dta_ps4
 !_ark/ps4/ui_prerivals/overshell/slot_states/slot_states.dta_dta_ps4
+.DS_Store
+dx_config.ini

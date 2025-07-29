@@ -56,7 +56,7 @@ def get_shadps4_path():
         else:
             print("Invalid ShadPS4 data directory path provided.")
 
-def save_config(config_path: Path, shadps4_path, xbox_console_ip, never_setup_shadps4=False, never_setup_xbox=False, lastfm_config=None, never_setup_lastfm=False):
+def save_config(config_path: Path, shadps4_path, ps4_console_ip, never_setup_shadps4=False, never_setup_ps4=False, lastfm_config=None, never_setup_lastfm=False):
     config = configparser.ConfigParser()
     if config_path.exists():
         config.read(config_path)
@@ -65,13 +65,13 @@ def save_config(config_path: Path, shadps4_path, xbox_console_ip, never_setup_sh
     if 'Paths' not in config:
         config['Paths'] = {}
     config['Paths']['shadps4_path'] = str(shadps4_path) if shadps4_path else ''
-    config['Paths']['xbox_console_ip'] = xbox_console_ip
+    config['Paths']['ps4_console_ip'] = ps4_console_ip
 
     # Save Settings for "Never" flags
     if 'Settings' not in config:
         config['Settings'] = {}
     config['Settings']['never_setup_shadps4'] = str(never_setup_shadps4)
-    config['Settings']['never_setup_xbox'] = str(never_setup_xbox)
+    config['Settings']['never_setup_ps4'] = str(never_setup_ps4)
     config['Settings']['never_setup_lastfm'] = str(never_setup_lastfm)
 
     # Save LastFM
@@ -96,10 +96,10 @@ def load_config(config_path: Path):
         return None, '', False, False, None, False  # Added never_setup_lastfm
 
     shadps4_path = None
-    xbox_console_ip = ''
+    ps4_console_ip = ''
     lastfm_config = None
     never_setup_shadps4 = False
-    never_setup_xbox = False
+    never_setup_ps4 = False
     never_setup_lastfm = False  # Initialize never_setup_lastfm
 
     # Read Paths
@@ -107,12 +107,12 @@ def load_config(config_path: Path):
         shadps4_path_str = config['Paths'].get('shadps4_path', '').strip('"')
         if shadps4_path_str:
             shadps4_path = Path(shadps4_path_str)
-        xbox_console_ip = config['Paths'].get('xbox_console_ip', '').strip()
+        ps4_console_ip = config['Paths'].get('ps4_console_ip', '').strip()
 
     # Read Settings for "Never" flags
     if 'Settings' in config:
         never_setup_shadps4 = config['Settings'].getboolean('never_setup_shadps4', fallback=False)
-        never_setup_xbox = config['Settings'].getboolean('never_setup_xbox', fallback=False)
+        never_setup_ps4 = config['Settings'].getboolean('never_setup_ps4', fallback=False)
         never_setup_lastfm = config['Settings'].getboolean('never_setup_lastfm', fallback=False)  # Read never_setup_lastfm
 
     # Read LastFM
@@ -130,7 +130,7 @@ def load_config(config_path: Path):
                 'PASSWORD_HASH': password_hash
             }
 
-    return shadps4_path, xbox_console_ip, never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm
+    return shadps4_path, ps4_console_ip, never_setup_shadps4, never_setup_ps4, lastfm_config, never_setup_lastfm
 
 def setup_lastfm_network(lastfm_config):
     if lastfm_config and all(key in lastfm_config for key in ['API_KEY', 'API_SECRET', 'USERNAME', 'PASSWORD_HASH']):
@@ -814,15 +814,46 @@ def main():
     idle_timeout = 900  # 15 minutes
 
     config_path = Path.cwd() / 'dx_config.ini'
-    shadps4_path, xbox_console_ip, never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm = load_config(config_path)
+    shadps4_path, ps4_console_ip, never_setup_shadps4, never_setup_ps4, lastfm_config, never_setup_lastfm = load_config(config_path)
 
-    # Check if only one is missing and prompt accordingly, considering "never" flags
-    if not shadps4_path:
-        shadps4_path = get_shadps4_path()
-        save_config(config_path, shadps4_path or '', xbox_console_ip or '', never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm)
+    # ——— always ask: emulator vs. real PS4 ———
+    while True:
+        print("Select data source:")
+        print("  1) ShadPS4 emulator")
+        print("  2) Real PS4 console")
+        choice = input("Enter 1 or 2: ").strip()
+        if choice == '1':
+            use_emulator = True
+            break
+        elif choice == '2':
+            use_emulator = False
+            break
+        else:
+            print("Invalid choice, please try again.")
 
-    # Save the updated configuration
-    save_config(config_path, shadps4_path or '', xbox_console_ip or '', never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm)
+    # ——— for emulator: only ask for path if not already set ———
+    if use_emulator:
+        if not shadps4_path:
+            shadps4_path = get_shadps4_path()
+        # ensure we clear any old console-IP
+        ps4_console_ip = ''
+    # ——— for real PS4: only ask for IP if not already set ———
+    else:
+        if not ps4_console_ip:
+            ps4_console_ip = input("Enter PS4 console IP (e.g. 192.168.0.54): ").strip()
+        # ensure we clear any old emulator path
+        shadps4_path = None
+
+    # Always persist whatever we have now
+    save_config(
+        config_path,
+        shadps4_path or '',
+        ps4_console_ip or '',
+        never_setup_shadps4,
+        never_setup_ps4,
+        lastfm_config,
+        never_setup_lastfm
+    )
 
     # Check Last.fm configuration
     if not lastfm_config and not never_setup_lastfm:
@@ -838,8 +869,8 @@ def main():
                 lastfm_config = setup_lastfm_config()
                 if lastfm_config:
                     # Save the configuration
-                    save_config(config_path, shadps4_path or '', xbox_console_ip or '',
-                                never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm)
+                    save_config(config_path, shadps4_path or '', ps4_console_ip or '',
+                                never_setup_shadps4, never_setup_ps4, lastfm_config, never_setup_lastfm)
                     break  # Exit the loop since setup is complete
                 else:
                     # User chose to skip Last.fm setup after failed authentication
@@ -852,8 +883,8 @@ def main():
             elif choice == '3':
                 # Do not ask again
                 never_setup_lastfm = True
-                save_config(config_path, shadps4_path or '', xbox_console_ip or '',
-                            never_setup_shadps4, never_setup_xbox, lastfm_config, never_setup_lastfm)
+                save_config(config_path, shadps4_path or '', ps4_console_ip or '',
+                            never_setup_shadps4, never_setup_ps4, lastfm_config, never_setup_lastfm)
                 print("Last.fm setup will not be prompted again.")
                 break
             else:
@@ -878,7 +909,7 @@ def main():
         last_data_change_time = time.time()
         last_data_receive_time = time.time()
         last_json_content = None
-        xbox_connection_error_displayed = False
+        ps4_connection_error_displayed = False
         screen_clear_delay_counter = 0  # Initialize the screen clear delay counter
 
         while True:
@@ -891,58 +922,52 @@ def main():
             # Determine whether to clear the screen
             should_clear_screen = screen_clear_delay_counter == 0
 
-            # Attempt to fetch data from Xbox if configured
-            if xbox_console_ip and not never_setup_xbox:
-                web_address = f"http://{xbox_console_ip}:21070/jsonrpc"
-                json_data = fetch_json_from_web(web_address)
-                if json_data:
-                    data_source = 'xbox'
-                    from_web = True
-                    xbox_connection_error_displayed = False  # Reset the error flag
-                    screen_clear_delay_counter = 0  # Reset the counter when connection is successful
-                else:
-                    if not xbox_connection_error_displayed:
-                        print(f"Error: Could not connect to Xbox at {xbox_console_ip}.")
-                        print("Please ensure the Xbox IP is correct and the console is powered on.")
-                        print("Rich Presence on Xbox requires Nightly RB3Enhanced installed and configured")
-                        print("Consult the MiloHax Discord or online setup guide https://rb3pc.milohax.org/adv_discordrp")
-                        print("Attempting to reconnect...")
-                        xbox_connection_error_displayed = True
+            # ——— 1) Real PS4 console via FTP? ———
+            if ps4_console_ip:
+                try:
+                    from ftplib import FTP
+                    from io import BytesIO
 
-                        # Set the screen clear delay counter to delay clearing the screen
-                        screen_clear_delay_counter = 1  # Number of cycles to delay
-                    else:
-                        # We can choose whether to reset the counter on subsequent failures
-                        # For now, we'll only set the counter on the first failure
-                        pass
+                    ftp = FTP()
+                    ftp.connect(ps4_console_ip, 2121, timeout=5)
+                    ftp.login()  # anonymous
+                    ftp.cwd('/data/GoldHEN/RB4DX-1.08/plugin')
 
-                    # Xbox data not available, fall back to ShadPS4 if configured
-                    if shadps4_path and not never_setup_shadps4:
-                        json_path = shadps4_path / "data" / "CUSA02084" / "GoldHEN" / "RB4DX-1.08" / "plugin" / "discordrp.json"
-                        json_file = Path(json_path)
-                        if json_file.is_file():
-                            with json_file.open('r', encoding='utf-8') as file:
-                                json_data = file.read()
-                            if json_data:
-                                data_source = 'local'
-                                from_web = False
-            else:
-                # Xbox not configured or opted out, try ShadPS4
-                if shadps4_path and not never_setup_shadps4:
-                    json_path = shadps4_path / "data" / "CUSA02084" / "GoldHEN" / "RB4DX-1.08" / "plugin" / "discordrp.json"
-                    json_file = Path(json_path)
-                    if json_file.is_file():
-                        with json_file.open('r', encoding='utf-8') as file:
-                            json_data = file.read()
-                        if json_data:
-                            data_source = 'local'
-                            from_web = False
+                    buf = BytesIO()
+                    ftp.retrbinary('RETR discordrp.json', buf.write)
+                    ftp.quit()
+
+                    json_data    = buf.getvalue().decode('utf-8')
+                    data_source  = 'ps4_hardware'
+                    from_web     = False
+                    ps4_connection_error_displayed = False
+                    screen_clear_delay_counter = 0
+
+                except Exception as e:
+                    if not globals().get('ps4_connection_error_displayed', False):
+                        print(f"Error: cannot FTP to {ps4_console_ip}: {e}")
+                        print(" Ensure console is on and FTP is open on port 2121.")
+                        ps4_connection_error_displayed = True
+                        screen_clear_delay_counter = 1
+                    time.sleep(5)
+                    continue
+
+            # ——— 2) else fallback to ShadPS4 file ———
+            elif shadps4_path and not never_setup_shadps4:
+                json_path = (shadps4_path / "data" / "CUSA02084" /
+                             "GoldHEN" / "RB4DX-1.08" / "plugin" /
+                             "discordrp.json")
+                if json_path.is_file():
+                    json_data   = json_path.read_text(encoding='utf-8')
+                    data_source = 'local'
+                    from_web    = False
+            # ——— else no data ———
 
             # Set interval based on data source
-            if data_source == 'xbox':
-                interval = 5  # Check every 5 seconds when using Xbox
+            if data_source == 'ps4':
+                interval = 5  # Check every 5 seconds when using PS4
             else:
-                interval = 2  # Check every 2 seconds when not using Xbox
+                interval = 2  # Check every 2 seconds when not using PS4
 
             # If no data from any source, wait and retry
             if not json_data:
