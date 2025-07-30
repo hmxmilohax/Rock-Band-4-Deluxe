@@ -323,3 +323,4 @@ UPDATE_SETTINGS
    {dx_file_delete "drunkmode.ini"}
 }
 {dx_write_null_file "saving.ini"}
+{write_file "data:/GoldHEN/RB4DX/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}
