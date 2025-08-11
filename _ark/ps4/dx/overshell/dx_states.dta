@@ -1428,6 +1428,7 @@
 
    ;improved solution to 1.08 overshell not evaluating options in the array, evaluate the options before adding them to the array
    {set $dxsettings {array ()}}
+   {push_back $dxsettings 'Track Theme'}
    {if_else $noaa
       {push_back $dxsettings 'Track Antialiasing: OFF'}
       {push_back $dxsettings 'Track Antialiasing: ON'}

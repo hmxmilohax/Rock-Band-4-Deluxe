@@ -16,11 +16,32 @@
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/theme"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/theme/gem"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/theme/gem/colors"}
-	{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/background"}
-	{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/game"}
 )
 
 CREATE_SETTINGS_DIRS
+
+;make ark/ps4 dirs that are used in game
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/shared"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/shared/scene"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/shared/gem_track_texture"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/tubes"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/tambourine"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/background"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/game"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/game/textures"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/ui/textures/vocals"}
+
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/shared/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/shared/scene/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/track/shared/gem_track_texture/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/tubes/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/tambourine/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/ui/background/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/ui/game/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/ui/game/textures/keep" ()}
+{write_file "data:/GoldHEN/RB4DX-1.08/ps4/ui/textures/vocals/keep" ()}
 
 {write_file "data:/GoldHEN/RB4DX-1.08/plugin/saving.ini" ()}
 {write_file "data:/GoldHEN/RB4DX-1.08/plugin/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}
