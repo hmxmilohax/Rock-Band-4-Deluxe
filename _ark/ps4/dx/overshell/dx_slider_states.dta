@@ -230,65 +230,65 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgr} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgg} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolgb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgb} ("+" "0" "-")}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrr} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrg} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolrb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrb} ("+" "0" "-")}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyr} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyg} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolyb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyb} ("+" "0" "-")}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbr} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbg} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolbb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbb} ("+" "0" "-")}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolor} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolor} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolog} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolog} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Gem Color: %d" $gemcolob} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolob} ("+" "0" "-")}
             )
          }
       )
@@ -588,5 +588,263 @@
    )
    (on_cancel 
       {$this show_state dxState_RGBSelect}
+      {$this trigger_cancel_effects})
+)
+
+#define POSITION_DATA
+(
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Song Title X Position: %.1f" $mtvposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Song Title Y Position: %.1f" $mtvposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Song Title Z Position: %.1f" $mtvposz} ("+" "0" "-")}
+            )
+         }
+      )
+      ("solo"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Solo X Position: %.1f" $soloposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Solo Y Position: %.1f" $soloposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Solo Z Position: %.1f" $soloposz} ("+" "0" "-")}
+            )
+         }
+      )
+      ("score"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Score X Position: %.1f" $scoreposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Score Y Position: %.1f" $scoreposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Score Z Position: %.1f" $scoreposz} ("+" "0" "-")}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Countdown X Position: %.1f" $countdownposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Countdown Y Position: %.1f" $countdownposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Countdown Z Position: %.1f" $countdownposz} ("+" "0" "-")}
+            )
+         }
+      )
+   }
+)
+#define POSITION_ADD
+(
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx {+ $mtvposx 0.5}}
+            )
+            (Y
+               {set $mtvposy {+ $mtvposy 0.5}}
+            )
+            (Z
+               {set $mtvposz {+ $mtvposz 0.5}}
+            )
+         }
+      )
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx {+ $soloposx 0.5}}
+            )
+            (Y
+               {set $soloposy {+ $soloposy 0.5}}
+            )
+            (Z
+               {set $soloposz {+ $soloposz 0.5}}
+            )
+         }
+      )
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx {+ $scoreposx 0.5}}
+            )
+            (Y
+               {set $scoreposy {+ $scoreposy 0.5}}
+            )
+            (Z
+               {set $scoreposz {+ $scoreposz 0.5}}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx {+ $countdownposx 0.5}}
+            )
+            (Y
+               {set $countdownposy {+ $countdownposy 0.5}}
+            )
+            (Z
+               {set $countdownposz {+ $countdownposz 0.5}}
+            )
+         }
+      )
+   }
+)
+#define POSITION_SUB
+(
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx {- $mtvposx 0.5}}
+            )
+            (Y
+               {set $mtvposy {- $mtvposy 0.5}}
+            )
+            (Z
+               {set $mtvposz {- $mtvposz 0.5}}
+            )
+         }
+      )
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx {- $soloposx 0.5}}
+            )
+            (Y
+               {set $soloposy {- $soloposy 0.5}}
+            )
+            (Z
+               {set $soloposz {- $soloposz 0.5}}
+            )
+         }
+      )
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx {- $scoreposx 0.5}}
+            )
+            (Y
+               {set $scoreposy {- $scoreposy 0.5}}
+            )
+            (Z
+               {set $scoreposz {- $scoreposz 0.5}}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx {- $countdownposx 0.5}}
+            )
+            (Y
+               {set $countdownposy {- $countdownposy 0.5}}
+            )
+            (Z
+               {set $countdownposz {- $countdownposz 0.5}}
+            )
+         }
+      )
+   }
+)
+#define POSITION_RESET
+(
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx 0.0}
+            )
+            (Y
+               {set $mtvposy 5.5}
+            )
+            (Z
+               {set $mtvposz 0.0}
+            )
+         }
+      )
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx -19.5}
+            )
+            (Y
+               {set $soloposy 50.0}
+            )
+            (Z
+               {set $soloposz -9.0}
+            )
+         }
+      )
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx 81.5}
+            )
+            (Y
+               {set $scoreposy 22.5}
+            )
+            (Z
+               {set $scoreposz 10.0}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx 0.0}
+            )
+            (Y
+               {set $countdownposy 0.0}
+            )
+            (Z
+               {set $countdownposz 0.0}
+            )
+         }
+      )
+   }
+)
+(dxState_PositionSlider
+   (view confirm_action) 
+   (enter 
+      POSITION_DATA
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            POSITION_ADD
+            POSITION_DATA
+         )
+         ("0"
+            POSITION_RESET
+            POSITION_DATA
+         )
+         ("-"
+            POSITION_SUB
+            POSITION_DATA
+         )
+      }
+   )
+   (on_cancel
+      {if_else {== $positiontype "mtv"}
+         {$this show_state dxState_SongTitlePosition}
+         {$this show_state dxState_HUDPosition}
+      }
       {$this trigger_cancel_effects})
 )

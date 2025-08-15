@@ -17,6 +17,16 @@
 ;visual settings
 {set $blackbg {file_exists "settings/visuals/blackbg.dta"}}
 {set $60fpsbg {file_exists "settings/visuals/60fpsbg.dta"}}
+{set $micwarn {file_exists "settings/visuals/micwarn.dta"}}
+
+;mtv settings
+{set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
+{set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
+{set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
+{set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
+{set $yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
+{set $genretxt {file_exists "settings/visuals/genretxt.dta"}}
+{set $origintxt {file_exists "settings/visuals/origintxt.dta"}}
 
 ;sfx settings
 {set $nomiss {file_exists "settings/sfx/nomiss.dta"}}
@@ -80,19 +90,43 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
-;default gem colors (TODO: READ FROM USER DTAS)
-{set $gemcolgr 33}
-{set $gemcolgg 93}
-{set $gemcolgb 2}
-{set $gemcolrr 229}
-{set $gemcolrg 4}
-{set $gemcolrb 8}
-{set $gemcolyr 202}
-{set $gemcolyg 164}
-{set $gemcolyb 8}
-{set $gemcolbr 3}
-{set $gemcolbg 82}
-{set $gemcolbb 139}
-{set $gemcolor 190}
-{set $gemcolog 48}
-{set $gemcolob 5}
+{if {file_exists "settings/visuals/positions/scoreposx.dta"}
+   {set $scoreposx {dx_read_file_as_float "settings/visuals/positions/scoreposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/scoreposy.dta"}
+   {set $scoreposy {dx_read_file_as_float "settings/visuals/positions/scoreposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/scoreposz.dta"}
+   {set $scoreposz {dx_read_file_as_float "settings/visuals/positions/scoreposz.dta"}}
+}
+
+
+{if {file_exists "settings/visuals/positions/soloposx.dta"}
+   {set $soloposx {dx_read_file_as_float "settings/visuals/positions/soloposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/soloposy.dta"}
+   {set $soloposy {dx_read_file_as_float "settings/visuals/positions/soloposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/soloposz.dta"}
+   {set $soloposz {dx_read_file_as_float "settings/visuals/positions/soloposz.dta"}}
+}
+
+{if {file_exists "settings/visuals/positions/countdownposx.dta"}
+   {set $countdownposx {dx_read_file_as_float "settings/visuals/positions/countdownposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/countdownposy.dta"}
+   {set $countdownposy {dx_read_file_as_float "settings/visuals/positions/countdownposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/countdownposz.dta"}
+   {set $countdownposz {dx_read_file_as_float "settings/visuals/positions/countdownposz.dta"}}
+}
+
+{if {file_exists "settings/visuals/positions/mtvposx.dta"}
+   {set $mtvposx {dx_read_file_as_float "settings/visuals/positions/mtvposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/mtvposy.dta"}
+   {set $mtvposy {dx_read_file_as_float "settings/visuals/positions/mtvposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/mtvposz.dta"}
+   {set $mtvposz {dx_read_file_as_float "settings/visuals/positions/mtvposz.dta"}}
+}

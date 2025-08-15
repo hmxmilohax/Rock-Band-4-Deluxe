@@ -15,6 +15,7 @@
             "Track Settings"
             "Controller Settings"
             "Extras"
+            ;"test"
          )
       }
       {$this setup_confirm_actions a 
@@ -82,7 +83,7 @@
             {$this show_state dxState_LostMenus}
             {$this trigger_select_effects})
          ("test"
-            {set_system_settings}
+            {write_score_file 81.5 10 -22.5}
             {$this trigger_select_effects}
          )
       }
@@ -437,9 +438,10 @@
             "Select Venue"
             {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
             {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            {if_else $noui "HUD: OFF" "HUD: ON"}
+            ;{if_else $noui "HUD: OFF" "HUD: ON"}
+            "HUD..."
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            "Song Title..."
+            ;"Song Title..."
             "Overshell Theme"
          )
       }
@@ -448,9 +450,9 @@
             "Select Venue"
             {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
             {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            {if_else $noui "HUD: OFF" "HUD: ON"}
+            "HUD..."
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            "Song Title..."
+            ;"Song Title..."
             "Overshell Theme"
             "UI Theme"
             {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
@@ -504,18 +506,21 @@
             }
             {$this trigger_select_effects}
          )
-         (("HUD: ON" "HUD: OFF")
-            {set $noui {! $noui}}
-            {if_else $noui
-               {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
-               {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
-            }
-            {if_else {$this in_song}
-               {$this show_state dxState_InGameWarn}
-               RB4DXVIS_DATA
-            }
-            {$this trigger_select_effects}
+         ("HUD..."
+            {$this show_state dxState_HUDElements}
          )
+         ; (("HUD: ON" "HUD: OFF")
+         ;    {set $noui {! $noui}}
+         ;    {if_else $noui
+         ;       {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
+         ;       {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+         ;    }
+         ;    {if_else {$this in_song}
+         ;       {$this show_state dxState_InGameWarn}
+         ;       RB4DXVIS_DATA
+         ;    }
+         ;    {$this trigger_select_effects}
+         ; )
          (("Performance Mode: ON" "Performance Mode: OFF")
             {set $nohud {! $nohud}}
             {if_else $nohud
@@ -530,36 +535,6 @@
          )
          ("Song Title..."
             {$this show_state dxState_MTVElements}
-            {$this trigger_select_effects}
-         )
-         ("Song Title Always: ON"
-            {set $songtitle FALSE}
-            {switch $songtitletype
-               (default
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlay1.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletype1.dta"}
-               )
-               (tl
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlaytl.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletypetl.dta"}
-               )
-               (a
-                  {dx_file_rename "ps4/ui/game/song_artist_overlay.entity_ps4" "ps4/ui/game/song_artist_overlaya.entity_ps4"}
-                  {dx_file_delete "settings/visuals/songtitletypea.dta"}
-               )
-               (none
-                  {dx_file_delete "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               )
-            }
-            {dx_file_delete "settings/visuals/songtitle.dta"}
-            {if_else {$this in_song}
-               {$this show_state dxState_InGameWarn}
-               RB4DXVIS1_DATA
-            }
-            {$this trigger_select_effects}
-         )
-         ("Song Title Always: OFF"
-            {$this show_state dxState_SongTitleSelector}
             {$this trigger_select_effects}
          )
          (("Menu BGs: OFF" "Menu BGs: ON")
@@ -606,6 +581,74 @@
    )
 )
 
+#define RB4DXHUD_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         {if_else $noui "Visibility: OFF" "Visibility: Default"}
+         "Score Position"
+         "Solo Box Position"
+         "Break Countdown Position"
+         "Song Title..."
+      )
+   }
+)
+(dxState_HUDElements
+   (view {$this get_auto_list_view}) 
+   (enter
+      {set $dx_cur_state hud}
+      {set $noui {file_exists "settings/visuals/noui.dta"}}
+      RB4DXHUD_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("Visibility: OFF"
+            {set $noui FALSE}
+            {dx_file_delete 'settings/visuals/noui.dta'}
+            {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+            {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXHUD_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         ("Visibility: Default"
+            {set $noui TRUE}
+            {dx_write_null_file "settings/visuals/noui.dta"}
+            {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+            {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXHUD_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         ("Score Position"
+            {set $positiontype "score"}
+            {$this show_state dxState_HUDPosition}
+         )
+         ("Solo Box Position"
+            {set $positiontype "solo"}
+            {$this show_state dxState_HUDPosition}
+         )
+         ("Break Countdown Position"
+            {set $positiontype "countdown"}
+            {$this show_state dxState_HUDPosition}
+         )
+         ("Song Title..."
+            {$this show_state dxState_MTVElements}
+            {$this trigger_select_effects}
+         )
+      }
+   )
+   (on_cancel 
+      {$this show_state dxState_VisSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
 #define RB4DXMTV_DATA
 (
    {$this setup_confirm_actions a 
@@ -637,19 +680,7 @@
             {set $songtitle FALSE}
             {dx_file_delete 'settings/visuals/songtitle.dta'}
             {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-            {if {|| $albumtxt $genretxt $origintxt}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-            }
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXMTV_DATA
@@ -659,30 +690,8 @@
          ("Visibility: Default"
             {set $songtitle TRUE}
             {dx_write_null_file "settings/visuals/songtitle.dta"}
-            {if_else {|| $albumtxt $genretxt $origintxt}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlay1.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytl.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaya.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXMTV_DATA
@@ -740,40 +749,8 @@
                {dx_write_null_file 'settings/visuals/noartisttxt.dta'}
                {dx_file_delete 'settings/visuals/noartisttxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -783,40 +760,8 @@
                {dx_write_null_file 'settings/visuals/covertxt.dta'}
                {dx_file_delete 'settings/visuals/covertxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -826,40 +771,8 @@
                {dx_write_null_file 'settings/visuals/albumtxt.dta'}
                {dx_file_delete 'settings/visuals/albumtxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -869,40 +782,8 @@
                {dx_write_null_file 'settings/visuals/yeartxt.dta'}
                {dx_file_delete 'settings/visuals/yeartxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -912,40 +793,8 @@
                {dx_write_null_file 'settings/visuals/genretxt.dta'}
                {dx_file_delete 'settings/visuals/genretxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -955,40 +804,8 @@
                {dx_write_null_file 'settings/visuals/origintxt.dta'}
                {dx_file_delete 'settings/visuals/origintxt.dta'}
             }
-            {if_else {&& {! $songtitle} {|| $albumtxt $genretxt $origintxt}}
-               {switch $songtitletype
-                  (default
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayd.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (tl
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlaytldn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-                  (a
-                     {dx_file_copy 'ps4/ui/game/song_artist_overlayadn.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                  )
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {switch $songtitletype
-                     (default
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlay1d.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytld.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayad.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-                  {switch $songtitletype
-                     (tl
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlaytln.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                     (a
-                        {dx_file_copy 'ps4/ui/game/song_artist_overlayan.entity_ps4' 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-                     )
-                  }
-               }
-            }
+            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -1129,66 +946,109 @@
    )
 )
 
+;Non-specific HUD Position Selector
+(dxState_HUDPosition
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a ("X" "Y" "Z")}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {set $positionchanged $list_data}
+      {$this show_state dxState_PositionSlider}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {switch $positiontype
+         ("score"
+            {dx_file_delete 'ps4/ui/game/hud.scene_ps4'}
+            {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposx.dta" {array ($scoreposx)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposy.dta" {array ($scoreposy)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposz.dta" {array ($scoreposz)}}
+         )
+         ("countdown"
+            {dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
+            {write_countdown_file $countdownposx $countdownposz $countdownposy}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposx.dta" {array ($countdownposx)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposy.dta" {array ($countdownposy)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposz.dta" {array ($countdownposz)}}
+         )
+         ("solo"
+            {dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
+            {write_solo_file $soloposx $soloposz $soloposy}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposx.dta" {array ($soloposx)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposy.dta" {array ($soloposy)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposz.dta" {array ($soloposz)}}
+         )
+      }
+      {set $positiontype FALSE}
+      {$this show_state dxState_HUDElements}
+      {$this trigger_cancel_effects}
+   )
+)
+
 ;Song Title Position Selector
 (dxState_SongTitlePosition
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a ("X" "Y" "Z" "Presets")}
+      {set $positiontype "mtv"}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {switch $list_data 
+         (("X" "Y" "Z")
+            {set $positionchanged $list_data}
+            {$this show_state dxState_PositionSlider}
+         )
+         ("Presets"
+            {$this show_state dxState_SongTitlePositionPreset}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+      {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+      {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposx.dta" {array ($mtvposx)}}
+      {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposy.dta" {array ($mtvposy)}}
+      {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposz.dta" {array ($mtvposz)}}
+      {$this show_state dxState_MTVElements}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Song Title Position Preset Selector
+(dxState_SongTitlePositionPreset
    (view {$this get_auto_list_view})
    (enter
       {$this setup_confirm_actions a ("Vanilla" "Top Left" "Acai; Below Twitch Chat")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {dx_file_delete "ps4/ui/game/song_artist_overlay.entity_ps4"}
       {switch $list_data 
          ("Vanilla"
-            {set $songtitletype default}
-            {dx_write_null_file "settings/visuals/songtitletype1.dta"}
-            {if_else $songtitle
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlay1d.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlay1.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               }
-               {if {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlayd.entity_ps4"}
-               }
-            }
+            {set $mtvposx 0.0}
+            {set $mtvposz 0.0}
+            {set $mtvposy 5.5}
          )
          ("Top Left"
-            {set $songtitletype tl}
-            {dx_write_null_file "settings/visuals/songtitletypetl.dta"}
-            {if_else $songtitle
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlaytld.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlaytl.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlaytldn.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlaytln.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               }
-            }
+            {set $mtvposx -180.0}
+            {set $mtvposz 0.0}
+            {set $mtvposy 380.0}
          )
          ("Acai; Below Twitch Chat"
-            {set $songtitletype a}
-            {dx_write_null_file "settings/visuals/songtitletypea.dta"}
-            {if_else $songtitle
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlayad.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlaya.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               }
-               {if_else {|| $albumtxt $genretxt $origintxt}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlayadn.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-                  {dx_file_copy "ps4/ui/game/song_artist_overlayan.entity_ps4" "ps4/ui/game/song_artist_overlay.entity_ps4"}
-               }
-            }
+            {set $mtvposx -180.0}
+            {set $mtvposz 0.0}
+            {set $mtvposy 260.0}
          )
       }
-      {if_else {$this in_song}
-         {$this show_state dxState_InGameWarn}
-         {$this show_state dxState_MTVElements}
-      }
+      {$this show_state dxState_SongTitlePosition}
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state dxState_MTVElements}
+      {$this show_state dxState_SongTitlePosition}
       {$this trigger_cancel_effects}
    )
 )
@@ -1285,7 +1145,7 @@
       {set $gemshine {dx_file_exists "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}}
       {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
       {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
-      {set $micwarn {! {dx_file_exists "ps4/ui/game/hud1.scene_ps4"}}}
+      {set $micwarn {file_exists "settings/visual/micwarn.dta"}}
       {set $dx_cur_state trk}
       RB4DXTRK_DATA
    ) 
@@ -1354,15 +1214,10 @@
          )
          (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
             {set $micwarn {! $micwarn}}
+            {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
             {if_else $micwarn
-               {do
-                  {dx_file_rename "ps4/ui/game/hud1.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/micwarn.dta"}
-               }
-               {do
-                  {dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/micwarn.dta"}
-               }
+               {dx_write_null_file "settings/visuals/micwarn.dta"}
+               {dx_file_delete "settings/visuals/micwarn.dta"}
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}

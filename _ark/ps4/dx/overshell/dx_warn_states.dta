@@ -87,6 +87,9 @@
          (mtv
             {$this show_state dxState_MTVElements}
          )
+         (hud
+            {$this show_state dxState_HUDElements}
+         )
          (trk
             {$this show_state dxState_TrkSettings}
          )
@@ -109,6 +112,9 @@
          )
          (mtv
             {$this show_state dxState_MTVElements}
+         )
+         (hud
+            {$this show_state dxState_HUDElements}
          )
          (trk
             {$this show_state dxState_TrkSettings}
