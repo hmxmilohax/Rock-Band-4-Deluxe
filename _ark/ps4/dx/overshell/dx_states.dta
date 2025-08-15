@@ -464,7 +464,6 @@
    (view {$this get_auto_list_view}) 
    (enter
       {set $crowdmeter {dx_file_exists "ps4/ui/game/crowd_meter.entity_ps4"}}
-      {set $noui {dx_file_exists "ps4/ui/game/hud.scene_ps4"}}
       {set $nohud {dx_file_exists "ps4/ui/game/game.layout_ps4"}}
       {set $songtitle {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}}
       SONGTITLE_CHECK
@@ -509,18 +508,6 @@
          ("HUD..."
             {$this show_state dxState_HUDElements}
          )
-         ; (("HUD: ON" "HUD: OFF")
-         ;    {set $noui {! $noui}}
-         ;    {if_else $noui
-         ;       {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
-         ;       {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
-         ;    }
-         ;    {if_else {$this in_song}
-         ;       {$this show_state dxState_InGameWarn}
-         ;       RB4DXVIS_DATA
-         ;    }
-         ;    {$this trigger_select_effects}
-         ; )
          (("Performance Mode: ON" "Performance Mode: OFF")
             {set $nohud {! $nohud}}
             {if_else $nohud
@@ -607,6 +594,7 @@
             {set $noui FALSE}
             {dx_file_delete 'settings/visuals/noui.dta'}
             {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+            {dx_file_rename "ps4/ui/game/hud0.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
             {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -617,7 +605,7 @@
          ("Visibility: Default"
             {set $noui TRUE}
             {dx_write_null_file "settings/visuals/noui.dta"}
-            {dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+            {dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud0.scene_ps4"}
             {dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -679,7 +667,7 @@
          ("Visibility: Always"
             {set $songtitle FALSE}
             {dx_file_delete 'settings/visuals/songtitle.dta'}
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -690,7 +678,7 @@
          ("Visibility: Default"
             {set $songtitle TRUE}
             {dx_write_null_file "settings/visuals/songtitle.dta"}
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+            ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -741,7 +729,6 @@
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}} 
-      {dx_file_delete "ps4/ui/game/song_artist_overlay.entity_ps4"} 
       {switch $list_data 
          (('Artist: ON' 'Artist: OFF')
             {set $noartisttxt {! $noartisttxt}}
@@ -749,7 +736,6 @@
                {dx_write_null_file 'settings/visuals/noartisttxt.dta'}
                {dx_file_delete 'settings/visuals/noartisttxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -760,7 +746,6 @@
                {dx_write_null_file 'settings/visuals/covertxt.dta'}
                {dx_file_delete 'settings/visuals/covertxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -771,7 +756,6 @@
                {dx_write_null_file 'settings/visuals/albumtxt.dta'}
                {dx_file_delete 'settings/visuals/albumtxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -782,7 +766,6 @@
                {dx_write_null_file 'settings/visuals/yeartxt.dta'}
                {dx_file_delete 'settings/visuals/yeartxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -793,7 +776,6 @@
                {dx_write_null_file 'settings/visuals/genretxt.dta'}
                {dx_file_delete 'settings/visuals/genretxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -804,7 +786,6 @@
                {dx_write_null_file 'settings/visuals/origintxt.dta'}
                {dx_file_delete 'settings/visuals/origintxt.dta'}
             }
-            {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
@@ -961,21 +942,23 @@
    (on_cancel 
       {switch $positiontype
          ("score"
-            {dx_file_delete 'ps4/ui/game/hud.scene_ps4'}
-            {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            ;{dx_file_delete 'ps4/ui/game/hud.scene_ps4'}
+            {if {! {dx_file_exists "ps4/ui/game/hud0.scene_ps4"}}
+               {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            }
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposx.dta" {array ($scoreposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposy.dta" {array ($scoreposy)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposz.dta" {array ($scoreposz)}}
          )
          ("countdown"
-            {dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
+            ;{dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
             {write_countdown_file $countdownposx $countdownposz $countdownposy}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposx.dta" {array ($countdownposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposy.dta" {array ($countdownposy)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposz.dta" {array ($countdownposz)}}
          )
          ("solo"
-            {dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
+            ;{dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
             {write_solo_file $soloposx $soloposz $soloposy}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposx.dta" {array ($soloposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposy.dta" {array ($soloposy)}}
@@ -1009,7 +992,7 @@
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
+      ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
       {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposx.dta" {array ($mtvposx)}}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposy.dta" {array ($mtvposy)}}
@@ -1214,7 +1197,9 @@
          )
          (("Hide Mic Warning: ON" "Hide Mic Warning: OFF")
             {set $micwarn {! $micwarn}}
-            {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            {if {! {dx_file_exists "ps4/ui/game/hud0.scene_ps4"}}
+               {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+            }
             {if_else $micwarn
                {dx_write_null_file "settings/visuals/micwarn.dta"}
                {dx_file_delete "settings/visuals/micwarn.dta"}

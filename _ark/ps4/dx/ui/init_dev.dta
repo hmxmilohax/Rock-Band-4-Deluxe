@@ -269,6 +269,18 @@ UPDATE_SETTINGS
 {if {file_exists "drunkmode.ini"}
    {dx_file_delete "drunkmode.ini"}
 }
+{if_else {file_exists "settings/visuals/noui.dta"}
+	{unless {dx_file_exists "ps4/ui/game/hud0.scene_ps4"}
+		{dx_file_rename "ps4/ui/game/hud.scene_ps4" "ps4/ui/game/hud0.scene_ps4"}
+		{dx_write_null_file "ps4/ui/game/hud.scene_ps4"}
+	}
+	{unless {dx_file_exists "ps4/ui/game/hud.scene_ps4"}
+		{if {dx_file_exists "ps4/ui/game/hud0.scene_ps4"}
+			{dx_file_delete "ps4/ui/game/hud.scene_ps4"}
+			{dx_file_rename "ps4/ui/game/hud0.scene_ps4" "ps4/ui/game/hud.scene_ps4"}
+		}
+	}
+}
 {dx_write_null_file "saving.ini"}
 {write_file "data:/GoldHEN/RB4DX/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}
 
