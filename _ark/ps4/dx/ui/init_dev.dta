@@ -23,6 +23,7 @@ CREATE_SETTINGS_DIRS
 ;make ark/ps4 dirs that are used in game
 {file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/shared"}
 {file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/shared/scene"}
+{file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/shared"}
 {file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/shared/gem_track_texture"}
 {file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals"}
 {file_mkdir "data:/GoldHEN/RB4DX-1.08/ps4/track/vocals/tubes"}
