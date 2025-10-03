@@ -30,6 +30,36 @@
       {$this trigger_cancel_effects})
 )
 
+(dxState_PracticeSongSpeed
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            {set $pracspeed {+ $pracspeed 5}}
+            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
+         )
+         ("Reset"
+            {set $pracspeed 100}
+            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
+         )
+         ("-"
+            {unless {< {- $pracspeed 5} 5}
+               {set $pracspeed {- $pracspeed 5}}
+            }
+            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
+         )
+
+         })
+   (on_cancel 
+      {set_practice_speed {/ $pracspeed 100}}
+      {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects})
+)
+
 (dxState_VideoCalibration
    (view confirm_action) 
    (enter 
