@@ -45,6 +45,9 @@
          (sfx
             {$this show_state dxState_SFXSettings}
          )
+         (hud
+            {$this show_state dxState_HUDElements}
+         )
       }
       {set $optionaladd FALSE}
       {$this trigger_select_effects}
@@ -65,6 +68,9 @@
          )
          (sfx
             {$this show_state dxState_SFXSettings}
+         )
+         (hud
+            {$this show_state dxState_HUDElements}
          )
       }
       {set $optionaladd FALSE}

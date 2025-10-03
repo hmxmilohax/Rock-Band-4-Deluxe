@@ -512,3 +512,48 @@
       {$this trigger_cancel_effects}
    )
 )
+
+;Button Prompts Texture Selector
+(dxState_ButtonPromptsTexSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/button prompts/options/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist 0}}
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_mkdir "ps4/ui/textures/help_bar"}
+      {dx_file_delete "ps4/ui/textures/help_bar/options_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_green_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_green_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_red_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_red_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_yellow_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_yellow_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_blue_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_blue_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_orange_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/textures/help_bar/ps_orange_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/options/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/options_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/cross/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_green_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/cross_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_green_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/circle/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_red_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/circle_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_red_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/triangle/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_yellow_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/triangle_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_yellow_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/square/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_blue_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/square_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_blue_combo_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/r1/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_orange_vocals_prompt_new_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/r1_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_orange_combo_prompt_new_ui.bmp_ps4"}
+      {$this show_state dxState_DelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_HUDElements}
+      {$this trigger_cancel_effects}
+   )
+)

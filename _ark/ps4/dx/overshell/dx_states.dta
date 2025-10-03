@@ -613,6 +613,7 @@
          "Solo Box Position"
          "Break Countdown Position"
          "Song Title..."
+         "Button Prompts"
       )
    }
 )
@@ -636,7 +637,6 @@
                {$this show_state dxState_InGameWarn}
                RB4DXHUD_DATA
             }
-            {$this trigger_select_effects}
          )
          ("Visibility: Default"
             {set $noui TRUE}
@@ -647,7 +647,6 @@
                {$this show_state dxState_InGameWarn}
                RB4DXHUD_DATA
             }
-            {$this trigger_select_effects}
          )
          ("Score Position"
             {set $positiontype "score"}
@@ -663,9 +662,12 @@
          )
          ("Song Title..."
             {$this show_state dxState_MTVElements}
-            {$this trigger_select_effects}
+         )
+         ("Button Prompts"
+            {$this show_state dxState_ButtonPromptsTexSelector}
          )
       }
+      {$this trigger_select_effects}
    )
    (on_cancel 
       {$this show_state dxState_VisSettings}
