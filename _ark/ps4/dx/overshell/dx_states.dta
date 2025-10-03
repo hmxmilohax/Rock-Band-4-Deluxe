@@ -68,6 +68,7 @@
 (dxState_DeluxeSettings
    (view {$this get_auto_list_view}) 
    (enter
+      {set $dx_cur_state main}
       RB4DXMAIN_DATA
    ) 
    (SELECT_MSG 

@@ -99,6 +99,9 @@
          (sfx
             {$this show_state dxState_SFXSettings}
          )
+         (main
+            {$this show_state dxState_DeluxeSettings}
+         )
       }
       {$this trigger_select_effects}
    )
@@ -124,6 +127,9 @@
          )
          (sfx
             {$this show_state dxState_SFXSettings}
+         )
+         (main
+            {$this show_state dxState_DeluxeSettings}
          )
       }
       {$this trigger_cancel_effects}

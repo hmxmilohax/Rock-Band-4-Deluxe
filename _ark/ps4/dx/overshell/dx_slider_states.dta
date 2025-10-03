@@ -56,7 +56,10 @@
          })
    (on_cancel 
       {set_practice_speed {/ $pracspeed 100}}
-      {$this show_state dxState_DeluxeSettings}
+      {if_else {$this in_song}
+         {$this show_state dxState_InGameWarn}
+         {$this show_state dxState_DeluxeSettings}
+      }
       {$this trigger_cancel_effects})
 )
 
