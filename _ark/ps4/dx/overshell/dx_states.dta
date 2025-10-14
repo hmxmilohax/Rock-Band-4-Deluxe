@@ -583,6 +583,7 @@
    ;    {push_back $dxsettings 'HUD: ON'}
    ; }
    {push_back $dxsettings 'Song Title...'}
+   {push_back $dxsettings 'Button Prompts'}
    {if_else $menubg
       {push_back $dxsettings 'Menu BGs: OFF'}
       {push_back $dxsettings 'Menu BGs: ON'}
@@ -671,6 +672,10 @@
          )
          ('Song Title...'
             {$this show_state dxState_MTVElements}
+            {$this trigger_select_effects}
+         )
+         ('Button Prompts'
+            {$this show_state dxState_ButtonPromptsTexSelector}
             {$this trigger_select_effects}
          )
          ('Song Title Always: ON'
