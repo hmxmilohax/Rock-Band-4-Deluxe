@@ -538,23 +538,23 @@
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/options/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/options_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/cross/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_green_vocals_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/cross_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_green_combo_prompt_ui.png_ps4'}
-      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/cross_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_green_prompt_ui.png_ps4'}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/green_voting/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_green_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/green/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/green_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/circle/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_red_vocals_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/circle_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_red_combo_prompt_ui.png_ps4'}
-      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/circle_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_red_prompt_ui.png_ps4'}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/red_voting/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_red_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/red/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/red_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/triangle/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_yellow_vocals_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/triangle_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_yellow_combo_prompt_ui.png_ps4'}
-      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/triangle_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_yellow_prompt_ui.png_ps4'}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/yellow_voting/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_yellow_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/yellow/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/yellow_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/square/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_blue_vocals_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/square_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_blue_combo_prompt_ui.png_ps4'}
-      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/square_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_blue_prompt_ui.png_ps4'}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/blue_voting/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_blue_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/blue/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/blue_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/r1/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_orange_vocals_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/r1_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/ps_orange_combo_prompt_ui.png_ps4'}
-      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/r1_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_orange_prompt_ui.png_ps4'}
+      {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/orange_voting/' $list_data '.png_ps4'} 'ps4/ui/textures/voting/ps_orange_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/orange/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/orange_prompt_ui.png_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/inset/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/button_inset_ui.bmp_ps4'}
       {dx_file_copy {sprint 'ps4/dx/custom_textures/button prompts/inset_combo/' $list_data '.png_ps4'} 'ps4/ui/textures/help_bar/combo_button_inset_ui.png_ps4'}
