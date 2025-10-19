@@ -10,6 +10,10 @@
       {$this end_somp_player_management_session} 
       {$this clear_selected_emote_category} 
       {$this clear_volume_slider_last_state}
+      {if {== {get_plugin_var dx_plugin_initialized} 0} 
+         SET_PLUGIN_VARS
+         #include ../ui/dx_hooks.dta
+      } ; more fallbacks
    ) 
    (on_start 
       ($user) 

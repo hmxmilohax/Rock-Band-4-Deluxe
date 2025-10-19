@@ -3,6 +3,7 @@
 #define SET_PLUGIN_VARS
 (
    {set_plugin_var speedmod 100}
+   {set_plugin_var insong FALSE}
    ;song title settings
    {set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
    {set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}
