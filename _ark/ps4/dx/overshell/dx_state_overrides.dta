@@ -10,10 +10,17 @@
       {$this end_somp_player_management_session} 
       {$this clear_selected_emote_category} 
       {$this clear_volume_slider_last_state}
-      {if {== {get_plugin_var dx_plugin_initialized} 0} 
-         SET_PLUGIN_VARS
+      ;re-check every plugin variable one at a time... idk why this doesn't work as a group
+      {if {== {get_plugin_var speedmod} 0}
+         {set_plugin_var speedmod 100}
          #include ../ui/dx_hooks.dta
-      } ; more fallbacks
+      }
+      {if {== {get_plugin_var noartisttxt} 0} {set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}}
+      {if {== {get_plugin_var covertxt} 0} {set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}}
+      {if {== {get_plugin_var albumtxt} 0} {set_plugin_var albumtxt {file_exists "settings/visuals/albumtxt.dta"}}}
+      {if {== {get_plugin_var yeartxt} 0} {set_plugin_var yeartxt {file_exists "settings/visuals/yeartxt.dta"}}}
+      {if {== {get_plugin_var genretxt} 0} {set_plugin_var genretxt {file_exists "settings/visuals/genretxt.dta"}}}
+      {if {== {get_plugin_var origintxt} 0} {set_plugin_var origintxt {file_exists "settings/visuals/origintxt.dta"}}}
    ) 
    (on_start 
       ($user) 
