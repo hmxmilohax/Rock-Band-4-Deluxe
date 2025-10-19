@@ -1,6 +1,6 @@
 #define RB4DXSONGSPEED_DATA
 ({do
-   {set $dxsettings {array ({force_sym {sprintf 'Song Speed: %d%%' $speedmod}})}}
+   {set $dxsettings {array ({force_sym {sprintf 'Song Speed: %d%%' {get_plugin_var speedmod}}})}}
    {push_back $dxsettings '+'}
    {push_back $dxsettings 'Reset'}
    {push_back $dxsettings '-'}
@@ -15,24 +15,23 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ('+'
-            {set $speedmod {+ $speedmod 5}}
+            {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
             RB4DXSONGSPEED_DATA
          )
          ('Reset'
-            {set $speedmod 100}
+            {set_plugin_var speedmod 100}
             RB4DXSONGSPEED_DATA
          )
          ('-'
-            {unless {< {- $speedmod 5} 100}
-               {set $speedmod {- $speedmod 5}}
+            {unless {< {- {get_plugin_var speedmod} 5} 100}
+               {set_plugin_var speedmod {- {get_plugin_var speedmod} 5}}
             }
             RB4DXSONGSPEED_DATA
          )
 
          })
    (on_cancel 
-      {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {set_song_speed {/ $speedmod 100}}
+      {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
       SET_TRACK_SPEEDS
       {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})
