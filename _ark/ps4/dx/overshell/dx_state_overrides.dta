@@ -10,7 +10,6 @@
       {$this end_somp_player_management_session} 
       {$this clear_selected_emote_category} 
       {$this clear_volume_slider_last_state}
-      {if {== {get_plugin_var speedmod} 0} {set_plugin_var speedmod 100}} ; more fallbacks
    ) 
    (on_start 
       ($user) 

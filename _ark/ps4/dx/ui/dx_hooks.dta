@@ -1,3 +1,5 @@
+{unless {get_plugin_var dx_plugin_initialized} SET_PLUGIN_VARS} ; more fallbacks
+
 ;apply hit window hook, make sure its default and not calibration/precision
 {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
 
