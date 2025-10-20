@@ -254,369 +254,305 @@
       {$this trigger_cancel_effects})
 )
 
-#define RGB_DATA
+#define POSITION_DATA
 (
-   {switch $gemchanged
-      ('Green'
-         {switch $gemcolchanged
-            (R
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgr} ('+' '0' '-')}
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $dxsettings {array ({force_sym {sprintf "Song Title X Position: %.1f" $mtvposx}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (G
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgg} ('+' '0' '-')}
+            (Y
+               {set $dxsettings {array ({force_sym {sprintf "Song Title Y Position: %.1f" $mtvposy}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (B
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolgb} ('+' '0' '-')}
-            )
-         }
-      )
-      ('Red'
-         {switch $gemcolchanged
-            (R
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrr} ('+' '0' '-')}
-            )
-            (G
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrg} ('+' '0' '-')}
-            )
-            (B
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolrb} ('+' '0' '-')}
-            )
-         }
-      )
-      ('Yellow'
-         {switch $gemcolchanged
-            (R
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyr} ('+' '0' '-')}
-            )
-            (G
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyg} ('+' '0' '-')}
-            )
-            (B
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolyb} ('+' '0' '-')}
+            (Z
+               {set $dxsettings {array ({force_sym {sprintf "Song Title Z Position: %.1f" $mtvposz}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
          }
       )
-      ('Blue'
-         {switch $gemcolchanged
-            (R
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbr} ('+' '0' '-')}
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $dxsettings {array ({force_sym {sprintf "Solo X Position: %.1f" $soloposx}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (G
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbg} ('+' '0' '-')}
+            (Y
+               {set $dxsettings {array ({force_sym {sprintf "Solo Y Position: %.1f" $soloposy}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (B
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolbb} ('+' '0' '-')}
+            (Z
+               {set $dxsettings {array ({force_sym {sprintf "Solo Z Position: %.1f" $soloposz}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
          }
       )
-      ('Orange'
-         {switch $gemcolchanged
-            (R
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolor} ('+' '0' '-')}
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $dxsettings {array ({force_sym {sprintf "Score X Position: %.1f" $scoreposx}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (G
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolog} ('+' '0' '-')}
+            (Y
+               {set $dxsettings {array ({force_sym {sprintf "Score Y Position: %.1f" $scoreposy}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
-            (B
-               {$this setup_confirm_actions {sprintf 'Gem Color: %d' $gemcolob} ('+' '0' '-')}
+            (Z
+               {set $dxsettings {array ({force_sym {sprintf "Score Z Position: %.1f" $scoreposz}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $dxsettings {array ({force_sym {sprintf "Countdown X Position: %.1f" $countdownposx}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
+            )
+            (Y
+               {set $dxsettings {array ({force_sym {sprintf "Countdown Y Position: %.1f" $countdownposy}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
+            )
+            (Z
+               {set $dxsettings {array ({force_sym {sprintf "Countdown Z Position: %.1f" $countdownposz}})}}
+               {push_back $dxsettings '+'}
+               {push_back $dxsettings 'Reset'}
+               {push_back $dxsettings '-'}
+               {$this setup_confirm_actions a $dxsettings}
             )
          }
       )
    }
 )
-#define RGB_ADD
+#define POSITION_ADD
 (
-   {switch $gemchanged
-      ('Green'
-         {switch $gemcolchanged
-            (R
-               {unless {> {+ $gemcolgr 1} 255}
-                  {set $gemcolgr {+ $gemcolgr 1}}
-               }
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx {+ $mtvposx 0.5}}
             )
-            (G
-               {unless {> {+ $gemcolgg 1} 255}
-                  {set $gemcolgg {+ $gemcolgg 1}}
-               }
+            (Y
+               {set $mtvposy {+ $mtvposy 0.5}}
             )
-            (B
-               {unless {> {+ $gemcolgb 1} 255}
-                  {set $gemcolgb {+ $gemcolgb 1}}
-               }
+            (Z
+               {set $mtvposz {+ $mtvposz 0.5}}
             )
          }
       )
-      ('Red'
-         {switch $gemcolchanged
-            (R
-               {unless {> {+ $gemcolrr 1} 255}
-                  {set $gemcolrr {+ $gemcolrr 1}}
-               }
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx {+ $soloposx 0.5}}
             )
-            (G
-               {unless {> {+ $gemcolrg 1} 255}
-                  {set $gemcolrg {+ $gemcolrg 1}}
-               }
+            (Y
+               {set $soloposy {+ $soloposy 0.5}}
             )
-            (B
-               {unless {> {+ $gemcolrb 1} 255}
-                  {set $gemcolrb {+ $gemcolrb 1}}
-               }
+            (Z
+               {set $soloposz {+ $soloposz 0.5}}
             )
          }
       )
-      ('Yellow'
-         {switch $gemcolchanged
-            (R
-               {unless {> {+ $gemcolyr 1} 255}
-                  {set $gemcolyr {+ $gemcolyr 1}}
-               }
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx {+ $scoreposx 0.5}}
             )
-            (G
-               {unless {> {+ $gemcolyg 1} 255}
-                  {set $gemcolyg {+ $gemcolyg 1}}
-               }
+            (Y
+               {set $scoreposy {+ $scoreposy 0.5}}
             )
-            (B
-               {unless {> {+ $gemcolyb 1} 255}
-                  {set $gemcolyb {+ $gemcolyb 1}}
-               }
+            (Z
+               {set $scoreposz {+ $scoreposz 0.5}}
             )
          }
       )
-      ('Blue'
-         {switch $gemcolchanged
-            (R
-               {unless {> {+ $gemcolbr 1} 255}
-                  {set $gemcolbr {+ $gemcolbr 1}}
-               }
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx {+ $countdownposx 0.5}}
             )
-            (G
-               {unless {> {+ $gemcolbg 1} 255}
-                  {set $gemcolbg {+ $gemcolbg 1}}
-               }
+            (Y
+               {set $countdownposy {+ $countdownposy 0.5}}
             )
-            (B
-               {unless {> {+ $gemcolbb 1} 255}
-                  {set $gemcolbb {+ $gemcolbb 1}}
-               }
-            )
-         }
-      )
-      ('Orange'
-         {switch $gemcolchanged
-            (R
-               {unless {> {+ $gemcolor 1} 255}
-                  {set $gemcolor {+ $gemcolor 1}}
-               }
-            )
-            (G
-               {unless {> {+ $gemcolgg 1} 255}
-                  {set $gemcolog {+ $gemcolog 1}}
-               }
-            )
-            (B
-               {unless {> {+ $gemcolgb 1} 255}
-                  {set $gemcolob {+ $gemcolob 1}}
-               }
+            (Z
+               {set $countdownposz {+ $countdownposz 0.5}}
             )
          }
       )
    }
 )
-#define RGB_SUB
+#define POSITION_SUB
 (
-   {switch $gemchanged
-      ('Green'
-         {switch $gemcolchanged
-            (R
-               {unless {< {- $gemcolgr 1} 0}
-                  {set $gemcolgr {- $gemcolgr 1}}
-               }
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx {- $mtvposx 0.5}}
             )
-            (G
-               {unless {< {- $gemcolgg 1} 0}
-                  {set $gemcolgg {- $gemcolgg 1}}
-               }
+            (Y
+               {set $mtvposy {- $mtvposy 0.5}}
             )
-            (B
-               {unless {< {- $gemcolgb 1} 0}
-                  {set $gemcolgb {- $gemcolgb 1}}
-               }
+            (Z
+               {set $mtvposz {- $mtvposz 0.5}}
             )
          }
       )
-      ('Red'
-         {switch $gemcolchanged
-            (R
-               {unless {< {<- $gemcolrr 1} 0}
-                  {set $gemcolrr {<- $gemcolrr 1}}
-               }
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx {- $soloposx 0.5}}
             )
-            (G
-               {unless {< {<- $gemcolrg 1} 0}
-                  {set $gemcolrg {<- $gemcolrg 1}}
-               }
+            (Y
+               {set $soloposy {- $soloposy 0.5}}
             )
-            (B
-               {unless {< {<- $gemcolrb 1} 0}
-                  {set $gemcolrb {<- $gemcolrb 1}}
-               }
+            (Z
+               {set $soloposz {- $soloposz 0.5}}
             )
          }
       )
-      ('Yellow'
-         {switch $gemcolchanged
-            (R
-               {unless {< {<- $gemcolyr 1} 0}
-                  {set $gemcolyr {<- $gemcolyr 1}}
-               }
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx {- $scoreposx 0.5}}
             )
-            (G
-               {unless {< {<- $gemcolyg 1} 0}
-                  {set $gemcolyg {<- $gemcolyg 1}}
-               }
+            (Y
+               {set $scoreposy {- $scoreposy 0.5}}
             )
-            (B
-               {unless {< {<- $gemcolyb 1} 0}
-                  {set $gemcolyb {<- $gemcolyb 1}}
-               }
+            (Z
+               {set $scoreposz {- $scoreposz 0.5}}
             )
          }
       )
-      ('Blue'
-         {switch $gemcolchanged
-            (R
-               {unless {< {<- $gemcolbr 1} 0}
-                  {set $gemcolbr {<- $gemcolbr 1}}
-               }
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx {- $countdownposx 0.5}}
             )
-            (G
-               {unless {< {<- $gemcolbg 1} 0}
-                  {set $gemcolbg {<- $gemcolbg 1}}
-               }
+            (Y
+               {set $countdownposy {- $countdownposy 0.5}}
             )
-            (B
-               {unless {< {<- $gemcolbb 1} 0}
-                  {set $gemcolbb {<- $gemcolbb 1}}
-               }
-            )
-         }
-      )
-      ('Orange'
-         {switch $gemcolchanged
-            (R
-               {unless {< {<- $gemcolor 1} 0}
-                  {set $gemcolor {<- $gemcolor 1}}
-               }
-            )
-            (G
-               {unless {< {<- $gemcolgg 1} 0}
-                  {set $gemcolog {<- $gemcolog 1}}
-               }
-            )
-            (B
-               {unless {< {<- $gemcolgb 1} 0}
-                  {set $gemcolob {<- $gemcolob 1}}
-               }
+            (Z
+               {set $countdownposz {- $countdownposz 0.5}}
             )
          }
       )
    }
 )
-#define RGB_RESET
+#define POSITION_RESET
 (
-   {switch $gemchanged
-      ('Green'
-         {switch $gemcolchanged
-            (R
-               {set $gemcolgr 0}
+   {switch $positiontype
+      ("mtv"
+         {switch $positionchanged
+            (X
+               {set $mtvposx 0.0}
             )
-            (G
-               {set $gemcolgg 0}
+            (Y
+               {set $mtvposy 5.5}
             )
-            (B
-               {set $gemcolgb 0}
-            )
-         }
-      )
-      ('Red'
-         {switch $gemcolchanged
-            (R
-               {set $gemcolrr 0}
-            )
-            (G
-               {set $gemcolrg 0}
-            )
-            (B
-               {set $gemcolrb 0}
+            (Z
+               {set $mtvposz 0.0}
             )
          }
       )
-      ('Yellow'
-         {switch $gemcolchanged
-            (R
-               {set $gemcolyr 0}
+      ("solo"
+         {switch $positionchanged
+            (X
+               {set $soloposx -19.5}
             )
-            (G
-               {set $gemcolyg 0}
+            (Y
+               {set $soloposy 50.0}
             )
-            (B
-               {set $gemcolyb 0}
-            )
-         }
-      )
-      ('Blue'
-         {switch $gemcolchanged
-            (R
-               {set $gemcolbr 0}
-            )
-            (G
-               {set $gemcolbg 0}
-            )
-            (B
-               {set $gemcolbb 0}
+            (Z
+               {set $soloposz -9.0}
             )
          }
       )
-      ('Orange'
-         {switch $gemcolchanged
-            (R
-               {set $gemcolor 0}
+      ("score"
+         {switch $positionchanged
+            (X
+               {set $scoreposx 81.5}
             )
-            (G
-               {set $gemcolog 0}
+            (Y
+               {set $scoreposy 22.5}
             )
-            (B
-               {set $gemcolob 0}
+            (Z
+               {set $scoreposz 10.0}
+            )
+         }
+      )
+      ("countdown"
+         {switch $positionchanged
+            (X
+               {set $countdownposx 0.0}
+            )
+            (Y
+               {set $countdownposy 0.0}
+            )
+            (Z
+               {set $countdownposz 0.0}
             )
          }
       )
    }
 )
-(dxState_RGBSlider
-   (view confirm_action) 
+(dxState_PositionSlider
+   (view AUTO_LIST_VIEW) 
    (enter 
-      RGB_DATA
+      POSITION_DATA
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ('+'
-            RGB_ADD
-            RGB_DATA
+            POSITION_ADD
+            POSITION_DATA
          )
-         ('0'
-            RGB_RESET
-            RGB_DATA
+         ('Reset'
+            POSITION_RESET
+            POSITION_DATA
          )
          ('-'
-            RGB_SUB
-            RGB_DATA
+            POSITION_SUB
+            POSITION_DATA
          )
       }
    )
-   (on_cancel 
-      {$this show_state dxState_RGBSelect}
+   (on_cancel
+      {$this show_state dxState_HUDPosition}
       {$this trigger_cancel_effects})
 )

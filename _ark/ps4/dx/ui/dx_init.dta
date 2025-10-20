@@ -89,7 +89,7 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
-;default gem colors (TODO: READ FROM USER DTAS)
+;default gem colors (TODO: IMPLEMENT)
 {set $gemcolgr 33}
 {set $gemcolgg 93}
 {set $gemcolgb 2}
@@ -105,3 +105,23 @@ SET_PAD_BINDING_VAR
 {set $gemcolor 190}
 {set $gemcolog 48}
 {set $gemcolob 5}
+
+;default score position
+{set $scoreposx 81.5}
+{set $scoreposz 10.0}
+{set $scoreposy 22.5}
+
+;default solo position
+{set $soloposx -19.5}
+{set $soloposz -9.0}
+{set $soloposy 50.0}
+
+;default countdown position
+{set $countdownposx 0.0}
+{set $countdownposz 0.0}
+{set $countdownposy 0.0}
+
+;default mtv position
+{set $mtvposx 0.0}
+{set $mtvposz 0.0}
+{set $mtvposy 5.5}

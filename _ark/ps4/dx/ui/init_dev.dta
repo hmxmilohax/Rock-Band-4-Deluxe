@@ -3,6 +3,7 @@
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/plugin"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/visuals"}
+	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/visuals/positions"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/venue"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/gameplay"}
 	{file_mkdir "data:/GoldHEN/RB4DX-1.08/settings/sfx"}
