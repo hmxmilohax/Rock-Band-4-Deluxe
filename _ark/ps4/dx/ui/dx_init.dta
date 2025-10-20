@@ -6,6 +6,7 @@
 {set $track_curve 1}
 {set $hwlength 1}
 {set $notifycolored {file_exists "notifycolored.ini"}}
+{set_plugin_var insong FALSE}
 
 ;gp settings
 {set $instafail {file_exists "settings/gameplay/instafail.dta"}}
