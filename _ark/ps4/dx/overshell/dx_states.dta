@@ -6,30 +6,60 @@
 #define RB4DXMAIN_DATA
 (
    {if_else {$this in_song}
-      {$this setup_confirm_actions a 
-         (
-            'Instrument Options'
-            'Gameplay Settings'
-            'Audio & SFX'
-            'Visual Settings'
-            'Track Settings'
-            ;'Controller Settings'
-            'Extras'
-            ;'Test'
-         )
+      {if_else {$gamemode in_mode practice}
+         {$this setup_confirm_actions a 
+            (
+               'Instrument Options'
+               'Practice Song Speed'
+               'Gameplay Settings'
+               'Audio & SFX'
+               'Visual Settings'
+               'Track Settings'
+               ;'Controller Settings'
+               'Extras'
+               ;'Test'
+            )
+         }
+         {$this setup_confirm_actions a 
+            (
+               'Instrument Options'
+               'Gameplay Settings'
+               'Audio & SFX'
+               'Visual Settings'
+               'Track Settings'
+               ;'Controller Settings'
+               'Extras'
+               ;'Test'
+            )
+         }
       }
-      {$this setup_confirm_actions a 
-         (
-            'Instrument Options'
-            'Song Speed'
-            'Gameplay Settings'
-            'Audio & SFX'
-            'Visual Settings'
-            'Track Settings'
-            'Controller Settings'
-            'Extras'
-            ;'Test'
-         )
+      {if_else {$gamemode in_mode practice}
+         {$this setup_confirm_actions a 
+            (
+               'Instrument Options'
+               'Practice Song Speed'
+               'Gameplay Settings'
+               'Audio & SFX'
+               'Visual Settings'
+               'Track Settings'
+               'Controller Settings'
+               'Extras'
+               ;'Test'
+            )
+         }
+         {$this setup_confirm_actions a 
+            (
+               'Instrument Options'
+               'Song Speed'
+               'Gameplay Settings'
+               'Audio & SFX'
+               'Visual Settings'
+               'Track Settings'
+               'Controller Settings'
+               'Extras'
+               ;'Test'
+            )
+         }
       }
    }
 )
@@ -46,6 +76,9 @@
             {$this trigger_select_effects})
          ('Song Speed'
             {$this show_state dxState_SongSpeed}
+            {$this trigger_select_effects})
+         ('Practice Song Speed'
+            {$this show_state dxState_PracticeSongSpeed}
             {$this trigger_select_effects})
          ('Gameplay Settings'
             {$this show_state dxState_GPSettings}

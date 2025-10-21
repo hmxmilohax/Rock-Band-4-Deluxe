@@ -15,6 +15,9 @@
                (z "z" ""))))))
 (poll
    {set [Transform [$this axis]] [([$this track_com] RBTrack) now_offset]}
+   {if {&& {$gamemode in_mode practice} {!= $pracspeed 100}}
+      #include ../dx/track/practice_speed.dta
+   }
 )
 (enter
    {set [Transform z_scale] $track_curve}
