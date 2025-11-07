@@ -481,18 +481,35 @@
             "Overshell Theme"
          )
       }
-      {$this setup_confirm_actions a 
-         (
-            "Select Venue"
-            {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-            {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            "HUD..."
-            {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            ;"Song Title..."
-            "Overshell Theme"
-            "UI Theme"
-            {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
-         )
+      {if_else {is_emu}
+         {$this setup_confirm_actions a 
+            (
+               "Select Venue"
+               {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+               {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+               "HUD..."
+               {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+               ;"Song Title..."
+               "Overshell Theme"
+               "UI Theme"
+               {if_else $nvidiaoverride "Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF"}
+               {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+            )
+         }
+
+         {$this setup_confirm_actions a 
+            (
+               "Select Venue"
+               {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+               {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+               "HUD..."
+               {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+               ;"Song Title..."
+               "Overshell Theme"
+               "UI Theme"
+               {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+            )
+         }
       }
    }
 )
@@ -504,6 +521,7 @@
       {set $songtitle {dx_file_exists "ps4/ui/game/song_artist_overlay.entity_ps4"}}
       SONGTITLE_CHECK
       {set $menubg {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}}
+      {set $nvidiaoverride {file_exists "settings/visuals/nvidiaoverride.dta"}}
       {set $dx_cur_state vis}
       RB4DXVIS_DATA
    ) 
@@ -543,6 +561,23 @@
          )
          ("HUD..."
             {$this show_state dxState_HUDElements}
+         )
+         (("Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF")
+            {set $nvidiaoverride {! $nvidiaoverride}}
+            {if_else $nvidiaoverride
+               {do
+                  {dx_write_null_file "settings/emu_override.dta"}
+                  {dx_write_null_file "ps4/system/data/shaders/compute/tiledlightsapplication.hlsl_ps4ps4"}
+                  {dx_write_null_file "settings/visuals/nvidiaoverride.dta"}
+               }
+               {do
+                  {dx_file_delete "settings/emu_override.dta"}
+                  {dx_file_delete "ps4/system/data/shaders/compute/tiledlightsapplication.hlsl_ps4ps4"}
+                  {dx_file_delete "settings/visuals/nvidiaoverride.dta"}
+               }
+            }
+            {$this show_state dxState_DelayedEffectWarn}
+            {$this trigger_select_effects}
          )
          (("Performance Mode: ON" "Performance Mode: OFF")
             {set $nohud {! $nohud}}
