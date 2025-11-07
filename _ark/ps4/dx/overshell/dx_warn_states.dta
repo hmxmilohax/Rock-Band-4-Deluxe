@@ -251,14 +251,12 @@
       {if {== $list_data overshell_confirm_yes}
          {switch $cheat_option
             (autoplay
-               {set $autoplayenabled TRUE}
-               {dx_write_null_file "autoplay.ini"}
+               {set_plugin_var autoplay TRUE}
                {dx_file_delete "saving.ini"}
             )
             (drunkmode
-               {set $drunkmode TRUE}
                {set_elem {find $syscfg beatmatcher watcher slop} 1 750}
-               {dx_write_null_file "drunkmode.ini"}
+               {set_plugin_var drunkmode TRUE}
                {dx_file_delete "saving.ini"}
             )
          }
@@ -279,13 +277,11 @@
    (SELECT_MSG
       {switch $cheat_option
          (autoplay
-            {set $autoplayenabled FALSE}
-            {dx_file_delete "autoplay.ini"}
+            {set_plugin_var autoplay FALSE}
          )
          (drunkmode
-            {set $drunkmode FALSE}
+            {set_plugin_var drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {dx_file_delete "drunkmode.ini"}
          )
       }
       {$this show_state dxState_GPSettings}
@@ -294,13 +290,11 @@
    (on_cancel 
       {switch $cheat_option
          (autoplay
-            {set $autoplayenabled FALSE}
-            {dx_file_delete "autoplay.ini"}
+            {set_plugin_var autoplay FALSE}
          )
          (drunkmode
-            {set $drunkmode FALSE}
+            {set_plugin_var drunkmode FALSE}
             {set_elem {find $syscfg beatmatcher watcher slop} 1 100}
-            {dx_file_delete "drunkmode.ini"}
          )
       }
       {$this show_state dxState_GPSettings}

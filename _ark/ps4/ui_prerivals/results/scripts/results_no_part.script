@@ -8,5 +8,5 @@
          (help "The slot value for what Player's data should be used.") 
          (default -1))))
 (exit
-   {dx_file_delete "insong.dta"}
+   {set_plugin_var insong FALSE}
 )

@@ -24,12 +24,12 @@
 
 ;mtv settings
 {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
-{set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
-{set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
-{set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
-{set $yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
-{set $genretxt {file_exists "settings/visuals/genretxt.dta"}}
-{set $origintxt {file_exists "settings/visuals/origintxt.dta"}}
+{set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
+{set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}
+{set_plugin_var albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
+{set_plugin_var yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
+{set_plugin_var genretxt {file_exists "settings/visuals/genretxt.dta"}}
+{set_plugin_var origintxt {file_exists "settings/visuals/origintxt.dta"}}
 
 ;sfx settings
 {set $nomiss {file_exists "settings/sfx/nomiss.dta"}}
@@ -126,6 +126,10 @@ SET_PAD_BINDING_VAR
    {set $scoreposz {dx_read_file_as_float "settings/visuals/positions/scoreposz.dta"}}
 }
 
+{if {|| {!= $scoreposx 81.5} {!= $scoreposz 10.0} {!= $scoreposy 22.5}}
+   {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
+}
+
 ;default solo position
 {set $soloposx -19.5}
 {set $soloposz -9.0}
@@ -142,6 +146,9 @@ SET_PAD_BINDING_VAR
    {set $soloposz {dx_read_file_as_float "settings/visuals/positions/soloposz.dta"}}
 }
 
+{if {|| {!= $soloposx -19.5} {!= $soloposz -9.0} {!= $soloposy 50.0}}
+   {write_solo_file $soloposx $soloposz $soloposy}
+}
 
 ;default countdown position
 {set $countdownposx 0.0}
@@ -159,6 +166,10 @@ SET_PAD_BINDING_VAR
    {set $countdownposz {dx_read_file_as_float "settings/visuals/positions/countdownposz.dta"}}
 }
 
+{if {|| {!= $countdownposx 0.0} {!= $countdownposz 0.0} {!= $countdownposy 0.0}}
+   {write_countdown_file $countdownposx $countdownposz $countdownposy}
+}
+
 ;default mtv position
 {set $mtvposx 0.0}
 {set $mtvposz 0.0}
@@ -174,6 +185,8 @@ SET_PAD_BINDING_VAR
 {if {file_exists "settings/visuals/positions/mtvposz.dta"}
    {set $mtvposz {dx_read_file_as_float "settings/visuals/positions/mtvposz.dta"}}
 }
+
+{write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
 
 {if {is_emu}
    {dx_write_null_file "settings/emu.dta"}

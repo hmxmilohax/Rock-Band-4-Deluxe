@@ -137,7 +137,7 @@
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
-      {if_else {|| {! {file_exists "saving.ini"}} $calibrationmode $precisionmode}
+      {if_else {|| {! {get_plugin_var saving}} $calibrationmode $precisionmode}
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
@@ -161,7 +161,7 @@
       {$this setup_confirm_actions a 
          (
             "Enter Calibration Numbers"
-            {if_else $autoplayenabled "Autoplay: ON" "Autoplay: OFF"}
+            {if_else {get_plugin_var autoplay} "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
             {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
@@ -170,7 +170,7 @@
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
             {if_else $calibrationmode "Calibration Mode: ON" "Calibration Mode: OFF"}
             {if_else $precisionmode "Precision Mode: ON" "Precision Mode: OFF"}
-            {if_else $drunkmode "Drunk Mode: ON" "Drunk Mode: OFF"}
+            {if_else {get_plugin_var drunkmode} "Drunk Mode: ON" "Drunk Mode: OFF"}
          )
       }
    }
@@ -190,7 +190,7 @@
          )
          (("Autoplay: OFF" "Autoplay: ON")
             {set $cheat_option autoplay}
-            {if_else $autoplayenabled
+            {if_else {get_plugin_var autoplay}
                {$this show_state dxState_SavingDisabled}
                {$this show_state dxState_SavingWarn}
             }
@@ -314,7 +314,7 @@
          )
          (("Drunk Mode: ON" "Drunk Mode: OFF")
             {set $cheat_option drunkmode}
-            {if_else $drunkmode
+            {if_else {get_plugin_var drunkmode}
                {$this show_state dxState_SavingDisabled}
                {$this show_state dxState_SavingWarn}
             }
@@ -727,12 +727,12 @@
    (view {$this get_auto_list_view}) 
    (enter
       {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
-      {set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
-      {set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
-      {set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
-      {set $yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
-      {set $genretxt {file_exists "settings/visuals/genretxt.dta"}}
-      {set $origintxt {file_exists "settings/visuals/origintxt.dta"}}
+      {set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
+      {set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}
+      {set_plugin_var albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
+      {set_plugin_var yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
+      {set_plugin_var genretxt {file_exists "settings/visuals/genretxt.dta"}}
+      {set_plugin_var origintxt {file_exists "settings/visuals/origintxt.dta"}}
       SONGTITLE_CHECK
       {set $dx_cur_state mtv}
       RB4DXMTV_DATA
@@ -744,7 +744,7 @@
             {set $songtitle FALSE}
             {dx_file_delete 'settings/visuals/songtitle.dta'}
             ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXMTV_DATA
@@ -755,7 +755,7 @@
             {set $songtitle TRUE}
             {dx_write_null_file "settings/visuals/songtitle.dta"}
             ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
                RB4DXMTV_DATA
@@ -782,12 +782,12 @@
 (
    {$this setup_confirm_actions a 
       (
-         {if_else $noartisttxt "Artist: OFF" "Artist: ON"}
-         {if_else $covertxt "Famous By: ON" "Famous By: OFF"}
-         {if_else $albumtxt "Album: ON" "Album: OFF"}
-         {if_else $yeartxt "Year: ON" "Year: OFF"}
-         {if_else $genretxt "Genre: ON" "Genre: OFF"}
-         {if_else $origintxt "Source: ON" "Source: OFF"}
+         {if_else {get_plugin_var noartisttxt} "Artist: OFF" "Artist: ON"}
+         {if_else {get_plugin_var covertxt} "Famous By: ON" "Famous By: OFF"}
+         {if_else {get_plugin_var albumtxt} "Album: ON" "Album: OFF"}
+         {if_else {get_plugin_var yeartxt} "Year: ON" "Year: OFF"}
+         {if_else {get_plugin_var genretxt} "Genre: ON" "Genre: OFF"}
+         {if_else {get_plugin_var origintxt} "Source: ON" "Source: OFF"}
       )
    }
 )
@@ -795,74 +795,74 @@
    (view {$this get_auto_list_view}) 
    (enter
       {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
-      {set $noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
-      {set $covertxt {file_exists "settings/visuals/covertxt.dta"}}
-      {set $albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
-      {set $yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
-      {set $genretxt {file_exists "settings/visuals/genretxt.dta"}}
-      {set $origintxt {file_exists "settings/visuals/origintxt.dta"}}
+      {set_plugin_var noartisttxt {file_exists "settings/visuals/noartisttxt.dta"}}
+      {set_plugin_var covertxt {file_exists "settings/visuals/covertxt.dta"}}
+      {set_plugin_var albumtxt {file_exists "settings/visuals/albumtxt.dta"}}
+      {set_plugin_var yeartxt {file_exists "settings/visuals/yeartxt.dta"}}
+      {set_plugin_var genretxt {file_exists "settings/visuals/genretxt.dta"}}
+      {set_plugin_var origintxt {file_exists "settings/visuals/origintxt.dta"}}
       RB4DXMTVINFO_DATA
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}} 
       {switch $list_data 
          (('Artist: ON' 'Artist: OFF')
-            {set $noartisttxt {! $noartisttxt}}
-            {if_else $noartisttxt
+            {set_plugin_var noartisttxt {! {get_plugin_var noartisttxt}}}
+            {if_else {get_plugin_var noartisttxt}
                {dx_write_null_file 'settings/visuals/noartisttxt.dta'}
                {dx_file_delete 'settings/visuals/noartisttxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
          (('Famous By: ON' 'Famous By: OFF')
-            {set $covertxt {! $covertxt}}
-            {if_else $covertxt
+            {set_plugin_var covertxt {! {get_plugin_var covertxt}}}
+            {if_else {get_plugin_var covertxt}
                {dx_write_null_file 'settings/visuals/covertxt.dta'}
                {dx_file_delete 'settings/visuals/covertxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
          (('Album: ON' 'Album: OFF')
-            {set $albumtxt {! $albumtxt}}
-            {if_else $albumtxt
+            {set_plugin_var albumtxt {! {get_plugin_var albumtxt}}}
+            {if_else {get_plugin_var albumtxt}
                {dx_write_null_file 'settings/visuals/albumtxt.dta'}
                {dx_file_delete 'settings/visuals/albumtxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
          (('Year: ON' 'Year: OFF')
-            {set $yeartxt {! $yeartxt}}
-            {if_else $yeartxt
+            {set_plugin_var yeartxt {! {get_plugin_var yeartxt}}}
+            {if_else {get_plugin_var yeartxt}
                {dx_write_null_file 'settings/visuals/yeartxt.dta'}
                {dx_file_delete 'settings/visuals/yeartxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
          (('Genre: ON' 'Genre: OFF')
-            {set $genretxt {! $genretxt}}
-            {if_else $genretxt
+            {set_plugin_var genretxt {! {get_plugin_var genretxt}}}
+            {if_else {get_plugin_var genretxt}
                {dx_write_null_file 'settings/visuals/genretxt.dta'}
                {dx_file_delete 'settings/visuals/genretxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
          (('Source: ON' 'Source: OFF')
-            {set $origintxt {! $origintxt}}
-            {if_else $origintxt
+            {set_plugin_var origintxt {! {get_plugin_var origintxt}}}
+            {if_else {get_plugin_var origintxt}
                {dx_write_null_file 'settings/visuals/origintxt.dta'}
                {dx_file_delete 'settings/visuals/origintxt.dta'}
             }
-            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+            {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             RB4DXMTVINFO_DATA
             {$this trigger_select_effects}
          )
@@ -1074,7 +1074,7 @@
    )
    (on_cancel 
       ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
-      {write_mtv_file $mtvposx $mtvposz $mtvposy {|| $albumtxt $genretxt $origintxt} $songtitle}
+      {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposx.dta" {array ($mtvposx)}}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposy.dta" {array ($mtvposy)}}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposz.dta" {array ($mtvposz)}}

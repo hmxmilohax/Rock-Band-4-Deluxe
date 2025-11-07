@@ -90,7 +90,7 @@
                {$this select_difficulty kDifficultyEasy})
          } 
       {$this trigger_select_effects}
-      {dx_write_null_file "insong.dta"}
+      {set_plugin_var insong TRUE}
    ) 
    (list_focus 
       ($obj_name $obj_id) 
@@ -130,11 +130,11 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}} 
       {switch $list_data 
          (overshell_confirm_yes 
-            {dx_file_delete "insong.dta"}
+            {set_plugin_var insong FALSE}
             {$this quit_early}
          )
          (overshell_confirm_no
-            {dx_write_null_file "insong.dta"}
+            {set_plugin_var insong TRUE}
             {if_else {$this in_venue_meta_mode}
                {$this show_state kState_VenueMetaMenu}
                {$this show_in_song_menu}
@@ -144,7 +144,7 @@
       {$this trigger_select_effects}
    ) 
    (on_cancel 
-      {dx_write_null_file "insong.dta"}
+      {set_plugin_var insong TRUE}
       {if_else {$this in_venue_meta_mode}
          {$this show_state kState_VenueMetaMenu}
          {$this show_in_song_menu}
@@ -159,7 +159,7 @@
       {cond 
          ({$this is_quit_token {$component selected_sym}} 
             {do 
-               {dx_file_delete "insong.dta"}
+               {set_plugin_var insong FALSE}
                {$this attempt_quit}
             }
          )
@@ -191,7 +191,7 @@
                )
                ({$this get_current_overshell_quit_token}
                   {do
-                     {dx_file_delete "insong.dta"}
+                     {set_plugin_var insong FALSE}
                      {$this attempt_quit}
                   }
                )
@@ -268,7 +268,7 @@
                )
                ({$this get_current_overshell_quit_token} 
                   {do
-                     {dx_file_delete "insong.dta"}
+                     {set_plugin_var insong FALSE}
                      {$this attempt_quit}
                   }
                )
