@@ -130,6 +130,10 @@ UPDATE_SETTINGS
 {dx_file_mkdir "ps4/track/vocals/tambourine"}
 {dx_file_mkdir "ps4/ui/game/textures"}
 {dx_file_mkdir "ps4/ui/textures/vocals"}
+{dx_file_mkdir "ps4/system"}
+{dx_file_mkdir "ps4/system/data"}
+{dx_file_mkdir "ps4/system/data/shaders"}
+{dx_file_mkdir "ps4/system/data/shaders/compute"}
 
 #define DELETE_INVALID_NOFLAMES_FILES
 (
