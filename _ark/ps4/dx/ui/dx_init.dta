@@ -1,4 +1,5 @@
 #include init_dev.dta
+
 {set $speedmod 100}
 {set $pracspeed 100}
 {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
@@ -92,6 +93,29 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
+;default gem colors (TODO: READ FROM USER DTAS)
+{set $gemcolgr 33}
+{set $gemcolgg 93}
+{set $gemcolgb 2}
+{set $gemcolrr 229}
+{set $gemcolrg 4}
+{set $gemcolrb 8}
+{set $gemcolyr 202}
+{set $gemcolyg 164}
+{set $gemcolyb 8}
+{set $gemcolbr 3}
+{set $gemcolbg 82}
+{set $gemcolbb 139}
+{set $gemcolor 190}
+{set $gemcolog 48}
+{set $gemcolob 5}
+
+;default score position
+{set $scoreposx 81.5}
+{set $scoreposz 10.0}
+{set $scoreposy 22.5}
+
+;load from files if exists
 {if {file_exists "settings/visuals/positions/scoreposx.dta"}
    {set $scoreposx {dx_read_file_as_float "settings/visuals/positions/scoreposx.dta"}}
 }
@@ -102,7 +126,12 @@ SET_PAD_BINDING_VAR
    {set $scoreposz {dx_read_file_as_float "settings/visuals/positions/scoreposz.dta"}}
 }
 
+;default solo position
+{set $soloposx -19.5}
+{set $soloposz -9.0}
+{set $soloposy 50.0}
 
+;load from files if exists
 {if {file_exists "settings/visuals/positions/soloposx.dta"}
    {set $soloposx {dx_read_file_as_float "settings/visuals/positions/soloposx.dta"}}
 }
@@ -113,6 +142,13 @@ SET_PAD_BINDING_VAR
    {set $soloposz {dx_read_file_as_float "settings/visuals/positions/soloposz.dta"}}
 }
 
+
+;default countdown position
+{set $countdownposx 0.0}
+{set $countdownposz 0.0}
+{set $countdownposy 0.0}
+
+;load from files if exists
 {if {file_exists "settings/visuals/positions/countdownposx.dta"}
    {set $countdownposx {dx_read_file_as_float "settings/visuals/positions/countdownposx.dta"}}
 }
@@ -123,6 +159,12 @@ SET_PAD_BINDING_VAR
    {set $countdownposz {dx_read_file_as_float "settings/visuals/positions/countdownposz.dta"}}
 }
 
+;default mtv position
+{set $mtvposx 0.0}
+{set $mtvposz 0.0}
+{set $mtvposy 5.5}
+
+;load from files if exists
 {if {file_exists "settings/visuals/positions/mtvposx.dta"}
    {set $mtvposx {dx_read_file_as_float "settings/visuals/positions/mtvposx.dta"}}
 }
