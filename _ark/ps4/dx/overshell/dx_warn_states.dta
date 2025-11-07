@@ -23,6 +23,38 @@
    )
 )
 
+(dxState_EmuWarn
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "Changing this setting may break RB4DX. If you experience crashing, you will need to delete the 'emu_override' file in 'data/CUSA02084/GoldHEN/RB4DX/settings' Are you sure you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {switch $list_data 
+         (overshell_confirm_yes
+            {dx_write_null_file "settings/emu_override.dta"}
+            {$this show_state dxState_DelayedEffectWarn}
+         )
+         (overshell_confirm_no
+            {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+            {dx_write_null_file "settings/visuals/menubg.dta"}
+            DELETE_INVALID_VENUE_DTAS
+            {dx_write_null_file "settings/venue/none.dta"}
+            {$this show_state dxState_DeluxeSettings}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+      {dx_write_null_file "settings/visuals/menubg.dta"}
+      DELETE_INVALID_VENUE_DTAS
+      {dx_write_null_file "settings/venue/none.dta"}
+      {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
 (dxState_DelayedEffectWarn
    (view confirm_action)
    (enter 

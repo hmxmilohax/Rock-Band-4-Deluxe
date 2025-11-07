@@ -572,7 +572,10 @@
                   {dx_file_delete "settings/visuals/menubg.dta"}
                }
             }
-            {$this show_state dxState_DelayedEffectWarn}
+            {if_else {&& {is_emu} {! {file_exists "settings/emu_override.dta"}}}
+               {$this show_state dxState_EmuWarn}
+               {$this show_state dxState_DelayedEffectWarn}
+            }
             {$this trigger_select_effects}
          )
          ("Overshell Theme"
@@ -918,8 +921,13 @@
          {dx_write_null_file {sprint "settings/venue/" $list_data ".dta"}}
       }
       {unless {== $list_data "Static Background"}
-         {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
-         {$this show_state dxState_DelayedEffectWarn}
+         {if_else {&& {is_emu} {! {file_exists "settings/emu_override.dta"}}}
+            {$this show_state dxState_EmuWarn}
+            {do
+               {dx_file_delete "ps4/ui/shared/fake_bg_ui.bmp_ps4"}
+               {$this show_state dxState_DelayedEffectWarn}
+            }
+         }
       }
       {$this trigger_select_effects}
    )

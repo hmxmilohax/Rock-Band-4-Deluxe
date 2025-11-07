@@ -174,3 +174,18 @@ SET_PAD_BINDING_VAR
 {if {file_exists "settings/visuals/positions/mtvposz.dta"}
    {set $mtvposz {dx_read_file_as_float "settings/visuals/positions/mtvposz.dta"}}
 }
+
+{if {is_emu}
+   {dx_write_null_file "settings/emu.dta"}
+   {unless {file_exists "settings/emu_override.dta"}
+      {dx_write_null_file "settings/visuals/menubg.dta"}
+      {if {dx_file_exists "ps4/ui/background/meta_background1.scene_ps4"}
+         {if_else {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}
+            {dx_file_delete "ps4/ui/background/meta_background1.scene_ps4"}
+            {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+         }
+      }
+      {dx_write_null_file "settings/venue/enabled.dta"}
+      {dx_write_null_file "settings/venue/none.dta"}
+   }
+}
