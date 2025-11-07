@@ -453,17 +453,17 @@
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolrr 1} 0}
-                  {set $gemcolrr {<- $gemcolrr 1}}
+                  {set $gemcolrr {- $gemcolrr 1}}
                }
             )
             (G
                {unless {< {<- $gemcolrg 1} 0}
-                  {set $gemcolrg {<- $gemcolrg 1}}
+                  {set $gemcolrg {- $gemcolrg 1}}
                }
             )
             (B
                {unless {< {<- $gemcolrb 1} 0}
-                  {set $gemcolrb {<- $gemcolrb 1}}
+                  {set $gemcolrb {- $gemcolrb 1}}
                }
             )
          }
@@ -472,17 +472,17 @@
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolyr 1} 0}
-                  {set $gemcolyr {<- $gemcolyr 1}}
+                  {set $gemcolyr {- $gemcolyr 1}}
                }
             )
             (G
                {unless {< {<- $gemcolyg 1} 0}
-                  {set $gemcolyg {<- $gemcolyg 1}}
+                  {set $gemcolyg {- $gemcolyg 1}}
                }
             )
             (B
                {unless {< {<- $gemcolyb 1} 0}
-                  {set $gemcolyb {<- $gemcolyb 1}}
+                  {set $gemcolyb {- $gemcolyb 1}}
                }
             )
          }
@@ -491,17 +491,17 @@
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolbr 1} 0}
-                  {set $gemcolbr {<- $gemcolbr 1}}
+                  {set $gemcolbr {- $gemcolbr 1}}
                }
             )
             (G
                {unless {< {<- $gemcolbg 1} 0}
-                  {set $gemcolbg {<- $gemcolbg 1}}
+                  {set $gemcolbg {- $gemcolbg 1}}
                }
             )
             (B
                {unless {< {<- $gemcolbb 1} 0}
-                  {set $gemcolbb {<- $gemcolbb 1}}
+                  {set $gemcolbb {- $gemcolbb 1}}
                }
             )
          }
@@ -510,17 +510,17 @@
          {switch $gemcolchanged
             (R
                {unless {< {<- $gemcolor 1} 0}
-                  {set $gemcolor {<- $gemcolor 1}}
+                  {set $gemcolor {- $gemcolor 1}}
                }
             )
             (G
                {unless {< {<- $gemcolgg 1} 0}
-                  {set $gemcolog {<- $gemcolog 1}}
+                  {set $gemcolog {- $gemcolog 1}}
                }
             )
             (B
                {unless {< {<- $gemcolgb 1} 0}
-                  {set $gemcolob {<- $gemcolob 1}}
+                  {set $gemcolob {- $gemcolob 1}}
                }
             )
          }
