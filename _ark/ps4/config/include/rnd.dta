@@ -3,6 +3,8 @@
 (multi_threaded_rendering_enabled FALSE)
 (use_lod FALSE)
 (use_gbuffer_vertex_normals FALSE)
+(scene_mask_enabled FALSE)
+(use_tiled_lighting {if_else {file_exists "data:/GoldHEN/RB4DX/ps4/system/data/shaders/compute/tiledlightsapplication.hlsl_ps4ps4"} FALSE TRUE})
 (max_shadow_contrib_buffers 2)
 (xb1 
    (resolutions 1920x1080))
