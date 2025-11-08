@@ -587,7 +587,7 @@
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
-               RB4DXVIS1_DATA
+               RB4DXVIS_DATA
             }
             {$this trigger_select_effects}
          )
