@@ -485,6 +485,7 @@
          {$this setup_confirm_actions a 
             (
                "Select Venue"
+               "Set Resolution"
                {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
                {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                "HUD..."
@@ -530,6 +531,10 @@
       {switch $list_data 
          ("Select Venue"
             {$this show_state dxState_VenueSelector}
+            {$this trigger_select_effects}
+         )
+         ("Set Resolution"
+            {$this show_state dxState_ResolutionSelector}
             {$this trigger_select_effects}
          )
          (("60 FPS Venues: ON" "60 FPS Venues: OFF")
@@ -638,6 +643,76 @@
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Resolution Selector
+(dxState_ResolutionSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            1024x576
+            1280x720
+            1366x768
+            1536x864
+            1600x900
+            1920x1080
+            2048x1152
+            2560x1440
+            3k
+            4k
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_rmdir "settings/resolution"}
+      {dx_file_mkdir "settings/resolution"}
+      {switch $list_data
+         (1024x576
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/1024x576"}
+         )
+         (1280x720
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/1280x720"}
+         )
+         (1366x768
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/1366x768"}
+         )
+         (1536x864
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/1536x864"}
+         )
+         (1600x900
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/1600x900"}
+         )
+         (2048x1152
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/2048x1152"}
+         )
+         (2560x1440
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/2560x1440"}
+         )
+         (3k
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/3264x1836"}
+         )
+         (4k
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/3840x2160"}
+         )
+      }
+      {$this show_state dxState_DelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )

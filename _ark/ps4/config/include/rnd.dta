@@ -6,7 +6,22 @@
 (scene_mask_enabled FALSE)
 (use_tiled_lighting {if_else {file_exists "data:/GoldHEN/RB4DX/ps4/system/data/shaders/compute/tiledlightsapplication.hlsl_ps4ps4"} FALSE TRUE})
 (max_shadow_contrib_buffers 2)
+#define RESSWITCH
+(
+   {cond
+      ({file_exists "settings/resolution/1024x576"} 1024x576)
+      ({file_exists "settings/resolution/1280x720"} 1280x720)
+      ({file_exists "settings/resolution/1366x768"} 1366x768)
+      ({file_exists "settings/resolution/1536x864"} 1536x864)
+      ({file_exists "settings/resolution/1600x900"} 1600x900)
+      ({file_exists "settings/resolution/2048x1152"} 2048x1152)
+      ({file_exists "settings/resolution/2560x1440"} 2560x1440)
+      ({file_exists "settings/resolution/3264x1836"} 3264x1836)
+      ({file_exists "settings/resolution/3840x2160"} 3840x2160)
+      (TRUE 1920x1080)
+   }
+)
 (xb1 
    (resolutions 1920x1080))
 (ps4 
-   (resolutions 1920x1080))
+   (resolutions {if_else {is_emu} {if_else {file_exists "settings/resolution/enabled.dta"} RESSWITCH 1920x1080} 1920x1080}))
