@@ -112,19 +112,19 @@
 
 #define WRITE_GEM_COLOR_DTAS
 (
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenr.dta" {array ({/ $gemcolgr 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greeng.dta" {array ({/ $gemcolgg 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenb.dta" {array ({/ $gemcolgb 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redr.dta" {array ({/ $gemcolrr 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redg.dta" {array ({/ $gemcolrg 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redb.dta" {array ({/ $gemcolrb 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowr.dta" {array ({/ $gemcolyr 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowg.dta" {array ({/ $gemcolyg 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowb.dta" {array ({/ $gemcolyb 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/bluer.dta" {array ({/ $gemcolbr 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueg.dta" {array ({/ $gemcolbg 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueb.dta" {array ({/ $gemcolbb 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ $gemcolor 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ $gemcolog 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ $gemcolob 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenr.dta" {array ({/ {get_plugin_var gemcolgr} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greeng.dta" {array ({/ {get_plugin_var gemcolgg} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenb.dta" {array ({/ {get_plugin_var gemcolgb} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redr.dta" {array ({/ {get_plugin_var gemcolrr} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redg.dta" {array ({/ {get_plugin_var gemcolrg} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redb.dta" {array ({/ {get_plugin_var gemcolrb} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowr.dta" {array ({/ {get_plugin_var gemcolyr} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowg.dta" {array ({/ {get_plugin_var gemcolyg} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowb.dta" {array ({/ {get_plugin_var gemcolyb} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/bluer.dta" {array ({/ {get_plugin_var gemcolbr} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueg.dta" {array ({/ {get_plugin_var gemcolbg} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueb.dta" {array ({/ {get_plugin_var gemcolbb} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ {get_plugin_var gemcolor} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ {get_plugin_var gemcolog} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ {get_plugin_var gemcolob} 255})}}
 )

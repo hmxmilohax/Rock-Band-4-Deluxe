@@ -92,22 +92,69 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
+{set_plugin_var gemcolors {file_exists "settings/theme/gem/colors/enabled.dta"}}
+
 ;default gem colors (TODO: READ FROM USER DTAS)
-{set $gemcolgr 33}
-{set $gemcolgg 93}
-{set $gemcolgb 2}
-{set $gemcolrr 229}
-{set $gemcolrg 4}
-{set $gemcolrb 8}
-{set $gemcolyr 202}
-{set $gemcolyg 164}
-{set $gemcolyb 8}
-{set $gemcolbr 3}
-{set $gemcolbg 82}
-{set $gemcolbb 139}
-{set $gemcolor 190}
-{set $gemcolog 48}
-{set $gemcolob 5}
+{set_plugin_var gemcolgr 33}
+{if {file_exists "settings/theme/gem/colors/greenr.dta"}
+   {set_plugin_var gemcolgr {int {* {dx_read_file_as_float "settings/theme/gem/colors/greenr.dta"} 255}}}
+}
+{set_plugin_var gemcolgg 93}
+{if {file_exists "settings/theme/gem/colors/greeng.dta"}
+   {set_plugin_var gemcolgg {int {* {dx_read_file_as_float "settings/theme/gem/colors/greeng.dta"} 255}}}
+}
+{set_plugin_var gemcolgb 2}
+{if {file_exists "settings/theme/gem/colors/greenb.dta"}
+   {set_plugin_var gemcolgb {int {* {dx_read_file_as_float "settings/theme/gem/colors/greenb.dta"} 255}}}
+}
+{set_plugin_var gemcolrr 229}
+{if {file_exists "settings/theme/gem/colors/redr.dta"}
+   {set_plugin_var gemcolrr {int {* {dx_read_file_as_float "settings/theme/gem/colors/redr.dta"} 255}}}
+}
+{set_plugin_var gemcolrg 4}
+{if {file_exists "settings/theme/gem/colors/redg.dta"}
+   {set_plugin_var gemcolrg {int {* {dx_read_file_as_float "settings/theme/gem/colors/redg.dta"} 255}}}
+}
+{set_plugin_var gemcolrb 8}
+{if {file_exists "settings/theme/gem/colors/redb.dta"}
+   {set_plugin_var gemcolrb {int {* {dx_read_file_as_float "settings/theme/gem/colors/redb.dta"} 255}}}
+}
+{set_plugin_var gemcolyr 202}
+{if {file_exists "settings/theme/gem/colors/yellowr.dta"}
+   {set_plugin_var gemcolyr {int {* {dx_read_file_as_float "settings/theme/gem/colors/yellowr.dta"} 255}}}
+}
+{set_plugin_var gemcolyg 164}
+{if {file_exists "settings/theme/gem/colors/yellowg.dta"}
+   {set_plugin_var gemcolyg {int {* {dx_read_file_as_float "settings/theme/gem/colors/yellowg.dta"} 255}}}
+}
+{set_plugin_var gemcolyb 8}
+{if {file_exists "settings/theme/gem/colors/yellowb.dta"}
+   {set_plugin_var gemcolyb {int {* {dx_read_file_as_float "settings/theme/gem/colors/yellowb.dta"} 255}}}
+}
+{set_plugin_var gemcolbr 3}
+{if {file_exists "settings/theme/gem/colors/bluer.dta"}
+   {set_plugin_var gemcolbr {int {* {dx_read_file_as_float "settings/theme/gem/colors/bluer.dta"} 255}}}
+}
+{set_plugin_var gemcolbg 82}
+{if {file_exists "settings/theme/gem/colors/blueg.dta"}
+   {set_plugin_var gemcolbg {int {* {dx_read_file_as_float "settings/theme/gem/colors/blueg.dta"} 255}}}
+}
+{set_plugin_var gemcolbb 139}
+{if {file_exists "settings/theme/gem/colors/blueb.dta"}
+   {set_plugin_var gemcolbb {int {* {dx_read_file_as_float "settings/theme/gem/colors/blueb.dta"} 255}}}
+}
+{set_plugin_var gemcolor 190}
+{if {file_exists "settings/theme/gem/colors/oranger.dta"}
+   {set_plugin_var gemcolor {int {* {dx_read_file_as_float "settings/theme/gem/colors/oranger.dta"} 255}}}
+}
+{set_plugin_var gemcolog 48}
+{if {file_exists "settings/theme/gem/colors/orangeg.dta"}
+   {set_plugin_var gemcolog {int {* {dx_read_file_as_float "settings/theme/gem/colors/orangeg.dta"} 255}}}
+}
+{set_plugin_var gemcolob 5}
+{if {file_exists "settings/theme/gem/colors/orangeb.dta"}
+   {set_plugin_var gemcolob {int {* {dx_read_file_as_float "settings/theme/gem/colors/orangeb.dta"} 255}}}
+}
 
 ;default score position
 {set $scoreposx 81.5}

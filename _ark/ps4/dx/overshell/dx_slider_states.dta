@@ -262,65 +262,65 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgr}} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgg}} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" $gemcolgb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgb}} ("+" "0" "-")}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrr}} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrg}} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" $gemcolrb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrb}} ("+" "0" "-")}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyr}} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyg}} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" $gemcolyb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyb}} ("+" "0" "-")}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbr} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbr}} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbg} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbg}} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" $gemcolbb} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbb}} ("+" "0" "-")}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolor} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolor}} ("+" "0" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolog} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolog}} ("+" "0" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" $gemcolob} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolob}} ("+" "0" "-")}
             )
          }
       )
@@ -332,18 +332,18 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {unless {> {+ $gemcolgr 1} 255}
-                  {set $gemcolgr {+ $gemcolgr 1}}
+               {unless {> {+ {get_plugin_var gemcolgr} 1} 255}
+                  {set_plugin_var gemcolgr {+ {get_plugin_var gemcolgr} 1}}
                }
             )
             (G
-               {unless {> {+ $gemcolgg 1} 255}
-                  {set $gemcolgg {+ $gemcolgg 1}}
+               {unless {> {+ {get_plugin_var gemcolgg} 1} 255}
+                  {set_plugin_var gemcolgg {+ {get_plugin_var gemcolgg} 1}}
                }
             )
             (B
-               {unless {> {+ $gemcolgb 1} 255}
-                  {set $gemcolgb {+ $gemcolgb 1}}
+               {unless {> {+ {get_plugin_var gemcolgb} 1} 255}
+                  {set_plugin_var gemcolgb {+ {get_plugin_var gemcolgb} 1}}
                }
             )
          }
@@ -351,18 +351,18 @@
       ("Red"
          {switch $gemcolchanged
             (R
-               {unless {> {+ $gemcolrr 1} 255}
-                  {set $gemcolrr {+ $gemcolrr 1}}
+               {unless {> {+ {get_plugin_var gemcolrr} 1} 255}
+                  {set_plugin_var gemcolrr {+ {get_plugin_var gemcolrr} 1}}
                }
             )
             (G
-               {unless {> {+ $gemcolrg 1} 255}
-                  {set $gemcolrg {+ $gemcolrg 1}}
+               {unless {> {+ {get_plugin_var gemcolrg} 1} 255}
+                  {set_plugin_var gemcolrg {+ {get_plugin_var gemcolrg} 1}}
                }
             )
             (B
-               {unless {> {+ $gemcolrb 1} 255}
-                  {set $gemcolrb {+ $gemcolrb 1}}
+               {unless {> {+ {get_plugin_var gemcolrb} 1} 255}
+                  {set_plugin_var gemcolrb {+ {get_plugin_var gemcolrb} 1}}
                }
             )
          }
@@ -370,18 +370,18 @@
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {unless {> {+ $gemcolyr 1} 255}
-                  {set $gemcolyr {+ $gemcolyr 1}}
+               {unless {> {+ {get_plugin_var gemcolyr} 1} 255}
+                  {set_plugin_var gemcolyr {+ {get_plugin_var gemcolyr} 1}}
                }
             )
             (G
-               {unless {> {+ $gemcolyg 1} 255}
-                  {set $gemcolyg {+ $gemcolyg 1}}
+               {unless {> {+ {get_plugin_var gemcolyg} 1} 255}
+                  {set_plugin_var gemcolyg {+ {get_plugin_var gemcolyg} 1}}
                }
             )
             (B
-               {unless {> {+ $gemcolyb 1} 255}
-                  {set $gemcolyb {+ $gemcolyb 1}}
+               {unless {> {+ {get_plugin_var gemcolyb} 1} 255}
+                  {set_plugin_var gemcolyb {+ {get_plugin_var gemcolyb} 1}}
                }
             )
          }
@@ -389,18 +389,18 @@
       ("Blue"
          {switch $gemcolchanged
             (R
-               {unless {> {+ $gemcolbr 1} 255}
-                  {set $gemcolbr {+ $gemcolbr 1}}
+               {unless {> {+ {get_plugin_var gemcolbr} 1} 255}
+                  {set_plugin_var gemcolbr {+ {get_plugin_var gemcolbr} 1}}
                }
             )
             (G
-               {unless {> {+ $gemcolbg 1} 255}
-                  {set $gemcolbg {+ $gemcolbg 1}}
+               {unless {> {+ {get_plugin_var gemcolbg} 1} 255}
+                  {set_plugin_var gemcolbg {+ {get_plugin_var gemcolbg} 1}}
                }
             )
             (B
-               {unless {> {+ $gemcolbb 1} 255}
-                  {set $gemcolbb {+ $gemcolbb 1}}
+               {unless {> {+ {get_plugin_var gemcolbb} 1} 255}
+                  {set_plugin_var gemcolbb {+ {get_plugin_var gemcolbb} 1}}
                }
             )
          }
@@ -408,18 +408,18 @@
       ("Orange"
          {switch $gemcolchanged
             (R
-               {unless {> {+ $gemcolor 1} 255}
-                  {set $gemcolor {+ $gemcolor 1}}
+               {unless {> {+ {get_plugin_var gemcolor} 1} 255}
+                  {set_plugin_var gemcolor {+ {get_plugin_var gemcolor} 1}}
                }
             )
             (G
-               {unless {> {+ $gemcolgg 1} 255}
-                  {set $gemcolog {+ $gemcolog 1}}
+               {unless {> {+ {get_plugin_var gemcolog} 1} 255}
+                  {set_plugin_var gemcolog {+ {get_plugin_var gemcolog} 1}}
                }
             )
             (B
-               {unless {> {+ $gemcolgb 1} 255}
-                  {set $gemcolob {+ $gemcolob 1}}
+               {unless {> {+ {get_plugin_var gemcolob} 1} 255}
+                  {set_plugin_var gemcolob {+ {get_plugin_var gemcolob} 1}}
                }
             )
          }
@@ -432,18 +432,18 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {unless {< {- $gemcolgr 1} 0}
-                  {set $gemcolgr {- $gemcolgr 1}}
+               {unless {< {- {get_plugin_var gemcolgr} 1} 0}
+                  {set_plugin_var gemcolgr {- {get_plugin_var gemcolgr} 1}}
                }
             )
             (G
-               {unless {< {- $gemcolgg 1} 0}
-                  {set $gemcolgg {- $gemcolgg 1}}
+               {unless {< {- {get_plugin_var gemcolgg} 1} 0}
+                  {set_plugin_var gemcolgg {- {get_plugin_var gemcolgg} 1}}
                }
             )
             (B
-               {unless {< {- $gemcolgb 1} 0}
-                  {set $gemcolgb {- $gemcolgb 1}}
+               {unless {< {- {get_plugin_var gemcolgb} 1} 0}
+                  {set_plugin_var gemcolgb {- {get_plugin_var gemcolgb} 1}}
                }
             )
          }
@@ -451,18 +451,18 @@
       ("Red"
          {switch $gemcolchanged
             (R
-               {unless {< {<- $gemcolrr 1} 0}
-                  {set $gemcolrr {- $gemcolrr 1}}
+               {unless {< {<- {get_plugin_var gemcolrr} 1} 0}
+                  {set_plugin_var gemcolrr {- {get_plugin_var gemcolrr} 1}}
                }
             )
             (G
-               {unless {< {<- $gemcolrg 1} 0}
-                  {set $gemcolrg {- $gemcolrg 1}}
+               {unless {< {<- {get_plugin_var gemcolrg} 1} 0}
+                  {set_plugin_var gemcolrg {- {get_plugin_var gemcolrg} 1}}
                }
             )
             (B
-               {unless {< {<- $gemcolrb 1} 0}
-                  {set $gemcolrb {- $gemcolrb 1}}
+               {unless {< {<- {get_plugin_var gemcolrb} 1} 0}
+                  {set_plugin_var gemcolrb {- {get_plugin_var gemcolrb} 1}}
                }
             )
          }
@@ -470,18 +470,18 @@
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {unless {< {<- $gemcolyr 1} 0}
-                  {set $gemcolyr {- $gemcolyr 1}}
+               {unless {< {<- {get_plugin_var gemcolyr} 1} 0}
+                  {set_plugin_var gemcolyr {- {get_plugin_var gemcolyr} 1}}
                }
             )
             (G
-               {unless {< {<- $gemcolyg 1} 0}
-                  {set $gemcolyg {- $gemcolyg 1}}
+               {unless {< {<- {get_plugin_var gemcolyg} 1} 0}
+                  {set_plugin_var gemcolyg {- {get_plugin_var gemcolyg} 1}}
                }
             )
             (B
-               {unless {< {<- $gemcolyb 1} 0}
-                  {set $gemcolyb {- $gemcolyb 1}}
+               {unless {< {<- {get_plugin_var gemcolyb} 1} 0}
+                  {set_plugin_var gemcolyb {- {get_plugin_var gemcolyb} 1}}
                }
             )
          }
@@ -489,18 +489,18 @@
       ("Blue"
          {switch $gemcolchanged
             (R
-               {unless {< {<- $gemcolbr 1} 0}
-                  {set $gemcolbr {- $gemcolbr 1}}
+               {unless {< {<- {get_plugin_var gemcolbr} 1} 0}
+                  {set_plugin_var gemcolbr {- {get_plugin_var gemcolbr} 1}}
                }
             )
             (G
-               {unless {< {<- $gemcolbg 1} 0}
-                  {set $gemcolbg {- $gemcolbg 1}}
+               {unless {< {<- {get_plugin_var gemcolbg} 1} 0}
+                  {set_plugin_var gemcolbg {- {get_plugin_var gemcolbg} 1}}
                }
             )
             (B
-               {unless {< {<- $gemcolbb 1} 0}
-                  {set $gemcolbb {- $gemcolbb 1}}
+               {unless {< {<- {get_plugin_var gemcolbb} 1} 0}
+                  {set_plugin_var gemcolbb {- {get_plugin_var gemcolbb} 1}}
                }
             )
          }
@@ -508,18 +508,18 @@
       ("Orange"
          {switch $gemcolchanged
             (R
-               {unless {< {<- $gemcolor 1} 0}
-                  {set $gemcolor {- $gemcolor 1}}
+               {unless {< {<- {get_plugin_var gemcolor} 1} 0}
+                  {set_plugin_var gemcolor {- {get_plugin_var gemcolor} 1}}
                }
             )
             (G
-               {unless {< {<- $gemcolgg 1} 0}
-                  {set $gemcolog {- $gemcolog 1}}
+               {unless {< {<- {get_plugin_var gemcolog} 1} 0}
+                  {set_plugin_var gemcolog {- {get_plugin_var gemcolog} 1}}
                }
             )
             (B
-               {unless {< {<- $gemcolgb 1} 0}
-                  {set $gemcolob {- $gemcolob 1}}
+               {unless {< {<- {get_plugin_var gemcolob} 1} 0}
+                  {set_plugin_var gemcolob {- {get_plugin_var gemcolob} 1}}
                }
             )
          }
@@ -532,65 +532,65 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {set $gemcolgr 0}
+               {set_plugin_var gemcolgr 0}
             )
             (G
-               {set $gemcolgg 0}
+               {set_plugin_var gemcolgg 0}
             )
             (B
-               {set $gemcolgb 0}
+               {set_plugin_var gemcolgb 0}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {set $gemcolrr 0}
+               {set_plugin_var gemcolrr 0}
             )
             (G
-               {set $gemcolrg 0}
+               {set_plugin_var gemcolrg 0}
             )
             (B
-               {set $gemcolrb 0}
+               {set_plugin_var gemcolrb 0}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {set $gemcolyr 0}
+               {set_plugin_var gemcolyr 0}
             )
             (G
-               {set $gemcolyg 0}
+               {set_plugin_var gemcolyg 0}
             )
             (B
-               {set $gemcolyb 0}
+               {set_plugin_var gemcolyb 0}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {set $gemcolbr 0}
+               {set_plugin_var gemcolbr 0}
             )
             (G
-               {set $gemcolbg 0}
+               {set_plugin_var gemcolbg 0}
             )
             (B
-               {set $gemcolbb 0}
+               {set_plugin_var gemcolbb 0}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {set $gemcolor 0}
+               {set_plugin_var gemcolor 0}
             )
             (G
-               {set $gemcolog 0}
+               {set_plugin_var gemcolog 0}
             )
             (B
-               {set $gemcolob 0}
+               {set_plugin_var gemcolob 0}
             )
          }
       )
