@@ -1,30 +1,29 @@
 (dxState_SongSpeed
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("+"
-            {set $speedmod {+ $speedmod 5}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
          )
          ("Reset"
-            {set $speedmod 100}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {set_plugin_var speedmod 100}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
          )
          ("-"
-            {unless {< {- $speedmod 5} 100}
-               {set $speedmod {- $speedmod 5}}
+            {unless {< {- {get_plugin_var speedmod} 5} 100}
+               {set_plugin_var speedmod {- {get_plugin_var speedmod} 5}}
             }
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" $speedmod} ("+" "Reset" "-")}
+            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
          )
 
          })
    (on_cancel 
-      {set_elem {find $syscfg beatmatcher watcher slop} 1 $speedmod}
-      {write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
+      {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
       SET_TRACK_SPEEDS
       {$this show_state dxState_DeluxeSettings}
       {$this trigger_cancel_effects})

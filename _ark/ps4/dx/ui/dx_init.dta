@@ -1,8 +1,7 @@
 #include init_dev.dta
 
-{set $speedmod 100}
+{set_plugin_var speedmod 100}
 {set $pracspeed 100}
-{write_file "data:/GoldHEN/RB4DX/speedmod.ini" {array ({/ $speedmod 100})}}
 {set_practice_speed {/ $pracspeed 100}}
 {set $dx_initialized TRUE}
 {set $calibrationmode FALSE}
