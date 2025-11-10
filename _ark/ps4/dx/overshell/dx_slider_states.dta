@@ -223,7 +223,7 @@
             }
          )
          ("+"
-            {unless {< {- $hwlength 0.05} 0.56}
+            {unless {< {- $hwlength 0.05} $posint6}
                {set $hwlength {- $hwlength 0.05}}
             }
             {if_else {< $hwlength 0.74}
@@ -686,52 +686,52 @@
       ("mtv"
          {switch $positionchanged
             (X
-               {set $mtvposx {+ $mtvposx 0.5}}
+               {set $mtvposx {+ $mtvposx $posint}}
             )
             (Y
-               {set $mtvposy {+ $mtvposy 0.5}}
+               {set $mtvposy {+ $mtvposy $posint}}
             )
             (Z
-               {set $mtvposz {+ $mtvposz 0.5}}
+               {set $mtvposz {+ $mtvposz $posint}}
             )
          }
       )
       ("solo"
          {switch $positionchanged
             (X
-               {set $soloposx {+ $soloposx 0.5}}
+               {set $soloposx {+ $soloposx $posint}}
             )
             (Y
-               {set $soloposy {+ $soloposy 0.5}}
+               {set $soloposy {+ $soloposy $posint}}
             )
             (Z
-               {set $soloposz {+ $soloposz 0.5}}
+               {set $soloposz {+ $soloposz $posint}}
             )
          }
       )
       ("score"
          {switch $positionchanged
             (X
-               {set $scoreposx {+ $scoreposx 0.5}}
+               {set $scoreposx {+ $scoreposx $posint}}
             )
             (Y
-               {set $scoreposy {+ $scoreposy 0.5}}
+               {set $scoreposy {+ $scoreposy $posint}}
             )
             (Z
-               {set $scoreposz {+ $scoreposz 0.5}}
+               {set $scoreposz {+ $scoreposz $posint}}
             )
          }
       )
       ("countdown"
          {switch $positionchanged
             (X
-               {set $countdownposx {+ $countdownposx 0.5}}
+               {set $countdownposx {+ $countdownposx $posint}}
             )
             (Y
-               {set $countdownposy {+ $countdownposy 0.5}}
+               {set $countdownposy {+ $countdownposy $posint}}
             )
             (Z
-               {set $countdownposz {+ $countdownposz 0.5}}
+               {set $countdownposz {+ $countdownposz $posint}}
             )
          }
       )
@@ -743,52 +743,52 @@
       ("mtv"
          {switch $positionchanged
             (X
-               {set $mtvposx {- $mtvposx 0.5}}
+               {set $mtvposx {- $mtvposx $posint}}
             )
             (Y
-               {set $mtvposy {- $mtvposy 0.5}}
+               {set $mtvposy {- $mtvposy $posint}}
             )
             (Z
-               {set $mtvposz {- $mtvposz 0.5}}
+               {set $mtvposz {- $mtvposz $posint}}
             )
          }
       )
       ("solo"
          {switch $positionchanged
             (X
-               {set $soloposx {- $soloposx 0.5}}
+               {set $soloposx {- $soloposx $posint}}
             )
             (Y
-               {set $soloposy {- $soloposy 0.5}}
+               {set $soloposy {- $soloposy $posint}}
             )
             (Z
-               {set $soloposz {- $soloposz 0.5}}
+               {set $soloposz {- $soloposz $posint}}
             )
          }
       )
       ("score"
          {switch $positionchanged
             (X
-               {set $scoreposx {- $scoreposx 0.5}}
+               {set $scoreposx {- $scoreposx $posint}}
             )
             (Y
-               {set $scoreposy {- $scoreposy 0.5}}
+               {set $scoreposy {- $scoreposy $posint}}
             )
             (Z
-               {set $scoreposz {- $scoreposz 0.5}}
+               {set $scoreposz {- $scoreposz $posint}}
             )
          }
       )
       ("countdown"
          {switch $positionchanged
             (X
-               {set $countdownposx {- $countdownposx 0.5}}
+               {set $countdownposx {- $countdownposx $posint}}
             )
             (Y
-               {set $countdownposy {- $countdownposy 0.5}}
+               {set $countdownposy {- $countdownposy $posint}}
             )
             (Z
-               {set $countdownposz {- $countdownposz 0.5}}
+               {set $countdownposz {- $countdownposz $posint}}
             )
          }
       )
@@ -870,6 +870,80 @@
          ("-"
             POSITION_SUB
             POSITION_DATA
+         )
+      }
+   )
+   (on_cancel
+      {if_else {== $positiontype "mtv"}
+         {$this show_state dxState_SongTitlePosition}
+         {$this show_state dxState_HUDPosition}
+      }
+      {$this trigger_cancel_effects})
+)
+
+(dxState_PositionIntervalSlider
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" "Reset" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            {switch $posint
+               (50
+                  {set $posint 100}
+               )
+               (25
+                  {set $posint 50}
+               )
+               (10
+                  {set $posint 25}
+               )
+               (5
+                  {set $posint 10}
+               )
+               (1
+                  {set $posint 5}
+               )
+               (0.5
+                  {set $posint 1}
+               )
+               (0.25
+                  {set $posint 0.5}
+               )
+            }
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" "Reset" "-")}
+         )
+         ("Reset"
+            {set $posint 0.5}
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" "Reset" "-")}
+         )
+         ("-"
+            {switch $posint
+               (100
+                  {set $posint 50}
+               )
+               (50
+                  {set $posint 25}
+               )
+               (25
+                  {set $posint 10}
+               )
+               (10
+                  {set $posint 5}
+               )
+               (5
+                  {set $posint 1}
+               )
+               (1
+                  {set $posint 0.5}
+               )
+               (0.5
+                  {set $posint 0.25}
+               )
+            }
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" "Reset" "-")}
          )
       }
    )

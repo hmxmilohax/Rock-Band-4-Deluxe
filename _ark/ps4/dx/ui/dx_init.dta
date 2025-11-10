@@ -156,6 +156,9 @@ SET_PAD_BINDING_VAR
    {set_plugin_var gemcolob {int {* {dx_read_file_as_float "settings/theme/gem/colors/orangeb.dta"} 255}}}
 }
 
+;default position adjustment interval
+{set $posint 0.5}
+
 ;default score position
 {set $scoreposx 81.5}
 {set $scoreposz 10.0}

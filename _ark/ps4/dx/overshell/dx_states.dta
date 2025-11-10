@@ -1087,12 +1087,17 @@
 (dxState_HUDPosition
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("X" "Y" "Z")}
+      {$this setup_confirm_actions a ("X" "Y" "Z" "Interval")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {set $positionchanged $list_data}
-      {$this show_state dxState_PositionSlider}
+      {if_else {== $list_data "Interval"}
+         {$this show_state dxState_PositionIntervalSlider}
+         {do
+            {set $positionchanged $list_data}
+            {$this show_state dxState_PositionSlider}
+         }
+      }
       {$this trigger_select_effects}
    )
    (on_cancel 
@@ -1131,7 +1136,7 @@
 (dxState_SongTitlePosition
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("X" "Y" "Z" "Presets")}
+      {$this setup_confirm_actions a ("X" "Y" "Z" "Interval" "Presets")}
       {set $positiontype "mtv"}
    )
    (SELECT_MSG
@@ -1143,6 +1148,9 @@
          )
          ("Presets"
             {$this show_state dxState_SongTitlePositionPreset}
+         )
+         ("Interval"
+            {$this show_state dxState_PositionIntervalSlider}
          )
       }
       {$this trigger_select_effects}
