@@ -534,6 +534,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {dx_file_mkdir "ps4/ui/textures/help_bar"}
       {dx_file_mkdir "ps4/ui/textures/voting"}
+      {dx_file_mkdir "ps4/ui/practice"}
       {dx_file_delete "ps4/ui/textures/help_bar/options_prompt_new_ui.bmp_ps4"}
       {dx_file_delete "ps4/ui/textures/help_bar/ps_green_vocals_prompt_new_ui.bmp_ps4"}
       {dx_file_delete "ps4/ui/textures/help_bar/ps_green_combo_prompt_new_ui.bmp_ps4"}
@@ -556,6 +557,7 @@
       {dx_file_delete "ps4/ui/textures/voting/ps_blue_prompt_ui.png_ps4"}
       {dx_file_delete "ps4/ui/textures/voting/ps_orange_prompt_ui.png_ps4"}
       {dx_file_delete "ps4/ui/game/textures/options_prompt_new_small_ui.bmp_ps4"}
+      {dx_file_delete "ps4/ui/practice/practice_options_ui.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/options/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/options_prompt_new_ui.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/cross/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_green_vocals_prompt_new_ui.bmp_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/cross_combo/" $list_data ".png_ps4"} "ps4/ui/textures/help_bar/ps_green_combo_prompt_new_ui.bmp_ps4"}
@@ -578,6 +580,7 @@
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/blue_voting/" $list_data ".png_ps4"} "ps4/ui/textures/voting/ps_blue_prompt_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/orange_voting/" $list_data ".png_ps4"} "ps4/ui/textures/voting/ps_orange_prompt_ui.png_ps4"}
       {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/options_small/" $list_data ".png_ps4"} "ps4/ui/game/textures/options_prompt_new_small_ui.bmp_ps4"}
+      {dx_file_copy {sprint "ps4/dx/custom_textures/button prompts/options_practice/" $list_data ".png_ps4"} "ps4/ui/practice/practice_options_ui.bmp_ps4"}
       {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )
