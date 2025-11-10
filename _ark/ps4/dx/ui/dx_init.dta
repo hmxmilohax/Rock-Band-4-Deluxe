@@ -92,9 +92,13 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
+;default rgb adjustment interval
+{set $rgbint 1}
+
+;set gem colors enabled
 {set_plugin_var gemcolors {file_exists "settings/theme/gem/colors/enabled.dta"}}
 
-;default gem colors (TODO: READ FROM USER DTAS)
+;default gem colors
 {set_plugin_var gemcolgr 33}
 {if {file_exists "settings/theme/gem/colors/greenr.dta"}
    {set_plugin_var gemcolgr {int {* {dx_read_file_as_float "settings/theme/gem/colors/greenr.dta"} 255}}}

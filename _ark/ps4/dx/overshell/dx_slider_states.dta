@@ -332,18 +332,18 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {unless {> {+ {get_plugin_var gemcolgr} 1} 255}
-                  {set_plugin_var gemcolgr {+ {get_plugin_var gemcolgr} 1}}
+               {unless {> {+ {get_plugin_var gemcolgr} $rgbint} 255}
+                  {set_plugin_var gemcolgr {+ {get_plugin_var gemcolgr} $rgbint}}
                }
             )
             (G
-               {unless {> {+ {get_plugin_var gemcolgg} 1} 255}
-                  {set_plugin_var gemcolgg {+ {get_plugin_var gemcolgg} 1}}
+               {unless {> {+ {get_plugin_var gemcolgg} $rgbint} 255}
+                  {set_plugin_var gemcolgg {+ {get_plugin_var gemcolgg} $rgbint}}
                }
             )
             (B
-               {unless {> {+ {get_plugin_var gemcolgb} 1} 255}
-                  {set_plugin_var gemcolgb {+ {get_plugin_var gemcolgb} 1}}
+               {unless {> {+ {get_plugin_var gemcolgb} $rgbint} 255}
+                  {set_plugin_var gemcolgb {+ {get_plugin_var gemcolgb} $rgbint}}
                }
             )
          }
@@ -351,18 +351,18 @@
       ("Red"
          {switch $gemcolchanged
             (R
-               {unless {> {+ {get_plugin_var gemcolrr} 1} 255}
-                  {set_plugin_var gemcolrr {+ {get_plugin_var gemcolrr} 1}}
+               {unless {> {+ {get_plugin_var gemcolrr} $rgbint} 255}
+                  {set_plugin_var gemcolrr {+ {get_plugin_var gemcolrr} $rgbint}}
                }
             )
             (G
-               {unless {> {+ {get_plugin_var gemcolrg} 1} 255}
-                  {set_plugin_var gemcolrg {+ {get_plugin_var gemcolrg} 1}}
+               {unless {> {+ {get_plugin_var gemcolrg} $rgbint} 255}
+                  {set_plugin_var gemcolrg {+ {get_plugin_var gemcolrg} $rgbint}}
                }
             )
             (B
-               {unless {> {+ {get_plugin_var gemcolrb} 1} 255}
-                  {set_plugin_var gemcolrb {+ {get_plugin_var gemcolrb} 1}}
+               {unless {> {+ {get_plugin_var gemcolrb} $rgbint} 255}
+                  {set_plugin_var gemcolrb {+ {get_plugin_var gemcolrb} $rgbint}}
                }
             )
          }
@@ -370,18 +370,18 @@
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {unless {> {+ {get_plugin_var gemcolyr} 1} 255}
-                  {set_plugin_var gemcolyr {+ {get_plugin_var gemcolyr} 1}}
+               {unless {> {+ {get_plugin_var gemcolyr} $rgbint} 255}
+                  {set_plugin_var gemcolyr {+ {get_plugin_var gemcolyr} $rgbint}}
                }
             )
             (G
-               {unless {> {+ {get_plugin_var gemcolyg} 1} 255}
-                  {set_plugin_var gemcolyg {+ {get_plugin_var gemcolyg} 1}}
+               {unless {> {+ {get_plugin_var gemcolyg} $rgbint} 255}
+                  {set_plugin_var gemcolyg {+ {get_plugin_var gemcolyg} $rgbint}}
                }
             )
             (B
-               {unless {> {+ {get_plugin_var gemcolyb} 1} 255}
-                  {set_plugin_var gemcolyb {+ {get_plugin_var gemcolyb} 1}}
+               {unless {> {+ {get_plugin_var gemcolyb} $rgbint} 255}
+                  {set_plugin_var gemcolyb {+ {get_plugin_var gemcolyb} $rgbint}}
                }
             )
          }
@@ -389,18 +389,18 @@
       ("Blue"
          {switch $gemcolchanged
             (R
-               {unless {> {+ {get_plugin_var gemcolbr} 1} 255}
-                  {set_plugin_var gemcolbr {+ {get_plugin_var gemcolbr} 1}}
+               {unless {> {+ {get_plugin_var gemcolbr} $rgbint} 255}
+                  {set_plugin_var gemcolbr {+ {get_plugin_var gemcolbr} $rgbint}}
                }
             )
             (G
-               {unless {> {+ {get_plugin_var gemcolbg} 1} 255}
-                  {set_plugin_var gemcolbg {+ {get_plugin_var gemcolbg} 1}}
+               {unless {> {+ {get_plugin_var gemcolbg} $rgbint} 255}
+                  {set_plugin_var gemcolbg {+ {get_plugin_var gemcolbg} $rgbint}}
                }
             )
             (B
-               {unless {> {+ {get_plugin_var gemcolbb} 1} 255}
-                  {set_plugin_var gemcolbb {+ {get_plugin_var gemcolbb} 1}}
+               {unless {> {+ {get_plugin_var gemcolbb} $rgbint} 255}
+                  {set_plugin_var gemcolbb {+ {get_plugin_var gemcolbb} $rgbint}}
                }
             )
          }
@@ -408,18 +408,18 @@
       ("Orange"
          {switch $gemcolchanged
             (R
-               {unless {> {+ {get_plugin_var gemcolor} 1} 255}
-                  {set_plugin_var gemcolor {+ {get_plugin_var gemcolor} 1}}
+               {unless {> {+ {get_plugin_var gemcolor} $rgbint} 255}
+                  {set_plugin_var gemcolor {+ {get_plugin_var gemcolor} $rgbint}}
                }
             )
             (G
-               {unless {> {+ {get_plugin_var gemcolog} 1} 255}
-                  {set_plugin_var gemcolog {+ {get_plugin_var gemcolog} 1}}
+               {unless {> {+ {get_plugin_var gemcolog} $rgbint} 255}
+                  {set_plugin_var gemcolog {+ {get_plugin_var gemcolog} $rgbint}}
                }
             )
             (B
-               {unless {> {+ {get_plugin_var gemcolob} 1} 255}
-                  {set_plugin_var gemcolob {+ {get_plugin_var gemcolob} 1}}
+               {unless {> {+ {get_plugin_var gemcolob} $rgbint} 255}
+                  {set_plugin_var gemcolob {+ {get_plugin_var gemcolob} $rgbint}}
                }
             )
          }
@@ -432,18 +432,18 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {unless {< {- {get_plugin_var gemcolgr} 1} 0}
-                  {set_plugin_var gemcolgr {- {get_plugin_var gemcolgr} 1}}
+               {unless {< {- {get_plugin_var gemcolgr} $rgbint} 0}
+                  {set_plugin_var gemcolgr {- {get_plugin_var gemcolgr} $rgbint}}
                }
             )
             (G
-               {unless {< {- {get_plugin_var gemcolgg} 1} 0}
-                  {set_plugin_var gemcolgg {- {get_plugin_var gemcolgg} 1}}
+               {unless {< {- {get_plugin_var gemcolgg} $rgbint} 0}
+                  {set_plugin_var gemcolgg {- {get_plugin_var gemcolgg} $rgbint}}
                }
             )
             (B
-               {unless {< {- {get_plugin_var gemcolgb} 1} 0}
-                  {set_plugin_var gemcolgb {- {get_plugin_var gemcolgb} 1}}
+               {unless {< {- {get_plugin_var gemcolgb} $rgbint} 0}
+                  {set_plugin_var gemcolgb {- {get_plugin_var gemcolgb} $rgbint}}
                }
             )
          }
@@ -451,18 +451,18 @@
       ("Red"
          {switch $gemcolchanged
             (R
-               {unless {< {<- {get_plugin_var gemcolrr} 1} 0}
-                  {set_plugin_var gemcolrr {- {get_plugin_var gemcolrr} 1}}
+               {unless {< {- {get_plugin_var gemcolrr} $rgbint} 0}
+                  {set_plugin_var gemcolrr {- {get_plugin_var gemcolrr} $rgbint}}
                }
             )
             (G
-               {unless {< {<- {get_plugin_var gemcolrg} 1} 0}
-                  {set_plugin_var gemcolrg {- {get_plugin_var gemcolrg} 1}}
+               {unless {< {- {get_plugin_var gemcolrg} $rgbint} 0}
+                  {set_plugin_var gemcolrg {- {get_plugin_var gemcolrg} $rgbint}}
                }
             )
             (B
-               {unless {< {<- {get_plugin_var gemcolrb} 1} 0}
-                  {set_plugin_var gemcolrb {- {get_plugin_var gemcolrb} 1}}
+               {unless {< {- {get_plugin_var gemcolrb} $rgbint} 0}
+                  {set_plugin_var gemcolrb {- {get_plugin_var gemcolrb} $rgbint}}
                }
             )
          }
@@ -470,18 +470,18 @@
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {unless {< {<- {get_plugin_var gemcolyr} 1} 0}
-                  {set_plugin_var gemcolyr {- {get_plugin_var gemcolyr} 1}}
+               {unless {< {- {get_plugin_var gemcolyr} $rgbint} 0}
+                  {set_plugin_var gemcolyr {- {get_plugin_var gemcolyr} $rgbint}}
                }
             )
             (G
-               {unless {< {<- {get_plugin_var gemcolyg} 1} 0}
-                  {set_plugin_var gemcolyg {- {get_plugin_var gemcolyg} 1}}
+               {unless {< {- {get_plugin_var gemcolyg} $rgbint} 0}
+                  {set_plugin_var gemcolyg {- {get_plugin_var gemcolyg} $rgbint}}
                }
             )
             (B
-               {unless {< {<- {get_plugin_var gemcolyb} 1} 0}
-                  {set_plugin_var gemcolyb {- {get_plugin_var gemcolyb} 1}}
+               {unless {< {- {get_plugin_var gemcolyb} $rgbint} 0}
+                  {set_plugin_var gemcolyb {- {get_plugin_var gemcolyb} $rgbint}}
                }
             )
          }
@@ -489,18 +489,18 @@
       ("Blue"
          {switch $gemcolchanged
             (R
-               {unless {< {<- {get_plugin_var gemcolbr} 1} 0}
-                  {set_plugin_var gemcolbr {- {get_plugin_var gemcolbr} 1}}
+               {unless {< {- {get_plugin_var gemcolbr} $rgbint} 0}
+                  {set_plugin_var gemcolbr {- {get_plugin_var gemcolbr} $rgbint}}
                }
             )
             (G
-               {unless {< {<- {get_plugin_var gemcolbg} 1} 0}
-                  {set_plugin_var gemcolbg {- {get_plugin_var gemcolbg} 1}}
+               {unless {< {- {get_plugin_var gemcolbg} $rgbint} 0}
+                  {set_plugin_var gemcolbg {- {get_plugin_var gemcolbg} $rgbint}}
                }
             )
             (B
-               {unless {< {<- {get_plugin_var gemcolbb} 1} 0}
-                  {set_plugin_var gemcolbb {- {get_plugin_var gemcolbb} 1}}
+               {unless {< {- {get_plugin_var gemcolbb} $rgbint} 0}
+                  {set_plugin_var gemcolbb {- {get_plugin_var gemcolbb} $rgbint}}
                }
             )
          }
@@ -508,18 +508,18 @@
       ("Orange"
          {switch $gemcolchanged
             (R
-               {unless {< {<- {get_plugin_var gemcolor} 1} 0}
-                  {set_plugin_var gemcolor {- {get_plugin_var gemcolor} 1}}
+               {unless {< {- {get_plugin_var gemcolor} $rgbint} 0}
+                  {set_plugin_var gemcolor {- {get_plugin_var gemcolor} $rgbint}}
                }
             )
             (G
-               {unless {< {<- {get_plugin_var gemcolog} 1} 0}
-                  {set_plugin_var gemcolog {- {get_plugin_var gemcolog} 1}}
+               {unless {< {- {get_plugin_var gemcolog} $rgbint} 0}
+                  {set_plugin_var gemcolog {- {get_plugin_var gemcolog} $rgbint}}
                }
             )
             (B
-               {unless {< {<- {get_plugin_var gemcolob} 1} 0}
-                  {set_plugin_var gemcolob {- {get_plugin_var gemcolob} 1}}
+               {unless {< {- {get_plugin_var gemcolob} 1} 0}
+                  {set_plugin_var gemcolob {- {get_plugin_var gemcolob} $rgbint}}
                }
             )
          }
@@ -532,65 +532,65 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {set_plugin_var gemcolgr 0}
+               {set_plugin_var gemcolgr 33}
             )
             (G
-               {set_plugin_var gemcolgg 0}
+               {set_plugin_var gemcolgg 93}
             )
             (B
-               {set_plugin_var gemcolgb 0}
+               {set_plugin_var gemcolgb 2}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {set_plugin_var gemcolrr 0}
+               {set_plugin_var gemcolrr 229}
             )
             (G
-               {set_plugin_var gemcolrg 0}
+               {set_plugin_var gemcolrg 4}
             )
             (B
-               {set_plugin_var gemcolrb 0}
+               {set_plugin_var gemcolrb 8}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {set_plugin_var gemcolyr 0}
+               {set_plugin_var gemcolyr 202}
             )
             (G
-               {set_plugin_var gemcolyg 0}
+               {set_plugin_var gemcolyg 164}
             )
             (B
-               {set_plugin_var gemcolyb 0}
+               {set_plugin_var gemcolyb 8}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {set_plugin_var gemcolbr 0}
+               {set_plugin_var gemcolbr 3}
             )
             (G
-               {set_plugin_var gemcolbg 0}
+               {set_plugin_var gemcolbg 82}
             )
             (B
-               {set_plugin_var gemcolbb 0}
+               {set_plugin_var gemcolbb 139}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {set_plugin_var gemcolor 0}
+               {set_plugin_var gemcolor 190}
             )
             (G
-               {set_plugin_var gemcolog 0}
+               {set_plugin_var gemcolog 48}
             )
             (B
-               {set_plugin_var gemcolob 0}
+               {set_plugin_var gemcolob 5}
             )
          }
       )
@@ -619,6 +619,65 @@
       }
    )
    (on_cancel 
+      {$this show_state dxState_RGBSelect}
+      {$this trigger_cancel_effects})
+)
+
+(dxState_RGBIntervalSlider
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" "Reset" "-")}
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            {switch $rgbint
+               (50
+                  {set $rgbint 100}
+               )
+               (25
+                  {set $rgbint 50}
+               )
+               (10
+                  {set $rgbint 25}
+               )
+               (5
+                  {set $rgbint 10}
+               )
+               (1
+                  {set $rgbint 5}
+               )
+            }
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" "Reset" "-")}
+         )
+         ("Reset"
+            {set $rgbint 1}
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" "Reset" "-")}
+         )
+         ("-"
+            {switch $rgbint
+               (100
+                  {set $rgbint 50}
+               )
+               (50
+                  {set $rgbint 25}
+               )
+               (25
+                  {set $rgbint 10}
+               )
+               (10
+                  {set $rgbint 5}
+               )
+               (5
+                  {set $rgbint 1}
+               )
+            }
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" "Reset" "-")}
+         )
+      }
+   )
+   (on_cancel
       {$this show_state dxState_RGBSelect}
       {$this trigger_cancel_effects})
 )

@@ -275,12 +275,17 @@
 (dxState_RGBSelect
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("R" "G" "B")}
+      {$this setup_confirm_actions a ("R" "G" "B" "Interval")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {set $gemcolchanged $list_data}
-      {$this show_state dxState_RGBSlider}
+      {if_else {== $list_data "Interval"}
+         {$this show_state dxState_RGBIntervalSlider}
+         {do
+            {set $gemcolchanged $list_data}
+            {$this show_state dxState_RGBSlider}
+         }
+      }
       {$this trigger_select_effects}
    )
    (on_cancel
