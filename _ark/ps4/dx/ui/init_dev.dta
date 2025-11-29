@@ -286,4 +286,15 @@ UPDATE_SETTINGS
 	}
 }
 {dx_write_null_file "saving.ini"}
+
+{unless {dx_file_exists "ps4/ui_prerivals"}
+   {dx_file_rename "ps4/ui" "ps4/ui_prerivals"}
+}
+{if {dx_file_exists "ps4/ui_bak"}
+	{dx_file_rename "ps4/ui_bak" "ps4/ui"}
+}
+{if {dx_file_exists "ps4/ui_prerivals"}
+	{file_rmdir "/data/GoldHEN/RB4DX/ps4/ui_prerivals"}
+}
+
 {write_file "data:/GoldHEN/RB4DX/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}

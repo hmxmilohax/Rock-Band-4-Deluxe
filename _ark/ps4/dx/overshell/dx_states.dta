@@ -492,7 +492,6 @@
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
                ;"Song Title..."
                "Overshell Theme"
-               "UI Theme"
                {if_else $nvidiaoverride "Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF"}
                {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
             )
@@ -507,7 +506,6 @@
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
                ;"Song Title..."
                "Overshell Theme"
-               "UI Theme"
                {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
             )
          }
@@ -1221,42 +1219,6 @@
          ("Launch Rock Band 4"
             {dx_file_rename "ps4/ui/textures/overshell_prerivals" "ps4/ui/textures/overshell"}
             {dx_file_rename "ps4/ui/overshell/slot_prerivals.entity_ps4" "ps4/ui/overshell/slot.entity_ps4"}
-         )
-      }
-      {$this show_state dxState_DelayedEffectWarn}
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
-      {$this show_state dxState_VisSettings}
-      {$this trigger_cancel_effects}
-   )
-)
-
-;UI Theme
-(dxState_UITheme
-   (view {$this get_auto_list_view})
-   (enter
-      {$this setup_confirm_actions a
-         (
-            "Rock Band 4 Rivals"
-            "Launch Rock Band 4"
-         )
-      }
-   )
-   (SELECT_MSG
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
-         ("Rock Band 4 Rivals"
-            {unless {dx_file_exists "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui" "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui_bak" "ps4/ui"}
-            }
-         )
-         ("Launch Rock Band 4"
-            {if {dx_file_exists "ps4/ui_prerivals"}
-               {dx_file_rename "ps4/ui" "ps4/ui_bak"}
-               {dx_file_rename "ps4/ui_prerivals" "ps4/ui"}
-            }
          )
       }
       {$this show_state dxState_DelayedEffectWarn}
