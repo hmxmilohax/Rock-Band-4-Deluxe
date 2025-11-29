@@ -275,21 +275,43 @@
 (dxState_RGBSelect
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("R" "G" "B" "Interval")}
+      {$this setup_confirm_actions a ("R" "G" "B" "Interval" "Copy Color From")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {if_else {== $list_data "Interval"}
          {$this show_state dxState_RGBIntervalSlider}
-         {do
-            {set $gemcolchanged $list_data}
-            {$this show_state dxState_RGBSlider}
+         {if_else {== $list_data "Copy Color From"}
+            {$this show_state dxState_GemColorCopyFrom}
+            {do
+               {set $gemcolchanged $list_data}
+               {$this show_state dxState_RGBSlider}
+            }
          }
       }
       {$this trigger_select_effects}
    )
    (on_cancel
       {$this show_state dxState_GemColorSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Gem Color Copy From
+(dxState_GemColorCopyFrom
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a ("Green" "Red" "Yellow" "Blue" "Orange" "Overdrive")}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {set $gemcopy $list_data}
+      COPY_GEM_COLORS
+      {$this show_state dxState_RGBSelect}
+      {$this trigger_select_effects}
+   )
+   (on_cancel
+      {$this show_state dxState_RGBSelect}
       {$this trigger_cancel_effects}
    )
 )

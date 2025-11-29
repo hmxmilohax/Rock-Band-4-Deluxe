@@ -1,133 +1,547 @@
 #define TRACKANGLE_CHECK
 (
-	{set $trackangletype
-   		{cond
-      		({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
-         		rr
-      		)
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
-		        rb2
-		    )
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
-		        rb3
-		    )
-		    ({&& {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
-		    	none
-		    )
-	    }
-	}
+   {set $trackangletype
+         {cond
+            ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+               rr
+            )
+          ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+              rb2
+          )
+          ({&& {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"}}
+              rb3
+          )
+          ({&& {dx_file_exists "ps4/track/guitar_unlit_rr.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb2.scene_ps4"} {dx_file_exists "ps4/track/guitar_unlit_rb3.scene_ps4"}}
+            none
+          )
+       }
+   }
 )
 #define SONGTITLE_CHECK
 (
-	{set $songtitletype
-   		{cond
-		    ({file_exists "settings/visuals/songtitletypetl.dta"}
-		        tl
-		    )
-		    ({file_exists "settings/visuals/songtitletypea.dta"}
-		        a
-		    )
-		    (TRUE
-		    	default
-		    )
-	    }
-	}
+   {set $songtitletype
+         {cond
+          ({file_exists "settings/visuals/songtitletypetl.dta"}
+              tl
+          )
+          ({file_exists "settings/visuals/songtitletypea.dta"}
+              a
+          )
+          (TRUE
+            default
+          )
+       }
+   }
 )
 #define SET_HIGHWAY_TEX_VAR
 (
-	{set $enabledtex
-		{cond
-			({&& {! {dx_file_exists "settings/visuals/highwaytex.dta"}} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}
-				none
-			)
-			({dx_file_exists "settings/visuals/highwaytex_wood.dta"}
-				wood
-			)
-			({dx_file_exists "settings/visuals/highwaytex_black.dta"}
-				black
-			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_guitar.dta"}
-				rb3_guitar
-			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_bass.dta"}
-				rb3_bass
-			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_drums.dta"}
-				rb3_drums
-			)
-			({dx_file_exists "settings/visuals/highwaytex_rb3_keys.dta"}
-				rb3_keys
-			)
-			({dx_file_exists "settings/visuals/highwaytex_fnfestival.dta"}
-				fnfestival
-			)
-			({dx_file_exists "settings/visuals/highwaytex_fnfestival_beta.dta"}
-				fnfestival_beta
-			)
-		}
-	}
+   {set $enabledtex
+      {cond
+         ({&& {! {dx_file_exists "settings/visuals/highwaytex.dta"}} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}
+            none
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_wood.dta"}
+            wood
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_black.dta"}
+            black
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_rb3_guitar.dta"}
+            rb3_guitar
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_rb3_bass.dta"}
+            rb3_bass
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_rb3_drums.dta"}
+            rb3_drums
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_rb3_keys.dta"}
+            rb3_keys
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_fnfestival.dta"}
+            fnfestival
+         )
+         ({dx_file_exists "settings/visuals/highwaytex_fnfestival_beta.dta"}
+            fnfestival_beta
+         )
+      }
+   }
 )
 #define MOVE_NOFLAMES_FILES_ON
 (
-	{dx_file_rename "ps4/track/smasher/gem_smasher_unlit1.entity_ps4" "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/drum_smasher_unlit1.entity_ps4" "ps4/track/smasher/drum_smasher_unlit.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4" "ps4/track/smasher/kick_drum_smasher_unlit.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks.bmp_ps4"}
-	{dx_file_rename "ps4/track/smasher/gem_smashed_util1.bmp_ps4" "ps4/track/smasher/gem_smashed_util.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_beams1.bmp_ps4" "ps4/track/shared/smasher_beams.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_flash1.bmp_ps4" "ps4/track/shared/smasher_flash.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_shockwave1.bmp_ps4" "ps4/track/shared/smasher_shockwave.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/spark01_color1.bmp_ps4" "ps4/track/shared/spark01_color.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
+   {dx_file_rename "ps4/track/smasher/gem_smasher_unlit1.entity_ps4" "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/drum_smasher_unlit1.entity_ps4" "ps4/track/smasher/drum_smasher_unlit.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4" "ps4/track/smasher/kick_drum_smasher_unlit.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks.bmp_ps4"}
+   {dx_file_rename "ps4/track/smasher/gem_smashed_util1.bmp_ps4" "ps4/track/smasher/gem_smashed_util.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_beams1.bmp_ps4" "ps4/track/shared/smasher_beams.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_flash1.bmp_ps4" "ps4/track/shared/smasher_flash.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_shockwave1.bmp_ps4" "ps4/track/shared/smasher_shockwave.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/spark01_color1.bmp_ps4" "ps4/track/shared/spark01_color.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4"}
 )
 #define MOVE_NOFLAMES_FILES_OFF
 (
-	{dx_file_rename "ps4/track/smasher/gem_smasher_unlit.entity_ps4" "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/drum_smasher_unlit.entity_ps4" "ps4/track/smasher/drum_smasher_unlit1.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/kick_drum_smasher_unlit.entity_ps4" "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4"}
-	{dx_file_rename "ps4/track/smasher/fx_smasher_streaks.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
-	{dx_file_rename "ps4/track/smasher/gem_smashed_util.bmp_ps4" "ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_beams.bmp_ps4" "ps4/track/shared/smasher_beams1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_flash.bmp_ps4" "ps4/track/shared/smasher_flash1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/smasher_shockwave.bmp_ps4" "ps4/track/shared/smasher_shockwave1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/spark01_color.bmp_ps4" "ps4/track/shared/spark01_color1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
-	{dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
+   {dx_file_rename "ps4/track/smasher/gem_smasher_unlit.entity_ps4" "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/drum_smasher_unlit.entity_ps4" "ps4/track/smasher/drum_smasher_unlit1.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/kick_drum_smasher_unlit.entity_ps4" "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4"}
+   {dx_file_rename "ps4/track/smasher/fx_smasher_streaks.bmp_ps4" "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
+   {dx_file_rename "ps4/track/smasher/gem_smashed_util.bmp_ps4" "ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_beams.bmp_ps4" "ps4/track/shared/smasher_beams1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_flash.bmp_ps4" "ps4/track/shared/smasher_flash1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/smasher_shockwave.bmp_ps4" "ps4/track/shared/smasher_shockwave1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/spark01_color.bmp_ps4" "ps4/track/shared/spark01_color1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_orb.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_orb_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_orb_dense1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_shockwave_forced_persp.bmp_ps4" "ps4/track/shared/particles/textures/particle_shockwave_forced_persp1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_smoke_plume.bmp_ps4" "ps4/track/shared/particles/textures/particle_smoke_plume1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark_cluster.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_cluster1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spark_dense.bmp_ps4" "ps4/track/shared/particles/textures/particle_spark_dense1.bmp_ps4"}
+   {dx_file_rename "ps4/track/shared/particles/textures/particle_spiral_flare.bmp_ps4" "ps4/track/shared/particles/textures/particle_spiral_flare1.bmp_ps4"}
 )
 
 #define WRITE_GEM_COLOR_DTAS
 (
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenr.dta" {array ({/ {get_plugin_var gemcolgr} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greeng.dta" {array ({/ {get_plugin_var gemcolgg} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenb.dta" {array ({/ {get_plugin_var gemcolgb} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redr.dta" {array ({/ {get_plugin_var gemcolrr} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redg.dta" {array ({/ {get_plugin_var gemcolrg} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redb.dta" {array ({/ {get_plugin_var gemcolrb} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowr.dta" {array ({/ {get_plugin_var gemcolyr} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowg.dta" {array ({/ {get_plugin_var gemcolyg} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowb.dta" {array ({/ {get_plugin_var gemcolyb} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/bluer.dta" {array ({/ {get_plugin_var gemcolbr} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueg.dta" {array ({/ {get_plugin_var gemcolbg} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueb.dta" {array ({/ {get_plugin_var gemcolbb} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ {get_plugin_var gemcolor} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ {get_plugin_var gemcolog} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ {get_plugin_var gemcolob} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odr.dta" {array ({/ {get_plugin_var gemcolodr} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odg.dta" {array ({/ {get_plugin_var gemcolodg} 255})}}
-	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odb.dta" {array ({/ {get_plugin_var gemcolodb} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenr.dta" {array ({/ {get_plugin_var gemcolgr} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greeng.dta" {array ({/ {get_plugin_var gemcolgg} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/greenb.dta" {array ({/ {get_plugin_var gemcolgb} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redr.dta" {array ({/ {get_plugin_var gemcolrr} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redg.dta" {array ({/ {get_plugin_var gemcolrg} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/redb.dta" {array ({/ {get_plugin_var gemcolrb} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowr.dta" {array ({/ {get_plugin_var gemcolyr} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowg.dta" {array ({/ {get_plugin_var gemcolyg} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/yellowb.dta" {array ({/ {get_plugin_var gemcolyb} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/bluer.dta" {array ({/ {get_plugin_var gemcolbr} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueg.dta" {array ({/ {get_plugin_var gemcolbg} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/blueb.dta" {array ({/ {get_plugin_var gemcolbb} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ {get_plugin_var gemcolor} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ {get_plugin_var gemcolog} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ {get_plugin_var gemcolob} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odr.dta" {array ({/ {get_plugin_var gemcolodr} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odg.dta" {array ({/ {get_plugin_var gemcolodg} 255})}}
+   {write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odb.dta" {array ({/ {get_plugin_var gemcolodb} 255})}}
+)
+
+#define COPY_GEM_COLORS
+(
+   {switch $gemchanged
+      ("Green"
+         {set_plugin_var gemcolgr
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolgg
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolgb
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+      ("Red"
+         {set_plugin_var gemcolrr
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolrg
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolrb
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+      ("Yellow"
+         {set_plugin_var gemcolyr
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolyg
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolyb
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+      ("Blue"
+         {set_plugin_var gemcolbr
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolbg
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolbb
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+      ("Orange"
+         {set_plugin_var gemcolor
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolog
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolob
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+      ("Overdrive"
+         {set_plugin_var gemcolodr
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgr}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrr}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyr}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbr}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolor}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodr}
+               )
+            }
+         }
+         {set_plugin_var gemcolodg
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgg}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrg}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyg}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbg}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolog}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodg}
+               )
+            }
+         }
+         {set_plugin_var gemcolodb
+            {switch $gemcopy
+               ("Green"
+                  {get_plugin_var gemcolgb}
+               )
+               ("Red"
+                  {get_plugin_var gemcolrb}
+               )
+               ("Yellow"
+                  {get_plugin_var gemcolyb}
+               )
+               ("Blue"
+                  {get_plugin_var gemcolbb}
+               )
+               ("Orange"
+                  {get_plugin_var gemcolob}
+               )
+               ("Overdrive"
+                  {get_plugin_var gemcolodb}
+               )
+            }
+         }
+      )
+   }
 )
