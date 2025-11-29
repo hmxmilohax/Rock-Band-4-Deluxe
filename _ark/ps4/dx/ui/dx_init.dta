@@ -159,6 +159,18 @@ SET_PAD_BINDING_VAR
 {if {file_exists "settings/theme/gem/colors/orangeb.dta"}
    {set_plugin_var gemcolob {int {* {dx_read_file_as_float "settings/theme/gem/colors/orangeb.dta"} 255}}}
 }
+{set_plugin_var gemcolodr 193}
+{if {file_exists "settings/theme/gem/colors/odr.dta"}
+   {set_plugin_var gemcolodr {int {* {dx_read_file_as_float "settings/theme/gem/colors/odr.dta"} 255}}}
+}
+{set_plugin_var gemcolodg 176}
+{if {file_exists "settings/theme/gem/colors/odg.dta"}
+   {set_plugin_var gemcolodg {int {* {dx_read_file_as_float "settings/theme/gem/colors/odg.dta"} 255}}}
+}
+{set_plugin_var gemcolodb 147}
+{if {file_exists "settings/theme/gem/colors/odb.dta"}
+   {set_plugin_var gemcolodb {int {* {dx_read_file_as_float "settings/theme/gem/colors/odb.dta"} 255}}}
+}
 
 ;default position adjustment interval
 {set $posint 0.5}

@@ -127,4 +127,7 @@
 	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/oranger.dta" {array ({/ {get_plugin_var gemcolor} 255})}}
 	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeg.dta" {array ({/ {get_plugin_var gemcolog} 255})}}
 	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/orangeb.dta" {array ({/ {get_plugin_var gemcolob} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odr.dta" {array ({/ {get_plugin_var gemcolodr} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odg.dta" {array ({/ {get_plugin_var gemcolodg} 255})}}
+	{write_file "data:/GoldHEN/RB4DX/settings/theme/gem/colors/odb.dta" {array ({/ {get_plugin_var gemcolodb} 255})}}
 )

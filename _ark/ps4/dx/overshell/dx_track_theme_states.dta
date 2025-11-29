@@ -251,7 +251,7 @@
 (dxState_GemColorSettings
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("Green" "Red" "Yellow" "Blue" "Orange")}
+      {$this setup_confirm_actions a ("Green" "Red" "Yellow" "Blue" "Orange" "Overdrive")}
       {unless {get_plugin_var gemcolors}
          {set_plugin_var gemcolors TRUE}
          {dx_write_null_file "settings/theme/gem/colors/enabled.dta"}

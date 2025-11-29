@@ -262,65 +262,78 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgr}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgr}} ("+" "Reset" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgg}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgg}} ("+" "Reset" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgb}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgb}} ("+" "Reset" "-")}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrr}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrr}} ("+" "Reset" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrg}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrg}} ("+" "Reset" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrb}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrb}} ("+" "Reset" "-")}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyr}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyr}} ("+" "Reset" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyg}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyg}} ("+" "Reset" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyb}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyb}} ("+" "Reset" "-")}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbr}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbr}} ("+" "Reset" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbg}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbg}} ("+" "Reset" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbb}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbb}} ("+" "Reset" "-")}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolor}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolor}} ("+" "Reset" "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolog}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolog}} ("+" "Reset" "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolob}} ("+" "0" "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolob}} ("+" "Reset" "-")}
+            )
+         }
+      )
+      ("Overdrive"
+         {switch $gemcolchanged
+            (R
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodr}} ("+" "Reset" "-")}
+            )
+            (G
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodg}} ("+" "Reset" "-")}
+            )
+            (B
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodb}} ("+" "Reset" "-")}
             )
          }
       )
@@ -424,6 +437,25 @@
             )
          }
       )
+      ("Overdrive"
+         {switch $gemcolchanged
+            (R
+               {unless {> {+ {get_plugin_var gemcolodr} $rgbint} 255}
+                  {set_plugin_var gemcolodr {+ {get_plugin_var gemcolodr} $rgbint}}
+               }
+            )
+            (G
+               {unless {> {+ {get_plugin_var gemcolodg} $rgbint} 255}
+                  {set_plugin_var gemcolodg {+ {get_plugin_var gemcolodg} $rgbint}}
+               }
+            )
+            (B
+               {unless {> {+ {get_plugin_var gemcolob} $rgbint} 255}
+                  {set_plugin_var gemcolodb {+ {get_plugin_var gemcolodb} $rgbint}}
+               }
+            )
+         }
+      )
    }
 )
 #define RGB_SUB
@@ -518,8 +550,27 @@
                }
             )
             (B
-               {unless {< {- {get_plugin_var gemcolob} 1} 0}
+               {unless {< {- {get_plugin_var gemcolob} $rgbint} 0}
                   {set_plugin_var gemcolob {- {get_plugin_var gemcolob} $rgbint}}
+               }
+            )
+         }
+      )
+      ("Overdrive"
+         {switch $gemcolchanged
+            (R
+               {unless {< {- {get_plugin_var gemcolodr} $rgbint} 0}
+                  {set_plugin_var gemcolodr {- {get_plugin_var gemcolodr} $rgbint}}
+               }
+            )
+            (G
+               {unless {< {- {get_plugin_var gemcolodg} $rgbint} 0}
+                  {set_plugin_var gemcolodg {- {get_plugin_var gemcolodg} $rgbint}}
+               }
+            )
+            (B
+               {unless {< {- {get_plugin_var gemcolodb} $rgbint} 0}
+                  {set_plugin_var gemcolodb {- {get_plugin_var gemcolodb} $rgbint}}
                }
             )
          }
@@ -594,6 +645,19 @@
             )
          }
       )
+      ("Overdrive"
+         {switch $gemcolchanged
+            (R
+               {set_plugin_var gemcolodr 193}
+            )
+            (G
+               {set_plugin_var gemcolodg 176}
+            )
+            (B
+               {set_plugin_var gemcolodb 147}
+            )
+         }
+      )
    }
 )
 (dxState_RGBSlider
@@ -608,7 +672,7 @@
             RGB_ADD
             RGB_DATA
          )
-         ("0"
+         ("Reset"
             RGB_RESET
             RGB_DATA
          )
