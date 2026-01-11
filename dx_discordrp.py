@@ -955,8 +955,7 @@ def main():
             # ——— 2) else fallback to ShadPS4 file ———
             elif shadps4_path and not never_setup_shadps4:
                 json_path = (shadps4_path / "data" / "CUSA02084" /
-                             "GoldHEN" / "RB4DX-1.08" / "plugin" /
-                             "discordrp.json")
+                             "GoldHEN" / "RB4DX" / "discordrp.json")
                 if json_path.is_file():
                     json_data   = json_path.read_text(encoding='utf-8')
                     data_source = 'local'
