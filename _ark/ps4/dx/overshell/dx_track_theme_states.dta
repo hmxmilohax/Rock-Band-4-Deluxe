@@ -6,6 +6,7 @@
          "Highway"
          "Gem"
          "Strikeline"
+         "Beatline Brightness"
          "Solo Box"
          "Score"
          "Countdown"
@@ -79,6 +80,10 @@
          )
          ("Strikeline"
             {$this show_state dxState_SLTexSelector}
+            {$this trigger_select_effects}
+         )
+         ("Beatline Brightness"
+            {$this show_state dxState_BeatlineAlphaSlider}
             {$this trigger_select_effects}
          )
          ("Solo Box"

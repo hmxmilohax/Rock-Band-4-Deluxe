@@ -1077,3 +1077,127 @@
       }
       {$this trigger_cancel_effects})
 )
+
+(dxState_BeatlineAlphaSlider
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions 
+         {sprintf "Beatline Brightness: %d%%" 
+            {if_else {< $beatlinealpha 0.5}
+               {+ {* -2.65 $beatlinealpha} 11.325}
+               {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+            }
+         }
+         ("+" "Reset" "-")
+      }
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            {switch $beatlinealpha
+               (-29.69
+                  {set $beatlinealpha -33.47}
+               )
+               (-25.92
+                  {set $beatlinealpha -29.69}
+               )
+               (-22.15
+                  {set $beatlinealpha -25.92}
+               )
+               (-18.37
+                  {set $beatlinealpha -22.15}
+               )
+               (-14.6
+                  {set $beatlinealpha -18.37}
+               )
+               (-10.83
+                  {set $beatlinealpha -14.6}
+               )
+               (-7.05
+                  {set $beatlinealpha -10.83}
+               )
+               (-3.28
+                  {set $beatlinealpha -7.05}
+               )
+               (0.5
+                  {set $beatlinealpha -3.28}
+               )
+               (2
+                  {set $beatlinealpha 0.5}
+               )
+            }
+            {$this setup_confirm_actions 
+               {sprintf "Beatline Brightness: %d%%" 
+                  {if_else {< $beatlinealpha 0.5}
+                     {+ {* -2.65 $beatlinealpha} 11.325}
+                     {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+         ("Reset"
+            {set $beatlinealpha 0.5}
+            {$this setup_confirm_actions 
+               {sprintf "Beatline Brightness: %d%%" 
+                  {if_else {< $beatlinealpha 0.5}
+                     {+ {* -2.65 $beatlinealpha} 11.325}
+                     {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+         ("-"
+            {switch $beatlinealpha
+               (-33.47
+                  {set $beatlinealpha -29.69}
+               )
+               (-29.69
+                  {set $beatlinealpha -25.92}
+               )
+               (-25.92
+                  {set $beatlinealpha -22.15}
+               )
+               (-22.15
+                  {set $beatlinealpha -18.37}
+               )
+               (-18.37
+                  {set $beatlinealpha -14.6}
+               )
+               (-14.6
+                  {set $beatlinealpha -10.83}
+               )
+               (-10.83
+                  {set $beatlinealpha -7.05}
+               )
+               (-7.05
+                  {set $beatlinealpha -3.28}
+               )
+               (-3.28
+                  {set $beatlinealpha 0.5}
+               )
+               (0.5
+                  {set $beatlinealpha 2}
+               )
+            }
+            {$this setup_confirm_actions 
+               {sprintf "Beatline Brightness: %d%%" 
+                  {if_else {< $beatlinealpha 0.5}
+                     {+ {* -2.65 $beatlinealpha} 11.325}
+                     {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                  }
+               }
+               ("+" "Reset" "-")
+            }
+         )
+      }
+   )
+   (on_cancel
+      {write_file "data:/GoldHEN/RB4DX/settings/theme/beatlinealpha.dta" {array ($beatlinealpha)}}
+      {write_beatline_file $beatlinealpha}
+      {$this show_state dxState_TrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
