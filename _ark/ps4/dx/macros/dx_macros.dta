@@ -22,6 +22,7 @@
 #define DELETE_INVALID_VENUE_DTAS
 (
 	{dx_file_delete "settings/venue/none.dta"}
+	{dx_file_delete "settings/venue/big_club_practice.dta"}
 	{dx_file_delete "settings/venue/big_club_toys.dta"}
 	{dx_file_delete "settings/venue/big_club_standard.dta"}
 	{dx_file_delete "settings/venue/big_club_industrial.dta"}
