@@ -122,6 +122,8 @@ CREATE_SETTINGS_DIRS
 UPDATE_SETTINGS
 
 ;make ark/ps4 dirs that are used in game
+{dx_file_mkdir "ps4/fmod_banks"}
+{dx_file_mkdir "ps4/fmod_banks/PS4"}
 {dx_file_mkdir "ps4/shared"}
 {dx_file_mkdir "ps4/shared/scene"}
 {dx_file_mkdir "ps4/track/shared/gem_track_texture"}
@@ -257,6 +259,9 @@ UPDATE_SETTINGS
 }
 {if {dx_file_exists "ps4/config/include/beatmatcher.dta_dta_ps4"}
    {dx_file_delete "ps4/config/include/beatmatcher.dta_dta_ps4"}
+}
+{if {dx_file_exists "ps4/ui/results/scripts/results_no_part.script_dta_ps4"}
+   {dx_file_delete "ps4/ui/results/scripts/results_no_part.script_dta_ps4"}
 }
 {if {file_exists "insong.dta"}
    {dx_file_delete "insong.dta"}

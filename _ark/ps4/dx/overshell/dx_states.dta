@@ -368,6 +368,7 @@
 (
    {$this setup_confirm_actions a 
       (
+         "FC SFX"
          {if_else $nomiss "Miss Sounds: OFF" "Miss Sounds: ON"}
          {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
          {switch $trackmuting
@@ -388,7 +389,10 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         
+         ("FC SFX"
+            {$this show_state dxState_FCSFXSelector}
+            {$this trigger_select_effects}
+         )
          (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
             {set $trackmuting
                {switch $trackmuting
@@ -461,6 +465,36 @@
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;FC SFX Selector
+(dxState_FCSFXSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist_ ()}
+      {resize $texturelist 0}
+      {push_back $texturelist "[Default]"}
+      {set $texturelist_ {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_sounds/fc_sfx/*.bank"}}
+      {remove_elem $texturelist_ {elem $texturelist_ 0}}
+      {foreach $entry $texturelist_
+         {push_back $texturelist $entry}
+      }
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_delete "ps4/fmod_banks/PS4/ui sfx.bank"}
+      {dx_file_copy {sprint "ps4/dx/custom_sounds/fc_sfx/" $list_data ".bank"} "ps4/fmod_banks/PS4/ui sfx.bank"}
+      {$this show_state dxState_DelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_SFXSettings}
       {$this trigger_cancel_effects}
    )
 )
