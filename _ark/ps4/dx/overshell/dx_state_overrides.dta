@@ -213,7 +213,7 @@
                      )
                      (kGameSlotDrum
                         {if_else {dx_file_exists "ps4/track/vocals_drum.scene_ps4"}
-                           {if_else {dx_file_exists "ps4/track/drums_unlit.scene_ps4"
+                           {if_else {dx_file_exists "ps4/track/drums_unlit.scene_ps4"}
                               {$this setup_confirm_actions a (overshell_drums overshell_drums_pro)}
                               {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums)}
                            }
