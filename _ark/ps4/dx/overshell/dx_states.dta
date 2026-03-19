@@ -756,7 +756,9 @@
          {if_else $noui "Visibility: OFF" "Visibility: Default"}
          "Score Position"
          "Solo Box Position"
+         "Tambourine Percentage Position"
          "Break Countdown Position"
+         "Vocals Break Countdown Position"
          "Song Title..."
          "Button Prompts"
       )
@@ -803,6 +805,14 @@
          )
          ("Break Countdown Position"
             {set $positiontype "countdown"}
+            {$this show_state dxState_HUDPosition}
+         )
+         ("Tambourine Percentage Position"
+            {set $positiontype "voxsolo"}
+            {$this show_state dxState_HUDPosition}
+         )
+         ("Vocals Break Countdown Position"
+            {set $positiontype "voxcountdown"}
             {$this show_state dxState_HUDPosition}
          )
          ("Song Title..."
@@ -1146,16 +1156,32 @@
          ("countdown"
             ;{dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
             {write_countdown_file $countdownposx $countdownposz $countdownposy}
+            {write_vox_countdown_file {- $voxcountdownposx $countdownposx} {- $voxcountdownposz $countdownposz} {- $voxcountdownposy $countdownposy}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposx.dta" {array ($countdownposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposy.dta" {array ($countdownposy)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposz.dta" {array ($countdownposz)}}
          )
+         ("voxcountdown"
+            ;{dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
+            {write_vox_countdown_file {- $voxcountdownposx $countdownposx} {- $voxcountdownposz $countdownposz} {- $voxcountdownposy $countdownposy}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposx.dta" {array ($voxcountdownposx)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposy.dta" {array ($voxcountdownposy)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposz.dta" {array ($voxcountdownposz)}}
+         )
          ("solo"
             ;{dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
             {write_solo_file $soloposx $soloposz $soloposy}
+            {write_vox_solo_file {- $voxsoloposx {- $soloposx -19.5}} {- $voxsoloposz {- $soloposz -9.0}} {- $voxsoloposy {- $soloposy 50.0}}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposx.dta" {array ($soloposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposy.dta" {array ($soloposy)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposz.dta" {array ($soloposz)}}
+         )
+         ("voxsolo"
+            ;{dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
+            {write_vox_solo_file {- $voxsoloposx {- $soloposx -19.5}} {- $voxsoloposz {- $soloposz -9.0}} {- $voxsoloposy {- $soloposy 50.0}}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxsoloposx.dta" {array ($voxsoloposx)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxsoloposy.dta" {array ($voxsoloposy)}}
+            {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxsoloposz.dta" {array ($voxsoloposz)}}
          )
       }
       {set $positiontype FALSE}

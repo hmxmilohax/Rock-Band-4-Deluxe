@@ -199,6 +199,9 @@ SET_PAD_BINDING_VAR
 {set $soloposx -19.5}
 {set $soloposz -9.0}
 {set $soloposy 50.0}
+{set $voxsoloposx -320.0}
+{set $voxsoloposz 10.0}
+{set $voxsoloposy 25.0}
 
 ;load from files if exists
 {if {file_exists "settings/visuals/positions/soloposx.dta"}
@@ -210,15 +213,28 @@ SET_PAD_BINDING_VAR
 {if {file_exists "settings/visuals/positions/soloposz.dta"}
    {set $soloposz {dx_read_file_as_float "settings/visuals/positions/soloposz.dta"}}
 }
+{if {file_exists "settings/visuals/positions/voxsoloposx.dta"}
+   {set $voxsoloposx {dx_read_file_as_float "settings/visuals/positions/voxsoloposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/voxsoloposy.dta"}
+   {set $voxsoloposy {dx_read_file_as_float "settings/visuals/positions/voxsoloposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/voxsoloposz.dta"}
+   {set $voxsoloposz {dx_read_file_as_float "settings/visuals/positions/voxsoloposz.dta"}}
+}
 
 {if {|| {!= $soloposx -19.5} {!= $soloposz -9.0} {!= $soloposy 50.0}}
    {write_solo_file $soloposx $soloposz $soloposy}
+   {write_vox_solo_file {- $voxsoloposx {- $soloposx -19.5}} {- $voxsoloposz {- $soloposz -9.0}} {- $voxsoloposy {- $soloposy 50.0}}}
 }
 
 ;default countdown position
 {set $countdownposx 0.0}
 {set $countdownposz 0.0}
 {set $countdownposy 0.0}
+{set $voxcountdownposx 0.0}
+{set $voxcountdownposz 50.0}
+{set $voxcountdownposy 250.0}
 
 ;load from files if exists
 {if {file_exists "settings/visuals/positions/countdownposx.dta"}
@@ -230,9 +246,19 @@ SET_PAD_BINDING_VAR
 {if {file_exists "settings/visuals/positions/countdownposz.dta"}
    {set $countdownposz {dx_read_file_as_float "settings/visuals/positions/countdownposz.dta"}}
 }
+{if {file_exists "settings/visuals/positions/voxcountdownposx.dta"}
+   {set $voxcountdownposx {dx_read_file_as_float "settings/visuals/positions/voxcountdownposx.dta"}}
+}
+{if {file_exists "settings/visuals/positions/voxcountdownposy.dta"}
+   {set $voxcountdownposy {dx_read_file_as_float "settings/visuals/positions/voxcountdownposy.dta"}}
+}
+{if {file_exists "settings/visuals/positions/voxcountdownposz.dta"}
+   {set $voxcountdownposz {dx_read_file_as_float "settings/visuals/positions/voxcountdownposz.dta"}}
+}
 
 {if {|| {!= $countdownposx 0.0} {!= $countdownposz 0.0} {!= $countdownposy 0.0}}
    {write_countdown_file $countdownposx $countdownposz $countdownposy}
+   {write_vox_countdown_file {- $voxcountdownposx $countdownposx} {- $voxcountdownposz $countdownposz} {- $voxcountdownposy $countdownposy}}
 }
 
 ;default mtv position

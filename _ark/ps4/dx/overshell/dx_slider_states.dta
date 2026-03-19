@@ -775,6 +775,19 @@
             )
          }
       )
+      ("voxsolo"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage X Position: %.1f" $voxsoloposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage Y Position: %.1f" $voxsoloposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage Z Position: %.1f" $voxsoloposz} ("+" "0" "-")}
+            )
+         }
+      )
       ("score"
          {switch $positionchanged
             (X
@@ -798,6 +811,19 @@
             )
             (Z
                {$this setup_confirm_actions {sprintf "Countdown Z Position: %.1f" $countdownposz} ("+" "0" "-")}
+            )
+         }
+      )
+      ("voxcountdown"
+         {switch $positionchanged
+            (X
+               {$this setup_confirm_actions {sprintf "Vocals Countdown X Position: %.1f" $voxcountdownposx} ("+" "0" "-")}
+            )
+            (Y
+               {$this setup_confirm_actions {sprintf "Vocals Countdown Y Position: %.1f" $voxcountdownposy} ("+" "0" "-")}
+            )
+            (Z
+               {$this setup_confirm_actions {sprintf "Vocals Countdown Z Position: %.1f" $voxcountdownposz} ("+" "0" "-")}
             )
          }
       )
@@ -832,6 +858,19 @@
             )
          }
       )
+      ("voxsolo"
+         {switch $positionchanged
+            (X
+               {set $voxsoloposx {+ $voxsoloposx $posint}}
+            )
+            (Y
+               {set $voxsoloposy {+ $voxsoloposy $posint}}
+            )
+            (Z
+               {set $voxsoloposz {+ $voxsoloposz $posint}}
+            )
+         }
+      )
       ("score"
          {switch $positionchanged
             (X
@@ -855,6 +894,19 @@
             )
             (Z
                {set $countdownposz {+ $countdownposz $posint}}
+            )
+         }
+      )
+      ("voxcountdown"
+         {switch $positionchanged
+            (X
+               {set $voxcountdownposx {+ $voxcountdownposx $posint}}
+            )
+            (Y
+               {set $voxcountdownposy {+ $voxcountdownposy $posint}}
+            )
+            (Z
+               {set $voxcountdownposz {+ $voxcountdownposz $posint}}
             )
          }
       )
@@ -889,6 +941,19 @@
             )
          }
       )
+      ("voxsolo"
+         {switch $positionchanged
+            (X
+               {set $voxsoloposx {- $voxsoloposx $posint}}
+            )
+            (Y
+               {set $voxsoloposy {- $voxsoloposy $posint}}
+            )
+            (Z
+               {set $voxsoloposz {- $voxsoloposz $posint}}
+            )
+         }
+      )
       ("score"
          {switch $positionchanged
             (X
@@ -912,6 +977,19 @@
             )
             (Z
                {set $countdownposz {- $countdownposz $posint}}
+            )
+         }
+      )
+      ("voxcountdown"
+         {switch $positionchanged
+            (X
+               {set $voxcountdownposx {- $voxcountdownposx $posint}}
+            )
+            (Y
+               {set $voxcountdownposy {- $voxcountdownposy $posint}}
+            )
+            (Z
+               {set $voxcountdownposz {- $voxcountdownposz $posint}}
             )
          }
       )
@@ -946,6 +1024,19 @@
             )
          }
       )
+      ("voxsolo"
+         {switch $positionchanged
+            (X
+               {set $voxsoloposx -320.0}
+            )
+            (Y
+               {set $voxsoloposy 25.0}
+            )
+            (Z
+               {set $voxsoloposz 10.0}
+            )
+         }
+      )
       ("score"
          {switch $positionchanged
             (X
@@ -969,6 +1060,19 @@
             )
             (Z
                {set $countdownposz 0.0}
+            )
+         }
+      )
+      ("voxcountdown"
+         {switch $positionchanged
+            (X
+               {set $voxcountdownposx 0.0}
+            )
+            (Y
+               {set $voxcountdownposy 250.0}
+            )
+            (Z
+               {set $voxcountdownposz 50.0}
             )
          }
       )
