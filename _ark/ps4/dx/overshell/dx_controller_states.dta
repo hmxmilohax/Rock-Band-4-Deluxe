@@ -2,11 +2,12 @@
    (view {$this get_auto_list_view}) 
    (enter
       {$this setup_confirm_actions a 
-      (
-         "Change instrument type"
-         "Change pad bindings"
-      )
-   }
+         (
+            "Change instrument type"
+            "Change pad bindings"
+            {if_else {file_exists "settings/controller/additionalparts.dta"} "Non-Standard Parts: ON" "Non-Standard Parts: OFF"}
+         )
+      }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
@@ -17,7 +18,22 @@
          ("Change pad bindings"
             {$this show_state dxState_BindingOverride}
          )
+         ("Non-Standard Parts: ON"
+            {dx_file_delete "settings/controller/additionalparts.dta"}
+            {$this setup_confirm_actions a 
+               (
+                  "Change instrument type"
+                  "Change pad bindings"
+                  {if_else {file_exists "settings/controller/additionalparts.dta"} "Non-Standard Parts: ON" "Non-Standard Parts: OFF"}
+               )
+            }
+         )
+         ("Non-Standard Parts: OFF"
+            {dx_write_null_file "settings/controller/additionalparts.dta"}
+            {$this show_state dxState_NonStandardPartsWarn}
+         )
       }
+      {$this trigger_select_effects}
    ) 
    (on_cancel 
       {$this show_state dxState_DeluxeSettings}

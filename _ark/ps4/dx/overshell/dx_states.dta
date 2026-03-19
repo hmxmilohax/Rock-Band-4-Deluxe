@@ -119,7 +119,7 @@
             {$this show_state dxState_LostMenus}
             {$this trigger_select_effects})
          ("test"
-            {write_score_file 81.5 10 -22.5}
+            {$this show_state dxState_test}
             {$this trigger_select_effects}
          )
       }

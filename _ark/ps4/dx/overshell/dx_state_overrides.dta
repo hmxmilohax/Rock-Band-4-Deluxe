@@ -49,6 +49,199 @@
    )
 )
 
+(kState_ChoosePart 
+   (view list_long) 
+   (song_settings_flow TRUE) 
+   (part_unresolved TRUE) 
+   (shows_extended_mic_arrows TRUE) 
+   (enter 
+      {$this clear_somp_part } 
+      {$this setup_part_select_list $this }
+      {if {! {$this in_song}}
+         {if_else {dx_file_exists "ps4/track/vocals_drum.scene_ps4"}
+            {dx_file_delete "ps4/track/drums_unlit.scene_ps4"}
+            {dx_file_rename "ps4/track/drums_unlit.scene_ps4" "ps4/track/vocals_drum.scene_ps4"}
+         }
+         {if {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
+            {dx_file_delete "ps4/track/vocals.scene_ps4"}
+            {dx_file_rename "ps4/track/vocals.scene_ps4" "ps4/track/drums_unlit_vocals.scene_ps4"}
+         }
+      }
+      {if_else 
+         {== 
+            {
+               {$this get_user }get_slot_num }kGameSlotVocals }
+         {do 
+            {local $ui_list 
+               {$this get_ui_list }}
+            {local $list_data 
+               {$ui_list get_data_in_column token }}
+            {switch $list_data 
+               (overshell_vocal_solo 
+                  {$this set_preview_track_type kTrackVocals } 
+                  {$this update_vocal_part_icon kScoreVocals })
+               (overshell_vocal_harmony 
+                  {$this set_preview_track_type kTrackVocals } 
+                  {$this update_vocal_part_icon kScoreHarmony })}}
+         {if 
+            {== 
+               {
+                  {$this get_user }get_slot_num }kGameSlotDrum }
+            {local $ui_list 
+               {$this get_ui_list }}
+            {local $list_data 
+               {$ui_list get_data_in_column token }}
+            {switch $list_data 
+               (overshell_drums 
+                  {$this set_preview_track_type kTrackDrum } 
+                  {$this update_drum_part_icon kScoreDrum })
+               (overshell_drums_pro 
+                  {$this set_preview_track_type kTrackDrum } 
+                  {$this update_drum_part_icon kScoreRealDrum })}}}
+   ) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_widget 
+         {
+            ($objId UIListCom)get_data_in_column widget_type }} 
+      {if_else 
+         {!= $list_widget kOvershellText }
+         {$this trigger_select_disabled_effects }
+         {do 
+            {switch $list_data 
+               (overshell_guitar 
+                  {$this select_part kTrackGuitar }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotDrum}
+                     {if_else {file_exists "settings/visuals/trackangle.dta"}
+                        {dx_file_copy "ps4/track/guitar_unlit.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                        {dx_file_copy "ps4/track/guitar_unlit_og.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                     }
+                  }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotVocals}
+                     {if_else {file_exists "settings/visuals/trackangle.dta"}
+                        {dx_file_copy "ps4/track/guitar_unlit.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                        {dx_file_copy "ps4/track/guitar_unlit_og.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                     }
+                  }
+               )
+               (overshell_bass 
+                  {$this select_part kTrackBass }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotDrum}
+                     {if_else {file_exists "settings/visuals/trackangle.dta"}
+                        {dx_file_copy "ps4/track/guitar_unlit.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                        {dx_file_copy "ps4/track/guitar_unlit_og.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                     }
+                  }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotVocals}
+                     {if_else {file_exists "settings/visuals/trackangle.dta"}
+                        {dx_file_copy "ps4/track/guitar_unlit.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                        {dx_file_copy "ps4/track/guitar_unlit_og.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                     }
+                  }
+               )
+               (overshell_vocal_solo 
+                  {$this select_vocal_part FALSE }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotDrum}
+                     {dx_file_rename "ps4/track/vocals_drum.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                  }
+               )
+               (overshell_vocal_harmony 
+                  {$this select_vocal_part TRUE }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotDrum}
+                     {dx_file_rename "ps4/track/vocals_drum.scene_ps4" "ps4/track/drums_unlit.scene_ps4"}
+                  }
+               )
+               (overshell_drums 
+                  {$this select_drum_part FALSE }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotVocals}
+                     {dx_file_rename "ps4/track/drums_unlit_vocals.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                  }
+               )
+               (overshell_drums_pro 
+                  {$this select_drum_part TRUE }
+                  {if {== {{$this get_user} get_slot_num} kGameSlotVocals}
+                     {dx_file_rename "ps4/track/drums_unlit_vocals.scene_ps4" "ps4/track/vocals.scene_ps4"}
+                  }
+               )
+            }
+            {$this trigger_select_effects }}}) 
+   (list_focus 
+      ($obj_name $obj_id) 
+      {local $ui_list 
+         {$this get_ui_list }} 
+      {local $list_data 
+         {$ui_list get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_guitar 
+            {$this set_preview_track_type kTrackGuitar })
+         (overshell_bass 
+            {$this set_preview_track_type kTrackBass })
+         (overshell_drums 
+            {$this set_preview_track_type kTrackDrum } 
+            {$this update_drum_part_icon kScoreDrum })
+         (overshell_drums_pro 
+            {$this set_preview_track_type kTrackDrum } 
+            {$this update_drum_part_icon kScoreRealDrum })
+         (overshell_vocal_solo 
+            {$this set_preview_track_type kTrackVocals } 
+            {$this update_vocal_part_icon kScoreVocals })
+         (overshell_vocal_harmony 
+            {$this set_preview_track_type kTrackVocals } 
+            {$this update_vocal_part_icon kScoreHarmony })})
+   (UI_BUTTON_DOWN_MSG
+      {if {file_exists "settings/controller/additionalparts.dta"}
+         {if_else {! {$this in_song}}
+            {switch {joypad_controller_type_padnum $pad_num}
+               ((hx_xbox digital analog dualshock stagekit_xbox wii_remote wii_classic gamecube)
+                  {switch {{$this get_user} get_slot_num}
+                     ((kGameSlotGuitar0 kGameSlotGuitar1)
+                        {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro)}
+                     )
+                     ((kGameSlotDrum kGameSlotVocals)
+                        {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro overshell_vocal_solo overshell_vocal_harmony)}
+                     )
+                  }
+               )
+            }
+            {switch {joypad_controller_type_padnum $pad_num}
+               ((hx_xbox digital analog dualshock stagekit_xbox wii_remote wii_classic gamecube)
+                  {switch {{$this get_user} get_slot_num}
+                     ((kGameSlotGuitar0 kGameSlotGuitar1)
+                        {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro)}
+                     )
+                     (kGameSlotDrum
+                        {if_else {dx_file_exists "ps4/track/vocals_drum.scene_ps4"}
+                           {if_else {dx_file_exists "ps4/track/drums_unlit.scene_ps4"
+                              {$this setup_confirm_actions a (overshell_drums overshell_drums_pro)}
+                              {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums)}
+                           }
+                           {$this setup_confirm_actions a (overshell_vocal_solo overshell_vocal_harmony)}
+                        }
+                     )
+                     (kGameSlotVocals
+                        {if_else {dx_file_exists "ps4/track/vocals.scene_ps4"}
+                           {if_else {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
+                              {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums)}
+                              {$this setup_confirm_actions a (overshell_drums overshell_drums_pro)}
+                           }
+                           {$this setup_confirm_actions a (overshell_vocal_solo overshell_vocal_harmony)}
+                        }
+                     )
+                  }
+               )
+            }
+         }
+      }
+      {if_else {== $action kAction_Cancel}
+         {$this leave_choose_part }
+         kDataUnhandled
+      }
+   )
+   (on_cancel)
+)
+
 (kState_ChooseDiff 
    (view list_medium) 
    (song_settings_flow TRUE) 

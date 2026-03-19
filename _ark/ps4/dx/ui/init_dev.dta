@@ -231,6 +231,16 @@ UPDATE_SETTINGS
     )
 }
 
+{if_else {dx_file_exists "ps4/track/vocals_drum.scene_ps4"}
+   {dx_file_delete "ps4/track/drums_unlit.scene_ps4"}
+   {dx_file_rename "ps4/track/drums_unlit.scene_ps4" "ps4/track/vocals_drum.scene_ps4"}
+}
+
+{if {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
+   {dx_file_delete "ps4/track/vocals.scene_ps4"}
+   {dx_file_rename "ps4/track/vocals.scene_ps4" "ps4/track/drums_unlit_vocals.scene_ps4"}
+}
+
 ;reset settings that shouldn't save
 {if {dx_file_exists "ps4/ui/game/game.layout_ps4"}
 	{if {dx_file_exists "ps4/ui/game/game1.layout_ps4"}
