@@ -12,7 +12,7 @@ for /R "%~dp0_tmpbuild" %%f in (*.dta) do IF NOT "%%~xf" == ".dta_dta_ps4" depen
 for /R "%~dp0_tmpbuild" %%f in (*.script) do IF NOT "%%~xf" == ".script_dta_ps4" dependencies\dtxtool\dtxtool dta2b "%%f" "%%~dpnf.script_dta_ps4" 3
 for /R "%~dp0_tmpbuild" %%f in (*.dta) do IF NOT "%%~xf" == ".dta_dta_ps4" del "%%f"
 for /R "%~dp0_tmpbuild" %%f in (*.script) do IF NOT "%%~xf" == ".script_dta_ps4" del "%%f"
-echo:Converting pngs...
+rem echo:Converting pngs...
 for /R "%~dp0_tmpbuild" %%f in (*.png) do IF NOT "%%~xf" == ".png_ps4" del "%%f"
 for /R "%~dp0_tmpbuild" %%f in (*.gitkeep) do del "%%f"
 xcopy /q /e /y _tmpbuild _build\GoldHEN\RB4DX\ps4\

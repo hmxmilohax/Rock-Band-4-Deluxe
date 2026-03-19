@@ -14,6 +14,7 @@
       {if
          {|| {== $action kAction_Confirm } {== $action kAction_Start}}
             {$overshell attempt_to_add_user $user }
+            {set $num_active_users {+ $num_active_users 1}}
             {$this trigger_start_effects }
       }
    ) 
@@ -62,7 +63,7 @@
             {dx_file_delete "ps4/track/drums_unlit.scene_ps4"}
             {dx_file_rename "ps4/track/drums_unlit.scene_ps4" "ps4/track/vocals_drum.scene_ps4"}
          }
-         {if {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
+         {if_else {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
             {dx_file_delete "ps4/track/vocals.scene_ps4"}
             {dx_file_rename "ps4/track/vocals.scene_ps4" "ps4/track/drums_unlit_vocals.scene_ps4"}
          }
@@ -126,7 +127,7 @@
                      }
                   }
                )
-               (overshell_bass 
+               (overshell_bass
                   {$this select_part kTrackBass }
                   {if {== {{$this get_user} get_slot_num} kGameSlotDrum}
                      {if_else {file_exists "settings/visuals/trackangle.dta"}
@@ -199,8 +200,13 @@
                      ((kGameSlotGuitar0 kGameSlotGuitar1)
                         {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro)}
                      )
-                     ((kGameSlotDrum kGameSlotVocals)
+                     (kGameSlotDrum
                         {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro overshell_vocal_solo overshell_vocal_harmony)}
+                     )
+                     (kGameSlotVocals
+                        {if {<= $num_active_users 1}
+                           {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums overshell_drums_pro overshell_vocal_solo overshell_vocal_harmony)}
+                        }
                      )
                   }
                )
@@ -221,12 +227,13 @@
                         }
                      )
                      (kGameSlotVocals
-                        {if_else {dx_file_exists "ps4/track/vocals.scene_ps4"}
-                           {if_else {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
-                              {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums)}
-                              {$this setup_confirm_actions a (overshell_drums overshell_drums_pro)}
+                        {if {<= $num_active_users 1}
+                           {if {dx_file_exists "ps4/track/vocals.scene_ps4"}
+                              {if_else {dx_file_exists "ps4/track/drums_unlit_vocals.scene_ps4"}
+                                 {$this setup_confirm_actions a (overshell_guitar overshell_bass overshell_drums)}
+                                 {$this setup_confirm_actions a (overshell_drums overshell_drums_pro)}
+                              }
                            }
-                           {$this setup_confirm_actions a (overshell_vocal_solo overshell_vocal_harmony)}
                         }
                      )
                   }
@@ -606,3 +613,153 @@
 ;             {$this update_vocal_part_icon kScoreHarmony })}) 
 ;    (on_cancel 
 ;       {$this leave_choose_part }))
+
+(kState_ConnectMic 
+   (view confirm_action) 
+   (prevents_override TRUE) 
+   (on_cancel 
+      {$this show_state kState_ChooseDiff } 
+      {$this trigger_cancel_effects }) 
+   (enter 
+      {if_else 
+         {|| 
+            {$this in_venue_meta_mode }
+            {$this in_song }}
+         {$this setup_confirm_actions solo_vocalist_needs_mic 
+            (overshell_continue overshell_leave)}
+         {$this setup_confirm_actions solo_vocalist_needs_mic 
+            (overshell_continue)}}) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_continue 
+            {$this show_state kState_ChooseDiff })
+         (overshell_leave 
+            {set $num_active_users {- $num_active_users 1}}
+            {$this attempt_remove_user })} 
+      {$this trigger_select_effects }))
+(kState_Options 
+   (view 
+      {$this get_auto_list_view }) 
+   (enter 
+      {$this setup_options_list $this } 
+      {$this end_char_management_session } 
+      {$this hide_preview_char } 
+      {$this deactivate_preview_scene_if_needed } 
+      {$this end_somp_player_management_session } 
+      {$this clear_selected_emote_category } 
+      {$this clear_volume_slider_last_state }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {local $list_widget 
+         {
+            ($objId UIListCom)get_data_in_column widget_type }} 
+      {if_else 
+         {== $list_widget kOvershellText }
+         {switch $list_data 
+            (overshell_return 
+               {$this leave_options })
+            (overshell_change_character 
+               {$this show_choose_char } 
+               {$this trigger_select_effects })
+            (instrument_options 
+               {$this show_instrument_options } 
+               {$this trigger_select_effects })
+            (profile_stats 
+               {$this go_to_player_stats } 
+               {$this trigger_select_effects })
+            (overshell_change_profile 
+               {$this change_profile } 
+               {$this trigger_select_effects })
+            (overshell_leave 
+               {set $num_active_users {- $num_active_users 1}}
+               {$this attempt_remove_user } 
+               {$this trigger_select_effects })
+            (overshell_online_settings 
+               {$this show_online_settings } 
+               {$this trigger_select_effects })
+            (overshell_somp_quit_session 
+               {$this show_somp_quit_session_confirm } 
+               {$this trigger_select_effects })
+            (overshell_somp_return_to_green_room 
+               {$this show_somp_return_to_green_room_confirm } 
+               {$this trigger_select_effects })
+            (overshell_somp_return_to_music_library 
+               {$this show_somp_return_to_music_library_confirm } 
+               {$this trigger_select_effects })
+            (overshell_somp_exit_submenu 
+               {$this show_online_exit_submenu } 
+               {$this trigger_select_effects })
+            (overshell_online_emote 
+               {$this show_somp_pick_emote_category } 
+               {$this trigger_select_effects })
+            (overshell_visit_rock_shop 
+               {$this start_generic_shop_session } 
+               {$this trigger_select_effects })
+            (overshell_rock_shop_tracktex 
+               {$this start_track_tex_shop_session } 
+               {$this trigger_select_effects })}
+         {$this trigger_select_disabled_effects }}) 
+   (on_cancel 
+      {$this leave_options }) 
+   (on_start 
+      ($user) 
+      {$this leave_options } 
+      {$this trigger_start_effects }))
+(kState_RemoveUserInSongConfirm 
+   (view confirm_action) 
+   (enter 
+      {$this setup_confirm_actions overshell_confirm_remove_user_in_song 
+         (overshell_confirm_yes overshell_confirm_no)overshell_confirm_no }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_confirm_yes 
+            {set $num_active_users {- $num_active_users 1}}
+            {$this attempt_remove_user })
+         (overshell_confirm_no 
+            {if_else 
+               {$this in_venue_meta_mode }
+               {$this show_state kState_VenueMetaMenu }
+               {$this show_in_song_menu }})} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {if_else 
+         {$this in_venue_meta_mode }
+         {$this show_state kState_VenueMetaMenu }
+         {$this show_in_song_menu }} 
+      {$this trigger_cancel_effects }))
+(kState_SongOptionsCancel 
+   (view 
+      {$this get_auto_confirm_view }) 
+   (song_settings_flow TRUE) 
+   (part_unresolved TRUE) 
+   (enter 
+      {$this setup_song_options_cancel }) 
+   (SELECT_MSG 
+      {local $list_data 
+         {
+            ($objId UIListCom)get_data_in_column token }} 
+      {switch $list_data 
+         (overshell_confirm_yes 
+            {$overshell end_override_flow kOverrideFlow_SongSettings TRUE })
+         (overshell_confirm_no 
+            {$this show_song_options })
+         (overshell_leave 
+            {set $num_active_users {- $num_active_users 1}}
+            {$this attempt_remove_user })
+         (overshell_somp_quit_session 
+            {$this show_somp_quit_session_confirm })
+         (overshell_somp_return_to_green_room 
+            {$this show_somp_return_to_green_room_confirm })
+         (overshell_somp_return_to_music_library 
+            {$this show_somp_return_to_music_library_confirm })} 
+      {$this trigger_select_effects }) 
+   (on_cancel 
+      {$this show_song_options }))
