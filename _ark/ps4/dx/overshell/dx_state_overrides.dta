@@ -248,6 +248,18 @@
    )
    (on_cancel)
 )
+(kState_ChoosePartWait 
+   (view list_long) 
+   (song_settings_flow TRUE) 
+   (part_unresolved TRUE) 
+   (shows_extended_mic_arrows TRUE) 
+   (allows_uilist_input FALSE) 
+   (force_uilist_focus TRUE) 
+   (show_online_spinner 
+      {$this is_somp }) 
+   (on_cancel 
+      {$this leave_choose_part_wait } 
+      {$this trigger_cancel_effects }))
 
 (kState_ChooseDiff 
    (view list_medium) 
