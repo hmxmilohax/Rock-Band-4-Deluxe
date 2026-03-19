@@ -109,6 +109,7 @@
       {$this trigger_cancel_effects}
    )
 )
+
 (dxState_InGameWarn
    (view confirm_action)
    (enter 
@@ -231,6 +232,34 @@
          )
          ("Edit"
             {$this show_state dxState_GemColorSettings}
+         )
+      }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_TrackTheme}
+      {$this trigger_cancel_effects}
+   )
+)
+
+(dxState_StaticMenuBackgroudConfirm
+   (view confirm_action)
+   (enter
+      {$this setup_confirm_actions "Would you like to reset Menu BGs to default or edit your static BG?" ("Reset" "Edit")}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("Reset"
+            {dx_file_rename "ps4/ui/background/meta_background.scene_ps4" "ps4/ui/background/meta_background1.scene_ps4"}
+            {dx_file_delete "settings/visuals/menubg.dta"}
+            {if_else {&& {is_emu} {! {file_exists "settings/emu_override.dta"}}}
+               {$this show_state dxState_EmuWarn}
+               {$this show_state dxState_DelayedEffectWarn}
+            }
+         )
+         ("Edit"
+            {$this show_state dxState_StaticMenuBackgroudSelector}
          )
       }
       {$this trigger_select_effects}

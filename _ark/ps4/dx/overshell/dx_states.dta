@@ -527,7 +527,7 @@
                ;"Song Title..."
                "Overshell Theme"
                {if_else $nvidiaoverride "Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF"}
-               {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+               {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
             )
          }
 
@@ -540,7 +540,7 @@
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
                ;"Song Title..."
                "Overshell Theme"
-               {if_else $menubg "Menu BGs: OFF" "Menu BGs: ON"}
+               {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
             )
          }
       }
@@ -632,22 +632,12 @@
             {$this show_state dxState_MTVElements}
             {$this trigger_select_effects}
          )
-         (("Menu BGs: OFF" "Menu BGs: ON")
-            {set $menubg {! $menubg}}
-            {if_else $menubg
-               {do
-                  {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
-                  {dx_write_null_file "settings/visuals/menubg.dta"}
-               }
-               {do
-                  {dx_file_rename "ps4/ui/background/meta_background.scene_ps4" "ps4/ui/background/meta_background1.scene_ps4"}
-                  {dx_file_delete "settings/visuals/menubg.dta"}
-               }
-            }
-            {if_else {&& {is_emu} {! {file_exists "settings/emu_override.dta"}}}
-               {$this show_state dxState_EmuWarn}
-               {$this show_state dxState_DelayedEffectWarn}
-            }
+         ("Static Menu BG: ON"
+            {$this show_state dxState_StaticMenuBackgroudConfirm}
+            {$this trigger_select_effects}
+         )
+         ("Static Menu BG: OFF"
+            {$this show_state dxState_StaticMenuBackgroudSelector}
             {$this trigger_select_effects}
          )
          ("Overshell Theme"
@@ -675,6 +665,33 @@
    (on_cancel 
       {set $dx_cur_state FALSE}
       {$this show_state dxState_DeluxeSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+;Static Menu Background Selector
+(dxState_StaticMenuBackgroudSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist 0}}
+      {$this setup_confirm_actions a $texturelist}
+      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
+      ;SET_HIGHWAY_TEX_VAR
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+      {dx_write_null_file "settings/visuals/menubg.dta"}
+      {if {dx_file_exists "ps4/ui/shared/menu_bg_ui.bmp_ps4"}
+         {dx_file_delete "ps4/ui/shared/menu_bg_ui.bmp_ps4"}
+      }
+      {dx_file_copy {sprint "ps4/dx/custom_textures/backgrounds/" $list_data ".png_ps4"} "ps4/ui/shared/menu_bg_ui.bmp_ps4"}
+      {$this show_state dxState_DelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_VisSettings}
       {$this trigger_cancel_effects}
    )
 )
@@ -1095,7 +1112,7 @@
    (enter
       {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
-      {remove_elem $texturelist {elem $texturelist             0}}
+      {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
       ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
       ;SET_HIGHWAY_TEX_VAR

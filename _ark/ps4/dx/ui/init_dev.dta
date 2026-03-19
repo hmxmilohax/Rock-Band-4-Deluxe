@@ -167,10 +167,10 @@ UPDATE_SETTINGS
 	}
 }
 {if {&& {file_exists "settings/visuals/menubg.dta"} {dx_file_exists "ps4/ui/background/meta_background1.scene_ps4"}}
-	{if_else {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}
-		{dx_file_delete "ps4/ui/background/meta_background1.scene_ps4"}
-		{dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
+	{if {dx_file_exists "ps4/ui/background/meta_background.scene_ps4"}
+		{dx_file_delete "ps4/ui/background/meta_background.scene_ps4"}
 	}
+	{dx_file_rename "ps4/ui/background/meta_background1.scene_ps4" "ps4/ui/background/meta_background.scene_ps4"}
 }
 {if {&& {file_exists "settings/visuals/noshine.dta"} {dx_file_exists "ps4/track/shared/track_skin_swap1.sgraph_ps4ps4"}}
 	{if_else {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}
