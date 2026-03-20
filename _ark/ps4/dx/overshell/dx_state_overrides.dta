@@ -51,7 +51,7 @@
 )
 
 (kState_ChoosePart 
-   (view list_long) 
+   (view {if_else {file_exists "settings/controller/additionalparts.dta"} list_long list_short}) 
    (song_settings_flow TRUE) 
    (part_unresolved TRUE) 
    (shows_extended_mic_arrows TRUE) 
@@ -249,7 +249,7 @@
    (on_cancel)
 )
 (kState_ChoosePartWait 
-   (view list_long) 
+   (view {if_else {file_exists "settings/controller/additionalparts.dta"} list_long list_short}) 
    (song_settings_flow TRUE) 
    (part_unresolved TRUE) 
    (shows_extended_mic_arrows TRUE) 
