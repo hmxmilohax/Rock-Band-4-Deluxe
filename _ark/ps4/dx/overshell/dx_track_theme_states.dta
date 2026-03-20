@@ -189,7 +189,7 @@
 (dxState_GemTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 4 (Beta)" "Rock Band 1")}
+      {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 4 (Beta)" "Rock Band 1" "Guitar Hero 2")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -198,16 +198,39 @@
             {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
+            {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
          )
          ("Rock Band 4 (Beta)"
+            {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
-            {dx_file_copy "ps4/track/guitar/gem.entity_ps4" "ps4/track/guitar/gem_unlit.entity_ps4"}
-            {dx_file_copy "ps4/track/guitar/gem.entity_ps4" "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
+            {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/rb4_proto.entity_ps4" "ps4/track/guitar/gem_unlit.entity_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/rb4_proto.entity_ps4" "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
          )
          ("Rock Band 1"
             {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
-            {dx_file_copy "ps4/track/guitar/gem_hopo_util_rb1.bmp_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
+            {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/rb1.bmp_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+         )
+         ("Guitar Hero 2"
+            {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2_hopo.png_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2.entity_ps4" "ps4/track/guitar/gem_unlit.entity_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2_hopo.entity_ps4" "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2.fbx++mesh++gem_ps4" "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gh2_hopo.fbx++mesh++hopo_gem_ps4" "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
          )
       }
       {if_else {$this in_song}

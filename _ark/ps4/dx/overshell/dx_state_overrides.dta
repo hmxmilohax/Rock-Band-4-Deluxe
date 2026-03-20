@@ -679,7 +679,7 @@
                {$this show_choose_char } 
                {$this trigger_select_effects })
             (instrument_options 
-               {$this show_instrument_options } 
+               {$this show_state dxState_DeluxeSettings}
                {$this trigger_select_effects })
             (profile_stats 
                {$this go_to_player_stats } 
