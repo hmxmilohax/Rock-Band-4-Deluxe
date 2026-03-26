@@ -346,7 +346,10 @@
                   {dx_file_delete "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
                }
             }
-            {$this show_state dxState_DelayedEffectWarn}
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXGP_DATA
+            }
             {$this trigger_select_effects}
          )
       }
