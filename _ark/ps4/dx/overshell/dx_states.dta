@@ -539,10 +539,8 @@
             "Select Venue"
             {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
             {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-            ;{if_else $noui "HUD: OFF" "HUD: ON"}
             "HUD..."
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-            ;"Song Title..."
             "Overshell Theme"
          )
       }
@@ -555,7 +553,7 @@
                {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                "HUD..."
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-               ;"Song Title..."
+               {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
                "Overshell Theme"
                {if_else $nvidiaoverride "Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF"}
                {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
@@ -569,7 +567,7 @@
                {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                "HUD..."
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-               ;"Song Title..."
+               {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
                "Overshell Theme"
                {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
             )
@@ -607,6 +605,15 @@
                {dx_file_delete "settings/visuals/60fpsbg.dta"}
             }
             {$this show_state dxState_DelayedEffectWarn}
+            {$this trigger_select_effects}
+         )
+         (("Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF")
+            {set_plugin_var origininsongsel {! {get_plugin_var origininsongsel}}}
+            {if_else {get_plugin_var origininsongsel}
+               {dx_write_null_file "settings/visuals/origininsongsel.dta"}
+               {dx_file_delete "settings/visuals/origininsongsel.dta"}
+            }
+            RB4DXVIS_DATA
             {$this trigger_select_effects}
          )
          (("Crowd Meter: ON" "Crowd Meter: OFF")

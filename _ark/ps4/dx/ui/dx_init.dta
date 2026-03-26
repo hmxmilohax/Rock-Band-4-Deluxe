@@ -20,6 +20,7 @@
 ;visual settings
 {set $blackbg {file_exists "settings/visuals/blackbg.dta"}}
 {set $60fpsbg {file_exists "settings/visuals/60fpsbg.dta"}}
+{set_plugin_var origininsongsel {file_exists "settings/visuals/origininsongsel.dta"}}
 {set $micwarn {file_exists "settings/visuals/micwarn.dta"}}
 
 ;mtv settings
