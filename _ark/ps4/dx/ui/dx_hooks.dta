@@ -41,3 +41,13 @@ SET_PAD_BINDING_HOOK
    {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
    ENABLE_INSTA_FAIL
 }
+
+{if $toughcrowd
+   {set_elem {find $syscfg gamemodes defaults allow_no_fail } 1 FALSE}
+   ENABLE_TOUGH_CROWD
+}
+
+{if $nolanes
+   ENABLE_NOLANES
+   {dx_write_null_file "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+}

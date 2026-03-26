@@ -267,6 +267,9 @@ UPDATE_SETTINGS
 {if {! {file_exists "settings/venue/enabled.dta"}}
 	DELETE_INVALID_VENUE_DTAS
 }
+{if {&& {! {file_exists "settings/gameplay/nolanes.dta"}} {dx_file_exists "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}}
+	{dx_file_delete "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+}
 {if {dx_file_exists "ps4/config/include/beatmatcher.dta_dta_ps4"}
    {dx_file_delete "ps4/config/include/beatmatcher.dta_dta_ps4"}
 }

@@ -142,6 +142,7 @@
             (
                "Enter Calibration Numbers"
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
+               {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -152,6 +153,7 @@
          {$this setup_confirm_actions a 
             (
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
+               {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -165,6 +167,7 @@
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
             {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
+            {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -325,6 +328,23 @@
             {if_else $tiltsens
                {dx_write_null_file "settings/gameplay/tiltsens.dta"}
                {dx_file_delete "settings/gameplay/tiltsens.dta"}
+            }
+            {$this show_state dxState_DelayedEffectWarn}
+            {$this trigger_select_effects}
+         )
+         (("No Lanes: ON" "No Lanes: OFF")
+            {set $nolanes {! $nolanes}}
+            {if_else $nolanes
+               {do
+                  {dx_write_null_file "settings/gameplay/nolanes.dta"}
+                  ENABLE_NOLANES
+                  {dx_write_null_file "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+               }
+               {do
+                  {dx_file_delete "settings/gameplay/nolanes.dta"}
+                  DISABLE_NOLANES
+                  {dx_file_delete "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+               }
             }
             {$this show_state dxState_DelayedEffectWarn}
             {$this trigger_select_effects}
