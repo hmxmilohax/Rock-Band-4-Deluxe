@@ -578,7 +578,7 @@
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
                {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
                "Overshell Theme"
-               {if_else $nvidiaoverride "Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF"}
+               {if_else $nvidiaoverride "Fix GPU Driver Crash: ON" "Fix GPU Driver Crash: OFF"}
                {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
             )
          }
@@ -660,7 +660,7 @@
          ("HUD..."
             {$this show_state dxState_HUDElements}
          )
-         (("Fix Nvidia Driver Crash: ON" "Fix Nvidia Driver Crash: OFF")
+         (("Fix GPU Driver Crash: ON" "Fix GPU Driver Crash: OFF")
             {set $nvidiaoverride {! $nvidiaoverride}}
             {if_else $nvidiaoverride
                {do
