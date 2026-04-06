@@ -315,4 +315,14 @@ UPDATE_SETTINGS
 	{file_rmdir "/data/GoldHEN/RB4DX/ps4/ui_prerivals"}
 }
 
+{if {is_emu}
+	{if_else {file_exists "emucrashdetect.dta"}
+		{do
+			{dx_file_delete "settings/emu_override.dta"}
+			{dx_file_delete "emucrashdetect.dta"}
+		}
+		{dx_write_null_file "emucrashdetect.dta"}
+	}
+}
+
 {write_file "data:/GoldHEN/RB4DX/discordrp.json" {array ({sprint "{\qGame mode\q:\qdefaults\q}"})}}

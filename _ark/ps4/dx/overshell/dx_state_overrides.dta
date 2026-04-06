@@ -27,6 +27,7 @@
    (ready_to_play TRUE) 
    (retracted_position TRUE) 
    (enter 
+      {dx_file_delete "emucrashdetect.dta"}
       {$this end_char_management_session} 
       {$this hide_preview_char} 
       {$this deactivate_preview_scene_if_needed} 
