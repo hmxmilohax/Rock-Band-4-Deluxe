@@ -137,7 +137,7 @@
 #define RB4DXGP_DATA
 (
    {if_else {$this in_song}
-      {if_else {|| {! {get_plugin_var saving}} $calibrationmode $precisionmode}
+      {if_else {|| {! {file_exists "saving.ini"}} $calibrationmode $precisionmode}
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
