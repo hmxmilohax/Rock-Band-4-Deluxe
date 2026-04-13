@@ -804,6 +804,18 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {dx_file_rmdir "settings/resolution"}
+      {if {file_exists "settings/resolution/enabled.dta"} ; backup reset resolution if rmdir fails
+         {dx_file_delete "settings/resolution/enabled.dta"}
+         {dx_file_delete "settings/resolution/1024x576.dta"}
+         {dx_file_delete "settings/resolution/1280x720.dta"}
+         {dx_file_delete "settings/resolution/1366x768.dta"}
+         {dx_file_delete "settings/resolution/1536x864.dta"}
+         {dx_file_delete "settings/resolution/1600x900.dta"}
+         {dx_file_delete "settings/resolution/2048x1152.dta"}
+         {dx_file_delete "settings/resolution/2560x1440.dta"}
+         {dx_file_delete "settings/resolution/3264x1836.dta"}
+         {dx_file_delete "settings/resolution/3840x2160.dta"}
+      }
       {dx_file_mkdir "settings/resolution"}
       {switch $list_data
          (1024x576
