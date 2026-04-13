@@ -582,18 +582,32 @@
                {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
             )
          }
-
-         {$this setup_confirm_actions a 
-            (
-               "Select Venue"
-               {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
-               {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
-               "HUD..."
-               {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
-               {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
-               "Overshell Theme"
-               {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
-            )
+         {if_else {is_neo}
+            {$this setup_confirm_actions a 
+               (
+                  "Select Venue"
+                  "Set Resolution"
+                  {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+                  {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+                  "HUD..."
+                  {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+                  {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
+                  "Overshell Theme"
+                  {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
+               )
+            }
+            {$this setup_confirm_actions a 
+               (
+                  "Select Venue"
+                  {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+                  {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
+                  "HUD..."
+                  {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
+                  {if_else {get_plugin_var origininsongsel} "Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF"}
+                  "Overshell Theme"
+                  {if_else $menubg "Static Menu BG: ON" "Static Menu BG: OFF"}
+               )
+            }
          }
       }
    }
@@ -761,19 +775,30 @@
 (dxState_ResolutionSelector
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a
-         (
-            1024x576
-            1280x720
-            1366x768
-            1536x864
-            1600x900
-            1920x1080
-            2048x1152
-            2560x1440
-            3k
-            4k
-         )
+      {if_else {is_neo}
+         {$this setup_confirm_actions a
+            (
+               1920x1080
+               2048x1152
+               2560x1440
+               3k
+               4k
+            )
+         }
+         {$this setup_confirm_actions a
+            (
+               1024x576
+               1280x720
+               1366x768
+               1536x864
+               1600x900
+               1920x1080
+               2048x1152
+               2560x1440
+               3k
+               4k
+            )
+         }
       }
    )
    (SELECT_MSG

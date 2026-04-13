@@ -24,4 +24,19 @@
 (xb1 
    (resolutions 1920x1080))
 (ps4 
-   (resolutions {if_else {is_emu} {if_else {file_exists "settings/resolution/enabled.dta"} RESSWITCH 1920x1080} 1920x1080}))
+   (resolutions 
+      {if_else {is_emu} 
+         {if_else {file_exists "settings/resolution/enabled.dta"} 
+            RESSWITCH 
+            1920x1080
+         } 
+         {if_else {is_neo}
+            {if_else {file_exists "settings/resolution/enabled.dta"}
+               RESSWITCH
+               1920x1080
+            }
+            1920x1080
+         }
+      }
+   )
+)

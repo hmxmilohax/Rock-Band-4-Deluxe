@@ -354,13 +354,19 @@
       ;       {set $joytext {joypad_controller_type_padnum $i}}
       ;    }
       ; }
-      {if {== {get_user_from_pad_num 4} {$this get_user}}
-         {set $joytext {joypad_controller_type_padnum 4}}
-      }
+      ;{if {== {get_user_from_pad_num 4} {$this get_user}}
+      ;   {set $joytext {joypad_controller_type_padnum 4}}
+      ;}
       ;{set $joytext {joypad_controller_type_padnum 1}}
-      {$this setup_confirm_actions 
-         {sprint $joytext}
-         (overshell_confirm_ok)
+      {if_else {is_neo}
+         {$this setup_confirm_actions 
+            "neo"
+            (overshell_confirm_ok)
+         }
+         {$this setup_confirm_actions 
+            "not neo"
+            (overshell_confirm_ok)
+         }
       }
    )
    (SELECT_MSG
