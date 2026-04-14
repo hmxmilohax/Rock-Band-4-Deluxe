@@ -128,6 +128,289 @@
    )
 )
 
+#define PER_CONTROLLER_CALIBRATION_DATA
+(
+   {switch $selected_pad_type
+      ("Dualshock"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var pad_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 1 Guitar"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb1_guitar_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 2/3 Guitar"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb2_guitar_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 4 Stratocaster"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb4_strat_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 4 Jaguar/Riffmaster"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb4_jag_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Guitar Hero Guitar"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var gh_guitar_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 1 Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb1_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 2/3 Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb2_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Band 4 Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rb4_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Guitar Hero Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var gh_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("Rock Revolution Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var rr_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+      ("MIDI Pro Adapter Drums"
+         {$this setup_confirm_actions {sprintf "Per-Controller Calibration: %d ms" {* {get_plugin_var mpa_drums_extra_lag} -1}} ("+" "Reset" "-")}
+      )
+   }
+)
+#define PER_CONTROLLER_CALIBRATION_ADD
+(
+   {switch $selected_pad_type
+      ("Dualshock"
+         {unless {< {- {get_plugin_var pad_extra_lag} 1} -300}
+            {set_plugin_var pad_extra_lag {- {get_plugin_var pad_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 1 Guitar"
+         {unless {< {- {get_plugin_var rb1_guitar_extra_lag} 1} -300}
+            {set_plugin_var rb1_guitar_extra_lag {- {get_plugin_var rb1_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 2/3 Guitar"
+         {unless {< {- {get_plugin_var rb2_guitar_extra_lag} 1} -300}
+            {set_plugin_var rb2_guitar_extra_lag {- {get_plugin_var rb2_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Stratocaster"
+         {unless {< {- {get_plugin_var rb4_strat_extra_lag} 1} -300}
+            {set_plugin_var rb4_strat_extra_lag {- {get_plugin_var rb4_strat_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Jaguar/Riffmaster"
+         {unless {< {- {get_plugin_var rb4_jag_extra_lag} 1} -300}
+            {set_plugin_var rb4_jag_extra_lag {- {get_plugin_var rb4_jag_extra_lag} 1}}
+         }
+      )
+      ("Guitar Hero Guitar"
+         {unless {< {- {get_plugin_var gh_guitar_extra_lag} 1} -300}
+            {set_plugin_var gh_guitar_extra_lag {- {get_plugin_var gh_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 1 Drums"
+         {unless {< {- {get_plugin_var rb1_drums_extra_lag} 1} -300}
+            {set_plugin_var rb1_drums_extra_lag {- {get_plugin_var rb1_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 2/3 Drums"
+         {unless {< {- {get_plugin_var rb2_drums_extra_lag} 1} -300}
+            {set_plugin_var rb2_drums_extra_lag {- {get_plugin_var rb2_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Drums"
+         {unless {< {- {get_plugin_var rb4_drums_extra_lag} 1} -300}
+            {set_plugin_var rb4_drums_extra_lag {- {get_plugin_var rb4_drums_extra_lag} 1}}
+         }
+      )
+      ("Guitar Hero Drums"
+         {unless {< {- {get_plugin_var gh_drums_extra_lag} 1} -300}
+            {set_plugin_var gh_drums_extra_lag {- {get_plugin_var gh_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Revolution Drums"
+         {unless {< {- {get_plugin_var rr_drums_extra_lag} 1} -300}
+            {set_plugin_var rr_drums_extra_lag {- {get_plugin_var rr_drums_extra_lag} 1}}
+         }
+      )
+      ("MIDI Pro Adapter Drums"
+         {unless {< {- {get_plugin_var mpa_drums_extra_lag} 1} -300}
+            {set_plugin_var mpa_drums_extra_lag {- {get_plugin_var mpa_drums_extra_lag} 1}}
+         }
+      )
+   }
+)
+#define PER_CONTROLLER_CALIBRATION_SUB
+(
+   {switch $selected_pad_type
+      ("Dualshock"
+         {unless {> {+ {get_plugin_var pad_extra_lag} 1} 300}
+            {set_plugin_var pad_extra_lag {+ {get_plugin_var pad_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 1 Guitar"
+         {unless {> {+ {get_plugin_var rb1_guitar_extra_lag} 1} 300}
+            {set_plugin_var rb1_guitar_extra_lag {+ {get_plugin_var rb1_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 2/3 Guitar"
+         {unless {> {+ {get_plugin_var rb2_guitar_extra_lag} 1} 300}
+            {set_plugin_var rb2_guitar_extra_lag {+ {get_plugin_var rb2_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Stratocaster"
+         {unless {> {+ {get_plugin_var rb4_strat_extra_lag} 1} 300}
+            {set_plugin_var rb4_strat_extra_lag {+ {get_plugin_var rb4_strat_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Jaguar/Riffmaster"
+         {unless {> {+ {get_plugin_var rb4_jag_extra_lag} 1} 300}
+            {set_plugin_var rb4_jag_extra_lag {+ {get_plugin_var rb4_jag_extra_lag} 1}}
+         }
+      )
+      ("Guitar Hero Guitar"
+         {unless {> {+ {get_plugin_var gh_guitar_extra_lag} 1} 300}
+            {set_plugin_var gh_guitar_extra_lag {+ {get_plugin_var gh_guitar_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 1 Drums"
+         {unless {> {+ {get_plugin_var rb1_drums_extra_lag} 1} 300}
+            {set_plugin_var rb1_drums_extra_lag {+ {get_plugin_var rb1_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 2/3 Drums"
+         {unless {> {+ {get_plugin_var rb2_drums_extra_lag} 1} 300}
+            {set_plugin_var rb2_drums_extra_lag {+ {get_plugin_var rb2_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Band 4 Drums"
+         {unless {> {+ {get_plugin_var rb4_drums_extra_lag} 1} 300}
+            {set_plugin_var rb4_drums_extra_lag {+ {get_plugin_var rb4_drums_extra_lag} 1}}
+         }
+      )
+      ("Guitar Hero Drums"
+         {unless {> {+ {get_plugin_var gh_drums_extra_lag} 1} 300}
+            {set_plugin_var gh_drums_extra_lag {+ {get_plugin_var gh_drums_extra_lag} 1}}
+         }
+      )
+      ("Rock Revolution Drums"
+         {unless {> {+ {get_plugin_var rr_drums_extra_lag} 1} 300}
+            {set_plugin_var rr_drums_extra_lag {+ {get_plugin_var rr_drums_extra_lag} 1}}
+         }
+      )
+      ("MIDI Pro Adapter Drums"
+         {unless {> {+ {get_plugin_var mpa_drums_extra_lag} 1} 300}
+            {set_plugin_var mpa_drums_extra_lag {+ {get_plugin_var mpa_drums_extra_lag} 1}}
+         }
+      )
+   }
+)
+#define PER_CONTROLLER_CALIBRATION_RESET
+(
+   {switch $selected_pad_type
+      ("Dualshock"
+         {set_plugin_var pad_extra_lag 0}
+      )
+      ("Rock Band 1 Guitar"
+         {set_plugin_var rb1_guitar_extra_lag -13}
+      )
+      ("Rock Band 2/3 Guitar"
+         {set_plugin_var rb2_guitar_extra_lag -31}
+      )
+      ("Rock Band 4 Stratocaster"
+         {set_plugin_var rb4_strat_extra_lag 1}
+      )
+      ("Rock Band 4 Jaguar/Riffmaster"
+         {set_plugin_var rb4_jag_extra_lag 1}
+      )
+      ("Guitar Hero Guitar"
+         {set_plugin_var gh_guitar_extra_lag -3}
+      )
+      ("Rock Band 1 Drums"
+         {set_plugin_var rb1_drums_extra_lag 26}
+      )
+      ("Rock Band 2/3 Drums"
+         {set_plugin_var rb2_drums_extra_lag 26}
+      )
+      ("Rock Band 4 Drums"
+         {set_plugin_var rb4_drums_extra_lag 26}
+      )
+      ("Guitar Hero Drums"
+         {set_plugin_var gh_drums_extra_lag 26}
+      )
+      ("Rock Revolution Drums"
+         {set_plugin_var rr_drums_extra_lag 26}
+      )
+      ("MIDI Pro Adapter Drums"
+         {set_plugin_var mpa_drums_extra_lag 26}
+      )
+   }
+)
+#define PER_CONTROLLER_CALIBRATION_SAVE
+(
+   {switch $selected_pad_type
+      ("Dualshock"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/pad.dta" {array ({get_plugin_var pad_extra_lag})}}
+      )
+      ("Rock Band 1 Guitar"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb1_guitar.dta" {array ({get_plugin_var rb1_guitar_extra_lag})}}
+      )
+      ("Rock Band 2/3 Guitar"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb2_guitar.dta" {array ({get_plugin_var rb2_guitar_extra_lag})}}
+      )
+      ("Rock Band 4 Stratocaster"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb4_strat.dta" {array ({get_plugin_var rb4_strat_extra_lag})}}
+      )
+      ("Rock Band 4 Jaguar/Riffmaster"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb4_jag.dta" {array ({get_plugin_var rb4_jag_extra_lag})}}
+      )
+      ("Guitar Hero Guitar"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/gh_guitar.dta" {array ({get_plugin_var gh_guitar_extra_lag})}}
+      )
+      ("Rock Band 1 Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb1_drums.dta" {array ({get_plugin_var rb1_drums_extra_lag})}}
+      )
+      ("Rock Band 2/3 Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb2_drums.dta" {array ({get_plugin_var rb2_drums_extra_lag})}}
+      )
+      ("Rock Band 4 Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rb4_drums.dta" {array ({get_plugin_var rb4_drums_extra_lag})}}
+      )
+      ("Guitar Hero Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/gh_drums.dta" {array ({get_plugin_var gh_drums_extra_lag})}}
+      )
+      ("Rock Revolution Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/rr_drums.dta" {array ({get_plugin_var rr_drums_extra_lag})}}
+      )
+      ("MIDI Pro Adapter Drums"
+         {write_file "data:/GoldHEN/RB4DX/settings/calibration/mpa_drums.dta" {array ({get_plugin_var mpa_drums_extra_lag})}}
+      )
+   }
+)
+
+(dxState_ControllerCalibration
+   (view confirm_action) 
+   (enter 
+      PER_CONTROLLER_CALIBRATION_DATA
+   )
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data 
+         ("+"
+            PER_CONTROLLER_CALIBRATION_ADD
+            PER_CONTROLLER_CALIBRATION_DATA
+         )
+         ("Reset"
+            PER_CONTROLLER_CALIBRATION_RESET
+            PER_CONTROLLER_CALIBRATION_DATA
+         )
+         ("-"
+            PER_CONTROLLER_CALIBRATION_SUB
+            PER_CONTROLLER_CALIBRATION_DATA
+         )
+      }
+   )
+   (on_cancel 
+      PER_CONTROLLER_CALIBRATION_SAVE
+      {$this show_state dxState_PerControllerCalibrationSelector}
+      {$this trigger_cancel_effects}
+   )
+)
+
 (dxState_TrackCurve
    (view confirm_action) 
    (enter 

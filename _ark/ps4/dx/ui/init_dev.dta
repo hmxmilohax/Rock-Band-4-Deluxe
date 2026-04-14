@@ -16,6 +16,7 @@
 	{dx_file_mkdir "settings/theme"}
 	{dx_file_mkdir "settings/theme/gem"}
 	{dx_file_mkdir "settings/theme/gem/colors"}
+	{dx_file_mkdir "settings/calibration"}
 )
 #define UPDATE_SETTINGS
 (

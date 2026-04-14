@@ -95,6 +95,57 @@
 ;controller binding
 SET_PAD_BINDING_VAR
 
+;controller calibration
+{set_plugin_var pad_extra_lag 0}
+{set_plugin_var rb1_guitar_extra_lag -13}
+{set_plugin_var rb2_guitar_extra_lag -31}
+{set_plugin_var rb4_strat_extra_lag 1}
+{set_plugin_var rb4_jag_extra_lag 1}
+{set_plugin_var gh_guitar_extra_lag -3}
+{set_plugin_var rb1_drums_extra_lag 26}
+{set_plugin_var rb2_drums_extra_lag 26}
+{set_plugin_var rb4_drums_extra_lag 26}
+{set_plugin_var gh_drums_extra_lag 26}
+{set_plugin_var rr_drums_extra_lag 26}
+{set_plugin_var mpa_drums_extra_lag 26}
+
+{if {file_exists "settings/calibration/pad.dta"}
+   {set_plugin_var pad_extra_lag {int {dx_read_file_as_float "settings/calibration/pad.dta"}}}
+}
+{if {file_exists "settings/calibration/rb1_guitar.dta"}
+   {set_plugin_var rb1_guitar_extra_lag {int {dx_read_file_as_float "settings/calibration/rb1_guitar.dta"}}}
+}
+{if {file_exists "settings/calibration/rb2_guitar.dta"}
+   {set_plugin_var rb2_guitar_extra_lag {int {dx_read_file_as_float "settings/calibration/rb2_guitar.dta"}}}
+}
+{if {file_exists "settings/calibration/rb4_strat.dta"}
+   {set_plugin_var rb4_strat_extra_lag {int {dx_read_file_as_float "settings/calibration/rb4_strat.dta"}}}
+}
+{if {file_exists "settings/calibration/rb4_jag.dta"}
+   {set_plugin_var rb4_jag_extra_lag {int {dx_read_file_as_float "settings/calibration/rb4_jag.dta"}}}
+}
+{if {file_exists "settings/calibration/gh_guitar.dta"}
+   {set_plugin_var gh_guitar_extra_lag {int {dx_read_file_as_float "settings/calibration/gh_guitar.dta"}}}
+}
+{if {file_exists "settings/calibration/rb1_drums.dta"}
+   {set_plugin_var rb1_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/rb1_drums.dta"}}}
+}
+{if {file_exists "settings/calibration/rb2_drums.dta"}
+   {set_plugin_var rb2_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/rb2_drums.dta"}}}
+}
+{if {file_exists "settings/calibration/rb4_drums.dta"}
+   {set_plugin_var rb4_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/rb4_drums.dta"}}}
+}
+{if {file_exists "settings/calibration/gh_drums.dta"}
+   {set_plugin_var gh_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/gh_drums.dta"}}}
+}
+{if {file_exists "settings/calibration/rr_drums.dta"}
+   {set_plugin_var rr_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/rr_drums.dta"}}}
+}
+{if {file_exists "settings/calibration/mpa_drums.dta"}
+   {set_plugin_var mpa_drums_extra_lag {int {dx_read_file_as_float "settings/calibration/mpa_drums.dta"}}}
+}
+
 ;default rgb adjustment interval
 {set $rgbint 1}
 

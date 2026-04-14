@@ -141,6 +141,7 @@
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
+               "Per-Controller Calibration"
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
@@ -163,6 +164,7 @@
       {$this setup_confirm_actions a 
          (
             "Enter Calibration Numbers"
+            "Per-Controller Calibration"
             {if_else {get_plugin_var autoplay} "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
@@ -189,6 +191,10 @@
       {switch $list_data 
          ("Enter Calibration Numbers"
             {$this show_state dxState_CalibrationSelector}
+            {$this trigger_select_effects}
+         )
+         ("Per-Controller Calibration"
+            {$this show_state dxState_PerControllerCalibrationSelector}
             {$this trigger_select_effects}
          )
          (("Autoplay: OFF" "Autoplay: ON")
@@ -378,6 +384,39 @@
          ("Video" {$this show_state dxState_VideoCalibration})
          ("Audio" {$this show_state dxState_AudioCalibration})
       }
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_GPSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Calibration selector
+(dxState_PerControllerCalibrationSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {$this setup_confirm_actions a
+         (
+            "Dualshock"
+            "Rock Band 1 Guitar"
+            "Rock Band 2/3 Guitar"
+            "Rock Band 4 Stratocaster"
+            "Rock Band 4 Jaguar/Riffmaster"
+            "Guitar Hero Guitar"
+            "Rock Band 1 Drums"
+            "Rock Band 2/3 Drums"
+            "Rock Band 4 Drums"
+            "Guitar Hero Drums"
+            "Rock Revolution Drums"
+            "MIDI Pro Adapter Drums"
+         )
+      }
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {set $selected_pad_type $list_data}
+      {$this show_state dxState_ControllerCalibration}
       {$this trigger_select_effects}
    )
    (on_cancel 
