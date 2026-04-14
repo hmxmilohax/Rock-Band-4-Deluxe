@@ -51,3 +51,7 @@ SET_PAD_BINDING_HOOK
    ENABLE_NOLANES
    {dx_write_null_file "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
 }
+
+{if $rb3lanes
+   ENABLE_RB3LANES
+}

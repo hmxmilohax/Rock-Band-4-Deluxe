@@ -144,6 +144,7 @@
                "Per-Controller Calibration"
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
+               {if_else $rb3lanes "RB3 Lanes: ON" "RB3 Lanes: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -155,6 +156,7 @@
             (
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
+               {if_else $rb3lanes "RB3 Lanes: ON" "RB3 Lanes: OFF"}
                {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
                {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
                {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -170,6 +172,7 @@
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
             {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
             {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
+            {if_else $rb3lanes "RB3 Lanes: ON" "RB3 Lanes: OFF"}
             {if_else $nood "Overdrive Gain: OFF" "Overdrive Gain: ON"}
             {if_else $practiceod "OD in Practice: ON" "OD in Practice: OFF"}
             {if_else $syncspeeds "Sync Difficulty Speeds: ON" "Sync Difficulty Speeds: OFF"}
@@ -342,14 +345,35 @@
             {set $nolanes {! $nolanes}}
             {if_else $nolanes
                {do
+                  {set $rb3lanes FALSE}
                   {dx_write_null_file "settings/gameplay/nolanes.dta"}
                   ENABLE_NOLANES
                   {dx_write_null_file "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
                }
                {do
                   {dx_file_delete "settings/gameplay/nolanes.dta"}
-                  DISABLE_NOLANES
+                  RESET_LANES
                   {dx_file_delete "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXGP_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("RB3 Lanes: ON" "RB3 Lanes: OFF")
+            {set $rb3lanes {! $rb3lanes}}
+            {if_else $rb3lanes
+               {do
+                  {set $nolanes FALSE}
+                  {dx_write_null_file "settings/gameplay/rb3lanes.dta"}
+                  ENABLE_RB3LANES
+                  {dx_file_delete "ps4/track/guitar/guitar_roll_lane_unlit.entity_ps4"}
+               }
+               {do
+                  {dx_file_delete "settings/gameplay/rb3lanes.dta"}
+                  RESET_LANES
                }
             }
             {if_else {$this in_song}

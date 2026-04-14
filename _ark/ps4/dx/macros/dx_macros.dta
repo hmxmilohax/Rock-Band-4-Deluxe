@@ -113,7 +113,17 @@
 	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms real_keys} 1 (-100 -100 -100 -100)}
 )
 
-#define DISABLE_NOLANES
+#define ENABLE_RB3LANES
+(
+	{set_elem {find $syscfg beatmatcher watcher trill_interval_ms} 1 (0 0 160 160)}
+	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms drum single_lane} 1 (0 0 165 165)}
+	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms drum double_lane} 1 (0 0 225 225)}
+	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms guitar} 1 (0 0 165 165)}
+	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms bass} 1 (0 0 165 165)}
+	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms real_keys} 1 (0 0 165 165)}
+)
+
+#define RESET_LANES
 (
 	{set_elem {find $syscfg beatmatcher watcher trill_interval_ms} 1 (0 0 184 184)}
 	{set_elem {find $syscfg beatmatcher watcher roll_interval_ms drum single_lane} 1 (0 0 190 190)}
