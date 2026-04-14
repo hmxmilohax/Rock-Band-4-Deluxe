@@ -600,6 +600,7 @@
          (
             "Select Venue"
             {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+            {if_else {get_plugin_var noshake} "Camera Shake: OFF" "Camera Shake: ON"}
             {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
             "HUD..."
             {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
@@ -612,6 +613,7 @@
                "Select Venue"
                "Set Resolution"
                {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+               {if_else {get_plugin_var noshake} "Camera Shake: OFF" "Camera Shake: ON"}
                {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                "HUD..."
                {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
@@ -627,6 +629,7 @@
                   "Select Venue"
                   "Set Resolution"
                   {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+                  {if_else {get_plugin_var noshake} "Camera Shake: OFF" "Camera Shake: ON"}
                   {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                   "HUD..."
                   {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
@@ -639,6 +642,7 @@
                (
                   "Select Venue"
                   {if_else $60fpsbg "60 FPS Venues: ON" "60 FPS Venues: OFF"}
+                  {if_else {get_plugin_var noshake} "Camera Shake: OFF" "Camera Shake: ON"}
                   {if_else $crowdmeter "Crowd Meter: OFF" "Crowd Meter: ON"}
                   "HUD..."
                   {if_else $nohud "Performance Mode: ON" "Performance Mode: OFF"}
@@ -681,6 +685,15 @@
                {dx_file_delete "settings/visuals/60fpsbg.dta"}
             }
             {$this show_state dxState_DelayedEffectWarn}
+            {$this trigger_select_effects}
+         )
+         (("Camera Shake: OFF" "Camera Shake: ON")
+            {set_plugin_var noshake {! {get_plugin_var noshake}}}
+            {if_else {get_plugin_var noshake}
+               {dx_write_null_file "settings/visuals/nocamshake.dta"}
+               {dx_file_delete "settings/visuals/nocamshake.dta"}
+            }
+            RB4DXVIS_DATA
             {$this trigger_select_effects}
          )
          (("Show Game Origin in Music Library: ON" "Show Game Origin in Music Library: OFF")
