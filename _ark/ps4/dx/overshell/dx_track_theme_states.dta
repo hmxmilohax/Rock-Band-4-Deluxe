@@ -56,11 +56,15 @@
                {do
                   {dx_file_rename "ps4/track/guitar/gem_unlit1.sgraph_ps4ps4" "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}
                   {dx_file_rename "ps4/track/drums/gem_cymbal_unlit1.sgraph_ps4ps4" "ps4/track/drums/gem_cymbal_unlit.sgraph_ps4ps4"}
+                  {dx_file_delete "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
+                  {dx_file_copy "ps4/track/drums/gem_unlit1_noshine.sgraph_ps4ps4" "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
                   {dx_write_null_file "settings/visuals/gemshine.dta"}
                }
                {do
                   {dx_file_rename "ps4/track/guitar/gem_unlit.sgraph_ps4ps4" "ps4/track/guitar/gem_unlit1.sgraph_ps4ps4"}
                   {dx_file_rename "ps4/track/drums/gem_cymbal_unlit.sgraph_ps4ps4" "ps4/track/drums/gem_cymbal_unlit1.sgraph_ps4ps4"}
+                  {dx_file_delete "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
+                  {dx_file_copy "ps4/track/drums/gem_unlit1_reset.sgraph_ps4ps4" "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
                   {dx_file_delete "settings/visuals/gemshine.dta"}
                }
             }
@@ -203,6 +207,10 @@
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
             {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
          )
          ("Rock Band 4 (Beta)"
             {dx_file_delete "ps4/track/guitar/gem_unlit.entity_ps4"}
@@ -213,6 +221,10 @@
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
             {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/rb4_proto.entity_ps4" "ps4/track/guitar/gem_unlit.entity_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/rb4_proto.entity_ps4" "ps4/track/guitar/gem_hopo_unlit.entity_ps4"}
          )
@@ -225,6 +237,10 @@
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
             {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/rb1.bmp_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
          )
          ("Guitar Hero 2"
@@ -234,6 +250,10 @@
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_hopo.png_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
@@ -249,6 +269,10 @@
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_darkstrum.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_hopo.png_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
@@ -264,6 +288,10 @@
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_brighthopo.png_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
@@ -279,6 +307,10 @@
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums01_util.bmp_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_darkstrum.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/gh2_brighthopo.png_ps4" "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
@@ -294,6 +326,10 @@
             {dx_file_delete "ps4/track/guitar/gem_hopo_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
+            {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/gems/fnfestival.png_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_normal.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/fnfestival.png_ps4" "ps4/track/guitar/gem_guitar_util.bmp_ps4"}
