@@ -242,7 +242,7 @@ UPDATE_SETTINGS
     )
 }
 
-{unless {dx_file_exists "ps4/track/drums/gem_drum_highlight.bmp_ps4"}
+{unless {dx_file_exists "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
    {dx_file_copy "ps4/dx/custom_textures/gems/gem_drums_highlight.bmp_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
 }
 {unless {dx_file_exists "ps4/track/drums/gem_drums01_util.bmp_ps4"}
