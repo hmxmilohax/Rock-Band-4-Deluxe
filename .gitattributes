@@ -1,3 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.dta linguist-language=Common-Lisp
+_ark/ps4/dx/custom_sounds/shell_music/rock[[:space:]]band[[:space:]]4[[:space:]](1.08).bank filter=lfs diff=lfs merge=lfs -text
+_ark/ps4/dx/custom_sounds/shell_music/rock[[:space:]]band[[:space:]]4[[:space:]](launch).bank filter=lfs diff=lfs merge=lfs -text
+_ark/ps4/dx/custom_sounds/shell_music/rock[[:space:]]band[[:space:]]rivals[[:space:]](unused).bank filter=lfs diff=lfs merge=lfs -text
+_ark/ps4/dx/custom_sounds/shell_music/rockudrama.bank filter=lfs diff=lfs merge=lfs -text

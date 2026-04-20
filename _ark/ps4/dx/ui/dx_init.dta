@@ -357,3 +357,20 @@ SET_PAD_BINDING_VAR
       {dx_write_null_file "settings/venue/none.dta"}
    }
 }
+
+{dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
+{switch {random_int 0 5}
+   (0)
+   (1
+      {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 4 (launch).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+   )
+   (2
+      {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 4 (1.08).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+   )
+   (3
+      {dx_file_copy "ps4/dx/custom_sounds/shell_music/rockudrama.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+   )
+   (4
+      {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band rivals (unused).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+   )
+}
