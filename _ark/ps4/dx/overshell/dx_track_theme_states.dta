@@ -328,6 +328,8 @@
             {dx_file_delete "ps4/track/guitar/gem_normal.bmp_ps4"}
             {dx_file_delete "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_delete "ps4/track/drums/gem_drums01_util.bmp_ps4"}
+            {dx_file_delete "ps4/track/guitar/gem.fbx++mesh++gem_ps4"}
+            {dx_file_delete "ps4/track/guitar/hopo_gem.fbx++mesh++hopo_gem_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/gems/fnfestival.png_ps4" "ps4/track/drums/gem_drums01_util.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/drums/gem_drums_highlight.bmp_ps4"}
             {dx_file_copy "ps4/dx/custom_textures/highways/transparent.png_ps4" "ps4/track/guitar/gem_highlight_util.bmp_ps4"}
