@@ -456,6 +456,7 @@
       (
          "FC SFX"
          "In-Game SFX"
+         "Menu Music"
          {if_else $nomiss "Miss Sounds: OFF" "Miss Sounds: ON"}
          {if_else $nowhammyfx "Whammy FX: OFF" "Whammy FX: ON"}
          {switch $trackmuting
@@ -482,6 +483,10 @@
          )
          ("In-Game SFX"
             {$this show_state dxState_InGameSFXSelector}
+            {$this trigger_select_effects}
+         )
+         ("Menu Music"
+            {$this show_state dxState_MenuMusicSelector}
             {$this trigger_select_effects}
          )
          (("Track Muting: Partial" "Track Muting: Off" "Track Muting: On")
@@ -607,6 +612,39 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {dx_file_delete "ps4/fmod_banks/PS4/ingame sfx.bank"}
       {dx_file_copy {sprint "ps4/dx/custom_sounds/ingame_sfx/" $list_data ".bank"} "ps4/fmod_banks/PS4/ingame sfx.bank"}
+      {$this show_state dxState_DelayedEffectWarn}
+      {$this trigger_select_effects}
+   )
+   (on_cancel 
+      {$this show_state dxState_SFXSettings}
+      {$this trigger_cancel_effects}
+   )
+)
+
+;Menu Music Selector
+(dxState_MenuMusicSelector
+   (view {$this get_auto_list_view})
+   (enter
+      {set $texturelist ()}
+      {set $texturelist_ ()}
+      {resize $texturelist 0}
+      {push_back $texturelist "[Random]"}
+      {push_back $texturelist "[Default]"}
+      {set $texturelist_ {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_sounds/shell_music/*.bank"}}
+      {remove_elem $texturelist_ {elem $texturelist_ 0}}
+      {foreach $entry $texturelist_
+         {push_back $texturelist $entry}
+      }
+      {$this setup_confirm_actions a $texturelist}
+   )
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
+      {dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
+      {if_else {== $list_data "[Random]"}
+         {dx_file_delete "settings/sfx/forcedmenumusic.dta"}
+         {dx_write_null_file "settings/sfx/forcedmenumusic.dta"}
+      }
+      {dx_file_copy {sprint "ps4/dx/custom_sounds/shell_music/" $list_data ".bank"} "ps4/fmod_banks/PS4/shell music.bank"}
       {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )
