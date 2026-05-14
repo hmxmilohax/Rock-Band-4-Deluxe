@@ -333,6 +333,10 @@ UPDATE_SETTINGS
 	{file_rmdir "/data/GoldHEN/RB4DX/ps4/ui_prerivals"}
 }
 
+{if {dx_file_exists "ps4/dx/custom_sounds/shell_music/rock band 4 (1.08).bank"}
+	{dx_file_delete "ps4/dx/custom_sounds/shell_music/rock band 4 (1.08).bank"}
+}
+
 {if {is_emu}
 	{if_else {file_exists "emucrashdetect.dta"}
 		{do
