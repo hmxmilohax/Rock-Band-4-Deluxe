@@ -639,12 +639,10 @@
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
       {if_else {== $list_data "[Random]"}
          {dx_file_delete "settings/sfx/forcedmenumusic.dta"}
-         {dx_write_null_file "settings/sfx/forcedmenumusic.dta"}
+         {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array ($list_data)}}
       }
-      {dx_file_copy {sprint "ps4/dx/custom_sounds/shell_music/" $list_data ".bank"} "ps4/fmod_banks/PS4/shell music.bank"}
       {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}
    )

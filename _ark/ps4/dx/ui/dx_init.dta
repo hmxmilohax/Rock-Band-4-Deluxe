@@ -358,6 +358,11 @@ SET_PAD_BINDING_VAR
    }
 }
 
+{if {&& {! {file_exists "settings/visuals/menubg.dta"}} {file_exists "settings/sfx/forcedmenumusic.dta"}}
+   {dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
+   {dx_file_copy {sprint "ps4/dx/custom_sounds/shell_music/" {elem {read_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta"} 0} ".bank"} "ps4/fmod_banks/PS4/shell music.bank"}
+}
+
 {if {&& {! {file_exists "settings/visuals/menubg.dta"}} {! {file_exists "settings/sfx/forcedmenumusic.dta"}}}
    {dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
    {switch {random_int 0 9}
