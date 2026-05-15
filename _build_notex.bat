@@ -12,6 +12,9 @@ for /R "%~dp0_tmpbuild" %%f in (*.dta) do IF NOT "%%~xf" == ".dta_dta_ps4" depen
 for /R "%~dp0_tmpbuild" %%f in (*.script) do IF NOT "%%~xf" == ".script_dta_ps4" dependencies\dtxtool\dtxtool dta2b "%%f" "%%~dpnf.script_dta_ps4" 3
 for /R "%~dp0_tmpbuild" %%f in (*.dta) do IF NOT "%%~xf" == ".dta_dta_ps4" del "%%f"
 for /R "%~dp0_tmpbuild" %%f in (*.script) do IF NOT "%%~xf" == ".script_dta_ps4" del "%%f"
+echo:Converting locale csvs...
+for /R "%~dp0_tmpbuild" %%f in (*.csv) do IF NOT "%%~xf" == ".csv_ps4" dependencies\forgecsv\forgecsv-windows-x86_64 csv2bin "%%f" "%%~dpnf.csv_ps4" 3
+for /R "%~dp0_tmpbuild" %%f in (*.csv) do IF NOT "%%~xf" == ".csv_ps4" del "%%f"
 rem echo:Converting pngs...
 for /R "%~dp0_tmpbuild" %%f in (*.png) do IF NOT "%%~xf" == ".png_ps4" del "%%f"
 for /R "%~dp0_tmpbuild" %%f in (*.gitkeep) do del "%%f"
