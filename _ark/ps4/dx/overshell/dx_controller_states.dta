@@ -42,8 +42,9 @@
 )
 #define RB4DXSLOT_DATA
 (
-   {$this setup_confirm_actions "Select the instrument type you want to change:\nPress left or right to change the instrument type."
+   {$this setup_confirm_actions a
       (
+         " "
          {switch $gtrslt
             (gtr " - guitar -> guitar + ")
             (drum " - guitar -> drums + ")
@@ -59,135 +60,191 @@
             (drum " - vocals -> drums + ")
             (vox " - vocals -> vocals + ")
          }
+         "  "
       )
    }
 )
 (dxState_SlotOverride
-   (view confirm_action) 
+   (view {$this get_auto_list_view})
    (enter
       RB4DXSLOT_DATA
-      {set $slotentered TRUE}
+      {set $slider_selected FALSE}
+      {$this reset_list_focus }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
          ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
             {set $slot_changed gtr}
-            {$this show_state dxState_SlotChooser}
-            {$this trigger_select_effects}
          )
          ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
             {set $slot_changed drum}
-            {$this show_state dxState_SlotChooser}
-            {$this trigger_select_effects}
          )
          ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
             {set $slot_changed vox}
-            {$this show_state dxState_SlotChooser}
-            {$this trigger_select_effects}
          )
+      }
+      {set $slider_selected {! $slider_selected}}
+      {$this trigger_select_effects}
+   )
+   (list_focus 
+      ($obj_name $obj_id) 
+      {local $ui_list {$this get_ui_list }}
+      {local $list_data {$ui_list get_data_in_column token}}
+      {if_else $slider_selected
+         {if_else $setting_focus
+            {set $setting_focus FALSE}
+            {switch $slot_changed
+               (gtr
+                  {switch $list_data
+                     (" " ;up
+                        {switch $gtrslt
+                           (gtr {set $slot_to drum})
+                           (drum {set $slot_to vox})
+                           (vox {set $slot_to gtr})
+                        }
+                     )
+                     {switch $gtrslt ;down
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
+                  }
+                  CLEAR_SLOT_DTAS
+                  WRITE_SLOT_DTA
+                  SET_SLOT_VAR
+                  CLEAR_INVALID_SLOT_DTAS
+                  RB4DXSLOT_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data token " - guitar -> guitar + "}
+                  {$ui_list set_focus_by_data token " - guitar -> drums + "}
+                  {$ui_list set_focus_by_data token " - guitar -> vocals + "}
+               )
+               (drum
+                  {switch $list_data
+                     ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ") ;up
+                        {switch $drmslt
+                           (gtr {set $slot_to drum})
+                           (drum {set $slot_to vox})
+                           (vox {set $slot_to gtr})
+                        }
+                     )
+                     {switch $drmslt ;down
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
+                  }
+                  CLEAR_SLOT_DTAS
+                  WRITE_SLOT_DTA
+                  SET_SLOT_VAR
+                  CLEAR_INVALID_SLOT_DTAS
+                  RB4DXSLOT_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data token " - drums -> guitar + "}
+                  {$ui_list set_focus_by_data token " - drums -> drums + "}
+                  {$ui_list set_focus_by_data token " - drums -> vocals + "}
+               )
+               (vox
+                  {switch $list_data
+                     ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ") ;up
+                        {switch $voxslt
+                           (gtr {set $slot_to drum})
+                           (drum {set $slot_to vox})
+                           (vox {set $slot_to gtr})
+                        }
+                     )
+                     {switch $voxslt ;down
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
+                  }
+                  CLEAR_SLOT_DTAS
+                  WRITE_SLOT_DTA
+                  SET_SLOT_VAR
+                  CLEAR_INVALID_SLOT_DTAS
+                  RB4DXSLOT_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data token " - vocals -> guitar + "}
+                  {$ui_list set_focus_by_data token " - vocals -> drums + "}
+                  {$ui_list set_focus_by_data token " - vocals -> vocals + "}
+               )
+            }
+         }
+         {cond
+            ({== $list_data " "}
+               {$ui_list set_focus_by_data token " - guitar -> guitar + "}
+               {$ui_list set_focus_by_data token " - guitar -> drums + "}
+               {$ui_list set_focus_by_data token " - guitar -> vocals + "}
+            )
+            ({== $list_data "  "}
+               {$ui_list set_focus_by_data token " - vocals -> guitar + "}
+               {$ui_list set_focus_by_data token " - vocals -> drums + "}
+               {$ui_list set_focus_by_data token " - vocals -> vocals + "}
+            )
+         }
       }
    )
    (UI_BUTTON_DOWN_MSG
       {local $list_data {{$this get_ui_list} get_data_in_column token}}
       {if_else {|| {== $action kAction_Right } {== $action kAction_Left }}
          {do
-            {if_else {== $action kAction_Right }
+            {if_else {== $action kAction_Right } ;also up
                {switch $list_data 
-                  (" - guitar -> guitar + "
+                  ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
                      {set $slot_changed gtr}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
+                     {switch $gtrslt
+                        (gtr {set $slot_to drum})
+                        (drum {set $slot_to vox})
+                        (vox {set $slot_to gtr})
+                     }
                   )
-                  (" - guitar -> drums + "
-                     {set $slot_changed gtr}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
-                  )
-                  (" - guitar -> vocals + "
-                     {set $slot_changed gtr}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
-                  )
-                  (" - drums -> guitar + "
+                  ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
                      {set $slot_changed drum}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
+                     {switch $drmslt
+                        (gtr {set $slot_to drum})
+                        (drum {set $slot_to vox})
+                        (vox {set $slot_to gtr})
+                     }
                   )
-                  (" - drums -> drums + "
-                     {set $slot_changed drum}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
-                  )
-                  (" - drums -> vocals + "
-                     {set $slot_changed drum}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> guitar + "
+                  ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
                      {set $slot_changed vox}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> drums + "
-                     {set $slot_changed vox}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> vocals + "
-                     {set $slot_changed vox}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
+                     {switch $voxslt
+                        (gtr {set $slot_to drum})
+                        (drum {set $slot_to vox})
+                        (vox {set $slot_to gtr})
+                     }
                   )
                }
-               {switch $list_data 
-                  (" - guitar -> guitar + "
+               {switch $list_data ;left and down
+                  ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
                      {set $slot_changed gtr}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
+                     {switch $gtrslt
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
                   )
-                  (" - guitar -> drums + "
-                     {set $slot_changed gtr}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
-                  )
-                  (" - guitar -> vocals + "
-                     {set $slot_changed gtr}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
-                  )
-                  (" - drums -> guitar + "
+                  ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
                      {set $slot_changed drum}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
+                     {switch $drmslt
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
                   )
-                  (" - drums -> drums + "
-                     {set $slot_changed drum}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
-                  )
-                  (" - drums -> vocals + "
-                     {set $slot_changed drum}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> guitar + "
+                  ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
                      {set $slot_changed vox}
-                     {set $slot_to vox}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> drums + "
-                     {set $slot_changed vox}
-                     {set $slot_to gtr}
-                     {$this trigger_select_effects}
-                  )
-                  (" - vocals -> vocals + "
-                     {set $slot_changed vox}
-                     {set $slot_to drum}
-                     {$this trigger_select_effects}
+                     {switch $voxslt
+                        (gtr {set $slot_to vox})
+                        (drum {set $slot_to gtr})
+                        (vox {set $slot_to drum})
+                     }
                   )
                }
             }
+            {$this trigger_select_effects}
             CLEAR_SLOT_DTAS
             WRITE_SLOT_DTA
             SET_SLOT_VAR
@@ -195,11 +252,16 @@
             RB4DXSLOT_DATA
          }
          {if_else {== $action kAction_Cancel}
-            {do
-               {$this show_state dxState_ControllerSettings}
-               {$this trigger_cancel_effects}
-               {set $slotentered FALSE}
-               {$overshell update_all}
+            {if_else $slider_selected
+               {do
+                  {set $slider_selected FALSE}
+                  {$this trigger_cancel_effects}
+               }
+               {do
+                  {$this show_state dxState_ControllerSettings}
+                  {$this trigger_cancel_effects}
+                  {$overshell update_all}
+               }
             }
             kDataUnhandled
          }
@@ -208,47 +270,7 @@
    )
    (on_cancel) ;doesn't work with button down, move to there
 )
-(dxState_SlotChooser
-   (view confirm_action) 
-   (enter
-      {$this setup_confirm_actions "Select the controller type you want to change to:"
-         (
-            "guitar"
-            "drums"
-            "vocals"
-         )
-      }
-   ) 
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom)get_data_in_column token}}  
-      {switch $list_data 
-         ("guitar"
-            {set $slot_to gtr}
-         )
-         ("drums"
-            {set $slot_to drum}
-         )
-         ("vocals"
-            {set $slot_to vox}
-         )
-      }
-      CLEAR_SLOT_DTAS
-      WRITE_SLOT_DTA
-      SET_SLOT_VAR
-      CLEAR_INVALID_SLOT_DTAS
-      {$overshell update_all}
-      {$this trigger_select_effects}
-   )
-   (exit
-      {set $slot_changed FALSE}
-      {set $slot_to FALSE}
-   )
-   (on_cancel 
-      {set $slot_changed FALSE}
-      {$this show_state dxState_SlotOverride}
-      {$this trigger_cancel_effects}
-   )
-)
+
 (dxState_BindingOverride
    (view {$this get_auto_list_view}) 
    (enter
