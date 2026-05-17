@@ -641,7 +641,35 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {if_else {== $list_data "[Random]"}
          {dx_file_delete "settings/sfx/forcedmenumusic.dta"}
-         {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array ($list_data)}}
+         {switch $list_data
+            ("[Default]"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (0)}}
+            )
+            ("rock band 4 (launch)"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (1)}}
+            )
+            ("rock band 4 (1,08)"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (2)}}
+            )
+            ("rockudrama"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (3)}}
+            )
+            ("rock band rivals (unused)"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (4)}}
+            )
+            ("rock band 1"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (5)}}
+            )
+            ("rock band 2"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (6)}}
+            )
+            ("rock band 3"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (7)}}
+            )
+            ("lego rock band"
+               {write_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta" {array (8)}}
+            )
+         }
       }
       {$this show_state dxState_DelayedEffectWarn}
       {$this trigger_select_effects}

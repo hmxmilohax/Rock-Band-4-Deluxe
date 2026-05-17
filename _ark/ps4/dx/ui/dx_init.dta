@@ -360,7 +360,34 @@ SET_PAD_BINDING_VAR
 
 {if {&& {! {file_exists "settings/visuals/menubg.dta"}} {file_exists "settings/sfx/forcedmenumusic.dta"}}
    {dx_file_delete "ps4/fmod_banks/PS4/shell music.bank"}
-   {dx_file_copy {sprint "ps4/dx/custom_sounds/shell_music/" {elem {read_file "data:/GoldHEN/RB4DX/settings/sfx/forcedmenumusic.dta"} 0} ".bank"} "ps4/fmod_banks/PS4/shell music.bank"}
+   {switch {int {dx_read_file_as_float "settings/sfx/forcedmenumusic.dta"}}
+      (0)
+      (1
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 4 (launch).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (2
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 4 (1,08).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (3
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rockudrama.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (4
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band rivals (unused).bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (5
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 1.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (6
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 2.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (7
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/rock band 3.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+      (8
+         {dx_file_copy "ps4/dx/custom_sounds/shell_music/lego rock band.bank" "ps4/fmod_banks/PS4/shell music.bank"}
+      )
+   }
+   ;{dx_file_copy {sprint "ps4/dx/custom_sounds/shell_music/" {get_plugin_symvar menumusic} ".bank"} "ps4/fmod_banks/PS4/shell music.bank"}
 }
 
 {if {&& {! {file_exists "settings/visuals/menubg.dta"}} {! {file_exists "settings/sfx/forcedmenumusic.dta"}}}
