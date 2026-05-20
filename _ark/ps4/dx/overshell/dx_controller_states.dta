@@ -116,9 +116,7 @@
                   CLEAR_INVALID_SLOT_DTAS
                   RB4DXSLOT_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data token " - guitar -> guitar + "}
-                  {$ui_list set_focus_by_data token " - guitar -> drums + "}
-                  {$ui_list set_focus_by_data token " - guitar -> vocals + "}
+                  {$ui_list set_focus_by_data dx_index 1}
                )
                (drum
                   {switch $list_data
@@ -141,9 +139,7 @@
                   CLEAR_INVALID_SLOT_DTAS
                   RB4DXSLOT_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data token " - drums -> guitar + "}
-                  {$ui_list set_focus_by_data token " - drums -> drums + "}
-                  {$ui_list set_focus_by_data token " - drums -> vocals + "}
+                  {$ui_list set_focus_by_data dx_index 2}
                )
                (vox
                   {switch $list_data
@@ -166,22 +162,16 @@
                   CLEAR_INVALID_SLOT_DTAS
                   RB4DXSLOT_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data token " - vocals -> guitar + "}
-                  {$ui_list set_focus_by_data token " - vocals -> drums + "}
-                  {$ui_list set_focus_by_data token " - vocals -> vocals + "}
+                  {$ui_list set_focus_by_data dx_index 3}
                )
             }
          }
          {cond
             ({== $list_data " "}
-               {$ui_list set_focus_by_data token " - guitar -> guitar + "}
-               {$ui_list set_focus_by_data token " - guitar -> drums + "}
-               {$ui_list set_focus_by_data token " - guitar -> vocals + "}
+                  {$ui_list set_focus_by_data dx_index 1}
             )
             ({== $list_data "  "}
-               {$ui_list set_focus_by_data token " - vocals -> guitar + "}
-               {$ui_list set_focus_by_data token " - vocals -> drums + "}
-               {$ui_list set_focus_by_data token " - vocals -> vocals + "}
+                  {$ui_list set_focus_by_data dx_index 3}
             )
          }
       }
@@ -266,7 +256,6 @@
             kDataUnhandled
          }
       }
-
    )
    (on_cancel) ;doesn't work with button down, move to there
 )

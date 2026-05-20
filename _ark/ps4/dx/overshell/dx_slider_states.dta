@@ -1,131 +1,155 @@
-(dxState_SongSpeed
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
-   )
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
-         ("+"
-            {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
-         )
-         ("Reset"
-            {set_plugin_var speedmod 100}
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
-         )
-         ("-"
-            {unless {< {- {get_plugin_var speedmod} 5} 100}
-               {set_plugin_var speedmod {- {get_plugin_var speedmod} 5}}
-            }
-            {$this setup_confirm_actions {sprintf "Song Speed: %d%%" {get_plugin_var speedmod}} ("+" "Reset" "-")}
-         )
+#define CALIBRATION_DATA
+(
+   {set $dxsettings {array ()}}
+   {push_back $dxsettings " "}
+   {push_back $dxsettings {sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}}
+   {push_back $dxsettings {sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}}
+   {push_back $dxsettings "Per-Controller Calibration"}
+   {$this setup_confirm_actions a $dxsettings}
 
-         })
-   (on_cancel 
-      {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
-      SET_TRACK_SPEEDS
-      {$this show_state dxState_DeluxeSettings}
-      {$this trigger_cancel_effects})
 )
-
-(dxState_PracticeSongSpeed
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
+;New Calibration Sliders
+(dxState_CalibrationSliders
+   (view {$this get_auto_list_view})
+   (enter
+      CALIBRATION_DATA
+      {set $slider_selected FALSE}
+      {$this setup_tooltip kAction_Option "Reset"} ;41 char limit
+      {$this reset_list_focus }
    )
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+   (SELECT_MSG
+      {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data 
-         ("+"
-            {set $pracspeed {+ $pracspeed 5}}
-            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
-         )
-         ("Reset"
-            {set $pracspeed 100}
-            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
-         )
-         ("-"
-            {unless {< {- $pracspeed 5} 5}
-               {set $pracspeed {- $pracspeed 5}}
+         ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {do
+                  {set $slider_type video}
+                  {$this show_tooltip}
+               }
+               {$this hide_tooltip}
             }
-            {$this setup_confirm_actions {sprintf "Practice Song Speed: %d%%" $pracspeed} ("+" "Reset" "-")}
          )
-
-         })
-   (on_cancel 
-      {set_practice_speed {/ $pracspeed 100}}
-      {if_else {$this in_song}
-         {$this show_state dxState_InGameWarn}
-         {$this show_state dxState_DeluxeSettings}
-      }
-      {$this trigger_cancel_effects})
-)
-
-(dxState_VideoCalibration
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
-   )
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
-         ("+"
-            {unless {< {- {get_video_calibration} 1} -300}
-               {set_video_calibration {- {get_video_calibration} 1}}
+         ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {do
+                  {set $slider_type audio}
+                  {$this show_tooltip}
+               }
+               {$this hide_tooltip}
             }
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
          )
-         ("Reset"
-            {set_video_calibration 0}
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
-         )
-         ("-"
-            {unless {> {+ {get_video_calibration} 1} 300}
-               {set_video_calibration {+ {get_video_calibration} 1}}
-            }
-            {$this setup_confirm_actions {sprintf "Video Calibration: %d ms" {* {get_video_calibration} -1}} ("+" "Reset" "-")}
+         ("Per-Controller Calibration"
+            {$this show_state dxState_PerControllerCalibrationSelector}
          )
       }
+      {$this trigger_select_effects}
    )
-   (on_cancel 
-      {write_file "data:/GoldHEN/RB4DX/videocalib.ini" {array ({get_video_calibration})}}
-      {$this show_state dxState_CalibrationSelector}
-      {$this trigger_cancel_effects}
-   )
-)
-
-(dxState_AudioCalibration
-   (view confirm_action) 
-   (enter 
-      {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
-   )
-   (SELECT_MSG 
-      {local $list_data {($objId UIListCom) get_data_in_column token}}  
-      {switch $list_data 
-         ("+"
-            {unless {< {- {get_audio_calibration} 1} -300}
-               {set_audio_calibration {- {get_audio_calibration} 1}}
+   (list_focus 
+      ($obj_name $obj_id) 
+      {local $ui_list {$this get_ui_list }}
+      {local $list_data {$ui_list get_data_in_column token}}
+      {if_else $slider_selected
+         {if_else $setting_focus
+            {set $setting_focus FALSE}
+            {switch $slider_type
+               (video
+                  {if_else {== $list_data " "} ;up
+                     {unless {< {- {get_video_calibration} 1} -300}
+                        {set_video_calibration {- {get_video_calibration} 1}}
+                     }
+                     {unless {> {+ {get_video_calibration} 1} 300}
+                        {set_video_calibration {+ {get_video_calibration} 1}}
+                     }
+                  }
+                  CALIBRATION_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data dx_index 1}
+               )
+               (audio
+                  {if_else {== $list_data {sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}} ;up
+                     {unless {< {- {get_audio_calibration} 1} -300}
+                        {set_audio_calibration {- {get_audio_calibration} 1}}
+                     }
+                     {unless {> {+ {get_audio_calibration} 1} 300}
+                        {set_audio_calibration {+ {get_audio_calibration} 1}}
+                     }
+                  }
+                  CALIBRATION_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data dx_index 2}
+               )
             }
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
-         )
-         ("Reset"
-            {set_audio_calibration 0}
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
-         )
-         ("-"
-            {unless {> {+ {get_audio_calibration} 1} 300}
-               {set_audio_calibration {+ {get_audio_calibration} 1}}
-            }
-            {$this setup_confirm_actions {sprintf "Audio Calibration: %d ms" {* {get_audio_calibration} -1}} ("+" "Reset" "-")}
-         )
+         }
+         {if {== $list_data " "}
+            {$ui_list set_focus_by_data dx_index 1}
+         }
       }
    )
-   (on_cancel 
-      {write_file "data:/GoldHEN/RB4DX/audiocalib.ini" {array ({get_audio_calibration})}}
-      {$this show_state dxState_CalibrationSelector}
-      {$this trigger_cancel_effects}
+   (UI_BUTTON_DOWN_MSG
+      {local $list_data {{$this get_ui_list} get_data_in_column token}}
+      {if_else {|| {== $action kAction_Right } {== $action kAction_Left }}
+         {do
+            {if_else {== $action kAction_Right } ;also up
+               {switch $list_data
+                  ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                     {unless {< {- {get_video_calibration} 1} -300}
+                        {set_video_calibration {- {get_video_calibration} 1}}
+                     }
+                  )
+                  ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                     {unless {< {- {get_audio_calibration} 1} -300}
+                        {set_audio_calibration {- {get_audio_calibration} 1}}
+                     }
+                  )
+               }
+               {switch $list_data
+                  ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                     {unless {> {+ {get_video_calibration} 1} 300}
+                        {set_video_calibration {+ {get_video_calibration} 1}}
+                     }
+                  )
+                  ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                     {unless {> {+ {get_audio_calibration} 1} 300}
+                        {set_audio_calibration {+ {get_audio_calibration} 1}}
+                     }
+                  )
+               }
+            }
+            CALIBRATION_DATA
+         }
+         {if_else {== $action kAction_Cancel}
+            {if_else $slider_selected
+               {do
+                  {set $slider_selected FALSE}
+                  {$this trigger_cancel_effects}
+               }
+               {do
+                  {write_file "data:/GoldHEN/RB4DX/videocalib.ini" {array ({get_video_calibration})}}
+                  {write_file "data:/GoldHEN/RB4DX/audiocalib.ini" {array ({get_audio_calibration})}}
+                  {$this show_state dxState_GPSettings}
+                  {$this trigger_cancel_effects}
+               }
+            }
+            {if_else {== $action kAction_Option}
+               {if $slider_selected
+                  {switch $list_data
+                     ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                        {set_video_calibration 0}
+                     )
+                     ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                        {set_audio_calibration 0}
+                     )
+                  }
+                  CALIBRATION_DATA
+               }
+               kDataUnhandled
+            }
+         }
+      }
    )
+   (on_cancel)
 )
 
 #define PER_CONTROLLER_CALIBRATION_DATA

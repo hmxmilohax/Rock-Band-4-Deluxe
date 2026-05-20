@@ -5,71 +5,32 @@
 
 #define RB4DXMAIN_DATA
 (
-   {if_else {$this in_song}
-      {if_else {$gamemode in_mode practice}
-         {$this setup_confirm_actions a 
-            (
-               "Instrument Options"
-               "Practice Song Speed"
-               "Gameplay Settings"
-               "Audio & SFX"
-               "Visual Settings"
-               "Track Settings"
-               ;"Controller Settings"
-               "Extras"
-               ;"test"
-            )
-         }
-         {$this setup_confirm_actions a 
-            (
-               "Instrument Options"
-               "Gameplay Settings"
-               "Audio & SFX"
-               "Visual Settings"
-               "Track Settings"
-               ;"Controller Settings"
-               "Extras"
-               ;"test"
-            )
-         }
-      }
-      {if_else {$gamemode in_mode practice}
-         {$this setup_confirm_actions a 
-            (
-               "Instrument Options"
-               ;"Song Speed"
-               "Practice Song Speed"
-               "Gameplay Settings"
-               "Audio & SFX"
-               "Visual Settings"
-               "Track Settings"
-               "Controller Settings"
-               "Extras"
-               ;"test" ; debugging
-            )
-         }
-         {$this setup_confirm_actions a 
-            (
-               "Instrument Options"
-               "Song Speed"
-               ;"Practice Song Speed"
-               "Gameplay Settings"
-               "Audio & SFX"
-               "Visual Settings"
-               "Track Settings"
-               "Controller Settings"
-               "Extras"
-               ;"test" ; debugging
-            )
-         }
-      }
+   {set $dxsettings {array ()}}
+   {push_back $dxsettings "Instrument Options"}
+   {if {&& {! {$this in_song}} {! {$gamemode in_mode practice}}}
+      {push_back $dxsettings {sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}}
    }
+   {if {$gamemode in_mode practice}
+      {push_back $dxsettings {sprintf " - Practice Song Speed: %d%% + " $pracspeed}}
+   }
+   {push_back $dxsettings "Gameplay Settings"}
+   {push_back $dxsettings "Audio & SFX"}
+   {push_back $dxsettings "Visual Settings"}
+   {push_back $dxsettings "Track Settings"}
+   {if {! {$this in_song}}
+      {push_back $dxsettings "Controller Settings"}
+   }
+   {push_back $dxsettings "Extras"}
+   ;{push_back $dxsettings "test"} ; debugging
+   {$this setup_confirm_actions a $dxsettings}
 )
 (dxState_DeluxeSettings
    (view {$this get_auto_list_view}) 
    (enter
       {set $dx_cur_state main}
-      RB4DXMAIN_DATA
+      {set $slider_selected FALSE}
+      RB4DXMAIN_DATA 
+      {$this setup_tooltip kAction_Option "Reset"} ;41 char limit
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -77,11 +38,19 @@
          ("Instrument Options"
             {$this show_instrument_options}
             {$this trigger_select_effects})
-         ("Song Speed"
-            {$this show_state dxState_SongSpeed}
+         ({sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {$this show_tooltip}
+               {$this hide_tooltip}
+            }
             {$this trigger_select_effects})
-         ("Practice Song Speed"
-            {$this show_state dxState_PracticeSongSpeed}
+         ({sprintf " - Practice Song Speed: %d%% + " $pracspeed}
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {$this show_tooltip}
+               {$this hide_tooltip}
+            }
             {$this trigger_select_effects})
          ("Gameplay Settings"
             {$this show_state dxState_GPSettings}
@@ -123,14 +92,93 @@
             {$this trigger_select_effects}
          )
       }
-   ) 
-   (on_cancel 
-      {if_else {$this in_song}
-         {$this show_in_song_menu}
-         {$this show_state kState_Options}
-      }
-      {$this trigger_cancel_effects}
    )
+   (list_focus 
+      ($obj_name $obj_id) 
+      {local $ui_list {$this get_ui_list }}
+      {local $list_data {$ui_list get_data_in_column token}}
+      {if $slider_selected
+         {if_else $setting_focus
+            {set $setting_focus FALSE}
+            {do
+               {if_else {== $list_data "Instrument Options"} ;up
+                  {if_else {$gamemode in_mode practice}
+                     {set $pracspeed {+ $pracspeed 5}}
+                     {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
+                  }
+                  {if_else {$gamemode in_mode practice} ;down
+                     {unless {< {- $pracspeed 5} 5}
+                        {set $pracspeed {- $pracspeed 5}}
+                     }
+                     {unless {< {- {get_plugin_var speedmod} 5} 100}
+                        {set_plugin_var speedmod {- {get_plugin_var speedmod} 5}}
+                     }
+                  }
+               }
+               RB4DXMAIN_DATA
+               {set $setting_focus TRUE}
+               {$ui_list set_focus_by_data dx_index 1}
+            }
+         }
+      }
+   )
+   (UI_BUTTON_DOWN_MSG
+      {local $list_data {{$this get_ui_list} get_data_in_column token}}
+      {if_else {|| {== $action kAction_Right } {== $action kAction_Left }}
+         {if {|| {== $list_data {sprintf " - Practice Song Speed: %d%% + " $pracspeed}} {== $list_data {sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}}}
+            {if_else {== $action kAction_Right } ;also up
+               {if_else {$gamemode in_mode practice}
+                  {set $pracspeed {+ $pracspeed 5}}
+                  {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
+               }
+               {if_else {$gamemode in_mode practice} ;down
+                  {unless {< {- $pracspeed 5} 5}
+                     {set $pracspeed {- $pracspeed 5}}
+                  }
+                  {unless {< {- {get_plugin_var speedmod} 5} 100}
+                     {set_plugin_var speedmod {- {get_plugin_var speedmod} 5}}
+                  }
+               }
+            }
+            RB4DXMAIN_DATA
+         }
+         {if_else {== $action kAction_Cancel}
+            {if_else $slider_selected
+               {do
+                  {set $slider_selected FALSE}
+                  {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  SET_TRACK_SPEEDS
+                  {set_practice_speed {/ $pracspeed 100}}
+                  {if {$this in_song}
+                     {$this show_state dxState_InGameWarn}
+                  }
+                  {$this trigger_cancel_effects}
+               }
+               {do
+                  {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  SET_TRACK_SPEEDS
+                  {set_practice_speed {/ $pracspeed 100}}
+                  {if_else {$this in_song}
+                     {$this show_in_song_menu}
+                     {$this show_state kState_Options}
+                  }
+                  {$this trigger_cancel_effects}
+               }
+            }
+            {if_else {== $action kAction_Option}
+               {if $slider_selected
+                  {if_else {$gamemode in_mode practice}
+                     {set $pracspeed 100}
+                     {set_plugin_var speedmod 100}
+                  }
+                  RB4DXMAIN_DATA
+               }
+               kDataUnhandled
+            }
+         }
+      }
+   )
+   (on_cancel)
 )
 
 ;Gameplay Settings
@@ -141,7 +189,6 @@
          {$this setup_confirm_actions a 
             (
                "Enter Calibration Numbers"
-               "Per-Controller Calibration"
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
                {if_else $rb3lanes "RB3 Lanes: ON" "RB3 Lanes: OFF"}
@@ -166,7 +213,6 @@
       {$this setup_confirm_actions a 
          (
             "Enter Calibration Numbers"
-            "Per-Controller Calibration"
             {if_else {get_plugin_var autoplay} "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
@@ -193,11 +239,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          ("Enter Calibration Numbers"
-            {$this show_state dxState_CalibrationSelector}
-            {$this trigger_select_effects}
-         )
-         ("Per-Controller Calibration"
-            {$this show_state dxState_PerControllerCalibrationSelector}
+            {$this show_state dxState_CalibrationSliders}
             {$this trigger_select_effects}
          )
          (("Autoplay: OFF" "Autoplay: ON")
@@ -392,31 +434,6 @@
 )
 
 ;Calibration selector
-(dxState_CalibrationSelector
-   (view {$this get_auto_list_view})
-   (enter
-      {$this setup_confirm_actions a
-         (
-            "Video"
-            "Audio"
-         )
-      }
-   )
-   (SELECT_MSG
-      {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {switch $list_data 
-         ("Video" {$this show_state dxState_VideoCalibration})
-         ("Audio" {$this show_state dxState_AudioCalibration})
-      }
-      {$this trigger_select_effects}
-   )
-   (on_cancel 
-      {$this show_state dxState_GPSettings}
-      {$this trigger_cancel_effects}
-   )
-)
-
-;Calibration selector
 (dxState_PerControllerCalibrationSelector
    (view {$this get_auto_list_view})
    (enter
@@ -444,7 +461,7 @@
       {$this trigger_select_effects}
    )
    (on_cancel 
-      {$this show_state dxState_GPSettings}
+      {$this show_state dxState_CalibrationSliders}
       {$this trigger_cancel_effects}
    )
 )
