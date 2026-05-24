@@ -1,24 +1,29 @@
 ;Track Theme
 #define RB4DXTHM_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         "Highway"
-         "Gem"
-         "Strikeline"
-         "Beatline Brightness"
-         "Solo Box"
-         "Score"
-         "Countdown"
-         "Stars"
-         "Crowd Meter"
-         {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}
-         {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}
-         {if_else {get_plugin_var gemcolors} "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}
-         "Vocal Notes"
-         "Vocal Arrows"
-      )
+   {set $dxsettings {array ()}}
+   {push_back $dxsettings "Highway"}
+   {push_back $dxsettings "Gem"}
+   {push_back $dxsettings "Strikeline"}
+   {push_back $dxsettings 
+      {sprintf " - Beatline Brightness: %d%% + " 
+         {if_else {< $beatlinealpha 0.5}
+            {+ {* -2.65 $beatlinealpha} 11.325}
+            {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+         }
+      }
    }
+   {push_back $dxsettings "Solo Box"}
+   {push_back $dxsettings "Score"}
+   {push_back $dxsettings "Countdown"}
+   {push_back $dxsettings "Stars"}
+   {push_back $dxsettings "Crowd Meter"}
+   {push_back $dxsettings {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}}
+   {push_back $dxsettings {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}}
+   {push_back $dxsettings {if_else {get_plugin_var gemcolors} "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}}
+   {push_back $dxsettings "Vocal Notes"}
+   {push_back $dxsettings "Vocal Arrows"}
+   {$this setup_confirm_actions a $dxsettings}
 )
 (dxState_TrackTheme
    (view {$this get_auto_list_view}) 
@@ -28,6 +33,9 @@
       {set_plugin_var gemcolors {file_exists "settings/theme/gem/colors/enabled.dta"}}
       {set $dx_cur_state thm}
       RB4DXTHM_DATA
+      {set $slider_selected FALSE}
+      {$this setup_tooltip kAction_Option "Reset"} ;41 char limit
+      {$this reset_list_focus }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -86,8 +94,17 @@
             {$this show_state dxState_SLTexSelector}
             {$this trigger_select_effects}
          )
-         ("Beatline Brightness"
-            {$this show_state dxState_BeatlineAlphaSlider}
+         ({sprintf " - Beatline Brightness: %d%% + " 
+            {if_else {< $beatlinealpha 0.5}
+               {+ {* -2.65 $beatlinealpha} 11.325}
+               {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+            }
+         }
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {$this show_tooltip}
+               {$this hide_tooltip}
+            }
             {$this trigger_select_effects}
          )
          ("Solo Box"
@@ -127,12 +144,216 @@
             {$this trigger_select_effects}
          )
       }
-   ) 
-   (on_cancel 
-      {set $dx_cur_state FALSE}
-      {$this show_state dxState_TrkSettings}
-      {$this trigger_cancel_effects}
    )
+   (LIST_FOCUS_MSG
+      {local $ui_list {$this get_ui_list }}
+      {local $list_data {$ui_list get_data_in_column token}}
+      {if $slider_selected
+         {if_else $setting_focus
+            {set $setting_focus FALSE}
+            {do
+               {if_else {== $list_data "Strikeline"} ;up
+                  {cond
+                     ({<= $beatlinealpha -29.68}
+                        {set $beatlinealpha -33.47}
+                     )
+                     ({&& {<= $beatlinealpha -25.91} {> $beatlinealpha -29.68}}
+                        {set $beatlinealpha -29.69}
+                     )
+                     ({&& {<= $beatlinealpha -22.14} {> $beatlinealpha -25.91}} 
+                        {set $beatlinealpha -25.92}
+                     )
+                     ({&& {<= $beatlinealpha -18.36} {> $beatlinealpha -22.14}}
+                        {set $beatlinealpha -22.15}
+                     )
+                     ({&& {<= $beatlinealpha -14.59} {> $beatlinealpha -18.36}} 
+                        {set $beatlinealpha -18.37}
+                     )
+                     ({&& {<= $beatlinealpha -10.82} {> $beatlinealpha -14.59}}
+                        {set $beatlinealpha -14.6}
+                     )
+                     ({&& {<= $beatlinealpha -7.04} {> $beatlinealpha -10.82}}
+                        {set $beatlinealpha -10.83}
+                     )
+                     ({&& {<= $beatlinealpha -3.27} {> $beatlinealpha -7.04}}
+                        {set $beatlinealpha -7.05}
+                     )
+                     ({&& {<= $beatlinealpha 0.51} {> $beatlinealpha -3.27}}
+                        {set $beatlinealpha -3.28}
+                     )
+                     ({> $beatlinealpha 0.5}
+                        {set $beatlinealpha 0.5}
+                     )
+                  }
+                  {switch 
+                     {int 
+                        {if_else {< $beatlinealpha 0.5}
+                           {+ {* -2.65 $beatlinealpha} 11.325}
+                           {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                        }
+                     }
+                     (100
+                        {set $beatlinealpha -29.69}
+                     )
+                     (90
+                        {set $beatlinealpha -25.92}
+                     )
+                     (80
+                        {set $beatlinealpha -22.15}
+                     )
+                     (70
+                        {set $beatlinealpha -18.37}
+                     )
+                     (60
+                        {set $beatlinealpha -14.6}
+                     )
+                     (50
+                        {set $beatlinealpha -10.83}
+                     )
+                     (40
+                        {set $beatlinealpha -7.05}
+                     )
+                     (30
+                        {set $beatlinealpha -3.28}
+                     )
+                     (20
+                        {set $beatlinealpha 0.5}
+                     )
+                     (10
+                        {set $beatlinealpha 2}
+                     )
+                  }
+               }
+               RB4DXTHM_DATA
+               {set $setting_focus TRUE}
+               {$ui_list set_focus_by_data dx_index 3}
+            }
+         }
+      }
+   )
+   (UI_BUTTON_DOWN_MSG
+      {local $list_data {{$this get_ui_list} get_data_in_column token}}
+      {if_else {|| {== $action kAction_Right } {== $action kAction_Left }}
+         {do
+            {if_else {== $action kAction_Right } ;also up
+               {if 
+                  {== $list_data 
+                     {sprintf " - Beatline Brightness: %d%% + " 
+                        {if_else {< $beatlinealpha 0.5}
+                           {+ {* -2.65 $beatlinealpha} 11.325}
+                           {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                        }
+                     }
+                  }
+                  {cond
+                     ({<= $beatlinealpha -29.68}
+                        {set $beatlinealpha -33.47}
+                     )
+                     ({&& {<= $beatlinealpha -25.91} {> $beatlinealpha -29.68}}
+                        {set $beatlinealpha -29.69}
+                     )
+                     ({&& {<= $beatlinealpha -22.14} {> $beatlinealpha -25.91}} 
+                        {set $beatlinealpha -25.92}
+                     )
+                     ({&& {<= $beatlinealpha -18.36} {> $beatlinealpha -22.14}}
+                        {set $beatlinealpha -22.15}
+                     )
+                     ({&& {<= $beatlinealpha -14.59} {> $beatlinealpha -18.36}} 
+                        {set $beatlinealpha -18.37}
+                     )
+                     ({&& {<= $beatlinealpha -10.82} {> $beatlinealpha -14.59}}
+                        {set $beatlinealpha -14.6}
+                     )
+                     ({&& {<= $beatlinealpha -7.04} {> $beatlinealpha -10.82}}
+                        {set $beatlinealpha -10.83}
+                     )
+                     ({&& {<= $beatlinealpha -3.27} {> $beatlinealpha -7.04}}
+                        {set $beatlinealpha -7.05}
+                     )
+                     ({&& {<= $beatlinealpha 0.51} {> $beatlinealpha -3.27}}
+                        {set $beatlinealpha -3.28}
+                     )
+                     ({> $beatlinealpha 0.5}
+                        {set $beatlinealpha 0.5}
+                     )
+                  }
+               }
+               {if 
+                  {== $list_data 
+                     {sprintf " - Beatline Brightness: %d%% + " 
+                        {if_else {< $beatlinealpha 0.5}
+                           {+ {* -2.65 $beatlinealpha} 11.325}
+                           {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                        }
+                     }
+                  }
+                  {switch 
+                     {int 
+                        {if_else {< $beatlinealpha 0.5}
+                           {+ {* -2.65 $beatlinealpha} 11.325}
+                           {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+                        }
+                     }
+                     (100
+                        {set $beatlinealpha -29.69}
+                     )
+                     (90
+                        {set $beatlinealpha -25.92}
+                     )
+                     (80
+                        {set $beatlinealpha -22.15}
+                     )
+                     (70
+                        {set $beatlinealpha -18.37}
+                     )
+                     (60
+                        {set $beatlinealpha -14.6}
+                     )
+                     (50
+                        {set $beatlinealpha -10.83}
+                     )
+                     (40
+                        {set $beatlinealpha -7.05}
+                     )
+                     (30
+                        {set $beatlinealpha -3.28}
+                     )
+                     (20
+                        {set $beatlinealpha 0.5}
+                     )
+                     (10
+                        {set $beatlinealpha 2}
+                     )
+                  }
+               }
+            }
+            RB4DXTHM_DATA
+         }
+         {if_else {== $action kAction_Cancel}
+            {if_else $slider_selected
+               {do
+                  {set $slider_selected FALSE}
+                  {$this trigger_cancel_effects}
+               }
+               {do
+                  {set $dx_cur_state FALSE}
+                  {write_file "data:/GoldHEN/RB4DX/settings/theme/beatlinealpha.dta" {array ($beatlinealpha)}}
+                  {write_beatline_file $beatlinealpha}
+                  {$this show_state dxState_TrkSettings}
+                  {$this trigger_cancel_effects}
+               }
+            }
+            {if_else {== $action kAction_Option}
+               {if $slider_selected
+                  {set $beatlinealpha 0.5}
+                  RB4DXTHM_DATA
+               }
+               kDataUnhandled
+            }
+         }
+      }
+   )
+   (on_cancel)
 )
 
 ;Highway Texture Selector
