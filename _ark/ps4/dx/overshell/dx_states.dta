@@ -93,8 +93,7 @@
          )
       }
    )
-   (list_focus 
-      ($obj_name $obj_id) 
+   (LIST_FOCUS_MSG
       {local $ui_list {$this get_ui_list }}
       {local $list_data {$ui_list get_data_in_column token}}
       {if $slider_selected
@@ -1532,17 +1531,24 @@
 ;Track Settings
 #define RB4DXTRK_DATA
 (
-   {$this setup_confirm_actions a 
-      (
-         "Track Theme"
-         {if_else $noflames "Flames: OFF" "Flames: ON"}
-         {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}
-         {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}
-         {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}
-         "Track Curvature"
-         "Highway Length"
-      )
+   {set $dxsettings {array ()}}
+   {push_back $dxsettings "Track Theme"}
+   {push_back $dxsettings {if_else $noflames "Flames: OFF" "Flames: ON"}}
+   {push_back $dxsettings {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}}
+   {push_back $dxsettings {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}}
+   {push_back $dxsettings {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}}
+   {push_back $dxsettings {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}}
+   {push_back $dxsettings 
+      {sprintf " - Highway Length: %.2fX + " 
+         {if_else {> $hwlength 1}
+            {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+            {+ {* $hwlength -1.25} 2.25}
+         }
+         $hwlength
+      }
    }
+   {push_back $dxsettings "  "}
+   {$this setup_confirm_actions a $dxsettings}
 )
 (dxState_TrkSettings
    (view {$this get_auto_list_view}) 
@@ -1635,25 +1641,209 @@
             }
             {$this trigger_select_effects}
          )
-         ("Track Curvature"
-            {$this show_state dxState_TrackCurve}
-            {$this trigger_select_effects}
+         ({sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {do
+                  {set $slider_type track_curve}
+                  {$this show_tooltip}
+               }
+               {$this hide_tooltip}
+            }
          )
-         ("Highway Length"
-            {$this show_state dxState_HighwayLength}
-            {$this trigger_select_effects}
+         ({sprintf " - Highway Length: %.2fX + " 
+            {if_else {> $hwlength 1}
+               {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+               {+ {* $hwlength -1.25} 2.25}
+            }
+            $hwlength
+         }
+            {set $slider_selected {! $slider_selected}}
+            {if_else $slider_selected
+               {do
+                  {set $slider_type hwlength}
+                  {$this show_tooltip}
+               }
+               {$this hide_tooltip}
+            }
          )
          ("Track Theme"
             {$this show_state dxState_TrackTheme}
             {$this trigger_select_effects}
          )
       }
-   ) 
-   (on_cancel 
-      {set $dx_cur_state FALSE}
-      {$this show_state dxState_DeluxeSettings}
-      {$this trigger_cancel_effects}
    )
+   (LIST_FOCUS_MSG
+      {local $ui_list {$this get_ui_list }}
+      {local $list_data {$ui_list get_data_in_column token}}
+      {if_else $slider_selected
+         {if_else $setting_focus
+            {set $setting_focus FALSE}
+            {switch $slider_type
+               (track_curve
+                  {if_else {== $list_data {if_else $trackangle "Custom Track Angle: ON" "Custom Track Angle: OFF"}} ;up
+                     {unless {< {- $track_curve 0.05} 0.45}
+                        {set $track_curve {- $track_curve 0.05}}
+                     }
+                     {unless {> {+ $track_curve 0.05} 1.5}
+                        {set $track_curve {+ $track_curve 0.05}}
+                     }
+                  }
+                  RB4DXTRK_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data dx_index 5}
+               )
+               (hwlength
+                  {if_else {== $list_data {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}} ;up
+                     {do
+                        {unless {< {- $hwlength 0.05} $posint6}
+                           {set $hwlength {- $hwlength 0.05}}
+                        }
+                        {if_else {< $hwlength 0.74}
+                           {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                                 {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              }
+                           }
+                           {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                                 {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              }
+                           }
+                        }
+                     }
+                     {do
+                        {unless {> {+ $hwlength 0.05} 2.54}
+                           {set $hwlength {+ $hwlength 0.05}}
+                        }
+                        {if_else {< $hwlength 0.74}
+                           {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                                 {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              }
+                           }
+                           {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                                 {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              }
+                           }
+                        }
+                     }
+                  }
+                  RB4DXTRK_DATA
+                  {set $setting_focus TRUE}
+                  {$ui_list set_focus_by_data dx_index 6}
+               )
+            }
+         }
+         {if {== $list_data "  "}
+            {$ui_list set_focus_by_data dx_index 6}
+         }
+      }
+   )
+   (UI_BUTTON_DOWN_MSG
+      {local $list_data {{$this get_ui_list} get_data_in_column token}}
+      {if_else {|| {== $action kAction_Right } {== $action kAction_Left }}
+         {do
+            {if_else {== $action kAction_Right } ;also up
+               {switch $list_data
+                  ({sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}
+                     {unless {< {- $track_curve 0.05} 0.45}
+                        {set $track_curve {- $track_curve 0.05}}
+                     }
+                  )
+                  ({sprintf " - Highway Length: %.2fX + " 
+                     {if_else {> $hwlength 1}
+                        {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                        {+ {* $hwlength -1.25} 2.25}
+                     }
+                     $hwlength
+                  }
+                     {unless {< {- $hwlength 0.05} $posint6}
+                        {set $hwlength {- $hwlength 0.05}}
+                     }
+                     {if_else {< $hwlength 0.74}
+                        {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                           }
+                        }
+                        {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                           {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           }
+                        }
+                     }
+                  )
+               }
+               {switch $list_data
+                  ({sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}
+                     {unless {> {+ $track_curve 0.05} 1.5}
+                        {set $track_curve {+ $track_curve 0.05}}
+                     }
+                  )
+                  ({sprintf " - Highway Length: %.2fX + " 
+                     {if_else {> $hwlength 1}
+                        {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+                        {+ {* $hwlength -1.25} 2.25}
+                     }
+                     $hwlength
+                  }
+                     {unless {> {+ $hwlength 0.05} 2.54}
+                        {set $hwlength {+ $hwlength 0.05}}
+                     }
+                     {if_else {< $hwlength 0.74}
+                        {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           {unless {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                              {dx_file_rename "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                           }
+                        }
+                        {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                           {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           }
+                        }
+                     }
+                  )
+               }
+            }
+            RB4DXTRK_DATA
+         }
+         {if_else {== $action kAction_Cancel}
+            {if_else $slider_selected
+               {do
+                  {set $slider_selected FALSE}
+                  {$this trigger_cancel_effects}
+               }
+               {do
+                  {set $dx_cur_state FALSE}
+                  {$this show_state dxState_DeluxeSettings}
+                  {$this trigger_cancel_effects}
+               }
+            }
+            {if_else {== $action kAction_Option}
+               {if $slider_selected
+                  {switch $slider_type
+                     (track_curve
+                        {set $track_curve 1}
+                     )
+                     (hwlength
+                        {set $hwlength 1}
+                        {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
+                           {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           }
+                        }
+                     )
+                  }
+                  RB4DXTRK_DATA
+               }
+               kDataUnhandled
+            }
+         }
+      }
+   )
+   (on_cancel)
 )
 
 ;Track Angle Type Selector

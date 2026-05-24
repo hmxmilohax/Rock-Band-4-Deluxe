@@ -87,8 +87,7 @@
       {set $slider_selected {! $slider_selected}}
       {$this trigger_select_effects}
    )
-   (list_focus 
-      ($obj_name $obj_id) 
+   (LIST_FOCUS_MSG
       {local $ui_list {$this get_ui_list }}
       {local $list_data {$ui_list get_data_in_column token}}
       {if_else $slider_selected

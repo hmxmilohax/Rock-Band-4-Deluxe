@@ -169,8 +169,7 @@
                )
             }
             {$this trigger_select_effects }}}) 
-   (list_focus 
-      ($obj_name $obj_id) 
+   (LIST_FOCUS_MSG
       {local $ui_list 
          {$this get_ui_list }} 
       {local $list_data 
@@ -305,8 +304,7 @@
       {$this trigger_select_effects}
       {set_plugin_var insong TRUE}
    ) 
-   (list_focus 
-      ($obj_name $obj_id) 
+   (LIST_FOCUS_MSG
       {if 
          {== {{$this get_user} get_track_type} kTrackVocals}
          {local $ui_list {$this get_ui_list}}
@@ -601,8 +599,7 @@
 ;                (overshell_drums_pro 
 ;                   {$this select_drum_part TRUE })}
 ;             {$this trigger_select_effects }}}) 
-;    (list_focus 
-;       ($obj_name $obj_id) 
+;    (LIST_FOCUS_MSG
 ;       {local $ui_list 
 ;          {$this get_ui_list }} 
 ;       {local $list_data 

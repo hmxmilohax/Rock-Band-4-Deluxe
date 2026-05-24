@@ -1,6 +1,11 @@
 #include dx_overshell_macros.dta
 #include dx_controller_macros.dta
 
+#define LIST_FOCUS_MSG
+(list_focus 
+      ($obj_name $obj_id)
+)
+
 #define SET_TRACK_SPEEDS
 (
 	{set_elem {find $syscfg track_graphics view_times drum easy} 1 {* {if_else $syncspeeds 1.2 2.4} {/ {get_plugin_var speedmod} 100}}}
