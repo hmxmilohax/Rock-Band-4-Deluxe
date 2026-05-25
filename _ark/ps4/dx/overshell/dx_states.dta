@@ -6,21 +6,21 @@
 #define RB4DXMAIN_DATA
 (
    {set $dxsettings {array ()}}
-   {push_back $dxsettings "Instrument Options"}
+   {push_back $dxsettings instrument_options}
    {if {&& {! {$this in_song}} {! {$gamemode in_mode practice}}}
       {push_back $dxsettings {sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}}
    }
    {if {$gamemode in_mode practice}
       {push_back $dxsettings {sprintf " - Practice Song Speed: %d%% + " $pracspeed}}
    }
-   {push_back $dxsettings "Gameplay Settings"}
-   {push_back $dxsettings "Audio & SFX"}
-   {push_back $dxsettings "Visual Settings"}
-   {push_back $dxsettings "Track Settings"}
+   {push_back $dxsettings gameplay_settings}
+   {push_back $dxsettings sfx_settings}
+   {push_back $dxsettings visual_settings}
+   {push_back $dxsettings }
    {if {! {$this in_song}}
-      {push_back $dxsettings "Controller Settings"}
+      {push_back $dxsettings controller_settings}
    }
-   {push_back $dxsettings "Extras"}
+   {push_back $dxsettings extras}
    ;{push_back $dxsettings "test"} ; debugging
    {$this setup_confirm_actions a $dxsettings}
 )
