@@ -6,21 +6,21 @@
 #define RB4DXMAIN_DATA
 (
    {set $dxsettings {array ()}}
-   {push_back $dxsettings "Instrument Options"}
+   {push_back $dxsettings instrumentdx_options}
    {if {&& {! {$this in_song}} {! {$gamemode in_mode practice}}}
       {push_back $dxsettings {sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}}
    }
    {if {$gamemode in_mode practice}
       {push_back $dxsettings {sprintf " - Practice Song Speed: %d%% + " $pracspeed}}
    }
-   {push_back $dxsettings "Gameplay Settings"}
-   {push_back $dxsettings "Audio & SFX"}
-   {push_back $dxsettings "Visual Settings"}
-   {push_back $dxsettings "Track Settings"}
+   {push_back $dxsettings gameplay_settings}
+   {push_back $dxsettings sfx_settings}
+   {push_back $dxsettings visual_settings}
+   {push_back $dxsettings track_settings}
    {if {! {$this in_song}}
-      {push_back $dxsettings "Controller Settings"}
+      {push_back $dxsettings controller_settings}
    }
-   {push_back $dxsettings "Extras"}
+   {push_back $dxsettings extras}
    ;{push_back $dxsettings "test"} ; debugging
    {$this setup_confirm_actions a $dxsettings}
 )
@@ -35,7 +35,7 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Instrument Options"
+         (instrumentdx_options
             {$this show_instrument_options}
             {$this trigger_select_effects})
          ({sprintf " - Song Speed: %d%% + " {get_plugin_var speedmod}}
@@ -52,27 +52,27 @@
                {$this hide_tooltip}
             }
             {$this trigger_select_effects})
-         ("Gameplay Settings"
+         (gameplay_settings
             {$this show_state dxState_GPSettings}
             {$this trigger_select_effects}
          )
-         ("Audio & SFX"
+         (sfx_settings
             {$this show_state dxState_SFXSettings}
             {$this trigger_select_effects}
          )
-         ("Visual Settings"
+         (visual_settings
             {$this show_state dxState_VisSettings}
             {$this trigger_select_effects}
          )
-         ("Track Settings"
+         (track_settings
             {$this show_state dxState_TrkSettings}
             {$this trigger_select_effects}
          )
-         ("Controller Settings"
+         (controller_settings
             {$this show_state dxState_ControllerSettings}
             {$this trigger_select_effects}
          )
-         ("Extras"
+         (extras
             {$this show_state dxState_Extras}
             {$this trigger_select_effects}
          )
