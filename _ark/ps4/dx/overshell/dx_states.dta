@@ -187,7 +187,7 @@
       {if_else {|| {! {file_exists "saving.ini"}} $calibrationmode $precisionmode}
          {$this setup_confirm_actions a 
             (
-               "Enter Calibration Numbers"
+               overshell_calibration
                {if_else $tiltsens "Increased Tilt Sensitivity: ON" "Increased Tilt Sensitivity: OFF"}
                {if_else $nolanes "No Lanes: ON" "No Lanes: OFF"}
                {if_else $rb3lanes "RB3 Lanes: ON" "RB3 Lanes: OFF"}
@@ -211,7 +211,7 @@
       }
       {$this setup_confirm_actions a 
          (
-            "Enter Calibration Numbers"
+            overshell_calibration
             {if_else {get_plugin_var autoplay} "Autoplay: ON" "Autoplay: OFF"}
             {if_else $instafail "Insta Fail: ON" "Insta Fail: OFF"}
             {if_else $toughcrowd "Tough Crowd: ON" "Tough Crowd: OFF"}
@@ -237,7 +237,7 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         ("Enter Calibration Numbers"
+         (overshell_calibration
             {$this show_state dxState_CalibrationSliders}
             {$this trigger_select_effects}
          )
