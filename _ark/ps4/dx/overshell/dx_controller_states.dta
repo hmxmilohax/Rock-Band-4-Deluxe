@@ -3,32 +3,32 @@
    (enter
       {$this setup_confirm_actions a 
          (
-            "Change instrument type"
-            "Change pad bindings"
-            {if_else {file_exists "settings/controller/additionalparts.dta"} "Non-Standard Parts: ON" "Non-Standard Parts: OFF"}
+            os_instrumentswap
+            os_pad_mapping
+            {if_else {file_exists "settings/controller/additionalparts.dta"} os_additional_parts_on os_additional_parts_off}
          )
       }
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         ("Change instrument type"
+         (os_instrumentswap
             {$this show_state dxState_SlotOverride}
          )
-         ("Change pad bindings"
+         (os_pad_mapping
             {$this show_state dxState_BindingOverride}
          )
-         ("Non-Standard Parts: ON"
+         (os_additional_parts_on
             {dx_file_delete "settings/controller/additionalparts.dta"}
             {$this setup_confirm_actions a 
                (
-                  "Change instrument type"
-                  "Change pad bindings"
-                  {if_else {file_exists "settings/controller/additionalparts.dta"} "Non-Standard Parts: ON" "Non-Standard Parts: OFF"}
+                  os_instrumentswap
+                  os_pad_mapping
+                  {if_else {file_exists "settings/controller/additionalparts.dta"} os_additional_parts_on os_additional_parts_off}
                )
             }
          )
-         ("Non-Standard Parts: OFF"
+         (os_additional_parts_off
             {dx_write_null_file "settings/controller/additionalparts.dta"}
             {$this show_state dxState_NonStandardPartsWarn}
          )
@@ -45,20 +45,29 @@
    {$this setup_confirm_actions a
       (
          " "
-         {switch $gtrslt
-            (gtr " - guitar -> guitar + ")
-            (drum " - guitar -> drums + ")
-            (vox " - guitar -> vocals + ")
+         {sprint "- " {localize guitar} " -> " 
+            {switch $gtrslt
+               (gtr {localize guitar})
+               (drum {localize drums})
+               (vox {localize vocals})
+            }
+            " +"
          }
-         {switch $drmslt
-            (gtr " - drums -> guitar + ")
-            (drum " - drums -> drums + ")
-            (vox " - drums -> vocals + ")
+         {sprint "- " {localize drums} " -> " 
+            {switch $drmslt
+               (gtr {localize guitar})
+               (drum {localize drums})
+               (vox {localize vocals})
+            }
+            " +"
          }
-         {switch $voxslt
-            (gtr " - vocals -> guitar + ")
-            (drum " - vocals -> drums + ")
-            (vox " - vocals -> vocals + ")
+         {sprint "- " {localize vocals} " -> " 
+            {switch $voxslt
+               (gtr {localize guitar})
+               (drum {localize drums})
+               (vox {localize vocals})
+            }
+            " +"
          }
          "  "
       )
@@ -74,13 +83,13 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom)get_data_in_column token}}  
       {switch $list_data 
-         ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
+         ({sprint "- " {localize guitar} " -> " {switch $gtrslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
             {set $slot_changed gtr}
          )
-         ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
+         ({sprint "- " {localize drums} " -> " {switch $drmslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
             {set $slot_changed drum}
          )
-         ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
+         ({sprint "- " {localize vocals} " -> " {switch $voxslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
             {set $slot_changed vox}
          )
       }
@@ -119,7 +128,7 @@
                )
                (drum
                   {switch $list_data
-                     ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ") ;up
+                     ({sprint "- " {localize guitar} " -> " {switch $gtrslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"} ;up
                         {switch $drmslt
                            (gtr {set $slot_to drum})
                            (drum {set $slot_to vox})
@@ -142,7 +151,7 @@
                )
                (vox
                   {switch $list_data
-                     ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ") ;up
+                     ({sprint "- " {localize drums} " -> " {switch $drmslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"} ;up
                         {switch $voxslt
                            (gtr {set $slot_to drum})
                            (drum {set $slot_to vox})
@@ -181,7 +190,7 @@
          {do
             {if_else {== $action kAction_Right } ;also up
                {switch $list_data 
-                  ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
+                  ({sprint "- " {localize guitar} " -> " {switch $gtrslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed gtr}
                      {switch $gtrslt
                         (gtr {set $slot_to drum})
@@ -189,7 +198,7 @@
                         (vox {set $slot_to gtr})
                      }
                   )
-                  ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
+                  ({sprint "- " {localize drums} " -> " {switch $drmslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed drum}
                      {switch $drmslt
                         (gtr {set $slot_to drum})
@@ -197,7 +206,7 @@
                         (vox {set $slot_to gtr})
                      }
                   )
-                  ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
+                  ({sprint "- " {localize vocals} " -> " {switch $voxslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed vox}
                      {switch $voxslt
                         (gtr {set $slot_to drum})
@@ -207,7 +216,7 @@
                   )
                }
                {switch $list_data ;left and down
-                  ((" - guitar -> guitar + " " - guitar -> drums + " " - guitar -> vocals + ")
+                  ({sprint "- " {localize guitar} " -> " {switch $gtrslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed gtr}
                      {switch $gtrslt
                         (gtr {set $slot_to vox})
@@ -215,7 +224,7 @@
                         (vox {set $slot_to drum})
                      }
                   )
-                  ((" - drums -> guitar + " " - drums -> drums + " " - drums -> vocals + ")
+                  ({sprint "- " {localize drums} " -> " {switch $drmslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed drum}
                      {switch $drmslt
                         (gtr {set $slot_to vox})
@@ -223,7 +232,7 @@
                         (vox {set $slot_to drum})
                      }
                   )
-                  ((" - vocals -> guitar + " " - vocals -> drums + " " - vocals -> vocals + ")
+                  ({sprint "- " {localize vocals} " -> " {switch $voxslt (gtr {localize guitar}) (drum {localize drums}) (vox {localize vocals})} " +"}
                      {set $slot_changed vox}
                      {switch $voxslt
                         (gtr {set $slot_to vox})
@@ -264,13 +273,13 @@
    (enter
       {$this setup_confirm_actions a 
       (
-         "[Reset]"
-         "Rock Band 1-3 Guitar"
-         "Rock Band 1-3 Drums"
-         "Rock Band 4 Guitar"
-         "Rock Band 4 Drums"
-         "Guitar Hero Guitar"
-         "Guitar Hero Drums"
+         os_reset
+         os_rbguitar
+         os_rbdrums
+         os_rb4guitar
+         os_rb4drums
+         os_ghguitar
+         os_ghdrums
       )
    }
    ) 
@@ -278,23 +287,23 @@
       {local $list_data {($objId UIListCom)get_data_in_column token}}
       DELETE_PAD_BINDING_DTAS
       {switch $list_data 
-         ("[Reset]")
-         ("Rock Band 1-3 Guitar"
+         (os_reset)
+         (os_rbguitar
             {dx_write_null_file "settings/controller/binding/pad/rbgtr.dta"}
          )
-         ("Rock Band 1-3 Drums"
+         (os_rbdrums
             {dx_write_null_file "settings/controller/binding/pad/rbdrum.dta"}
          )
-         ("Rock Band 4 Guitar"
+         (os_rb4guitar
             {dx_write_null_file "settings/controller/binding/pad/rb4gtr.dta"}
          )
-         ("Rock Band 4 Drums"
+         (os_rb4drums
             {dx_write_null_file "settings/controller/binding/pad/rb4drum.dta"}
          )
-         ("Guitar Hero Guitar"
+         (os_ghguitar
             {dx_write_null_file "settings/controller/binding/pad/ghgtr.dta"}
          )
-         ("Guitar Hero Drums"
+         (os_ghdrums
             {dx_write_null_file "settings/controller/binding/pad/ghdrum.dta"}
          )
       }
