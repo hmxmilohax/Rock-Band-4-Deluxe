@@ -53,6 +53,7 @@
             }
             {$this trigger_select_effects})
          (os_gp
+         (os_gameplay
             {$this show_state dxState_GPSettings}
             {$this trigger_select_effects}
          )
