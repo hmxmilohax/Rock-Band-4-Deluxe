@@ -100,7 +100,7 @@
          {if_else $setting_focus
             {set $setting_focus FALSE}
             {do
-               {if_else {== $list_data "Instrument Options"} ;up
+               {if_else {== $list_data os_instrument_options} ;up
                   {if_else {$gamemode in_mode practice}
                      {set $pracspeed {+ $pracspeed 5}}
                      {set_plugin_var speedmod {+ {get_plugin_var speedmod} 5}}
