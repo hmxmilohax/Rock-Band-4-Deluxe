@@ -1827,15 +1827,15 @@
    {if_else {$this in_song}
       {$this setup_confirm_actions a 
          (
-            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            {if_else $faststart os_fast_start_on os_fast_start_off}
+            {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
          )
       }
       {$this setup_confirm_actions a 
          (
-            "Screensaver"
-            {if_else $faststart "Fast Start: ON" "Fast Start: OFF"}
-            {if_else $notifycolored "Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W"}
+            os_screensaver
+            {if_else $faststart os_fast_start_on os_fast_start_off}
+            {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
          )
       }
    }
@@ -1849,10 +1849,10 @@
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data
-         ("Screensaver"
+         (os_screensaver
             {$this show_state dxState_ScreensaverWarn}
             {$this trigger_select_effects})
-         (("Fast Start: ON" "Fast Start: OFF")
+         ((os_fast_start_on os_fast_start_off)
             {set $faststart {! $faststart}}
             {if_else $faststart
                {do
@@ -1867,7 +1867,7 @@
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}
          )
-         (("Plugin Notification Icon: Colored" "Plugin Notification Icon: B/W")
+         ((os_notification_icon_colored os_notification_icon_bw)
             {set $notifycolored {! $notifycolored}}
             {if_else $notifycolored
                {dx_write_null_file "notifycolored.ini"}
