@@ -20,7 +20,7 @@
    {if {! {$this in_song}}
       {push_back $dxsettings os_controller}
    }
-   {push_back $dxsettings os_extras}
+   {push_back $dxsettings extras} ; reused the original reset from locate org
    ;{push_back $dxsettings "test"} ; debugging
    {$this setup_confirm_actions a $dxsettings}
 )
@@ -30,7 +30,7 @@
       {set $dx_cur_state main}
       {set $slider_selected FALSE}
       RB4DXMAIN_DATA 
-      {$this setup_tooltip kAction_Option os_reset} ;41 char limit
+      {$this setup_tooltip kAction_Option restart} ;41 char limit
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -72,7 +72,7 @@
             {$this show_state dxState_ControllerSettings}
             {$this trigger_select_effects}
          )
-         (os_extras
+         (extras
             {$this show_state dxState_Extras}
             {$this trigger_select_effects}
          )

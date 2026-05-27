@@ -14,7 +14,7 @@
    (enter
       CALIBRATION_DATA
       {set $slider_selected FALSE}
-      {$this setup_tooltip kAction_Option os_reset} ;41 char limit
+      {$this setup_tooltip kAction_Option restart} ;41 char limit
       {$this reset_list_focus }
    )
    (SELECT_MSG
@@ -258,7 +258,7 @@
    (enter 
       PER_CONTROLLER_CALIBRATION_DATA
       {set $slider_selected FALSE}
-      {$this setup_tooltip kAction_Option os_reset} ;41 char limit
+      {$this setup_tooltip kAction_Option restart} ;41 char limit
       {$this reset_list_focus }
    )
    (SELECT_MSG 
@@ -712,78 +712,78 @@
       ("Green"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgr}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgr}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgg}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgg}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgb}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Green Gem Color: %d" {get_plugin_var gemcolgb}} ("+" restart "-")}
             )
          }
       )
       ("Red"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrr}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrr}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrg}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrg}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrb}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Red Gem Color: %d" {get_plugin_var gemcolrb}} ("+" restart "-")}
             )
          }
       )
       ("Yellow"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyr}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyr}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyg}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyg}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyb}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Yellow Gem Color: %d" {get_plugin_var gemcolyb}} ("+" restart "-")}
             )
          }
       )
       ("Blue"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbr}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbr}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbg}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbg}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbb}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Blue Gem Color: %d" {get_plugin_var gemcolbb}} ("+" restart "-")}
             )
          }
       )
       ("Orange"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolor}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolor}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolog}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolog}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolob}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Orange Gem Color: %d" {get_plugin_var gemcolob}} ("+" restart "-")}
             )
          }
       )
       ("Overdrive"
          {switch $gemcolchanged
             (R
-               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodr}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodr}} ("+" restart "-")}
             )
             (G
-               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodg}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodg}} ("+" restart "-")}
             )
             (B
-               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodb}} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Overdrive Gem Color: %d" {get_plugin_var gemcolodb}} ("+" restart "-")}
             )
          }
       )
@@ -1122,7 +1122,7 @@
             RGB_ADD
             RGB_DATA
          )
-         (os_reset
+         (restart
             RGB_RESET
             RGB_DATA
          )
@@ -1141,7 +1141,7 @@
 (dxState_RGBIntervalSlider
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" os_reset "-")}
+      {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" restart "-")}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -1164,11 +1164,11 @@
                   {set $rgbint 5}
                )
             }
-            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" restart "-")}
          )
-         (os_reset
+         (restart
             {set $rgbint 1}
-            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" restart "-")}
          )
          ("-"
             {switch $rgbint
@@ -1188,7 +1188,7 @@
                   {set $rgbint 1}
                )
             }
-            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "RGB Adjustment Interval: %dX" $rgbint} ("+" restart "-")}
          )
       }
    )
@@ -1204,78 +1204,78 @@
       ("mtv"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Song Title X Position: %.1f" $mtvposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Song Title X Position: %.1f" $mtvposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Song Title Y Position: %.1f" $mtvposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Song Title Y Position: %.1f" $mtvposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Song Title Z Position: %.1f" $mtvposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Song Title Z Position: %.1f" $mtvposz} ("+" restart "-")}
             )
          }
       )
       ("solo"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Solo X Position: %.1f" $soloposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Solo X Position: %.1f" $soloposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Solo Y Position: %.1f" $soloposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Solo Y Position: %.1f" $soloposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Solo Z Position: %.1f" $soloposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Solo Z Position: %.1f" $soloposz} ("+" restart "-")}
             )
          }
       )
       ("voxsolo"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Tambourine Percentage X Position: %.1f" $voxsoloposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage X Position: %.1f" $voxsoloposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Tambourine Percentage Y Position: %.1f" $voxsoloposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage Y Position: %.1f" $voxsoloposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Tambourine Percentage Z Position: %.1f" $voxsoloposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Tambourine Percentage Z Position: %.1f" $voxsoloposz} ("+" restart "-")}
             )
          }
       )
       ("score"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Score X Position: %.1f" $scoreposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Score X Position: %.1f" $scoreposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Score Y Position: %.1f" $scoreposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Score Y Position: %.1f" $scoreposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Score Z Position: %.1f" $scoreposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Score Z Position: %.1f" $scoreposz} ("+" restart "-")}
             )
          }
       )
       ("countdown"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Countdown X Position: %.1f" $countdownposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Countdown X Position: %.1f" $countdownposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Countdown Y Position: %.1f" $countdownposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Countdown Y Position: %.1f" $countdownposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Countdown Z Position: %.1f" $countdownposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Countdown Z Position: %.1f" $countdownposz} ("+" restart "-")}
             )
          }
       )
       ("voxcountdown"
          {switch $positionchanged
             (X
-               {$this setup_confirm_actions {sprintf "Vocals Countdown X Position: %.1f" $voxcountdownposx} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Vocals Countdown X Position: %.1f" $voxcountdownposx} ("+" restart "-")}
             )
             (Y
-               {$this setup_confirm_actions {sprintf "Vocals Countdown Y Position: %.1f" $voxcountdownposy} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Vocals Countdown Y Position: %.1f" $voxcountdownposy} ("+" restart "-")}
             )
             (Z
-               {$this setup_confirm_actions {sprintf "Vocals Countdown Z Position: %.1f" $voxcountdownposz} ("+" os_reset "-")}
+               {$this setup_confirm_actions {sprintf "Vocals Countdown Z Position: %.1f" $voxcountdownposz} ("+" restart "-")}
             )
          }
       )
@@ -1542,7 +1542,7 @@
             POSITION_ADD
             POSITION_DATA
          )
-         (os_reset
+         (restart
             POSITION_RESET
             POSITION_DATA
          )
@@ -1564,7 +1564,7 @@
 (dxState_PositionIntervalSlider
    (view confirm_action) 
    (enter 
-      {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" os_reset "-")}
+      {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" restart "-")}
    )
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -1593,11 +1593,11 @@
                   {set $posint 0.5}
                )
             }
-            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" restart "-")}
          )
-         (os_reset
+         (restart
             {set $posint 0.5}
-            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" restart "-")}
          )
          ("-"
             {switch $posint
@@ -1623,7 +1623,7 @@
                   {set $posint 0.25}
                )
             }
-            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" os_reset "-")}
+            {$this setup_confirm_actions {sprintf "Position Adjustment Interval: %.2fX" $posint} ("+" restart "-")}
          )
       }
    )
