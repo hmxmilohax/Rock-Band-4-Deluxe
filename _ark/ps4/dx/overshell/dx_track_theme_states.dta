@@ -34,7 +34,7 @@
       {set $dx_cur_state thm}
       RB4DXTHM_DATA
       {set $slider_selected FALSE}
-      {$this setup_tooltip kAction_Option restart} ;41 char limit
+      {$this setup_tooltip kAction_Option os_reset} ;41 char limit
       {$this reset_list_focus }
    ) 
    (SELECT_MSG 

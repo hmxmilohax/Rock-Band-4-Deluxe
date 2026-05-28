@@ -20,7 +20,7 @@
    {if {! {$this in_song}}
       {push_back $dxsettings os_controller}
    }
-   {push_back $dxsettings extras} ; reused the original reset from locate org
+   {push_back $dxsettings overshell_extras}
    ;{push_back $dxsettings "test"} ; debugging
    {$this setup_confirm_actions a $dxsettings}
 )
@@ -30,7 +30,7 @@
       {set $dx_cur_state main}
       {set $slider_selected FALSE}
       RB4DXMAIN_DATA 
-      {$this setup_tooltip kAction_Option restart} ;41 char limit
+      {$this setup_tooltip kAction_Option os_reset} ;41 char limit
    ) 
    (SELECT_MSG 
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -72,7 +72,7 @@
             {$this show_state dxState_ControllerSettings}
             {$this trigger_select_effects}
          )
-         (extras
+         (overshell_extras
             {$this show_state dxState_Extras}
             {$this trigger_select_effects}
          )
@@ -847,6 +847,7 @@
       {$this trigger_cancel_effects}
    )
 )
+
 ;Static Menu Background Selector
 (dxState_StaticMenuBackgroudSelector
    (view {$this get_auto_list_view})
@@ -855,8 +856,6 @@
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -1079,7 +1078,6 @@
          (os_mtv_vis_always
             {set $songtitle FALSE}
             {dx_file_delete 'settings/visuals/songtitle.dta'}
-            ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -1090,7 +1088,6 @@
          (os_mtv_vis_default
             {set $songtitle TRUE}
             {dx_write_null_file "settings/visuals/songtitle.dta"}
-            ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
             {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -1280,8 +1277,6 @@
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/backgrounds/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -1328,7 +1323,6 @@
    (on_cancel 
       {switch $positiontype
          ("score"
-            ;{dx_file_delete 'ps4/ui/game/hud.scene_ps4'}
             {if {! {dx_file_exists "ps4/ui/game/hud0.scene_ps4"}}
                {write_score_file $scoreposx $scoreposz $scoreposy $micwarn}
             }
@@ -1337,7 +1331,6 @@
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/scoreposz.dta" {array ($scoreposz)}}
          )
          ("countdown"
-            ;{dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
             {write_countdown_file $countdownposx $countdownposz $countdownposy}
             {write_vox_countdown_file {- $voxcountdownposx $countdownposx} {- $voxcountdownposz $countdownposz} {- $voxcountdownposy $countdownposy}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposx.dta" {array ($countdownposx)}}
@@ -1345,14 +1338,12 @@
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/countdownposz.dta" {array ($countdownposz)}}
          )
          ("voxcountdown"
-            ;{dx_file_delete 'ps4/ui/game/break_countdown.entity_ps4'}
             {write_vox_countdown_file {- $voxcountdownposx $countdownposx} {- $voxcountdownposz $countdownposz} {- $voxcountdownposy $countdownposy}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposx.dta" {array ($voxcountdownposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposy.dta" {array ($voxcountdownposy)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxcountdownposz.dta" {array ($voxcountdownposz)}}
          )
          ("solo"
-            ;{dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
             {write_solo_file $soloposx $soloposz $soloposy}
             {write_vox_solo_file {- $voxsoloposx {- $soloposx -19.5}} {- $voxsoloposz {- $soloposz -9.0}} {- $voxsoloposy {- $soloposy 50.0}}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposx.dta" {array ($soloposx)}}
@@ -1360,7 +1351,6 @@
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/soloposz.dta" {array ($soloposz)}}
          )
          ("voxsolo"
-            ;{dx_file_delete 'ps4/ui/game/solo_percentage.entity_ps4'}
             {write_vox_solo_file {- $voxsoloposx {- $soloposx -19.5}} {- $voxsoloposz {- $soloposz -9.0}} {- $voxsoloposy {- $soloposy 50.0}}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxsoloposx.dta" {array ($voxsoloposx)}}
             {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/voxsoloposy.dta" {array ($voxsoloposy)}}
@@ -1397,7 +1387,6 @@
       {$this trigger_select_effects}
    )
    (on_cancel 
-      ;{dx_file_delete 'ps4/ui/game/song_artist_overlay.entity_ps4'}
       {write_mtv_file $mtvposx $mtvposz $mtvposy {|| {get_plugin_var albumtxt} {get_plugin_var genretxt} {get_plugin_var origintxt}} $songtitle}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposx.dta" {array ($mtvposx)}}
       {write_file "data:/GoldHEN/RB4DX/settings/visuals/positions/mtvposy.dta" {array ($mtvposy)}}

@@ -273,7 +273,7 @@
    (enter
       {$this setup_confirm_actions a 
       (
-         restart ; reused the original reset from locate org
+         os_reset
          os_rbguitar
          os_rbdrums
          os_rb4guitar
@@ -287,7 +287,6 @@
       {local $list_data {($objId UIListCom)get_data_in_column token}}
       DELETE_PAD_BINDING_DTAS
       {switch $list_data 
-         (restart)
          (os_rbguitar
             {dx_write_null_file "settings/controller/binding/pad/rbgtr.dta"}
          )

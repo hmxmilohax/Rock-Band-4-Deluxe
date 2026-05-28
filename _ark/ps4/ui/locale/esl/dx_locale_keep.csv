@@ -6,6 +6,7 @@
 "os_visual","Opciones Graficas","","","",""
 "os_track","Opciones de la Pista","","","",""
 "os_controller","Opciones de Control","","","",""
+"os_reset","Reset","","","",""
 "os_song_speed","- Song Speed: %d%% +","","","",""
 "os_practice_song_speed","- Practice Song Speed: %d%% +","","","",""
 "os_tiltsens_on","Increased Tilt Sensitivity: ON","","","",""
