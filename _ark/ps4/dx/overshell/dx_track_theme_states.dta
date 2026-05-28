@@ -361,17 +361,14 @@
    (view {$this get_auto_list_view})
    (enter
       {set $texturelist ()}
-      {set $texturelist_ ()}
       {resize $texturelist 0}
-      {push_back $texturelist "[Default]"}
+      {push_back $texturelist os_default}
       {set $texturelist_ {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/highways/*.png_ps4"}}
       {remove_elem $texturelist_ {elem $texturelist_ 0}}
       {foreach $entry $texturelist_
          {push_back $texturelist $entry}
       }
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -381,7 +378,7 @@
       {if {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
          {dx_file_delete "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
       }
-      {unless {== $list_data "[Default]"}
+      {unless {== $list_data os_default}
          {if_else {== $list_data "yarg"}
             {do
                {dx_file_copy {sprint "ps4/dx/custom_textures/highways/" $list_data ".png_ps4"} "ps4/track/shared/track_pattern_center_util.bmp_ps4"}
@@ -674,12 +671,9 @@
 (dxState_SoloBoxTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/solo box/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -701,12 +695,9 @@
 (dxState_ScoreTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/score/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -728,12 +719,9 @@
 (dxState_CountdownTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/countdown/timer/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -759,12 +747,9 @@
 (dxState_StarsTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/stars/score_star_frame/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -810,12 +795,9 @@
 (dxState_CrowdMeterTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/crowd meter/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -837,12 +819,9 @@
 (dxState_VoxNotesTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/vocal notes/tubes/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -868,12 +847,9 @@
 (dxState_VoxArrowsTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/vocal arrows/1/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -899,12 +875,9 @@
 (dxState_ButtonPromptsTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {set $texturelist ()}
       {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/button prompts/options/*.png_ps4"}}
       {remove_elem $texturelist {elem $texturelist 0}}
       {$this setup_confirm_actions a $texturelist}
-      ;{set $customhw {|| {dx_file_exists "settings/visuals/highwaytex.dta"} {dx_file_exists "ps4/track/shared/gem_track_texture/gem_track_surface.bmp_ps4"}}}
-      ;SET_HIGHWAY_TEX_VAR
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
