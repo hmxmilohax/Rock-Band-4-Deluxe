@@ -1,7 +1,7 @@
 (dxState_ScreensaverWarn
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "You will need to restart the game to continue playing. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions os_screensaver_warning (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -26,7 +26,7 @@
 (dxState_EmuWarn
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Changing this setting may break RB4DX. If you experience crashing, you will need to delete the 'emu_override' file in 'data/CUSA02084/GoldHEN/RB4DX/settings' Are you sure you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions os_emu_warning (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -58,7 +58,7 @@
 (dxState_DelayedEffectWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect the next time you restart the game." (overshell_confirm_ok)}
+      {$this setup_confirm_actions os_delayed_effect_warn (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $dx_cur_state
@@ -113,7 +113,7 @@
 (dxState_NonStandardPartsWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "Press yellow on the part select menu to get non-standard parts to appear (PAD/VOCALS ONLY)." (overshell_confirm_ok)}
+      {$this setup_confirm_actions os_additional_parts_info (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {$this show_state dxState_ControllerSettings}
@@ -128,7 +128,7 @@
 (dxState_InGameWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This option will take effect when you go back to music library." (overshell_confirm_ok)}
+      {$this setup_confirm_actions os_ingame_warn (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $dx_cur_state
@@ -193,7 +193,7 @@
 (dxState_AnglesWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions os_track_angles_warn (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -236,7 +236,7 @@
 (dxState_GemColorConfirm
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" (os_reset "Edit")}
+      {$this setup_confirm_actions os_gem_color_confirm (os_reset os_edit)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -245,7 +245,7 @@
             {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
             {$this show_state dxState_TrackTheme}
          )
-         ("Edit"
+         (os_edit
             {$this show_state dxState_GemColorSettings}
          )
       }
@@ -260,7 +260,7 @@
 (dxState_StaticMenuBackgroudConfirm
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Would you like to reset Menu BGs to default or edit your static BG?" (os_reset "Edit")}
+      {$this setup_confirm_actions os_static_menu_bg_confirm (os_reset os_edit)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
@@ -273,7 +273,7 @@
                {$this show_state dxState_DelayedEffectWarn}
             }
          )
-         ("Edit"
+         (os_edit
             {$this show_state dxState_StaticMenuBackgroudSelector}
          )
       }
@@ -288,7 +288,7 @@
 (dxState_SavingWarn
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "This setting will disable saving until you restart the game. Do you want to continue?" (overshell_confirm_yes overshell_confirm_no)}
+      {$this setup_confirm_actions os_saving_warn (overshell_confirm_yes overshell_confirm_no)}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
@@ -316,7 +316,7 @@
 (dxState_SavingDisabled
    (view confirm_action)
    (enter 
-      {$this setup_confirm_actions "You will need to restart the game to re-enable saving." (overshell_confirm_ok)}
+      {$this setup_confirm_actions os_saving_disabled (overshell_confirm_ok)}
    )
    (SELECT_MSG
       {switch $cheat_option
