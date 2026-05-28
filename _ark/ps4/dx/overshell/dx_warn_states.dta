@@ -201,16 +201,31 @@
          (overshell_confirm_yes
             {switch $trackangletype
                (rr
+                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
+                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerr.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
+                  }
+                  {dx_file_copy "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
                )
                (rb2
+                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
+                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerb2.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
+                  }
+                  {dx_file_copy "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
                )
                (rb3
+                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
+                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerb3.dta"}
-                  {dx_file_rename "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
+                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
+                  }
+                  {dx_file_copy "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
                )
             }
             {set $trackangle TRUE}

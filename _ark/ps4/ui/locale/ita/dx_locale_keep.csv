@@ -119,7 +119,7 @@
 "os_delayed_effect_warn","This option will take effect the next time you restart the game.","","","",""
 "os_additional_parts_info","Press yellow on the part select menu to get non-standard parts to appear (PAD/VOCALS ONLY).","","","",""
 "os_ingame_warn","This option will take effect when you go back to music library.","","","",""
-"os_track_angles_warn","Track Angles are EXPERIMENTAL, and may not work in multiplayer. Do you want to continue?","","","",""
+"os_track_angles_warn","Track Angles are EXPERIMENTAL, and will not work with drums or multiplayer. Do you want to continue?","","","",""
 "os_gem_color_confirm","Would you like to reset gem colors to default or edit your colors?","","","",""
 "os_edit","Edit","","","",""
 "os_static_menu_bg_confirm","Would you like to reset Menu BGs to default or edit your static BG?","","","",""
