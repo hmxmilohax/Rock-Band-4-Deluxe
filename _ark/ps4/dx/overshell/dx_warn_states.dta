@@ -236,12 +236,12 @@
 (dxState_GemColorConfirm
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" (os_reset "Edit")}
+      {$this setup_confirm_actions "Would you like to reset gem colors to default or edit your colors?" (restart "Edit")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         (os_reset
+         (restart
             {dx_file_delete "settings/theme/gem/colors/enabled.dta"}
             {$this show_state dxState_TrackTheme}
          )
@@ -260,12 +260,12 @@
 (dxState_StaticMenuBackgroudConfirm
    (view confirm_action)
    (enter
-      {$this setup_confirm_actions "Would you like to reset Menu BGs to default or edit your static BG?" (os_reset "Edit")}
+      {$this setup_confirm_actions "Would you like to reset Menu BGs to default or edit your static BG?" (restart "Edit")}
    )
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
-         (os_reset
+         (restart
             {dx_file_rename "ps4/ui/background/meta_background.scene_ps4" "ps4/ui/background/meta_background1.scene_ps4"}
             {dx_file_delete "settings/visuals/menubg.dta"}
             {if_else {&& {is_emu} {! {file_exists "settings/emu_override.dta"}}}
