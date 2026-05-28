@@ -1728,7 +1728,8 @@
                            }
                         }
                         {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                           {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           {if_else {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {dx_file_delete "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
                               {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
                            }
                         }
@@ -1759,7 +1760,8 @@
                      (hwlength
                         {set $hwlength 1}
                         {if {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
-                           {unless {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                           {if_else {dx_file_exists "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
+                              {dx_file_delete "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4"}
                               {dx_file_rename "ps4/track/smasher/fretboard.fbx++mesh++fretboard_ps4" "ps4/track/smasher/fretboard1.fbx++mesh++fretboard_ps4"}
                            }
                         }

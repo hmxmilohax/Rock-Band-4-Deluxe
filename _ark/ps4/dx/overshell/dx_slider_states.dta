@@ -2,9 +2,9 @@
 (
    {set $dxsettings {array ()}}
    {push_back $dxsettings " "}
-   {push_back $dxsettings {sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}}
-   {push_back $dxsettings {sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}}
-   {push_back $dxsettings "Per-Controller Calibration"}
+   {push_back $dxsettings {sprintf {localize os_video_cal} {* {get_video_calibration} -1}}}
+   {push_back $dxsettings {sprintf {localize os_audio_cal} {* {get_audio_calibration} -1}}}
+   {push_back $dxsettings os_per_controller_cal}
    {$this setup_confirm_actions a $dxsettings}
 
 )
@@ -20,7 +20,7 @@
    (SELECT_MSG
       {local $list_data {($objId UIListCom) get_data_in_column token}}
       {switch $list_data 
-         ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+         ({sprintf {localize os_video_cal} {* {get_video_calibration} -1}}
             {set $slider_selected {! $slider_selected}}
             {if_else $slider_selected
                {do
@@ -30,7 +30,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+         ({sprintf {localize os_audio_cal} {* {get_audio_calibration} -1}}
             {set $slider_selected {! $slider_selected}}
             {if_else $slider_selected
                {do
@@ -40,7 +40,7 @@
                {$this hide_tooltip}
             }
          )
-         ("Per-Controller Calibration"
+         (os_per_controller_cal
             {$this show_state dxState_ControllerCalibration}
          )
       }
@@ -67,7 +67,7 @@
                   {$ui_list set_focus_by_data dx_index 1}
                )
                (audio
-                  {if_else {== $list_data {sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_video_cal} {* {get_video_calibration} -1}}} ;up
                      {unless {< {- {get_audio_calibration} 1} -300}
                         {set_audio_calibration {- {get_audio_calibration} 1}}
                      }
@@ -92,24 +92,24 @@
          {do
             {if_else {== $action kAction_Right } ;also up
                {switch $list_data
-                  ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                  ({sprintf {localize os_video_cal} {* {get_video_calibration} -1}}
                      {unless {< {- {get_video_calibration} 1} -300}
                         {set_video_calibration {- {get_video_calibration} 1}}
                      }
                   )
-                  ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                  ({sprintf {localize os_audio_cal} {* {get_audio_calibration} -1}}
                      {unless {< {- {get_audio_calibration} 1} -300}
                         {set_audio_calibration {- {get_audio_calibration} 1}}
                      }
                   )
                }
                {switch $list_data
-                  ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                  ({sprintf {localize os_video_cal} {* {get_video_calibration} -1}}
                      {unless {> {+ {get_video_calibration} 1} 300}
                         {set_video_calibration {+ {get_video_calibration} 1}}
                      }
                   )
-                  ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                  ({sprintf {localize os_audio_cal} {* {get_audio_calibration} -1}}
                      {unless {> {+ {get_audio_calibration} 1} 300}
                         {set_audio_calibration {+ {get_audio_calibration} 1}}
                      }
@@ -134,10 +134,10 @@
             {if_else {== $action kAction_Option}
                {if $slider_selected
                   {switch $list_data
-                     ({sprintf " - Video: %d ms + " {* {get_video_calibration} -1}}
+                     ({sprintf {localize os_video_cal} {* {get_video_calibration} -1}}
                         {set_video_calibration 0}
                      )
-                     ({sprintf " - Audio: %d ms + " {* {get_audio_calibration} -1}}
+                     ({sprintf {localize os_audio_cal} {* {get_audio_calibration} -1}}
                         {set_audio_calibration 0}
                      )
                   }
@@ -155,18 +155,18 @@
 (
    {set $dxsettings {array ()}}
    {push_back $dxsettings " "}
-   {push_back $dxsettings {sprintf " - Dualshock: %d ms + " {* {get_plugin_var pad_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 1 Guitar: %d ms + " {* {get_plugin_var rb1_guitar_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 2/3 Guitar: %d ms + " {* {get_plugin_var rb2_guitar_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 4 Stratocaster: %d ms + " {* {get_plugin_var rb4_strat_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 4 Jaguar/Riffmaster: %d ms + " {* {get_plugin_var rb4_jag_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Guitar Hero Guitar: %d ms + " {* {get_plugin_var gh_guitar_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 1 Drums: %d ms + " {* {get_plugin_var rb1_drums_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 2/3 Drums: %d ms + " {* {get_plugin_var rb2_drums_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Band 4 Drums: %d ms + " {* {get_plugin_var rb4_drums_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Guitar Hero Drums: %d ms + " {* {get_plugin_var gh_drums_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - Rock Revolution Drums: %d ms + " {* {get_plugin_var rr_drums_extra_lag} -1}}}
-   {push_back $dxsettings {sprintf " - MIDI Pro Adapter Drums: %d ms + " {* {get_plugin_var mpa_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}}
+   {push_back $dxsettings {sprintf {localize os_mpa_drums_cal} {* {get_plugin_var mpa_drums_extra_lag} -1}}}
    {push_back $dxsettings "  "}
    {$this setup_confirm_actions a $dxsettings}
 )
@@ -265,7 +265,7 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {set $slider_selected {! $slider_selected}}
       {switch $list_data 
-         ({sprintf " - Dualshock: %d ms + " {* {get_plugin_var pad_extra_lag} -1}}
+         ({sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Dualshock"}
@@ -274,7 +274,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 1 Guitar: %d ms + " {* {get_plugin_var rb1_guitar_extra_lag} -1}}
+         ({sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 1 Guitar"}
@@ -283,7 +283,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 2/3 Guitar: %d ms + " {* {get_plugin_var rb2_guitar_extra_lag} -1}}
+         ({sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 2/3 Guitar"}
@@ -292,7 +292,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 4 Stratocaster: %d ms + " {* {get_plugin_var rb4_strat_extra_lag} -1}}
+         ({sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 4 Stratocaster"}
@@ -301,7 +301,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 4 Jaguar/Riffmaster: %d ms + " {* {get_plugin_var rb4_jag_extra_lag} -1}}
+         ({sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 4 Jaguar/Riffmaster"}
@@ -310,7 +310,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Guitar Hero Guitar: %d ms + " {* {get_plugin_var gh_guitar_extra_lag} -1}}
+         ({sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Guitar Hero Guitar"}
@@ -319,7 +319,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 1 Drums: %d ms + " {* {get_plugin_var rb1_drums_extra_lag} -1}}
+         ({sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 1 Drums"}
@@ -328,7 +328,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 2/3 Drums: %d ms + " {* {get_plugin_var rb2_drums_extra_lag} -1}}
+         ({sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 2/3 Drums"}
@@ -337,7 +337,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Band 4 Drums: %d ms + " {* {get_plugin_var rb4_drums_extra_lag} -1}}
+         ({sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Band 4 Drums"}
@@ -346,7 +346,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Guitar Hero Drums: %d ms + " {* {get_plugin_var gh_drums_extra_lag} -1}}
+         ({sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Guitar Hero Drums"}
@@ -355,7 +355,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - Rock Revolution Drums: %d ms + " {* {get_plugin_var rr_drums_extra_lag} -1}}
+         ({sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "Rock Revolution Drums"}
@@ -364,7 +364,7 @@
                {$this hide_tooltip}
             }
          )
-         ({sprintf " - MIDI Pro Adapter Drums: %d ms + " {* {get_plugin_var mpa_drums_extra_lag} -1}}
+         ({sprintf {localize os_mpa_drums_cal} {* {get_plugin_var mpa_drums_extra_lag} -1}}
             {if_else $slider_selected
                {do
                   {set $selected_pad_type "MIDI Pro Adapter Drums"}
@@ -397,7 +397,7 @@
                   {$ui_list set_focus_by_data dx_index 1}
                )
                ("Rock Band 1 Guitar"
-                  {if_else {== $list_data {sprintf " - Dualshock: %d ms + " {* {get_plugin_var pad_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb1_guitar_extra_lag} 1} -1000}
                         {set_plugin_var rb1_guitar_extra_lag {- {get_plugin_var rb1_guitar_extra_lag} 1}}
                      }
@@ -410,7 +410,7 @@
                   {$ui_list set_focus_by_data dx_index 2}
                )
                ("Rock Band 2/3 Guitar"
-                  {if_else {== $list_data {sprintf " - Rock Band 1 Guitar: %d ms + " {* {get_plugin_var rb1_guitar_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb2_guitar_extra_lag} 1} -1000}
                         {set_plugin_var rb2_guitar_extra_lag {- {get_plugin_var rb2_guitar_extra_lag} 1}}
                      }
@@ -423,7 +423,7 @@
                   {$ui_list set_focus_by_data dx_index 3}
                )
                ("Rock Band 4 Stratocaster"
-                  {if_else {== $list_data {sprintf " - Rock Band 2/3 Guitar: %d ms + " {* {get_plugin_var rb2_guitar_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb4_strat_extra_lag} 1} -1000}
                         {set_plugin_var rb4_strat_extra_lag {- {get_plugin_var rb4_strat_extra_lag} 1}}
                      }
@@ -436,7 +436,7 @@
                   {$ui_list set_focus_by_data dx_index 4}
                )
                ("Rock Band 4 Jaguar/Riffmaster"
-                  {if_else {== $list_data {sprintf " - Rock Band 4 Stratocaster: %d ms + " {* {get_plugin_var rb4_strat_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb4_jag_extra_lag} 1} -1000}
                         {set_plugin_var rb4_jag_extra_lag {- {get_plugin_var rb4_jag_extra_lag} 1}}
                      }
@@ -449,7 +449,7 @@
                   {$ui_list set_focus_by_data dx_index 5}
                )
                ("Guitar Hero Guitar"
-                  {if_else {== $list_data {sprintf " - Rock Band 4 Jaguar/Riffmaster: %d ms + " {* {get_plugin_var rb4_jag_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var gh_guitar_extra_lag} 1} -1000}
                         {set_plugin_var gh_guitar_extra_lag {- {get_plugin_var gh_guitar_extra_lag} 1}}
                      }
@@ -462,7 +462,7 @@
                   {$ui_list set_focus_by_data dx_index 6}
                )
                ("Rock Band 1 Drums"
-                  {if_else {== $list_data {sprintf " - Guitar Hero Guitar: %d ms + " {* {get_plugin_var gh_guitar_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb1_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb1_drums_extra_lag {- {get_plugin_var rb1_drums_extra_lag} 1}}
                      }
@@ -475,7 +475,7 @@
                   {$ui_list set_focus_by_data dx_index 7}
                )
                ("Rock Band 2/3 Drums"
-                  {if_else {== $list_data {sprintf " - Rock Band 1 Drums: %d ms + " {* {get_plugin_var rb1_drums_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb2_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb2_drums_extra_lag {- {get_plugin_var rb2_drums_extra_lag} 1}}
                      }
@@ -488,7 +488,7 @@
                   {$ui_list set_focus_by_data dx_index 8}
                )
                ("Rock Band 4 Drums"
-                  {if_else {== $list_data {sprintf " - Rock Band 2/3 Drums: %d ms + " {* {get_plugin_var rb2_drums_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rb4_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb4_drums_extra_lag {- {get_plugin_var rb4_drums_extra_lag} 1}}
                      }
@@ -501,7 +501,7 @@
                   {$ui_list set_focus_by_data dx_index 9}
                )
                ("Guitar Hero Drums"
-                  {if_else {== $list_data {sprintf " - Rock Band 4 Drums: %d ms + " {* {get_plugin_var rb4_drums_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var gh_drums_extra_lag} 1} -1000}
                         {set_plugin_var gh_drums_extra_lag {- {get_plugin_var gh_drums_extra_lag} 1}}
                      }
@@ -514,7 +514,7 @@
                   {$ui_list set_focus_by_data dx_index 10}
                )
                ("Rock Revolution Drums"
-                  {if_else {== $list_data {sprintf " - Guitar Hero Drums: %d ms + " {* {get_plugin_var gh_drums_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var rr_drums_extra_lag} 1} -1000}
                         {set_plugin_var rr_drums_extra_lag {- {get_plugin_var rr_drums_extra_lag} 1}}
                      }
@@ -527,7 +527,7 @@
                   {$ui_list set_focus_by_data dx_index 11}
                )
                ("MIDI Pro Adapter Drums"
-                  {if_else {== $list_data {sprintf " - Rock Revolution Drums: %d ms + " {* {get_plugin_var rr_drums_extra_lag} -1}}} ;up
+                  {if_else {== $list_data {sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}} ;up
                      {unless {< {- {get_plugin_var mpa_drums_extra_lag} 1} -1000}
                         {set_plugin_var mpa_drums_extra_lag {- {get_plugin_var mpa_drums_extra_lag} 1}}
                      }
@@ -555,124 +555,124 @@
          {do
             {if_else {== $action kAction_Right } ;also up
                {switch $list_data
-                  ({sprintf " - Dualshock: %d ms + " {* {get_plugin_var pad_extra_lag} -1}}
+                  ({sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}
                      {unless {< {- {get_plugin_var pad_extra_lag} 1} -1000}
                         {set_plugin_var pad_extra_lag {- {get_plugin_var pad_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 1 Guitar: %d ms + " {* {get_plugin_var rb1_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb1_guitar_extra_lag} 1} -1000}
                         {set_plugin_var rb1_guitar_extra_lag {- {get_plugin_var rb1_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 2/3 Guitar: %d ms + " {* {get_plugin_var rb2_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb2_guitar_extra_lag} 1} -1000}
                         {set_plugin_var rb2_guitar_extra_lag {- {get_plugin_var rb2_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Stratocaster: %d ms + " {* {get_plugin_var rb4_strat_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb4_strat_extra_lag} 1} -1000}
                         {set_plugin_var rb4_strat_extra_lag {- {get_plugin_var rb4_strat_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Jaguar/Riffmaster: %d ms + " {* {get_plugin_var rb4_jag_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb4_jag_extra_lag} 1} -1000}
                         {set_plugin_var rb4_jag_extra_lag {- {get_plugin_var rb4_jag_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Guitar Hero Guitar: %d ms + " {* {get_plugin_var gh_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}
                      {unless {< {- {get_plugin_var gh_guitar_extra_lag} 1} -1000}
                         {set_plugin_var gh_guitar_extra_lag {- {get_plugin_var gh_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 1 Drums: %d ms + " {* {get_plugin_var rb1_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb1_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb1_drums_extra_lag {- {get_plugin_var rb1_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 2/3 Drums: %d ms + " {* {get_plugin_var rb2_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb2_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb2_drums_extra_lag {- {get_plugin_var rb2_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Drums: %d ms + " {* {get_plugin_var rb4_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rb4_drums_extra_lag} 1} -1000}
                         {set_plugin_var rb4_drums_extra_lag {- {get_plugin_var rb4_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Guitar Hero Drums: %d ms + " {* {get_plugin_var gh_drums_extra_lag} -1}}
+                  ({sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var gh_drums_extra_lag} 1} -1000}
                         {set_plugin_var gh_drums_extra_lag {- {get_plugin_var gh_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Revolution Drums: %d ms + " {* {get_plugin_var rr_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var rr_drums_extra_lag} 1} -1000}
                         {set_plugin_var rr_drums_extra_lag {- {get_plugin_var rr_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - MIDI Pro Adapter Drums: %d ms + " {* {get_plugin_var mpa_drums_extra_lag} -1}}
+                  ({sprintf {localize os_mpa_drums_cal} {* {get_plugin_var mpa_drums_extra_lag} -1}}
                      {unless {< {- {get_plugin_var mpa_drums_extra_lag} 1} -1000}
                         {set_plugin_var mpa_drums_extra_lag {- {get_plugin_var mpa_drums_extra_lag} 1}}
                      }
                   )
                }
                {switch $list_data
-                  ({sprintf " - Dualshock: %d ms + " {* {get_plugin_var pad_extra_lag} -1}}
+                  ({sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var pad_extra_lag} 1} 1000}
                         {set_plugin_var pad_extra_lag {+ {get_plugin_var pad_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 1 Guitar: %d ms + " {* {get_plugin_var rb1_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb1_guitar_extra_lag} 1} 1000}
                         {set_plugin_var rb1_guitar_extra_lag {+ {get_plugin_var rb1_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 2/3 Guitar: %d ms + " {* {get_plugin_var rb2_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb2_guitar_extra_lag} 1} 1000}
                         {set_plugin_var rb2_guitar_extra_lag {+ {get_plugin_var rb2_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Stratocaster: %d ms + " {* {get_plugin_var rb4_strat_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb4_strat_extra_lag} 1} 1000}
                         {set_plugin_var rb4_strat_extra_lag {+ {get_plugin_var rb4_strat_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Jaguar/Riffmaster: %d ms + " {* {get_plugin_var rb4_jag_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb4_jag_extra_lag} 1} 1000}
                         {set_plugin_var rb4_jag_extra_lag {+ {get_plugin_var rb4_jag_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Guitar Hero Guitar: %d ms + " {* {get_plugin_var gh_guitar_extra_lag} -1}}
+                  ({sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var gh_guitar_extra_lag} 1} 1000}
                         {set_plugin_var gh_guitar_extra_lag {+ {get_plugin_var gh_guitar_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 1 Drums: %d ms + " {* {get_plugin_var rb1_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb1_drums_extra_lag} 1} 1000}
                         {set_plugin_var rb1_drums_extra_lag {+ {get_plugin_var rb1_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 2/3 Drums: %d ms + " {* {get_plugin_var rb2_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb2_drums_extra_lag} 1} 1000}
                         {set_plugin_var rb2_drums_extra_lag {+ {get_plugin_var rb2_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Band 4 Drums: %d ms + " {* {get_plugin_var rb4_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rb4_drums_extra_lag} 1} 1000}
                         {set_plugin_var rb4_drums_extra_lag {+ {get_plugin_var rb4_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Guitar Hero Drums: %d ms + " {* {get_plugin_var gh_drums_extra_lag} -1}}
+                  ({sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var gh_drums_extra_lag} 1} 1000}
                         {set_plugin_var gh_drums_extra_lag {+ {get_plugin_var gh_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - Rock Revolution Drums: %d ms + " {* {get_plugin_var rr_drums_extra_lag} -1}}
+                  ({sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var rr_drums_extra_lag} 1} 1000}
                         {set_plugin_var rr_drums_extra_lag {+ {get_plugin_var rr_drums_extra_lag} 1}}
                      }
                   )
-                  ({sprintf " - MIDI Pro Adapter Drums: %d ms + " {* {get_plugin_var mpa_drums_extra_lag} -1}}
+                  ({sprintf {localize os_mpa_drums_cal} {* {get_plugin_var mpa_drums_extra_lag} -1}}
                      {unless {> {+ {get_plugin_var mpa_drums_extra_lag} 1} 1000}
                         {set_plugin_var mpa_drums_extra_lag {+ {get_plugin_var mpa_drums_extra_lag} 1}}
                      }
