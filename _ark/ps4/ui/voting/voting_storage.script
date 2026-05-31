@@ -11,5 +11,5 @@
          (item float 
             (help "A float array item whose default value matches its index within the array.")))))
 (enter)
-(poll {set_plugin_var insong FALSE})
+(poll {set_plugin_var insong FALSE} {set_plugin_var dontmodifyartist TRUE})
 (exit {unless {$ui is_in_transition} {set_plugin_var insong TRUE}})

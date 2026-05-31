@@ -302,7 +302,7 @@
                {$this select_difficulty kDifficultyEasy})
          } 
       {$this trigger_select_effects}
-      {set_plugin_var insong TRUE}
+      {set_plugin_var dontmodifyartist TRUE}
    ) 
    (LIST_FOCUS_MSG
       {if 
