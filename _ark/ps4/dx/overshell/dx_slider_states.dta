@@ -154,7 +154,8 @@
 #define PER_CONTROLLER_CALIBRATION_DATA
 (
    {set $dxsettings {array ()}}
-   {push_back $dxsettings " "}
+   {push_back $dxsettings os_all_offsets_vanilla}
+   {push_back $dxsettings os_all_offsets_custom_optimal}
    {push_back $dxsettings {sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}}
    {push_back $dxsettings {sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}}
    {push_back $dxsettings {sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}}
@@ -265,6 +266,36 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {set $slider_selected {! $slider_selected}}
       {switch $list_data 
+         (os_all_offsets_vanilla
+            {set_plugin_var pad_extra_lag 0}
+            {set_plugin_var rb1_guitar_extra_lag -13}
+            {set_plugin_var rb2_guitar_extra_lag -31}
+            {set_plugin_var rb4_strat_extra_lag 1}
+            {set_plugin_var rb4_jag_extra_lag 1}
+            {set_plugin_var gh_guitar_extra_lag -3}
+            {set_plugin_var rb1_drums_extra_lag 26}
+            {set_plugin_var rb2_drums_extra_lag 26}
+            {set_plugin_var rb4_drums_extra_lag 26}
+            {set_plugin_var gh_drums_extra_lag 26}
+            {set_plugin_var rr_drums_extra_lag 26}
+            {set_plugin_var mpa_drums_extra_lag 26}
+            PER_CONTROLLER_CALIBRATION_DATA
+         )
+         (os_all_offsets_custom_optimal
+            {set_plugin_var pad_extra_lag 6}
+            {set_plugin_var rb1_guitar_extra_lag -2}
+            {set_plugin_var rb2_guitar_extra_lag -2}
+            {set_plugin_var rb4_strat_extra_lag 6}
+            {set_plugin_var rb4_jag_extra_lag 6}
+            {set_plugin_var gh_guitar_extra_lag -2}
+            {set_plugin_var rb1_drums_extra_lag -2}
+            {set_plugin_var rb2_drums_extra_lag -2}
+            {set_plugin_var rb4_drums_extra_lag 6}
+            {set_plugin_var gh_drums_extra_lag -2}
+            {set_plugin_var rr_drums_extra_lag -2}
+            {set_plugin_var mpa_drums_extra_lag -2}
+            PER_CONTROLLER_CALIBRATION_DATA
+         )
          ({sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}
             {if_else $slider_selected
                {do
@@ -384,7 +415,7 @@
             {set $setting_focus FALSE}
             {switch $selected_pad_type
                ("Dualshock"
-                  {if_else {== $list_data " "} ;up
+                  {if_else {== $list_data os_all_offsets_custom_optimal} ;up
                      {unless {< {- {get_plugin_var pad_extra_lag} 1} -1000}
                         {set_plugin_var pad_extra_lag {- {get_plugin_var pad_extra_lag} 1}}
                      }
@@ -394,7 +425,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 1}
+                  {$ui_list set_focus_by_data dx_index 2}
                )
                ("Rock Band 1 Guitar"
                   {if_else {== $list_data {sprintf {localize os_dualshock_cal} {* {get_plugin_var pad_extra_lag} -1}}} ;up
@@ -407,7 +438,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 2}
+                  {$ui_list set_focus_by_data dx_index 3}
                )
                ("Rock Band 2/3 Guitar"
                   {if_else {== $list_data {sprintf {localize os_rb1_guitar_cal} {* {get_plugin_var rb1_guitar_extra_lag} -1}}} ;up
@@ -420,7 +451,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 3}
+                  {$ui_list set_focus_by_data dx_index 4}
                )
                ("Rock Band 4 Stratocaster"
                   {if_else {== $list_data {sprintf {localize os_rb2_guitar_cal} {* {get_plugin_var rb2_guitar_extra_lag} -1}}} ;up
@@ -433,7 +464,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 4}
+                  {$ui_list set_focus_by_data dx_index 5}
                )
                ("Rock Band 4 Jaguar/Riffmaster"
                   {if_else {== $list_data {sprintf {localize os_rb4_strat_cal} {* {get_plugin_var rb4_strat_extra_lag} -1}}} ;up
@@ -446,7 +477,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 5}
+                  {$ui_list set_focus_by_data dx_index 6}
                )
                ("Guitar Hero Guitar"
                   {if_else {== $list_data {sprintf {localize os_rb4_jag_cal} {* {get_plugin_var rb4_jag_extra_lag} -1}}} ;up
@@ -459,7 +490,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 6}
+                  {$ui_list set_focus_by_data dx_index 7}
                )
                ("Rock Band 1 Drums"
                   {if_else {== $list_data {sprintf {localize os_gh_guitar_cal} {* {get_plugin_var gh_guitar_extra_lag} -1}}} ;up
@@ -472,7 +503,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 7}
+                  {$ui_list set_focus_by_data dx_index 8}
                )
                ("Rock Band 2/3 Drums"
                   {if_else {== $list_data {sprintf {localize os_rb1_drums_cal} {* {get_plugin_var rb1_drums_extra_lag} -1}}} ;up
@@ -485,7 +516,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 8}
+                  {$ui_list set_focus_by_data dx_index 9}
                )
                ("Rock Band 4 Drums"
                   {if_else {== $list_data {sprintf {localize os_rb2_drums_cal} {* {get_plugin_var rb2_drums_extra_lag} -1}}} ;up
@@ -498,7 +529,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 9}
+                  {$ui_list set_focus_by_data dx_index 10}
                )
                ("Guitar Hero Drums"
                   {if_else {== $list_data {sprintf {localize os_rb4_drums_cal} {* {get_plugin_var rb4_drums_extra_lag} -1}}} ;up
@@ -511,7 +542,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 10}
+                  {$ui_list set_focus_by_data dx_index 11}
                )
                ("Rock Revolution Drums"
                   {if_else {== $list_data {sprintf {localize os_gh_drums_cal} {* {get_plugin_var gh_drums_extra_lag} -1}}} ;up
@@ -524,7 +555,7 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 11}
+                  {$ui_list set_focus_by_data dx_index 12}
                )
                ("MIDI Pro Adapter Drums"
                   {if_else {== $list_data {sprintf {localize os_rr_drums_cal} {* {get_plugin_var rr_drums_extra_lag} -1}}} ;up
@@ -537,15 +568,12 @@
                   }
                   PER_CONTROLLER_CALIBRATION_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 12}
+                  {$ui_list set_focus_by_data dx_index 13}
                )
             }
          }
-         {if_else {== $list_data " "}
-            {$ui_list set_focus_by_data dx_index 1}
-            {if {== $list_data "  "}
-               {$ui_list set_focus_by_data dx_index 12}
-            }
+         {if {== $list_data "  "}
+            {$ui_list set_focus_by_data dx_index 13}
          }
       }
    )

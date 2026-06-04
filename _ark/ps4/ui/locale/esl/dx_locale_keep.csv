@@ -141,6 +141,8 @@
 "os_gh_drums_cal","- Guitar Hero Drums: %d ms +","","","",""
 "os_rr_drums_cal","- Rock Revolution Drums: %d ms +","","","",""
 "os_mpa_drums_cal","- MIDI Pro Adapter Drums: %d ms +","","","",""
+"os_all_offsets_vanilla","[RESET ALL TO VANILLA]","","","",""
+"os_all_offsets_custom_optimal","[SET TO CUSTOM-OPTIMAL]","","","",""
 "nice_solo","Nice","","","",""
 "choke_solo","¡Vaya manqueada!","","","",""
 "version_number","%s","","","",""
