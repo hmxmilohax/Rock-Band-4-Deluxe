@@ -1598,7 +1598,7 @@
                (hwlength
                   {if_else {== $list_data {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}} ;up
                      {do
-                        {unless {< {- $hwlength 0.05} $posint6}
+                        {unless {< {- $hwlength 0.05} 0.56}
                            {set $hwlength {- $hwlength 0.05}}
                         }
                         {if_else {< $hwlength 0.74}
@@ -1661,7 +1661,7 @@
                      }
                      $hwlength
                   }
-                     {unless {< {- $hwlength 0.05} $posint6}
+                     {unless {< {- $hwlength 0.05} 0.56}
                         {set $hwlength {- $hwlength 0.05}}
                      }
                      {if_else {< $hwlength 0.74}
