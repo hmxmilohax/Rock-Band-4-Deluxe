@@ -134,7 +134,9 @@
             {if_else $slider_selected
                {do
                   {set $slider_selected FALSE}
-                  {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  {unless {|| $calibrationmode $precisionmode {get_plugin_var drunkmode}}
+                     {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  }
                   SET_TRACK_SPEEDS
                   {set_practice_speed {/ $pracspeed 100}}
                   {if {$this in_song}
@@ -143,7 +145,9 @@
                   {$this trigger_cancel_effects}
                }
                {do
-                  {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  {unless {|| $calibrationmode $precisionmode {get_plugin_var drunkmode}}
+                     {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
+                  }
                   SET_TRACK_SPEEDS
                   {set_practice_speed {/ $pracspeed 100}}
                   {if_else {$this in_song}
