@@ -143,6 +143,8 @@
 "os_mpa_drums_cal","- MIDI Pro Adapter Drums: %d ms +","","","",""
 "os_all_offsets_vanilla","[RESET ALL TO VANILLA]","","","",""
 "os_all_offsets_custom_optimal","[SET TO CUSTOM-OPTIMAL]","","","",""
+"player_intros_on","Player Intro Animations: ON","","","",""
+"player_intros_off","Player Intro Animations: OFF","","","",""
 "nice_solo","Nice","","","",""
 "choke_solo","¡Vaya manqueada!","","","",""
 "version_number","%s","","","",""

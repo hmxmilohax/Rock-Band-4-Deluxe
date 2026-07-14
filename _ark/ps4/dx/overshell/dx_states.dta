@@ -77,7 +77,9 @@
             {$this trigger_select_effects}
          )
          ("test"
-            {$this show_state dxState_test}
+            {write_file "data:/GoldHEN/RB4DX/syscfg.dta" $syscfg}
+            ;{$ui add_scene "ui/btm/btm_temp_scene.scene"}
+            ;{$this show_state dxState_test}
             {$this trigger_select_effects}
          )
       }
@@ -662,6 +664,7 @@
             os_venue
             {if_else $60fpsbg os_venuefps_60 os_venuefps_30}
             {if_else {get_plugin_var noshake} os_camera_shake_off os_camera_shake_on}
+            {if_else {get_plugin_var player_intros} player_intros_on player_intros_off}
             {if_else $crowdmeter os_crowdmeter_off os_crowdmeter_on}
             os_hud_theme
             {if_else $nohud os_nohud_on os_nohud_off}
@@ -675,6 +678,7 @@
                os_resolution
                {if_else $60fpsbg os_venuefps_60 os_venuefps_30}
                {if_else {get_plugin_var noshake} os_camera_shake_off os_camera_shake_on}
+               {if_else {get_plugin_var player_intros} player_intros_on player_intros_off}
                {if_else $crowdmeter os_crowdmeter_off os_crowdmeter_on}
                os_hud_theme
                {if_else $nohud os_nohud_on os_nohud_off}
@@ -691,6 +695,7 @@
                   os_resolution
                   {if_else $60fpsbg os_venuefps_60 os_venuefps_30}
                   {if_else {get_plugin_var noshake} os_camera_shake_off os_camera_shake_on}
+                  {if_else {get_plugin_var player_intros} player_intros_on player_intros_off}
                   {if_else $crowdmeter os_crowdmeter_off os_crowdmeter_on}
                   os_hud_theme
                   {if_else $nohud os_nohud_on os_nohud_off}
@@ -704,6 +709,7 @@
                   os_venue
                   {if_else $60fpsbg os_venuefps_60 os_venuefps_30}
                   {if_else {get_plugin_var noshake} os_camera_shake_off os_camera_shake_on}
+                  {if_else {get_plugin_var player_intros} player_intros_on player_intros_off}
                   {if_else $crowdmeter os_crowdmeter_off os_crowdmeter_on}
                   os_hud_theme
                   {if_else $nohud os_nohud_on os_nohud_off}
@@ -737,6 +743,18 @@
          )
          (os_resolution
             {$this show_state dxState_ResolutionSelector}
+            {$this trigger_select_effects}
+         )
+         ((player_intros_on player_intros_off)
+            {set_plugin_var player_intros {! {get_plugin_var player_intros}}}
+            {if_else {get_plugin_var player_intros}
+               {dx_write_null_file "settings/visuals/playerintros.dta"}
+               {dx_file_delete "settings/visuals/playerintros.dta"}
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXVIS_DATA
+            }
             {$this trigger_select_effects}
          )
          ((os_venuefps_60 os_venuefps_30)
