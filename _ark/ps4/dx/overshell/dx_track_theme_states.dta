@@ -338,7 +338,7 @@
                {do
                   {set $dx_cur_state FALSE}
                   {write_file "data:/GoldHEN/RB4DX/settings/theme/beatlinealpha.dta" {array ($beatlinealpha)}}
-                  {write_beatline_file $beatlinealpha}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/shared/fret_unlit.entity_ps4" 1594 $beatlinealpha}
                   {$this show_state dxState_TrkSettings}
                   {$this trigger_cancel_effects}
                }

@@ -80,6 +80,7 @@
             {write_file "data:/GoldHEN/RB4DX/syscfg.dta" $syscfg}
             ;{$ui add_scene "ui/btm/btm_temp_scene.scene"}
             ;{$this show_state dxState_test}
+            {replace_byte "/data/GoldHEN/RB4DX/ps4/dx/track/practice_speed.dta_dta_ps4" 57 50}
             {$this trigger_select_effects}
          )
       }
@@ -140,7 +141,7 @@
                      {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
                   }
                   SET_TRACK_SPEEDS
-                  {set_practice_speed {/ $pracspeed 100}}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/dx/track/practice_speed.dta_dta_ps4" 57 {/ $pracspeed 100}}
                   {if {$this in_song}
                      {$this show_state dxState_InGameWarn}
                   }
@@ -151,7 +152,7 @@
                      {set_elem {find $syscfg beatmatcher watcher slop} 1 {get_plugin_var speedmod}}
                   }
                   SET_TRACK_SPEEDS
-                  {set_practice_speed {/ $pracspeed 100}}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/dx/track/practice_speed.dta_dta_ps4" 57 {/ $pracspeed 100}}
                   {if_else {$this in_song}
                      {$this show_in_song_menu}
                      {$this show_state kState_Options}
