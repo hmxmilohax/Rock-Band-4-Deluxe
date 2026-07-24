@@ -1,29 +1,31 @@
 ;Track Theme
 #define RB4DXTHM_DATA
 (
-   {set $dxsettings {array ()}}
-   {push_back $dxsettings "Highway"}
-   {push_back $dxsettings "Gem"}
-   {push_back $dxsettings "Strikeline"}
-   {push_back $dxsettings 
-      {sprintf " - Beatline Brightness: %d%% + " 
-         {if_else {< $beatlinealpha 0.5}
-            {+ {* -2.65 $beatlinealpha} 11.325}
-            {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+   {do
+      {set $dxsettings {array ()}}
+      {push_back $dxsettings "Highway"}
+      {push_back $dxsettings "Gem"}
+      {push_back $dxsettings "Strikeline"}
+      {push_back $dxsettings 
+         {sprintf " - Beatline Brightness: %d%% + " 
+            {if_else {< $beatlinealpha 0.5}
+               {+ {* -2.65 $beatlinealpha} 11.325}
+               {+ {* -2.67 {* $beatlinealpha $beatlinealpha}} 10.6676}
+            }
          }
       }
+      {push_back $dxsettings "Solo Box"}
+      {push_back $dxsettings "Score"}
+      {push_back $dxsettings "Countdown"}
+      {push_back $dxsettings "Stars"}
+      {push_back $dxsettings "Crowd Meter"}
+      {push_back $dxsettings {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}}
+      {push_back $dxsettings {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}}
+      {push_back $dxsettings {if_else {get_plugin_var gemcolors} "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}}
+      {push_back $dxsettings "Vocal Notes"}
+      {push_back $dxsettings "Vocal Arrows"}
+      {$this setup_confirm_actions a $dxsettings}
    }
-   {push_back $dxsettings "Solo Box"}
-   {push_back $dxsettings "Score"}
-   {push_back $dxsettings "Countdown"}
-   {push_back $dxsettings "Stars"}
-   {push_back $dxsettings "Crowd Meter"}
-   {push_back $dxsettings {if_else $noshine "Highway Shine: OFF" "Highway Shine: ON"}}
-   {push_back $dxsettings {if_else $gemshine "Gem Shine: OFF" "Gem Shine: ON"}}
-   {push_back $dxsettings {if_else {get_plugin_var gemcolors} "Custom Gem Colors: ON" "Custom Gem Colors: OFF"}}
-   {push_back $dxsettings "Vocal Notes"}
-   {push_back $dxsettings "Vocal Arrows"}
-   {$this setup_confirm_actions a $dxsettings}
 )
 (dxState_TrackTheme
    (view {$this get_auto_list_view}) 

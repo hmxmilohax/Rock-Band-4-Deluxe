@@ -1483,24 +1483,26 @@
 ;Track Settings
 #define RB4DXTRK_DATA
 (
-   {set $dxsettings {array ()}}
-   {push_back $dxsettings "Track Theme"}
-   {push_back $dxsettings {if_else $noflames "Flames: OFF" "Flames: ON"}}
-   {push_back $dxsettings {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}}
-   {push_back $dxsettings {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}}
-   {push_back $dxsettings "Custom Track Angle"}
-   {push_back $dxsettings {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}}
-   {push_back $dxsettings 
-      {sprintf " - Highway Length: %.2fX + " 
-         {if_else {> $hwlength 1}
-            {+ {* $hwlength -0.333333333333333} 1.333333333333333}
-            {+ {* $hwlength -1.25} 2.25}
+   {do
+      {set $dxsettings {array ()}}
+      {push_back $dxsettings "Track Theme"}
+      {push_back $dxsettings {if_else $noflames "Flames: OFF" "Flames: ON"}}
+      {push_back $dxsettings {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}}
+      {push_back $dxsettings {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}}
+      {push_back $dxsettings "Custom Track Angle"}
+      {push_back $dxsettings {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}}
+      {push_back $dxsettings 
+         {sprintf " - Highway Length: %.2fX + " 
+            {if_else {> $hwlength 1}
+               {+ {* $hwlength -0.333333333333333} 1.333333333333333}
+               {+ {* $hwlength -1.25} 2.25}
+            }
+            $hwlength
          }
-         $hwlength
       }
+      {push_back $dxsettings "  "}
+      {$this setup_confirm_actions a $dxsettings}
    }
-   {push_back $dxsettings "  "}
-   {$this setup_confirm_actions a $dxsettings}
 )
 (dxState_TrkSettings
    (view {$this get_auto_list_view}) 
