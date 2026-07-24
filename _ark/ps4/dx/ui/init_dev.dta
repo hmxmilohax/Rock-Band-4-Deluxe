@@ -140,9 +140,6 @@ UPDATE_SETTINGS
 
 #define DELETE_INVALID_NOFLAMES_FILES
 (
-	{dx_file_delete "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
-	{dx_file_delete "ps4/track/smasher/drum_smasher_unlit1.entity_ps4"}
-	{dx_file_delete "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4"}
 	{dx_file_delete "ps4/track/smasher/fx_smasher_streaks1.bmp_ps4"}
 	{dx_file_delete "ps4/track/smasher/gem_smashed_util1.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/smasher_beams1.bmp_ps4"}
@@ -198,6 +195,10 @@ UPDATE_SETTINGS
 	   {dx_file_delete "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
 	   {dx_file_copy "ps4/track/drums/gem_unlit1_reset.sgraph_ps4ps4" "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
 	}
+}
+{if {file_exists "settings/visuals/noflames.dta"}
+	{dx_file_delete "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
+   {dx_file_copy "ps4/track/shared/fx/flash_pot/particle_smoke_noflames.bmp_ps4" "ps4/track/shared/fx/flash_pot/particle_smoke.bmp_ps4"}
 }
 {if {&& {file_exists "settings/visuals/noflames.dta"} {dx_file_exists "ps4/track/shared/smasher_beams1.bmp_ps4"}}
 	{if_else {dx_file_exists "ps4/track/shared/smasher_beams.bmp_ps4"}
@@ -273,6 +274,16 @@ UPDATE_SETTINGS
 }
 
 ;clear invalid files
+{if {dx_file_exists "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
+	{dx_file_delete "ps4/track/smasher/gem_smasher_unlit1.entity_ps4"}
+}
+{if {dx_file_exists "ps4/track/smasher/drum_smasher_unlit1.entity_ps4"}
+	{dx_file_delete "ps4/track/smasher/drum_smasher_unlit1.entity_ps4"}
+}
+{if {dx_file_exists "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4"}
+	{dx_file_delete "ps4/track/smasher/kick_drum_smasher_unlit1.entity_ps4"}
+}
+
 {if {dx_file_exists "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
 	{dx_file_delete "ps4/track/shared/fx_noise_b_util.bmp_ps4"}
 }

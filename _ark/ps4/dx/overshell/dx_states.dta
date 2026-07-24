@@ -1486,7 +1486,7 @@
    {do
       {set $dxsettings {array ()}}
       {push_back $dxsettings "Track Theme"}
-      {push_back $dxsettings {if_else $noflames "Flames: OFF" "Flames: ON"}}
+      {push_back $dxsettings "Note Hit Effects"}
       {push_back $dxsettings {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}}
       {push_back $dxsettings {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}}
       {push_back $dxsettings "Custom Track Angle"}
@@ -1510,7 +1510,6 @@
       TRACKANGLE_CHECK
       {set $noshine {dx_file_exists "ps4/track/shared/track_skin_swap.sgraph_ps4ps4"}}
       {set $gemshine {dx_file_exists "ps4/track/guitar/gem_unlit.sgraph_ps4ps4"}}
-      {set $noflames {dx_file_exists "ps4/track/smasher/gem_smasher_unlit.entity_ps4"}}
       {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
       {set $micwarn {file_exists "settings/visual/micwarn.dta"}}
       {set $dx_cur_state trk}
@@ -1523,22 +1522,8 @@
             {$this show_state dxState_TrackAngleSelector}
             {$this trigger_select_effects}
          )
-         (("Flames: OFF" "Flames: ON")
-            {set $noflames {! $noflames}}
-            {if_else $noflames
-               {do
-                  MOVE_NOFLAMES_FILES_ON
-                  {dx_write_null_file "settings/visuals/noflames.dta"}
-               }
-               {do
-                  MOVE_NOFLAMES_FILES_OFF
-                  {dx_file_delete "settings/visuals/noflames.dta"}
-               }
-            }
-            {if_else {$this in_song}
-               {$this show_state dxState_InGameWarn}
-               RB4DXTRK_DATA
-            }
+         ("Note Hit Effects"
+            {$this show_state dxState_HitFXSettings}
             {$this trigger_select_effects}
          )
          (("Track Antialiasing: OFF" "Track Antialiasing: ON")
@@ -1773,6 +1758,91 @@
       }
    )
    (on_cancel)
+)
+
+;Hit FX Settings
+#define RB4DXHITFX_DATA
+(
+   {$this setup_confirm_actions a 
+      (
+         {if_else $noflames "Particles: OFF" "Particles: ON"}
+         {if_else $strikelineglow "Strikeline Glow: OFF" "Strikeline Glow: ON"}
+         {if_else $strikelinebounce "Strikeline Bounce: OFF" "Strikeline Bounce: ON"}
+      )
+   }
+)
+(dxState_HitFXSettings
+   (view {$this get_auto_list_view})
+   (enter
+      {set $dx_cur_state hitfx}
+      RB4DXHITFX_DATA
+   ) 
+   (SELECT_MSG 
+      {local $list_data {($objId UIListCom) get_data_in_column token}}  
+      {switch $list_data
+         (os_screensaver
+            {$this show_state dxState_ScreensaverWarn}
+            {$this trigger_select_effects})
+         (("Particles: OFF" "Particles: ON")
+            {set $noflames {! $noflames}}
+            {if_else $noflames
+               {do
+                  MOVE_NOFLAMES_FILES_ON
+                  {dx_write_null_file "settings/visuals/noflames.dta"}
+               }
+               {do
+                  MOVE_NOFLAMES_FILES_OFF
+                  {dx_file_delete "settings/visuals/noflames.dta"}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXHITFX_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Strikeline Glow: OFF" "Strikeline Glow: ON")
+            {set $strikelineglow {! $strikelineglow}}
+            {if_else $strikelineglow
+               {do
+                  {dx_write_null_file "settings/visuals/strikelineglow.dta"}
+                  ENABLE_NOGLOW
+               }
+               {do
+                  {dx_file_delete "settings/visuals/strikelineglow.dta"}
+                  DISABLE_NOGLOW
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXHITFX_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Strikeline Bounce: OFF" "Strikeline Bounce: ON")
+            {set $strikelinebounce {! $strikelinebounce}}
+            {if_else $strikelinebounce
+               {do
+                  {dx_write_null_file "settings/visuals/strikelinebounce.dta"}
+                  ENABLE_NO_SL_BOUNCE
+               }
+               {do
+                  {dx_file_delete "settings/visuals/strikelinebounce.dta"}
+                  DISABLE_NO_SL_BOUNCE
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXHITFX_DATA
+            }
+            {$this trigger_select_effects}
+         )
+      }
+   ) 
+   (on_cancel 
+      {$this show_state dxState_TrkSettings}
+      {$this trigger_cancel_effects}
+   )
 )
 
 ;Track Angle Type Selector

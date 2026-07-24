@@ -25,6 +25,25 @@
 {set_plugin_var player_intros {file_exists "settings/visuals/playerintros.dta"}}
 {set_plugin_var origininsongsel {file_exists "settings/visuals/origininsongsel.dta"}}
 {set $micwarn {file_exists "settings/visuals/micwarn.dta"}}
+{set $noflames {file_exists "settings/visuals/noflames.dta"}}
+{set $strikelineglow {file_exists "settings/visuals/strikelineglow.dta"}}
+{if_else $strikelineglow
+   {do
+      ENABLE_NOGLOW
+   }
+   {do
+      DISABLE_NOGLOW
+   }
+}
+{set $strikelinebounce {file_exists "settings/visuals/strikelinebounce.dta"}}
+{if_else $strikelinebounce
+   {do
+      ENABLE_NO_SL_BOUNCE
+   }
+   {do
+      DISABLE_NO_SL_BOUNCE
+   }
+}
 
 ;mtv settings
 {set $songtitle {file_exists "settings/visuals/songtitle.dta"}}
