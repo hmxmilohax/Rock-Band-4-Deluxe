@@ -915,10 +915,16 @@
                1536x864
                1600x900
                1920x1080
+               2560x1080
+               3840x1080
                2048x1152
                2560x1440
+               3440x1440
+               5120x1440
+               3840x1600
                3k
                4k
+               5120x2160
             )
          }
       }
@@ -928,15 +934,21 @@
       {dx_file_rmdir "settings/resolution"}
       {if {file_exists "settings/resolution/enabled.dta"} ; backup reset resolution if rmdir fails
          {dx_file_delete "settings/resolution/enabled.dta"}
-         {dx_file_delete "settings/resolution/1024x576.dta"}
-         {dx_file_delete "settings/resolution/1280x720.dta"}
-         {dx_file_delete "settings/resolution/1366x768.dta"}
-         {dx_file_delete "settings/resolution/1536x864.dta"}
-         {dx_file_delete "settings/resolution/1600x900.dta"}
-         {dx_file_delete "settings/resolution/2048x1152.dta"}
-         {dx_file_delete "settings/resolution/2560x1440.dta"}
-         {dx_file_delete "settings/resolution/3264x1836.dta"}
-         {dx_file_delete "settings/resolution/3840x2160.dta"}
+         {dx_file_delete "settings/resolution/1024x576"}
+         {dx_file_delete "settings/resolution/1280x720"}
+         {dx_file_delete "settings/resolution/1366x768"}
+         {dx_file_delete "settings/resolution/1536x864"}
+         {dx_file_delete "settings/resolution/1600x900"}
+         {dx_file_delete "settings/resolution/2560x1080"}
+         {dx_file_delete "settings/resolution/3840x1080"}
+         {dx_file_delete "settings/resolution/2048x1152"}
+         {dx_file_delete "settings/resolution/2560x1440"}
+         {dx_file_delete "settings/resolution/3440x1440"}
+         {dx_file_delete "settings/resolution/5120x1440"}
+         {dx_file_delete "settings/resolution/3840x1600"}
+         {dx_file_delete "settings/resolution/3264x1836"}
+         {dx_file_delete "settings/resolution/3840x2160"}
+         {dx_file_delete "settings/resolution/5120x2160"}
       }
       {dx_file_mkdir "settings/resolution"}
       {switch $list_data
@@ -960,6 +972,14 @@
             {dx_write_null_file "settings/resolution/enabled.dta"}
             {dx_write_null_file "settings/resolution/1600x900"}
          )
+         (2560x1080
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/2560x1080"}
+         )
+         (3840x1080
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/3840x1080"}
+         )
          (2048x1152
             {dx_write_null_file "settings/resolution/enabled.dta"}
             {dx_write_null_file "settings/resolution/2048x1152"}
@@ -968,6 +988,18 @@
             {dx_write_null_file "settings/resolution/enabled.dta"}
             {dx_write_null_file "settings/resolution/2560x1440"}
          )
+         (3440x1440
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/3440x1440"}
+         )
+         (5120x1440
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/5120x1440"}
+         )
+         (3840x1600
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/3840x1600"}
+         )
          (3k
             {dx_write_null_file "settings/resolution/enabled.dta"}
             {dx_write_null_file "settings/resolution/3264x1836"}
@@ -975,6 +1007,10 @@
          (4k
             {dx_write_null_file "settings/resolution/enabled.dta"}
             {dx_write_null_file "settings/resolution/3840x2160"}
+         )
+         (5120x2160
+            {dx_write_null_file "settings/resolution/enabled.dta"}
+            {dx_write_null_file "settings/resolution/5120x2160"}
          )
       }
       {$this show_state dxState_DelayedEffectWarn}
