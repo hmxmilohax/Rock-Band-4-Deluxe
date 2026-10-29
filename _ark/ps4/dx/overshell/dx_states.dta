@@ -1230,7 +1230,7 @@
 (dxState_VenueSelector
    (view {$this get_auto_list_view})
    (enter
-      {if_else {is_emu}
+      {if_else {&& {is_emu} {file_exists "settings/visuals/nvidiaoverride.dta"}}
          {$this setup_confirm_actions a
             (
                os_random
@@ -1288,7 +1288,7 @@
                {$this show_state dxState_StaticBackgroudSelector}
             )
             (os_random
-               {if_else {is_emu}
+               {if_else {&& {is_emu} {file_exists "settings/visuals/nvidiaoverride.dta"}}
                   {dx_write_null_file "settings/venue/random_emu.dta"}
                   {dx_file_delete "settings/venue/enabled.dta"}
                }
