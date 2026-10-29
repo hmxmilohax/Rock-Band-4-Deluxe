@@ -145,6 +145,8 @@
 "os_all_offsets_custom_optimal","[AJUSTAR PARA INST. MODIFICADOS]","","","",""
 "os_player_intros_on","Animación de entrada: Sí","","","",""
 "os_player_intros_off","Animación de entrada: No","","","",""
+"os_emu_crash_detect_on","GPU Driver Crash Detection: ON","","","",""
+"os_emu_crash_detect_off","GPU Driver Crash Detection: OFF","","","",""
 "random_full","Locales a reventar","","","",""
 "random_full_emu","Locales a reventar","","","",""
 "big_venues","Locales Grandes","","","",""

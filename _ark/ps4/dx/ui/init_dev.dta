@@ -353,12 +353,14 @@ UPDATE_SETTINGS
 }
 
 {if {is_emu}
-	{if_else {file_exists "emucrashdetect.dta"}
-		{do
-			{dx_file_delete "settings/emu_override.dta"}
-			{dx_file_delete "emucrashdetect.dta"}
+	{unless {file_exists "settings/visuals/emucrashdetect.dta"}
+		{if_else {file_exists "emucrashdetect.dta"}
+			{do
+				{dx_file_delete "settings/emu_override.dta"}
+				{dx_file_delete "emucrashdetect.dta"}
+			}
+			{dx_write_null_file "emucrashdetect.dta"}
 		}
-		{dx_write_null_file "emucrashdetect.dta"}
 	}
 }
 

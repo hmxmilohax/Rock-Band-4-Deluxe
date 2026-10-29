@@ -145,6 +145,8 @@
 "os_all_offsets_custom_optimal","[SET TO CUSTOM-OPTIMAL]","","","",""
 "os_player_intros_on","Player Intro Animations: ON","","","",""
 "os_player_intros_off","Player Intro Animations: OFF","","","",""
+"os_emu_crash_detect_on","GPU Driver Crash Detection: ON","","","",""
+"os_emu_crash_detect_off","GPU Driver Crash Detection: OFF","","","",""
 "random_full","Full Crowd Venues","","","",""
 "random_full_emu","Full Crowd Venues","","","",""
 "big_venues","Big Club Venues","","","",""

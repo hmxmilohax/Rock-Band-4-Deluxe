@@ -1969,12 +1969,22 @@
             {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
          )
       }
-      {$this setup_confirm_actions a 
-         (
-            os_screensaver
-            {if_else $faststart os_fast_start_on os_fast_start_off}
-            {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
-         )
+      {if_else {is_emu}
+         {$this setup_confirm_actions a 
+            (
+               os_screensaver
+               {if_else $faststart os_fast_start_on os_fast_start_off}
+               {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
+               {if_else $emucrashdetect os_emu_crash_detect_off os_emu_crash_detect_on}
+            )
+         }
+         {$this setup_confirm_actions a 
+            (
+               os_screensaver
+               {if_else $faststart os_fast_start_on os_fast_start_off}
+               {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
+            )
+         }
       }
    }
 )
@@ -1982,6 +1992,7 @@
    (view {$this get_auto_list_view})
    (enter
       {set $faststart {dx_file_exists "ps4/ui/startup/mnemonix.bk2"}}
+      {set $emucrashdetect {file_exists "settings/visuals/emucrashdetect.dta"}}
       RB4DXEXTRA_DATA
    ) 
    (SELECT_MSG 
@@ -2010,6 +2021,15 @@
             {if_else $notifycolored
                {dx_write_null_file "notifycolored.ini"}
                {dx_file_delete "notifycolored.ini"}
+            }
+            RB4DXEXTRA_DATA
+            {$this trigger_select_effects}
+         )
+         ((os_emu_crash_detect_on os_emu_crash_detect_off)
+            {set $emucrashdetect {! $emucrashdetect}}
+            {if_else $emucrashdetect
+               {dx_write_null_file "settings/visuals/emucrashdetect.dta"}
+               {dx_file_delete "settings/visuals/emucrashdetect.dta"}
             }
             RB4DXEXTRA_DATA
             {$this trigger_select_effects}
