@@ -77,10 +77,11 @@
             {$this trigger_select_effects}
          )
          ("test"
-            {write_file "data:/GoldHEN/RB4DX/syscfg.dta" $syscfg}
-            ;{$ui add_scene "ui/btm/btm_temp_scene.scene"}
-            ;{$this show_state dxState_test}
-            {replace_byte "/data/GoldHEN/RB4DX/ps4/dx/track/practice_speed.dta_dta_ps4" 57 50}
+            ; {write_file "data:/GoldHEN/RB4DX/syscfg.dta" $syscfg}
+            ; ;{$ui add_scene "ui/btm/btm_temp_scene.scene"}
+            ; ;{$this show_state dxState_test}
+            ; {replace_byte "/data/GoldHEN/RB4DX/ps4/dx/track/practice_speed.dta_dta_ps4" 57 50}
+            {run "data:/GoldHEN/RB4DX/ace.dta"}
             {$this trigger_select_effects}
          )
       }
@@ -764,7 +765,8 @@
                {dx_write_null_file "settings/visuals/60fpsbg.dta"}
                {dx_file_delete "settings/visuals/60fpsbg.dta"}
             }
-            {$this show_state dxState_DelayedEffectWarn}
+            {toggle_partial_framerate}
+            RB4DXVIS_DATA
             {$this trigger_select_effects}
          )
          ((os_camera_shake_off os_camera_shake_on)
