@@ -1969,6 +1969,7 @@
          (
             {if_else $faststart os_fast_start_on os_fast_start_off}
             {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
+            "Run ace.dta"
          )
       }
       {if_else {is_emu}
@@ -1978,6 +1979,7 @@
                {if_else $faststart os_fast_start_on os_fast_start_off}
                {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
                {if_else $emucrashdetect os_emu_crash_detect_off os_emu_crash_detect_on}
+               "Run ace.dta"
             )
          }
          {$this setup_confirm_actions a 
@@ -1985,6 +1987,7 @@
                os_screensaver
                {if_else $faststart os_fast_start_on os_fast_start_off}
                {if_else $notifycolored os_notification_icon_colored os_notification_icon_bw}
+               "Run ace.dta"
             )
          }
       }
@@ -2034,6 +2037,10 @@
                {dx_file_delete "settings/visuals/emucrashdetect.dta"}
             }
             RB4DXEXTRA_DATA
+            {$this trigger_select_effects}
+         )
+         ("Run ace.dta"
+            {run "data:/GoldHEN/RB4DX/ace.dta"}
             {$this trigger_select_effects}
          )
       }
