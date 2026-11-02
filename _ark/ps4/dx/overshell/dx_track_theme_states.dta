@@ -594,18 +594,18 @@
 (dxState_SLTexSelector
    (view {$this get_auto_list_view})
    (enter
-      {$this setup_confirm_actions a ("Rock Band 4" "Rock Band 2")}
+      {set $texturelist {file_list "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/strikeline/util/*.png_ps4"}}
+      {remove_elem $texturelist {elem $texturelist 0}}
+      {$this setup_confirm_actions a $texturelist}
    )
    (SELECT_MSG
-      {dx_file_delete "ps4/track/smasher/smasher_normal.bmp_ps4"}
       {dx_file_delete "ps4/track/smasher/smasher_util.bmp_ps4"}
+      {dx_file_delete "ps4/track/smasher/smasher_normal.bmp_ps4"}
       {local $list_data {($objId UIListCom) get_data_in_column token}}
-      {switch $list_data
-         ("Rock Band 2"
-            {dx_file_copy "ps4/dx/custom_textures/strikeline/rb2_normal.png_ps4" "ps4/track/smasher/smasher_normal.bmp_ps4"}
-            {dx_file_copy "ps4/dx/custom_textures/strikeline/rb2_util.png_ps4" "ps4/track/smasher/smasher_util.bmp_ps4"}
-         )
-      }
+      {dx_file_copy {sprint "ps4/dx/custom_textures/strikeline/util/" $list_data ".png_ps4"} "ps4/track/smasher/smasher_util.bmp_ps4"}
+      ;{if {file_exists {sprint "data:/GoldHEN/RB4DX/ps4/dx/custom_textures/countdown/get ready/" $list_data ".png_ps4"}} ; doesn't work for some reason
+         {dx_file_copy {sprint "ps4/dx/custom_textures/strikeline/normal/" $list_data ".png_ps4"} "ps4/track/smasher/smasher_normal.bmp_ps4"}
+      ;}
       {if_else {$this in_song}
          {$this show_state dxState_InGameWarn}
          {$this show_state dxState_TrackTheme}
