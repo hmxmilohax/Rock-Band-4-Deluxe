@@ -205,33 +205,48 @@
       {local $list_data {($objId UIListCom) get_data_in_column token}}  
       {switch $list_data 
          (overshell_confirm_yes
+            {dx_file_delete "settings/visuals/trackanglerr.dta"}
+            {dx_file_delete "settings/visuals/trackanglerb2.dta"}
+            {dx_file_delete "settings/visuals/trackanglerb3.dta"}
             {switch $trackangletype
                (rr
-                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
-                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerr.dta"}
-                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
-                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
-                  }
-                  {dx_file_copy "ps4/track/guitar_unlit_rr.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18367 -0.8}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18379 0.5}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18387 1.25}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142774 -92}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142982 180}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12775 -0.8}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12787 0.5}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12795 1.25}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111740 -92}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111948 180}
                )
                (rb2
-                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
-                  {dx_file_delete "settings/visuals/trackanglerb3.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerb2.dta"}
-                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
-                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
-                  }
-                  {dx_file_copy "ps4/track/guitar_unlit_rb2.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18367 -0.1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18379 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18387 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142774 -69}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142982 24.5}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12775 -0.1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12787 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12795 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111740 -69}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111948 24.5}
                )
                (rb3
-                  {dx_file_delete "settings/visuals/trackanglerr.dta"}
-                  {dx_file_delete "settings/visuals/trackanglerb2.dta"}
                   {dx_write_null_file "settings/visuals/trackanglerb3.dta"}
-                  {if {dx_file_exists "ps4/track/guitar_unlit.scene_ps4"}
-                     {dx_file_delete "ps4/track/guitar_unlit.scene_ps4"}
-                  }
-                  {dx_file_copy "ps4/track/guitar_unlit_rb3.scene_ps4" "ps4/track/guitar_unlit.scene_ps4"}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18367 -0.0175}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18379 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 18387 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142774 -75}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 142982 21.5}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12775 -0.0175}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12787 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 12795 1}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111740 -75}
+                  {replace_float "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 111948 21.5}
                )
             }
             {set $trackangle TRUE}
