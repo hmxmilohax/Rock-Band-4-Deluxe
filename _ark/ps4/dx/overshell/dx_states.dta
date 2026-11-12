@@ -1552,6 +1552,8 @@
       {push_back $dxsettings "Note Hit Effects"}
       {push_back $dxsettings {if_else $noaa "Track Antialiasing: OFF" "Track Antialiasing: ON"}}
       {push_back $dxsettings {if_else $micwarn "Hide Mic Warning: ON" "Hide Mic Warning: OFF"}}
+      {push_back $dxsettings {if_else $streakfx "Max Multiplier Effects: OFF" "Max Multiplier Effects: ON"}}
+      {push_back $dxsettings {if_else $hwbounce "Track Bounce: OFF" "Track Bounce: ON"}}
       {push_back $dxsettings "Custom Track Angle"}
       {push_back $dxsettings {sprintf " - Track Curve: %.2fX + " {+ {* $track_curve -2} 3}}}
       {push_back $dxsettings 
@@ -1572,6 +1574,8 @@
    (enter
       {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
       {set $micwarn {file_exists "settings/visual/micwarn.dta"}}
+      {set $streakfx {file_exists "settings/visual/streakfx.dta"}}
+      {set $hwbounce {file_exists "settings/visual/hwbounce.dta"}}
       {set $dx_cur_state trk}
       RB4DXTRK_DATA
    ) 
@@ -1606,6 +1610,50 @@
             {if_else $micwarn
                {dx_write_null_file "settings/visuals/micwarn.dta"}
                {dx_file_delete "settings/visuals/micwarn.dta"}
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXTRK_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Max Multiplier Effects: ON" "Max Multiplier Effects: OFF")
+            {set $streakfx {! $streakfx}}
+            {if_else $streakfx
+               {do
+                  {dx_write_null_file "settings/visuals/streakfx.dta"}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 29831 104}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 16507 104}
+               }
+               {do
+                  {dx_file_delete "settings/visuals/streakfx.dta"}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 29831 103}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 16507 103}
+               }
+            }
+            {if_else {$this in_song}
+               {$this show_state dxState_InGameWarn}
+               RB4DXTRK_DATA
+            }
+            {$this trigger_select_effects}
+         )
+         (("Track Bounce: ON" "Track Bounce: OFF")
+            {set $hwbounce {! $hwbounce}}
+            {if_else $hwbounce
+               {do
+                  {dx_write_null_file "settings/visuals/hwbounce.dta"}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 242773 97}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 249829 97}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 211739 97}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 218795 97}
+               }
+               {do
+                  {dx_file_delete "settings/visuals/hwbounce.dta"}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 242773 122}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/guitar_unlit.scene_ps4" 249829 122}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 211739 122}
+                  {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums_unlit.scene_ps4" 218795 122}
+               }
             }
             {if_else {$this in_song}
                {$this show_state dxState_InGameWarn}
@@ -1704,12 +1752,12 @@
                   }
                   RB4DXTRK_DATA
                   {set $setting_focus TRUE}
-                  {$ui_list set_focus_by_data dx_index 6}
+                  {$ui_list set_focus_by_data dx_index 8}
                )
             }
          }
          {if {== $list_data "  "}
-            {$ui_list set_focus_by_data dx_index 6}
+            {$ui_list set_focus_by_data dx_index 8}
          }
       }
    )
