@@ -187,14 +187,8 @@ UPDATE_SETTINGS
 	}
 }
 {if_else {file_exists "settings/visuals/gemshine.dta"}
-	{do
-      {dx_file_delete "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
-      {dx_file_copy "ps4/track/drums/gem_unlit1_noshine.sgraph_ps4ps4" "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
-	}
-	{do
-	   {dx_file_delete "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
-	   {dx_file_copy "ps4/track/drums/gem_unlit1_reset.sgraph_ps4ps4" "ps4/track/drums/gem_unlit1.sgraph_ps4ps4"}
-	}
+   {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums/gem_unlit1.sgraph_ps4ps4" 1594 49}
+   {replace_byte "/data/GoldHEN/RB4DX/ps4/track/drums/gem_unlit1.sgraph_ps4ps4" 1594 108}
 }
 {if_else {&& {file_exists "settings/visuals/norails.dta"} {! {dx_file_exists "ps4/track/smasher/fretboard.fbx++mesh++fretboard_rails_ps4"}}}
 	{dx_write_null_file "ps4/track/smasher/fretboard.fbx++mesh++fretboard_rails_ps4"}
