@@ -120,7 +120,7 @@
 "os_delayed_effect_warn","Esta opción surtirá efecto la próxima vez que reinicies el juego.","","","",""
 "os_additional_parts_info","Pulsa el botón amarillo en el menú de selección de instrumento para mostrar los demas instrumentos (solo para PAD/VOCES).","","","",""
 "os_ingame_warn","Esta opción surtirá efecto cuando vuelvas a la biblioteca musical.","","","",""
-"os_track_angles_warn","El ángulo de la pista es EXPERIMENTAL y no funcionara en batería, ni en el modo multijugador. ¿Seguro que quieres continuar?","","","",""
+"os_track_angles_warn","El ángulo de la pista es EXPERIMENTAL y no funcionara en el modo multijugador. ¿Seguro que quieres continuar?","","","",""
 "os_gem_color_confirm","¿Quieres restablecer los colores de las gemas a los predeterminados o editar sus colores?","","","",""
 "os_edit","Editar","","","",""
 "os_static_menu_bg_confirm","¿Quieres restablecer los fondos del menú a los predeterminados o editar tu fondo estático?","","","",""
