@@ -1573,9 +1573,9 @@
    (view {$this get_auto_list_view}) 
    (enter
       {set $noaa {dx_file_exists "ps4/shared/scene/antialias.scene_ps4"}}
-      {set $micwarn {file_exists "settings/visual/micwarn.dta"}}
-      {set $streakfx {file_exists "settings/visual/streakfx.dta"}}
-      {set $hwbounce {file_exists "settings/visual/hwbounce.dta"}}
+      {set $micwarn {file_exists "settings/visuals/micwarn.dta"}}
+      {set $streakfx {file_exists "settings/visuals/streakfx.dta"}}
+      {set $hwbounce {file_exists "settings/visuals/hwbounce.dta"}}
       {set $dx_cur_state trk}
       RB4DXTRK_DATA
    ) 
